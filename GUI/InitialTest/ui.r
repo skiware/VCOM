@@ -22,7 +22,7 @@ shinyUI(fluidPage(
       sliderInput("beta","Beta:",min=0,max=1,value=.5),
       sliderInput("muEL","muEL:",min=0,max=1,value=.5),
       sliderInput("hbi","Human Blood Index",min=0,max=1,value=.5),
-      submitButton(text="Run Model",icon=NULL,width="100%"),
+      actionButton("runModel","Run Model",width="100%"),
       #########################################################################
       headerPanel(h2("CM Coverage")),
       fluidRow(
@@ -53,13 +53,13 @@ shinyUI(fluidPage(
     #########################################################################
   mainPanel(
     headerPanel(h1("Outputs")),
-    
     fluidRow(
         plotOutput("distPlot"),
         headerPanel(h1("")),
         headerPanel(h1("")),
         headerPanel(h1("")),
-        textOutput("text1")
+        textOutput("text1"),
+        textOutput("reactiveText")
       )
   )
   ###########################################################################
