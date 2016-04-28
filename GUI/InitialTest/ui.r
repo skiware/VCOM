@@ -7,53 +7,61 @@ shinyUI(fluidPage(
   #############################################################################
   sidebarLayout(
     sidebarPanel(
+      headerPanel(h1("Inputs")),
       #########################################################################
-      headerPanel("Parameters"),
+      radioButtons("radio",label=h2("Species Selection"),
+                   choices=list(
+                     "An. gambiae"="GAM",
+                     "An. arabiensis"="ARA",
+                     "An. funestus"="FUN"
+                  ),selected="ARA"),
+      #########################################################################
+      headerPanel(h2("Parameters")),
       sliderInput("bins","Number of bins:",min=1,max=50,value=30),
+      sliderInput("maxTime","Number of days:",min=1,max=365,value=50),
       sliderInput("beta","Beta:",min=0,max=1,value=.5),
       sliderInput("muEL","muEL:",min=0,max=1,value=.5),
+      sliderInput("hbi","Human Blood Index",min=0,max=1,value=.5),
       submitButton(text="Run Model",icon=NULL,width="100%"),
       #########################################################################
-      headerPanel("CM Coverage"),
-      helpText("
-          [IRS: Indoors Residual Spraying] 
-          [ITN: Insecticide Treated Net]
-          [IVM: Ivermectin]
-          [HOU: House Modification]
-          [OVI: Ovitrap]
-          [FOG: Fogging]
-          [LAR: Larvaciding]
-          [ODO: Odor Traps]
-          [BIO: Biological Control]
-          [SRE: Source Reduction]
-          [SPA: Spatial Spraying]
-        "),
+      headerPanel(h2("CM Coverage")),
       fluidRow(
         column(4,
-               textInput("inputId","IRS",value="",placeholder=.5,width="50px"),
-               textInput("inputId","ITN",value="",placeholder=.5,width="50px"),
-               textInput("inputId","IVM",value="",placeholder=.5,width="50px"),
-               textInput("inputId","HOU",value="",placeholder=.5,width="50px"),
-               textInput("inputId","OVI",value="",placeholder=.5,width="50px")
+               textInput("irsCov","IRS",value="",placeholder=0.5,width="50px"),
+               textInput("itnCov","ITN",value="",placeholder=0.5,width="50px"),
+               textInput("ivmCov","IVM",value="",placeholder=0.5,width="50px"),
+               textInput("houCov","HOU",value="",placeholder=0.5,width="50px"),
+               textInput("oviCov","OVI",value="",placeholder=0.5,width="50px")
         ),
         column(4,
-               textInput("inputId","FOG",value="",placeholder=.5,width="50px"),
-               textInput("inputId","LAR",value="",placeholder=.5,width="50px"),
-               textInput("inputId","ODO",value="",placeholder=.5,width="50px"),
-               textInput("inputId","BIO",value="",placeholder=.5,width="50px"),
-               textInput("inputId","SRE",value="",placeholder=.5,width="50px")
+               textInput("fogCov","FOG",value="",placeholder=0.5,width="50px"),
+               textInput("larCov","LAR",value="",placeholder=0.5,width="50px"),
+               textInput("odoCov","ODO",value="",placeholder=0.5,width="50px"),
+               textInput("bioCov","BIO",value="",placeholder=0.5,width="50px"),
+               textInput("sreCov","SRE",value="",placeholder=0.5,width="50px")
         ),
         column(4,
-               textInput("inputId","SPA",value="",placeholder=.5,width="50px"),
-               textInput("inputId","NA ",value="",placeholder=0,width="50px"),
-               textInput("inputId","NA ",value="",placeholder=0,width="50px"),
-               textInput("inputId","NA ",value="",placeholder=0,width="50px"),
-               textInput("inputId","NA ",value="",placeholder=0,width="50px")
+               textInput("spaCov","SPA",value="",placeholder=0.5,width="50px"),
+               textInput("naaCov","NA ",value="",placeholder=0.0,width="50px"),
+               textInput("naaCov","NA ",value="",placeholder=0.0,width="50px"),
+               textInput("naaCov","NA ",value="",placeholder=0.0,width="50px"),
+               textInput("naaCov","NA ",value="",placeholder=0.0,width="50px")
         )
-      )
+      ),
+      helpText("Authors: Samson, Sean, Hector, John")
     ),
     #########################################################################
-    mainPanel(plotOutput("distPlot"))
-    #########################################################################
+  mainPanel(
+    headerPanel(h1("Outputs")),
+    
+    fluidRow(
+        plotOutput("distPlot"),
+        headerPanel(h1("")),
+        headerPanel(h1("")),
+        headerPanel(h1("")),
+        textOutput("text1")
+      )
+  )
+  ###########################################################################
   )
 ))
