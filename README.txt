@@ -1,1 +1,1 @@
-O.K. Computer
+Computer
