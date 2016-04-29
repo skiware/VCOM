@@ -1,5 +1,8 @@
 library(shiny)
 library(ggplot2)
+library(deSolve)
+source("functions.R")
+source("ODE.R")
 
 shinyUI(fluidPage(
   #############################################################################
@@ -59,7 +62,11 @@ shinyUI(fluidPage(
         headerPanel(h1("")),
         headerPanel(h1("")),
         textOutput("text1"),
-        textOutput("reactiveText")
+        headerPanel(h6("Reactive Text:")),
+        textOutput("reactiveText"),
+        textOutput("text2"),
+        textOutput("odeOutput"),
+        plotOutput("barChart")
       )
   )
   ###########################################################################

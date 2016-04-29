@@ -10,4 +10,8 @@ shinyServer(function(input,output,session){
   output$text1 <- renderText({
     paste("You have selected", input$radio)
   })
+  output$text2 = renderText(callFunction())
+  output$odeOutput = renderText(NumMosq)
+  output$barChart = renderPlot({barplot(NumMosq , main='An. Gambiae ITN & IRS & Cattle = 0.8', xlab='Time (days)',ylab='Number of Mosquitoes',
+                            names.arg=c('EL','LL','PL','SV','EV','IV'))})
 })
