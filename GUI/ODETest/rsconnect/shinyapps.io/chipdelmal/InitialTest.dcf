@@ -1,4 +1,7 @@
 name: InitialTest
 account: chipdelmal
-bundleId: 439366
+server: shinyapps.io
+appId: 98829
+bundleId: 437216
 url: https://chipdelmal.shinyapps.io/InitialTest/
+when: 1461880008.54868

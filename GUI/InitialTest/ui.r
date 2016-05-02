@@ -26,6 +26,7 @@ shinyUI(fluidPage(
       sliderInput("muEL","muEL:",min=0,max=1,value=.5),
       sliderInput("hbi","Human Blood Index",min=0,max=1,value=.5),
       actionButton("runModel","Run Model",width="100%"),
+      actionButton("testButton","TESTING",width="100%"),
       #########################################################################
       headerPanel(h2("CM Coverage")),
       fluidRow(
@@ -50,8 +51,7 @@ shinyUI(fluidPage(
                textInput("naaCov","NA ",value="",placeholder=0.0,width="50px"),
                textInput("naaCov","NA ",value="",placeholder=0.0,width="50px")
         )
-      ),
-      helpText("Authors: Samson, Sean, Hector, John")
+      )
     ),
     #########################################################################
   mainPanel(

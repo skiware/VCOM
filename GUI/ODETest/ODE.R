@@ -19,7 +19,7 @@
 ## Adapted by SK on Feb 08, 2016 for extension:   ##
 #########################################################################
 
-#library(deSolve)
+library(deSolve)
 IVM_ode <- function(time, state, theta) {
 	## Parameters (mosquito life cycle):
 	beta <- theta[["beta"]] # Eggs laid per day by female mosquito
