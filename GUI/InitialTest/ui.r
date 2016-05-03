@@ -68,7 +68,7 @@ shinyUI(fluidPage(
         textOutput("odeOutput"),
         plotOutput("barChart")
       )
-  )
+    )
   ###########################################################################
   )
 ))
