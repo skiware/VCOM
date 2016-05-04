@@ -5,7 +5,7 @@
 ## Adapted and extended by SK starting Feb 2016
 #########################################################################
 # Clear all stored parameters:
-#rm(list=ls())
+rm(list=ls())
 # Set working directory:
 #setwd("C://Users/John/My Documents/Berkeley/MEI/MicroEpiModeling/")
 #########################################################################
@@ -20,6 +20,7 @@ library(deSolve)
 source("ODEMosquitoParameters.R")
 #########################################################################
 
+theta <- getTheta()
 IVM_ode <- function(time, state, theta) {
 	## Parameters (mosquito life cycle):
 	beta <- theta[["beta"]] # Eggs laid per day by female mosquito

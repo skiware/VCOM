@@ -1,52 +1,48 @@
 # Do we need to provide range of values? Provide cite where these came from
 ## Model parameters:
-theta <- c(
-  ## Mosquito life cycle parameters:
-  beta = 21.19, # Number of eggs laid per day by female mosquito
-  muEL = 0.034, # Early larval instar daily mortality
-  muLL = 0.035, # Late larval instar daily mortality
-  muPL = 0.25, # Pupal daily mortality
-  durEL = 6.64, # Duration of early instar stage
-  durLL = 3.72, # Duration of late instar stage
-  durPL = 0.64, # Duration of pupal stage
-  durEV = 10, # Duration of latent period in mosquito (days)
-  gamma = 13.25, # Effect of density-dependence on late instars relative to early instars
-  tau1 = 0.68, # Time spent foraging for a blood meal at 0% ITN coverage
-  tau2 = 2.32, # Time spent resting and ovipositing by a mosquito
-  ## Intervention parameters (variable):
-  ITNcov = 0.8, # ITN coverage
-  IRScov = 0.8, # IRS coverave
-  time_ITN_on = 50, # When ITNs are applied (days)
-  time_IRS_on = 50, # When IRS is applied (days)
-  ## Species-specific parameters:
-  ## An. gambiae:
-  muV = 1/7.6, # Adult mosquito daily mortality
-  Q0 = 0.92, # Human blood index
-  phiB = 0.89, # Proportion of bites on a person while they are in bed
-  phiI = 0.97, # Proportion of bites on a person while they are indoors
-  rITN = 0.56, # Probability of mosquito repeating a feeding attempt due to IRS
-  sITN = 0.03, # Probability of mosquito feeding and surviving in presence of ITNs
-  rIRS = 0.60, # Probability of mosquito repeating a feeding attempt due to IRS
-  sIRS = 0, # Probability of mosquito feeding and surviving in presence of IRS
-  ## Additional transmission parameters:
-  f0 = 1/3, # Daily biting rate by mosquitoes on animals and humans
-  epsilon0 = 10/365, # Daily entomological inolculation rate
-  iH_eq = 0.35, # Equilibrium malaria prevalence in humans
-  NH_eq = 200, # Equilibrium human population size
-  bV = 0.05 # Probability of transmission from human to vector per infectious bite
-)
-
-getTheta = function(lifeCycleParameters, interventionParameters){
+getTheta = function(
+                    speciesSpecificParameters=getAnGambiaeParameters(), 
+                    interventionParameters=getInterventionsParameters(),
+                    additionalTransmissionParameters=getAdditionalTransmissionParameters(), 
+                    mosquitoLifeCycleParameters=getMosquitoLifeCycleParameters()
+                  ){
+  #Facade for parameters selection
   c(
-    
+    beta = mosquitoLifeCycleParameters[["beta"]],
+    muEL = mosquitoLifeCycleParameters[["muEL"]],
+    muLL = mosquitoLifeCycleParameters[["muLL"]],
+    muPL = mosquitoLifeCycleParameters[["muPL"]],
+    durEL = mosquitoLifeCycleParameters[["durEL"]],
+    durLL = mosquitoLifeCycleParameters[["durLL"]],
+    durPL = mosquitoLifeCycleParameters[["durPL"]],
+    durEV = mosquitoLifeCycleParameters[["durEV"]],
+    gamma = mosquitoLifeCycleParameters[["gamma"]],
+    tau1 = mosquitoLifeCycleParameters[["tau1"]],
+    tau2 = mosquitoLifeCycleParameters[["tau2"]],
+    ITNcov = interventionParameters[["ITNcov"]],
+    IRScov = interventionParameters[["IRScov"]],
+    time_ITN_on = interventionParameters[["time_ITN_on"]],
+    time_IRS_on = interventionParameters[["time_IRS_on"]],
+    muV = speciesSpecificParameters[["muV"]],
+    Q0 = speciesSpecificParameters[["Q0"]],
+    phiB = speciesSpecificParameters[["phiB"]],
+    phiI = speciesSpecificParameters[["phiI"]],
+    rITN = speciesSpecificParameters[["rITN"]],
+    sITN = speciesSpecificParameters[["sITN"]],
+    rIRS = speciesSpecificParameters[["rIRS"]],
+    sIRS = speciesSpecificParameters[["sIRS"]],
+    f0 = additionalTransmissionParameters[["f0"]],
+    epsilon0 = additionalTransmissionParameters[["epsilon0"]],
+    iH_eq = additionalTransmissionParameters[["iH_eq"]],
+    NH_eq = additionalTransmissionParameters[["NH_eq"]],
+    bV = additionalTransmissionParameters[["bV"]]
   )
 }
-
 ######################################################################################
 #------------------------------------------------------------------------
 ############ SPECIES SPECIFIC PARAMETERS ################################
 #------------------------------------------------------------------------
-#* muV     Adult mosquito daily mortality
+#*  muV     Adult mosquito daily mortality
 #* Q0      Human blood index
 #* phiB    Proportion of bites on a person while they are in bed
 #* phiI    Proportion of bites on a person while they are indoors
@@ -94,8 +90,6 @@ getInterventionsParameters = function(){
     time_ITN_on = 50, time_IRS_on = 50
   )
 }
-#########################################################################
-#------------------------------------------------------------------------
 ######################################################################################
 #------------------------------------------------------------------------
 ############ MOSQUITO LIFE CYCLE PARAMETERS #############################
@@ -113,7 +107,7 @@ getInterventionsParameters = function(){
 #* tau1    Time spent foraginf for a blood meal at 0% ITN coverage
 #* tau2    Time spent resting and ovipositing by a mosquito
 #------------------------------------------------------------------------
-getLifeCycleParameters = function(){
+getMosquitoLifeCycleParameters = function(){
   c(
     beta = 21.19,
     muEL = 0.034, muLL = 0.035, muPL = 0.25,
@@ -121,8 +115,6 @@ getLifeCycleParameters = function(){
     gamma = 13.25, tau1 = 0.68, tau2 = 2.32
   )
 }
-#########################################################################
-#------------------------------------------------------------------------
 ######################################################################################
 #------------------------------------------------------------------------
 ############ ADDITIONAL TRANSMISSION PARAMETERS #########################
@@ -133,13 +125,11 @@ getLifeCycleParameters = function(){
 #* NH_eq     Equilibrium human population size
 #* bV        Probability of transmission from human to vector per infectious bite
 #------------------------------------------------------------------------
-getAnGambiaeParameters = function(){
+getAdditionalTransmissionParameters = function(){
   c(
     f0 = 1/3, epsilon0 = 10/365, 
     iH_eq = 0.35, NH_eq = 200, 
     bV = 0.05
   )
 }
-#########################################################################
-#------------------------------------------------------------------------
 ######################################################################################
