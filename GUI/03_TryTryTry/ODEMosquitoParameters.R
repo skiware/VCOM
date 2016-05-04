@@ -1,12 +1,14 @@
-# Do we need to provide range of values? Provide cite where these came from
-## Model parameters:
+######################################################################################
+#------------------------------------------------------------------------
+############ getTheta FACADE ############################################
+#------------------------------------------------------------------------
+#. getTheta: Facade function to return theta from selected parameters
 getTheta = function(
                     speciesSpecificParameters=getAnGambiaeParameters(), 
                     interventionParameters=getInterventionsParameters(),
                     additionalTransmissionParameters=getAdditionalTransmissionParameters(), 
                     mosquitoLifeCycleParameters=getMosquitoLifeCycleParameters()
                   ){
-  #Facade for parameters selection
   c(
     beta = mosquitoLifeCycleParameters[["beta"]],
     muEL = mosquitoLifeCycleParameters[["muEL"]],
@@ -42,15 +44,16 @@ getTheta = function(
 #------------------------------------------------------------------------
 ############ SPECIES SPECIFIC PARAMETERS ################################
 #------------------------------------------------------------------------
-#*  muV     Adult mosquito daily mortality
-#* Q0      Human blood index
-#* phiB    Proportion of bites on a person while they are in bed
-#* phiI    Proportion of bites on a person while they are indoors
-#* rITN    Probability of mosquito repeating a feeding attempt due to IRS
-#* sITN    Probability of mosquito feeding and surviving in presence of ITN
-#* rIRS    Probability of mosquito repeating a feeding attempt due to IRS
-#* sIRS    Probability of mosquito feeding and surviving in presence of IRS
+#* muV:     Adult mosquito daily mortality
+#* Q0:      Human blood index
+#* phiB:    Proportion of bites on a person while they are in bed
+#* phiI:    Proportion of bites on a person while they are indoors
+#* rITN:    Probability of mosquito repeating a feeding attempt due to IRS
+#* sITN:    Probability of mosquito feeding and surviving in presence of ITN
+#* rIRS:    Probability of mosquito repeating a feeding attempt due to IRS
+#* sIRS:    Probability of mosquito feeding and surviving in presence of IRS
 #------------------------------------------------------------------------
+#. getAnGambiaeParameters: Returns the list of Anopheles Gambiae specific parameters
 getAnGambiaeParameters = function(){
   c(
     muV = 1/7.6, Q0 = 0.92,
@@ -59,6 +62,7 @@ getAnGambiaeParameters = function(){
     rIRS = 0.60, sIRS = 0
   )
 }
+#. getAnArabiensisParameters: Returns the list of Anopheles Arabiensis specific parameters
 getAnArabiensisParameters = function(){
   c(
     muV = 1/7.6, Q0 = 0.71,
@@ -67,6 +71,7 @@ getAnArabiensisParameters = function(){
     rIRS = 0.60, sIRS = 0
   )
 }
+#. getAnFunestusParameters: Returns the list of Anopheles Funestus specific parameters
 getAnFunestusParameters = function(){
   c(
     muV = 1/8.9, Q0 = 0.94,
@@ -79,11 +84,12 @@ getAnFunestusParameters = function(){
 #------------------------------------------------------------------------
 ############ INTERVENTIONS PARAMETERS ###################################
 #------------------------------------------------------------------------
-#* ITNcov        ITN coverage
-#* IRScov        IRS coverage
-#* time_ITN_on   When ITNs are applied (days)
-#* time_IRS_on   When IRSs are applied (days)
+#* ITNcov:        ITN coverage
+#* IRScov:        IRS coverage
+#* time_ITN_on:   When ITNs are applied (days)
+#* time_IRS_on:   When IRSs are applied (days)
 #------------------------------------------------------------------------
+#. getInterventionsParameters: Returns the list of intervention parameters
 getInterventionsParameters = function(){
   c(
     ITNcov = 0.8, IRScov = 0.8,
@@ -94,19 +100,20 @@ getInterventionsParameters = function(){
 #------------------------------------------------------------------------
 ############ MOSQUITO LIFE CYCLE PARAMETERS #############################
 #------------------------------------------------------------------------
-#* beta    Number of eggs laid per day per female mosquito
-#* muEL    Early larval instar daily mortality
-#* muLL    Late larvarl instar daily mortality
-#* muPL    Pupal daily mortality
-#* durEL   Duration of early instar stage
-#* durLL   Duration of late instar stage
-#* durPL   Pupal daily mortality
-#* durPL   Duration of pupal stage
-#* durEV   Duration of latent period in mosquito (days)
-#* gamma   Effect of density-dependence on late instars relative to early instars
-#* tau1    Time spent foraginf for a blood meal at 0% ITN coverage
-#* tau2    Time spent resting and ovipositing by a mosquito
+#* beta:    Number of eggs laid per day per female mosquito
+#* muEL:    Early larval instar daily mortality
+#* muLL:    Late larvarl instar daily mortality
+#* muPL:    Pupal daily mortality
+#* durEL:   Duration of early instar stage
+#* durLL:   Duration of late instar stage
+#* durPL:   Pupal daily mortality
+#* durPL:   Duration of pupal stage
+#* durEV:   Duration of latent period in mosquito (days)
+#* gamma:   Effect of density-dependence on late instars relative to early instars
+#* tau1:    Time spent foraginf for a blood meal at 0% ITN coverage
+#* tau2:    Time spent resting and ovipositing by a mosquito
 #------------------------------------------------------------------------
+#. getMosquitoLifeCycleParameters: Returns the list of mosquito life cycle parameters
 getMosquitoLifeCycleParameters = function(){
   c(
     beta = 21.19,
@@ -119,12 +126,13 @@ getMosquitoLifeCycleParameters = function(){
 #------------------------------------------------------------------------
 ############ ADDITIONAL TRANSMISSION PARAMETERS #########################
 #------------------------------------------------------------------------
-#* f0        Daily biting rate by mosquitoes on animals and humans
-#* epsilon0  Daily entomological inolculation rate
-#* iH_eq     Equilibrium malaria prevalence in humans
-#* NH_eq     Equilibrium human population size
-#* bV        Probability of transmission from human to vector per infectious bite
+#* f0:        Daily biting rate by mosquitoes on animals and humans
+#* epsilon0:  Daily entomological inolculation rate
+#* iH_eq:     Equilibrium malaria prevalence in humans
+#* NH_eq:     Equilibrium human population size
+#* bV:        Probability of transmission from human to vector per infectious bite
 #------------------------------------------------------------------------
+#. getAdditionalTransmissionParameters: Returns the transmission parameters
 getAdditionalTransmissionParameters = function(){
   c(
     f0 = 1/3, epsilon0 = 10/365, 

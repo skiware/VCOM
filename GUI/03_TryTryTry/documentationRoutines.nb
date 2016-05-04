@@ -10,160 +10,294 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      8880,        214]
-NotebookOptionsPosition[      8432,        194]
-NotebookOutlinePosition[      8790,        210]
-CellTagsIndexPosition[      8747,        207]
+NotebookDataLength[     13980,        365]
+NotebookOptionsPosition[     13015,        326]
+NotebookOutlinePosition[     13373,        342]
+CellTagsIndexPosition[     13330,        339]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
 
 Cell[CellGroupData[{
+Cell["Documentation Parser", "Title",
+ CellChangeTimes->{{3.671388981334496*^9, 3.6713889858807583`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["H\[EAcute]ctor M. S\[AAcute]nchez C.", "Chapter",
+ CellChangeTimes->{{3.671388987915411*^9, 3.671388994545991*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Functions", "Section",
+ CellChangeTimes->{{3.67138360257273*^9, 3.671383617448989*^9}}],
+
+Cell[CellGroupData[{
+
 Cell[BoxData[{
- RowBox[{"SetDirectory", "[", 
-  RowBox[{"NotebookDirectory", "[", "]"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{"fileNames", "=", 
   RowBox[{"FileNames", "[", "\"\<*.R\>\"", "]"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"rawFilesData", "=", 
    RowBox[{
     RowBox[{
-     RowBox[{"Import", "[", "#", "]"}], "&"}], "/@", "fileNames"}]}], 
-  ";"}], "\[IndentingNewLine]", 
+     RowBox[{"Import", "[", 
+      RowBox[{"#", ",", "\"\<Table\>\""}], "]"}], "&"}], "/@", 
+    "fileNames"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"cases", "=", 
+  RowBox[{"functions", "=", 
    RowBox[{
     RowBox[{
-     RowBox[{"StringCases", "[", 
-      RowBox[{"#", ",", 
-       RowBox[{
-        RowBox[{"\"\<#*\>\"", "~~", "x___"}], "\[Rule]", "x"}]}], "]"}], 
-     "&"}], "/@", 
-    RowBox[{"StringSplit", "[", 
-     RowBox[{
-      RowBox[{"rawFilesData", "[", 
-       RowBox[{"[", "2", "]"}], "]"}], ",", "\"\<\\n\>\""}], "]"}]}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"casesWithData", "=", "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"(", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"StringTrim", "[", "#", "]"}], "&"}], "/@", 
-       RowBox[{"StringSplit", "[", 
-        RowBox[{"#", ",", "\"\<  \>\""}], "]"}]}], ")"}], "&"}], "/@", 
-    RowBox[{"(", 
      RowBox[{"Cases", "[", 
-      RowBox[{"cases", ",", 
-       RowBox[{"x_", "/;", 
-        RowBox[{"x", "\[NotEqual]", 
-         RowBox[{"{", "}"}]}]}]}], "]"}], ")"}]}]}], 
+      RowBox[{"#", ",", 
+       RowBox[{"{", 
+        RowBox[{"\"\<#.\>\"", ",", "x___"}], "}"}]}], "]"}], "&"}], "/@", 
+    "rawFilesData"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"functionsSplits", "=", 
+   RowBox[{
+    RowBox[{"Flatten", "[", 
+     RowBox[{"functions", ",", "1"}], "]"}], "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", 
+      RowBox[{"2", ";;", "All"}]}], "]"}], "]"}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"cleanTable", "=", 
+  RowBox[{"functionsStrings", "=", 
    RowBox[{
     RowBox[{
+     RowBox[{"StringJoin", "[", 
+      RowBox[{"Riffle", "[", 
+       RowBox[{"#", ",", "\"\< \>\""}], "]"}], "]"}], "&"}], "/@", 
+    "functionsSplits"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"functionsGrid", "=", 
+  RowBox[{"Grid", "[", 
+   RowBox[{
+    RowBox[{"Prepend", "[", 
+     RowBox[{
+      RowBox[{"StringSplit", "[", 
+       RowBox[{"functionsStrings", ",", "\"\<:\>\""}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<Name\>\"", ",", "\"\<Description\>\""}], "}"}]}], "]"}], 
+    ",", 
+    RowBox[{"Background", "\[Rule]", 
      RowBox[{"{", 
-      RowBox[{
-       RowBox[{"First", "[", "#", "]"}], ",", 
-       RowBox[{"Last", "[", "#", "]"}]}], "}"}], "&"}], "/@", 
-    RowBox[{"Flatten", "[", 
-     RowBox[{"casesWithData", ",", "1"}], "]"}]}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{"Grid", "[", 
-  RowBox[{
-   RowBox[{"Prepend", "[", 
-    RowBox[{"cleanTable", ",", 
-     RowBox[{"{", 
-      RowBox[{"\"\<NAME\>\"", ",", "\"\<DESCRIPTION\>\""}], "}"}]}], "]"}], 
-   ",", 
-   RowBox[{"Background", "\[Rule]", 
-    RowBox[{"{", 
-     RowBox[{"None", ",", 
-      RowBox[{"{", "LightBlue", "}"}]}], "}"}]}], ",", 
-   RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}], "\[IndentingNewLine]", 
+      RowBox[{"None", ",", 
+       RowBox[{"{", "LightBlue", "}"}]}], "}"}]}], ",", 
+    RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}]}], "\[IndentingNewLine]", 
  RowBox[{"Export", "[", 
-  RowBox[{"\"\<ParametersDescription.png\>\"", ",", "%", ",", 
-   RowBox[{"ImageSize", "\[Rule]", "2000"}], ",", 
-   RowBox[{"ImageResolution", "\[Rule]", "125"}]}], "]"}]}], "Input",
- CellChangeTimes->{{3.671370937134931*^9, 3.67137103272274*^9}, {
-  3.6713714907404013`*^9, 3.671371570619742*^9}, {3.671371615189543*^9, 
-  3.671371642279584*^9}, {3.671371683517227*^9, 3.671371697627911*^9}, {
-  3.671371733026308*^9, 3.671371844002707*^9}, {3.671371876861298*^9, 
-  3.671371886426773*^9}, {3.671371930027956*^9, 3.6713725268517942`*^9}}],
-
-Cell[BoxData["\<\"/Users/chipdelmal/Documents/School/Research/ODE_\
-MalariaVectors/GUI/03_TryTryTry\"\>"], "Output",
- CellChangeTimes->{{3.6713709443557043`*^9, 3.6713709715593557`*^9}, {
-   3.6713710284756823`*^9, 3.671371033237073*^9}, {3.6713714915416117`*^9, 
-   3.6713715711534033`*^9}, 3.671371628037817*^9, {3.671371765765204*^9, 
-   3.671371844342906*^9}, {3.671371877204196*^9, 3.671371886789733*^9}, {
-   3.671371930710834*^9, 3.6713720558912086`*^9}, 3.671372102082408*^9, {
-   3.671372138724925*^9, 3.6713722591515636`*^9}, {3.671372293761551*^9, 
-   3.671372364538394*^9}, {3.671372428971237*^9, 3.671372439553648*^9}, {
-   3.671372471599462*^9, 3.6713725272495604`*^9}}],
+  RowBox[{"\"\<DOC_functionsDescription.txt\>\"", ",", "functionsStrings"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Export", "[", 
+  RowBox[{"\"\<DOC_functionsDescription.png\>\"", ",", "functionsGrid", ",", 
+   RowBox[{"ImageSize", "\[Rule]", "1500"}], ",", 
+   RowBox[{"ImageResolution", "\[Rule]", "150"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6713837890601387`*^9, 3.671383811354813*^9}, {
+   3.6713839057041616`*^9, 3.671383943419662*^9}, {3.671386015693858*^9, 
+   3.671386067566222*^9}, {3.6713861190492563`*^9, 3.6713861228838797`*^9}, {
+   3.671386195022608*^9, 3.671386231128728*^9}, {3.671386299203518*^9, 
+   3.6713863129898767`*^9}, {3.671386363689082*^9, 3.671386373677343*^9}, {
+   3.6713864126328697`*^9, 3.6713865017241898`*^9}, {3.671386790509775*^9, 
+   3.671386792085503*^9}, {3.671387016331912*^9, 3.671387018159492*^9}, {
+   3.671387113789382*^9, 3.67138713576969*^9}, {3.671387181404855*^9, 
+   3.6713871951917*^9}, {3.6713872528444567`*^9, 3.671387306801015*^9}, {
+   3.671387730652133*^9, 3.671387791411111*^9}, {3.671387837414446*^9, 
+   3.6713878482469397`*^9}, {3.671387989864716*^9, 3.671387992708261*^9}, {
+   3.671388031328992*^9, 3.6713880505464783`*^9}, {3.671388194798759*^9, 
+   3.671388194892323*^9}, {3.671388237329262*^9, 3.6713882600319233`*^9}, {
+   3.671388412145625*^9, 3.6713885529042892`*^9}, {3.671388650472258*^9, 
+   3.671388712098859*^9}, {3.671388958273246*^9, 3.671388962874832*^9}, 
+   3.6713890256241007`*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"\<\"ODEInterventionParameters.R\"\>", 
+  RowBox[{"\<\"ODEAuxiliaryFunctions.R\"\>", ",", "\<\"ODEModel.R\"\>", 
    ",", "\<\"ODEMosquitoParameters.R\"\>", ",", "\<\"ODE.R\"\>"}], 
   "}"}]], "Output",
- CellChangeTimes->{{3.6713709443557043`*^9, 3.6713709715593557`*^9}, {
-   3.6713710284756823`*^9, 3.671371033237073*^9}, {3.6713714915416117`*^9, 
-   3.6713715711534033`*^9}, 3.671371628037817*^9, {3.671371765765204*^9, 
-   3.671371844342906*^9}, {3.671371877204196*^9, 3.671371886789733*^9}, {
-   3.671371930710834*^9, 3.6713720558912086`*^9}, 3.671372102082408*^9, {
-   3.671372138724925*^9, 3.6713722591515636`*^9}, {3.671372293761551*^9, 
-   3.671372364538394*^9}, {3.671372428971237*^9, 3.671372439553648*^9}, {
-   3.671372471599462*^9, 3.6713725272696037`*^9}}],
+ CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
+  3.6713886841425734`*^9, 3.6713887125307713`*^9}, {3.671388996829238*^9, 
+  3.671389025875333*^9}}],
 
 Cell[BoxData[
  TagBox[GridBox[{
-    {"\<\"NAME\"\>", "\<\"DESCRIPTION\"\>"},
-    {"\<\"muV\"\>", "\<\"Adult mosquito daily mortality\"\>"},
-    {"\<\"Q0\"\>", "\<\"Human blood index\"\>"},
-    {"\<\"phiB\"\>", "\<\"Proportion of bites on a person while they are in \
+    {"\<\"Name\"\>", "\<\"Description\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"barChartMosquitoDemographics\"\>", "\<\" Generates a bar chart with \
+the amount of mosquitos in each life stage\"\>"},
+    {"\<\"runODE\"\>", "\<\" Main ODE wrapper for simulating the mosquito \
+population\"\>"},
+    {"\<\"calculateInitialState\"\>", "\<\" Calculates the initial conditions \
+of a system given the theta parameters\"\>"},
+    {"\<\"IVM_ode\"\>", "\<\" ODE Model definition\"\>"},
+    {"\<\"getTheta\"\>", "\<\" Facade function to return theta from selected \
+parameters\"\>"},
+    {"\<\"getAnGambiaeParameters\"\>", "\<\" Returns the list of Anopheles \
+Gambiae specific parameters\"\>"},
+    {"\<\"getAnArabiensisParameters\"\>", "\<\" Returns the list of Anopheles \
+Arabiensis specific parameters\"\>"},
+    {"\<\"getAnFunestusParameters\"\>", "\<\" Returns the list of Anopheles \
+Funestus specific parameters\"\>"},
+    {"\<\"getInterventionsParameters\"\>", "\<\" Returns the list of \
+intervention parameters\"\>"},
+    {"\<\"getMosquitoLifeCycleParameters\"\>", "\<\" Returns the list of \
+mosquito life cycle parameters\"\>"},
+    {"\<\"getAdditionalTransmissionParameters\"\>", "\<\" Returns the \
+transmission parameters\"\>"}
+   },
+   AutoDelete->False,
+   GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {
+       RGBColor[0.87, 0.94, 1]}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output",
+ CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
+  3.6713886841425734`*^9, 3.6713887125307713`*^9}, {3.671388996829238*^9, 
+  3.6713890260263443`*^9}}],
+
+Cell[BoxData["\<\"DOC_functionsDescription.txt\"\>"], "Output",
+ CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
+  3.6713886841425734`*^9, 3.6713887125307713`*^9}, {3.671388996829238*^9, 
+  3.671389026052394*^9}}],
+
+Cell[BoxData["\<\"DOC_functionsDescription.png\"\>"], "Output",
+ CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
+  3.6713886841425734`*^9, 3.6713887125307713`*^9}, {3.671388996829238*^9, 
+  3.671389026703032*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Parameters", "Section",
+ CellChangeTimes->{{3.6713889708170347`*^9, 3.671388974230564*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"fileNames", "=", 
+  RowBox[{"FileNames", "[", "\"\<*.R\>\"", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"rawFilesData", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Import", "[", 
+      RowBox[{"#", ",", "\"\<Table\>\""}], "]"}], "&"}], "/@", 
+    "fileNames"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"functions", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Cases", "[", 
+      RowBox[{"#", ",", 
+       RowBox[{"{", 
+        RowBox[{"\"\<#*\>\"", ",", "x___"}], "}"}]}], "]"}], "&"}], "/@", 
+    "rawFilesData"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"functionsSplits", "=", 
+   RowBox[{
+    RowBox[{"Flatten", "[", 
+     RowBox[{"functions", ",", "1"}], "]"}], "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", 
+      RowBox[{"2", ";;", "All"}]}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"functionsStrings", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"StringJoin", "[", 
+      RowBox[{"Riffle", "[", 
+       RowBox[{"#", ",", "\"\< \>\""}], "]"}], "]"}], "&"}], "/@", 
+    "functionsSplits"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"functionsGrid", "=", 
+  RowBox[{"Grid", "[", 
+   RowBox[{
+    RowBox[{"Prepend", "[", 
+     RowBox[{
+      RowBox[{"StringSplit", "[", 
+       RowBox[{"functionsStrings", ",", "\"\<:\>\""}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<Name\>\"", ",", "\"\<Description\>\""}], "}"}]}], "]"}], 
+    ",", 
+    RowBox[{"Background", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"None", ",", 
+       RowBox[{"{", "LightBlue", "}"}]}], "}"}]}], ",", 
+    RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Export", "[", 
+  RowBox[{"\"\<DOC_parametersDescription.txt\>\"", ",", "functionsStrings"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Export", "[", 
+  RowBox[{
+  "\"\<DOC_parametersDescription.png\>\"", ",", "functionsGrid", ",", 
+   RowBox[{"ImageSize", "\[Rule]", "1500"}], ",", 
+   RowBox[{"ImageResolution", "\[Rule]", "150"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.67138873497936*^9, 3.671388765259427*^9}, {
+  3.671388832869417*^9, 3.6713888852297487`*^9}, {3.6713889505523157`*^9, 
+  3.671388955491416*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"ODEAuxiliaryFunctions.R\"\>", ",", "\<\"ODEModel.R\"\>", 
+   ",", "\<\"ODEMosquitoParameters.R\"\>", ",", "\<\"ODE.R\"\>"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
+  3.6713888277570877`*^9, 3.671388886041439*^9}, {3.671388997669395*^9, 
+  3.671389012204503*^9}}],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"Name\"\>", "\<\"Description\"\>"},
+    {"\<\"muV\"\>", "\<\" Adult mosquito daily mortality\"\>"},
+    {"\<\"Q0\"\>", "\<\" Human blood index\"\>"},
+    {"\<\"phiB\"\>", "\<\" Proportion of bites on a person while they are in \
 bed\"\>"},
-    {"\<\"phiI\"\>", "\<\"Proportion of bites on a person while they are \
+    {"\<\"phiI\"\>", "\<\" Proportion of bites on a person while they are \
 indoors\"\>"},
-    {"\<\"rITN\"\>", "\<\"Probability of mosquito repeating a feeding attempt \
-due to IRS\"\>"},
-    {"\<\"sITN\"\>", "\<\"Probability of mosquito feeding and surviving in \
+    {"\<\"rITN\"\>", "\<\" Probability of mosquito repeating a feeding \
+attempt due to IRS\"\>"},
+    {"\<\"sITN\"\>", "\<\" Probability of mosquito feeding and surviving in \
 presence of ITN\"\>"},
-    {"\<\"rIRS\"\>", "\<\"Probability of mosquito repeating a feeding attempt \
-due to IRS\"\>"},
-    {"\<\"sIRS\"\>", "\<\"Probability of mosquito feeding and surviving in \
+    {"\<\"rIRS\"\>", "\<\" Probability of mosquito repeating a feeding \
+attempt due to IRS\"\>"},
+    {"\<\"sIRS\"\>", "\<\" Probability of mosquito feeding and surviving in \
 presence of IRS\"\>"},
-    {"\<\"ITNcov\"\>", "\<\"ITN coverage\"\>"},
-    {"\<\"IRScov\"\>", "\<\"IRS coverage\"\>"},
-    {"\<\"time_ITN_on\"\>", "\<\"When ITNs are applied (days)\"\>"},
-    {"\<\"time_IRS_on\"\>", "\<\"When IRSs are applied (days)\"\>"},
-    {"\<\"beta\"\>", "\<\"Number of eggs laid per day per female \
+    {"\<\"ITNcov\"\>", "\<\" ITN coverage\"\>"},
+    {"\<\"IRScov\"\>", "\<\" IRS coverage\"\>"},
+    {"\<\"time_ITN_on\"\>", "\<\" When ITNs are applied (days)\"\>"},
+    {"\<\"time_IRS_on\"\>", "\<\" When IRSs are applied (days)\"\>"},
+    {"\<\"beta\"\>", "\<\" Number of eggs laid per day per female \
 mosquito\"\>"},
-    {"\<\"muEL\"\>", "\<\"Early larval instar daily mortality\"\>"},
-    {"\<\"muLL\"\>", "\<\"Late larvarl instar daily mortality\"\>"},
-    {"\<\"muPL\"\>", "\<\"Pupal daily mortality\"\>"},
-    {"\<\"durEL\"\>", "\<\"Duration of early instar stage\"\>"},
-    {"\<\"durLL\"\>", "\<\"Duration of late instar stage\"\>"},
-    {"\<\"durPL\"\>", "\<\"Pupal daily mortality\"\>"},
-    {"\<\"durPL\"\>", "\<\"Duration of pupal stage\"\>"},
-    {"\<\"durEV\"\>", "\<\"Duration of latent period in mosquito \
-(days)\"\>"},
-    {"\<\"gamma\"\>", "\<\"Effect of density-dependence on late instars \
+    {"\<\"muEL\"\>", "\<\" Early larval instar daily mortality\"\>"},
+    {"\<\"muLL\"\>", "\<\" Late larvarl instar daily mortality\"\>"},
+    {"\<\"muPL\"\>", "\<\" Pupal daily mortality\"\>"},
+    {"\<\"durEL\"\>", "\<\" Duration of early instar stage\"\>"},
+    {"\<\"durLL\"\>", "\<\" Duration of late instar stage\"\>"},
+    {"\<\"durPL\"\>", "\<\" Pupal daily mortality\"\>"},
+    {"\<\"durPL\"\>", "\<\" Duration of pupal stage\"\>"},
+    {"\<\"durEV\"\>", "\<\" Duration of latent period in mosquito (days)\"\>"},
+    {"\<\"gamma\"\>", "\<\" Effect of density-dependence on late instars \
 relative to early instars\"\>"},
-    {"\<\"tau1\"\>", "\<\"Time spent foraginf for a blood meal at 0% ITN \
+    {"\<\"tau1\"\>", "\<\" Time spent foraginf for a blood meal at 0% ITN \
 coverage\"\>"},
-    {"\<\"tau2\"\>", "\<\"Time spent resting and ovipositing by a \
-mosquito\"\>"},
-    {"\<\"f0\"\>", "\<\"Daily biting rate by mosquitoes on animals and humans\
-\"\>"},
-    {"\<\"epsilon0\"\>", "\<\"Daily entomological inolculation rate\"\>"},
-    {"\<\"iH_eq\"\>", "\<\"Equilibrium malaria prevalence in humans\"\>"},
-    {"\<\"NH_eq\"\>", "\<\"Equilibrium human population size\"\>"},
-    {"\<\"bV\"\>", "\<\"Probability of transmission from human to vector per \
+    {"\<\"tau2\"\>", "\<\" Time spent resting and ovipositing by a mosquito\"\
+\>"},
+    {"\<\"f0\"\>", "\<\" Daily biting rate by mosquitoes on animals and \
+humans\"\>"},
+    {"\<\"epsilon0\"\>", "\<\" Daily entomological inolculation rate\"\>"},
+    {"\<\"iH_eq\"\>", "\<\" Equilibrium malaria prevalence in humans\"\>"},
+    {"\<\"NH_eq\"\>", "\<\" Equilibrium human population size\"\>"},
+    {"\<\"bV\"\>", "\<\" Probability of transmission from human to vector per \
 infectious bite\"\>"}
    },
    AutoDelete->False,
@@ -172,24 +306,22 @@ infectious bite\"\>"}
    GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
   "Grid"]], "Output",
- CellChangeTimes->{{3.6713709443557043`*^9, 3.6713709715593557`*^9}, {
-   3.6713710284756823`*^9, 3.671371033237073*^9}, {3.6713714915416117`*^9, 
-   3.6713715711534033`*^9}, 3.671371628037817*^9, {3.671371765765204*^9, 
-   3.671371844342906*^9}, {3.671371877204196*^9, 3.671371886789733*^9}, {
-   3.671371930710834*^9, 3.6713720558912086`*^9}, 3.671372102082408*^9, {
-   3.671372138724925*^9, 3.6713722591515636`*^9}, {3.671372293761551*^9, 
-   3.671372364538394*^9}, {3.671372428971237*^9, 3.671372439553648*^9}, {
-   3.671372471599462*^9, 3.671372527391554*^9}}],
+ CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
+  3.6713888277570877`*^9, 3.671388886041439*^9}, {3.671388997669395*^9, 
+  3.671389012226746*^9}}],
 
-Cell[BoxData["\<\"ParametersDescription.png\"\>"], "Output",
- CellChangeTimes->{{3.6713709443557043`*^9, 3.6713709715593557`*^9}, {
-   3.6713710284756823`*^9, 3.671371033237073*^9}, {3.6713714915416117`*^9, 
-   3.6713715711534033`*^9}, 3.671371628037817*^9, {3.671371765765204*^9, 
-   3.671371844342906*^9}, {3.671371877204196*^9, 3.671371886789733*^9}, {
-   3.671371930710834*^9, 3.6713720558912086`*^9}, 3.671372102082408*^9, {
-   3.671372138724925*^9, 3.6713722591515636`*^9}, {3.671372293761551*^9, 
-   3.671372364538394*^9}, {3.671372428971237*^9, 3.671372439553648*^9}, {
-   3.671372471599462*^9, 3.671372528131488*^9}}]
+Cell[BoxData["\<\"DOC_parametersDescription.txt\"\>"], "Output",
+ CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
+  3.6713888277570877`*^9, 3.671388886041439*^9}, {3.671388997669395*^9, 
+  3.67138901224844*^9}}],
+
+Cell[BoxData["\<\"DOC_parametersDescription.png\"\>"], "Output",
+ CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
+  3.6713888277570877`*^9, 3.671388886041439*^9}, {3.671388997669395*^9, 
+  3.6713890129409657`*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
 }, Open  ]]
 },
 WindowSize->{1116, 790},
@@ -210,11 +342,30 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 2649, 73, 165, "Input"],
-Cell[3232, 97, 684, 9, 28, "Output"],
-Cell[3919, 108, 734, 12, 28, "Output"],
-Cell[4656, 122, 3131, 59, 559, "Output"],
-Cell[7790, 183, 626, 8, 28, "Output"]
+Cell[580, 22, 105, 1, 92, "Title"],
+Cell[CellGroupData[{
+Cell[710, 27, 121, 1, 65, "Chapter"],
+Cell[CellGroupData[{
+Cell[856, 32, 93, 1, 64, "Section"],
+Cell[CellGroupData[{
+Cell[974, 37, 3289, 77, 182, "Input"],
+Cell[4266, 116, 357, 7, 28, "Output"],
+Cell[4626, 125, 1788, 35, 255, "Output"],
+Cell[6417, 162, 231, 3, 28, "Output"],
+Cell[6651, 167, 231, 3, 28, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6931, 176, 97, 1, 64, "Section"],
+Cell[CellGroupData[{
+Cell[7053, 181, 2324, 65, 182, "Input"],
+Cell[9380, 248, 355, 7, 28, "Output"],
+Cell[9738, 257, 2758, 53, 561, "Output"],
+Cell[12499, 312, 229, 3, 28, "Output"],
+Cell[12731, 317, 232, 3, 28, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
 }, Open  ]]
 }
 ]
