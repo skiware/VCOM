@@ -1,9 +1,17 @@
+########################################################################
+#=======================================================================
+# ODEMosquitoParameters.R
+# Contains the accessors and setters for mosquitos and control measures
+# 
+#=======================================================================
+########################################################################
+
 ######################################################################################
 #------------------------------------------------------------------------
-############ getTheta FACADE ############################################
+############ THETA FACADE #############################################
 #------------------------------------------------------------------------
-#. getTheta: Facade function to return theta from selected parameters
 getTheta = function(
+  #. getTheta: Facade function to return theta from selected parameters
                     speciesSpecificParameters=getAnGambiaeParameters(), 
                     interventionParameters=getInterventionsParameters(),
                     additionalTransmissionParameters=getAdditionalTransmissionParameters(), 
@@ -53,8 +61,8 @@ getTheta = function(
 #* rIRS:    Probability of mosquito repeating a feeding attempt due to IRS
 #* sIRS:    Probability of mosquito feeding and surviving in presence of IRS
 #------------------------------------------------------------------------
-#. getAnGambiaeParameters: Returns the list of Anopheles Gambiae specific parameters
 getAnGambiaeParameters = function(){
+  #. getAnGambiaeParameters: Returns the list of Anopheles Gambiae specific parameters
   c(
     muV = 1/7.6, Q0 = 0.92,
     phiB = 0.89, phiI = 0.97,
@@ -62,8 +70,8 @@ getAnGambiaeParameters = function(){
     rIRS = 0.60, sIRS = 0
   )
 }
-#. getAnArabiensisParameters: Returns the list of Anopheles Arabiensis specific parameters
 getAnArabiensisParameters = function(){
+  #. getAnArabiensisParameters: Returns the list of Anopheles Arabiensis specific parameters
   c(
     muV = 1/7.6, Q0 = 0.71,
     phiB = 0.90, phiI = 0.96,
@@ -71,8 +79,8 @@ getAnArabiensisParameters = function(){
     rIRS = 0.60, sIRS = 0
   )
 }
-#. getAnFunestusParameters: Returns the list of Anopheles Funestus specific parameters
 getAnFunestusParameters = function(){
+  #. getAnFunestusParameters: Returns the list of Anopheles Funestus specific parameters
   c(
     muV = 1/8.9, Q0 = 0.94,
     phiB = 0.90, phiI = 0.98,
@@ -89,8 +97,8 @@ getAnFunestusParameters = function(){
 #* time_ITN_on:   When ITNs are applied (days)
 #* time_IRS_on:   When IRSs are applied (days)
 #------------------------------------------------------------------------
-#. getInterventionsParameters: Returns the list of intervention parameters
 getInterventionsParameters = function(){
+  #. getInterventionsParameters: Returns the list of intervention parameters
   c(
     ITNcov = 0.8, IRScov = 0.8,
     time_ITN_on = 50, time_IRS_on = 50
@@ -113,8 +121,8 @@ getInterventionsParameters = function(){
 #* tau1:    Time spent foraginf for a blood meal at 0% ITN coverage
 #* tau2:    Time spent resting and ovipositing by a mosquito
 #------------------------------------------------------------------------
-#. getMosquitoLifeCycleParameters: Returns the list of mosquito life cycle parameters
 getMosquitoLifeCycleParameters = function(){
+  #. getMosquitoLifeCycleParameters: Returns the list of mosquito life cycle parameters
   c(
     beta = 21.19,
     muEL = 0.034, muLL = 0.035, muPL = 0.25,
@@ -132,8 +140,8 @@ getMosquitoLifeCycleParameters = function(){
 #* NH_eq:     Equilibrium human population size
 #* bV:        Probability of transmission from human to vector per infectious bite
 #------------------------------------------------------------------------
-#. getAdditionalTransmissionParameters: Returns the transmission parameters
 getAdditionalTransmissionParameters = function(){
+  #. getAdditionalTransmissionParameters: Returns the transmission parameters
   c(
     f0 = 1/3, epsilon0 = 10/365, 
     iH_eq = 0.35, NH_eq = 200, 

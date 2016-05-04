@@ -19,13 +19,13 @@ library(ggplot2)
 source("ODEModel.R")
 source("ODEMosquitoParameters.R")
 source("ODEAuxiliaryFunctions.R")
-#########################################################################
-#------------------------------------------------------------------------
+########### INIT MODEL ##################################################
 theta = getTheta()
 initState = calculateInitialState(theta) 
-# RUN THE IVM ODEs ######################################################
+########### RUN THE IVM ODEs ############################################
 IVM_traj = runODE(80,1,initState,theta,"lsoda")
-# PLOT RESULTS ##########################################################
+########### PLOT RESULTS ################################################
 par(mfrow=c(2,1))
 barChartMosquitoDemographics(IVM_traj)
 plotTrajectory(IVM_traj)
+#------------------------------------------------------------------------

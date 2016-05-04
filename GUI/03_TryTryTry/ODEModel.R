@@ -1,13 +1,19 @@
 ########################################################################
-#. runODE: Main ODE wrapper for simulating the mosquito population
+#=======================================================================
+# ODEModel.R
+# Contains the functions that deal with the main ODE mosquitos model
+#
+#=======================================================================
+########################################################################
+
 runODE = function(tMax, tIncrement, initState, theta, method){
+  #. runODE: Main ODE wrapper for simulating the mosquito population
   simPeriod <- tMax # Simulation runs up to 365 days
   times <- seq(0, simPeriod, by = tIncrement)
   IVM_traj <- data.frame(dede(y = initState, times = times, parms = theta, func = IVM_ode, method = "lsoda"))
 }
-########################################################################
-#. calculateInitialState: Calculates the initial conditions of a system given the theta parameters
 calculateInitialState = function(theta){
+  #. calculateInitialState: Calculates the initial conditions of a system given the theta parameters
   beta <- theta[["beta"]]; muEL <- theta[["muEL"]]; muLL <- theta[["muLL"]]
   muPL <- theta[["muPL"]]; muV <- theta[["muV"]]; durEL <- theta[["durEL"]]
   durLL <- theta[["durLL"]]; durPL <- theta[["durPL"]]; durEV <- theta[["durEV"]]
@@ -47,9 +53,8 @@ calculateInitialState = function(theta){
   
   return(initState)
 }
-########################################################################
-#. IVM_ode: ODE Model definition
 IVM_ode <- function(time, state, theta){
+  #. IVM_ode: ODE Model definition
   ## Parameters (mosquito life cycle):
   beta <- theta[["beta"]] # Eggs laid per day by female mosquito
   muEL <- theta[["muEL"]] # Early instar stage daily mortality
