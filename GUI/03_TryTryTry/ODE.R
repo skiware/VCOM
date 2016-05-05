@@ -23,9 +23,10 @@ source("ODEAuxiliaryFunctions.R")
 theta = getTheta()
 initState = calculateInitialState(theta) 
 ########### RUN THE IVM ODEs ############################################
-IVM_traj = runODE(80,1,initState,theta,"lsoda")
+IVM_traj = runODE(365,1,initState,theta,"lsoda")
 ########### PLOT RESULTS ################################################
 par(mfrow=c(2,1))
 barChartMosquitoDemographics(IVM_traj)
 plotTrajectory(IVM_traj)
 #------------------------------------------------------------------------
+

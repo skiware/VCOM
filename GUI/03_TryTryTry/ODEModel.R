@@ -11,6 +11,8 @@ runODE = function(tMax, tIncrement, initState, theta, method){
   simPeriod <- tMax # Simulation runs up to 365 days
   times <- seq(0, simPeriod, by = tIncrement)
   IVM_traj <- data.frame(dede(y = initState, times = times, parms = theta, func = IVM_ode, method = "lsoda"))
+  #print(IVM_traj)
+  return(IVM_traj)
 }
 calculateInitialState = function(theta){
   #. calculateInitialState: Calculates the initial conditions of a system given the theta parameters
