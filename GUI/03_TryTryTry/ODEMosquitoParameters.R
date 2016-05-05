@@ -66,8 +66,17 @@ getAnGambiaeParameters = function(){
   c(
     muV = 1/7.6, Q0 = 0.92,
     phiB = 0.89, phiI = 0.97,
+    rOVI = 0.00, sOVI = 0.00,
+    rFOG = 0.00, sFOG = 0.00,
+    rLAR = 0.00, sLAR = 0.00,
+    rBIO = 0.00, sBIO = 0.00,
+    rSRE = 0.00, sSRE = 0.00,
+    rIRS = 0.60, sIRS = 0.00,
     rITN = 0.56, sITN = 0.03,
-    rIRS = 0.60, sIRS = 0
+    rIVM = 0.00, sIVM = 0.00,
+    rHOU = 0.00, sHOU = 0.00,
+    rODO = 0.00, sODO = 0.00,
+    rSPA = 0.00, sSPA = 0.00
   )
 }
 getAnArabiensisParameters = function(){
@@ -75,8 +84,17 @@ getAnArabiensisParameters = function(){
   c(
     muV = 1/7.6, Q0 = 0.71,
     phiB = 0.90, phiI = 0.96,
-    rITN = 0.48, sITN = 0.39,
-    rIRS = 0.60, sIRS = 0
+    rOVI = 0.00, sOVI = 0.00,
+    rFOG = 0.00, sFOG = 0.00,
+    rLAR = 0.00, sLAR = 0.00,
+    rBIO = 0.00, sBIO = 0.00,
+    rSRE = 0.00, sSRE = 0.00,
+    rIRS = 0.60, sIRS = 0.00,
+    rITN = 0.56, sITN = 0.03,
+    rIVM = 0.00, sIVM = 0.00,
+    rHOU = 0.00, sHOU = 0.00,
+    rODO = 0.00, sODO = 0.00,
+    rSPA = 0.00, sSPA = 0.00
   )
 }
 getAnFunestusParameters = function(){
@@ -84,8 +102,17 @@ getAnFunestusParameters = function(){
   c(
     muV = 1/8.9, Q0 = 0.94,
     phiB = 0.90, phiI = 0.98,
+    rOVI = 0.00, sOVI = 0.00,
+    rFOG = 0.00, sFOG = 0.00,
+    rLAR = 0.00, sLAR = 0.00,
+    rBIO = 0.00, sBIO = 0.00,
+    rSRE = 0.00, sSRE = 0.00,
+    rIRS = 0.60, sIRS = 0.00,
     rITN = 0.56, sITN = 0.03,
-    rIRS = 0.63, sIRS = 0
+    rIVM = 0.00, sIVM = 0.00,
+    rHOU = 0.00, sHOU = 0.00,
+    rODO = 0.00, sODO = 0.00,
+    rSPA = 0.00, sSPA = 0.00
   )
 }
 ######################################################################################
@@ -100,8 +127,17 @@ getAnFunestusParameters = function(){
 getInterventionsParameters = function(){
   #. getInterventionsParameters: Returns the list of intervention parameters
   c(
-    ITNcov = 0.8, IRScov = 0.8,
-    time_ITN_on = 50, time_IRS_on = 50
+    OVIcov = 0.0, time_OVI_on = 00,
+    FOGcov = 0.0, time_FOG_on = 00,
+    LARcov = 0.0, time_LAR_on = 00,
+    BIOcov = 0.0, time_BIO_on = 00,
+    SREcov = 0.0, time_SRE_on = 00,
+    IRScov = 0.8, time_IRS_on = 50,
+    ITNcov = 0.8, time_ITN_on = 50,
+    IVMcov = 0.0, time_IVM_on = 00,
+    HOUcov = 0.0, time_HOU_on = 00,
+    ODOcov = 0.0, time_ODO_on = 00,
+    SPAcov = 0.0, time_SPA_on = 00
   )
 }
 ######################################################################################
