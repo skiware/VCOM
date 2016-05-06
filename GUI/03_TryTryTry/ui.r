@@ -127,19 +127,20 @@ shinyUI(
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
       tabPanel("Files I/O",
         #titlePanel(h3("Input",align="left")),
-        fileInput('xmlImport', 'Import XML Parameters File', accept = c('xml')),
+        fileInput('csvImport', 'Import CSV Parameters File', accept = c('.csv')),
         helpText("Select an XML file to load the parameters set for the desired scenario. If it is the first time you are 
           using this option a good starting point is to download the 'XML Parameters Template' and modify it."),
         titlePanel(h3("Output",align="left")),
         downloadButton(NA, 'Download CSV Parameters'),
         downloadButton(NA, 'Download CSV Output'),
-        downloadButton(NA, 'Download EPS Plots'),
-        downloadButton("downloadData", 'Download CSV Parameters Template')
+        downloadButton("downloadPlot", 'Download Plot'),
+        downloadButton("downloadTemplate", 'Download CSV Parameters Template')
       ),
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
       tabPanel("Runtime Data",
         titlePanel("Runtime data"),
-        textOutput("IVM_Runtime")
+        textOutput("IVM_Runtime"),
+        tableOutput("contents")
       )
       ###########################################################################
     )

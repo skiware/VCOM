@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     17025,        413]
-NotebookOptionsPosition[     15979,        372]
-NotebookOutlinePosition[     16337,        388]
-CellTagsIndexPosition[     16294,        385]
+NotebookDataLength[     19568,        465]
+NotebookOptionsPosition[     18519,        424]
+NotebookOutlinePosition[     18877,        440]
+CellTagsIndexPosition[     18834,        437]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -129,7 +129,8 @@ Cell[BoxData[
    3.6713886841425734`*^9, 3.6713887125307713`*^9}, {3.671388996829238*^9, 
    3.671389025875333*^9}, 3.671389441338258*^9, 3.6713899202035437`*^9, 
    3.6714820901636753`*^9, 3.6714823711064777`*^9, {3.67154808478664*^9, 
-   3.671548090687114*^9}}],
+   3.671548090687114*^9}, 3.671549163437726*^9, 3.671549536754277*^9, 
+   3.671552399858946*^9}],
 
 Cell[BoxData[
  TagBox[GridBox[{
@@ -142,6 +143,8 @@ the amount of mosquitos in each life stage\"\>"},
 imported this function converts the data into a theta object\"\>"},
     {"\<\"importCSVParametersFromDirectory\"\>", "\<\" Loads the parameters \
 from a CSV file into the workflow\"\>"},
+    {"\<\"validateCSVParameters\"\>", "\<\" Verifies that the user has \
+imported a valid CSV file with all the parameters defined\"\>"},
     {"\<\"runODE\"\>", "\<\" Main ODE wrapper for simulating the mosquito \
 population\"\>"},
     {"\<\"calculateInitialState\"\>", "\<\" Calculates the initial conditions \
@@ -172,28 +175,32 @@ transmission parameters\"\>"}
    3.6713886841425734`*^9, 3.6713887125307713`*^9}, {3.671388996829238*^9, 
    3.671389025875333*^9}, 3.671389441338258*^9, 3.6713899202035437`*^9, 
    3.6714820901636753`*^9, 3.6714823711064777`*^9, {3.67154808478664*^9, 
-   3.671548090840044*^9}}],
+   3.671548090687114*^9}, 3.671549163437726*^9, 3.671549536754277*^9, 
+   3.6715523999904757`*^9}],
 
 Cell[BoxData["\<\"DOC_functionsDescription.txt\"\>"], "Output",
  CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
    3.6713886841425734`*^9, 3.6713887125307713`*^9}, {3.671388996829238*^9, 
    3.671389025875333*^9}, 3.671389441338258*^9, 3.6713899202035437`*^9, 
    3.6714820901636753`*^9, 3.6714823711064777`*^9, {3.67154808478664*^9, 
-   3.6715480908641243`*^9}}],
+   3.671548090687114*^9}, 3.671549163437726*^9, 3.671549536754277*^9, 
+   3.6715524000122843`*^9}],
 
 Cell[BoxData["\<\"DOC_functionsDescription.csv\"\>"], "Output",
  CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
    3.6713886841425734`*^9, 3.6713887125307713`*^9}, {3.671388996829238*^9, 
    3.671389025875333*^9}, 3.671389441338258*^9, 3.6713899202035437`*^9, 
    3.6714820901636753`*^9, 3.6714823711064777`*^9, {3.67154808478664*^9, 
-   3.6715480908862953`*^9}}],
+   3.671548090687114*^9}, 3.671549163437726*^9, 3.671549536754277*^9, 
+   3.6715524000358343`*^9}],
 
 Cell[BoxData["\<\"DOC_functionsDescription.png\"\>"], "Output",
  CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
    3.6713886841425734`*^9, 3.6713887125307713`*^9}, {3.671388996829238*^9, 
    3.671389025875333*^9}, 3.671389441338258*^9, 3.6713899202035437`*^9, 
    3.6714820901636753`*^9, 3.6714823711064777`*^9, {3.67154808478664*^9, 
-   3.6715480915263853`*^9}}]
+   3.671548090687114*^9}, 3.671549163437726*^9, 3.671549536754277*^9, 
+   3.671552400803789*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -286,7 +293,8 @@ Cell[BoxData[
    3.6713888277570877`*^9, 3.671388886041439*^9}, {3.671388997669395*^9, 
    3.671389012204503*^9}, 3.6713894421519823`*^9, 3.67138992185116*^9, 
    3.671482091804675*^9, 3.671482372253051*^9, 3.6715478524238787`*^9, {
-   3.671547903761304*^9, 3.671547925188884*^9}}],
+   3.671547903761304*^9, 3.671547925188884*^9}, 3.671549164568158*^9, 
+   3.671549537840641*^9, 3.671552401126684*^9}],
 
 Cell[BoxData[
  TagBox[GridBox[{
@@ -297,18 +305,58 @@ Cell[BoxData[
 bed\"\>"},
     {"\<\"phiI\"\>", "\<\" Proportion of bites on a person while they are \
 indoors\"\>"},
-    {"\<\"rITN\"\>", "\<\" Probability of mosquito repeating a feeding \
-attempt due to IRS\"\>"},
-    {"\<\"sITN\"\>", "\<\" Probability of mosquito feeding and surviving in \
-presence of ITN\"\>"},
+    {"\<\"rOVI\"\>", ""},
+    {"\<\"sOVI\"\>", ""},
+    {"\<\"rFOG\"\>", ""},
+    {"\<\"sFOG\"\>", ""},
+    {"\<\"rLAR\"\>", ""},
+    {"\<\"sLAR\"\>", ""},
+    {"\<\"rBIO\"\>", ""},
+    {"\<\"sBIO\"\>", ""},
+    {"\<\"rSRE\"\>", ""},
+    {"\<\"sSRE\"\>", ""},
     {"\<\"rIRS\"\>", "\<\" Probability of mosquito repeating a feeding \
 attempt due to IRS\"\>"},
     {"\<\"sIRS\"\>", "\<\" Probability of mosquito feeding and surviving in \
 presence of IRS\"\>"},
-    {"\<\"ITNcov\"\>", "\<\" ITN coverage\"\>"},
+    {"\<\"rITN\"\>", "\<\" Probability of mosquito repeating a feeding \
+attempt due to IRS\"\>"},
+    {"\<\"sITN\"\>", "\<\" Probability of mosquito feeding and surviving in \
+presence of ITN\"\>"},
+    {"\<\"rIVM\"\>", ""},
+    {"\<\"sIVM\"\>", ""},
+    {"\<\"rHOU\"\>", ""},
+    {"\<\"sHOU\"\>", ""},
+    {"\<\"rODO\"\>", ""},
+    {"\<\"sODO\"\>", ""},
+    {"\<\"rSPA\"\>", ""},
+    {"\<\"sSPA\"\>", ""},
+    {"\<\"OVIcov\"\>", "\<\" Ovitraps coverage\"\>"},
+    {"\<\"time_OVI_on\"\>", "\<\" When Ovitraps are applied (days)\"\>"},
+    {"\<\"FOGcov\"\>", "\<\" Fogging coverage\"\>"},
+    {"\<\"time_FOG_on\"\>", "\<\" When Fogging is applied (days)\"\>"},
+    {"\<\"LARcov\"\>", "\<\" Larvacide coverage\"\>"},
+    {"\<\"time_LAR_on\"\>", "\<\" When Larvacide is applied (days)\"\>"},
+    {"\<\"BIOcov\"\>", "\<\" Biological Control coverage\"\>"},
+    {"\<\"time_BIO_on\"\>", "\<\" When Biological Control is applied (days)\"\
+\>"},
+    {"\<\"SREcov\"\>", "\<\" Source Reduction coverage\"\>"},
+    {"\<\"time_SRE_on\"\>", "\<\" When Source Reduction is applied \
+(days)\"\>"},
     {"\<\"IRScov\"\>", "\<\" IRS coverage\"\>"},
-    {"\<\"time_ITN_on\"\>", "\<\" When ITNs are applied (days)\"\>"},
     {"\<\"time_IRS_on\"\>", "\<\" When IRSs are applied (days)\"\>"},
+    {"\<\"ITNcov\"\>", "\<\" ITN coverage\"\>"},
+    {"\<\"time_ITN_on\"\>", "\<\" When ITNs are applied (days)\"\>"},
+    {"\<\"IVMcov\"\>", "\<\" Ivermectin coverage\"\>"},
+    {"\<\"time_IVM_on\"\>", "\<\" When Ivermectin is applied (days)\"\>"},
+    {"\<\"HOUcov\"\>", "\<\" House Modification coverage\"\>"},
+    {"\<\"time_HOU_on\"\>", "\<\" When House Modifications are applied (days)\
+\"\>"},
+    {"\<\"ODOcov\"\>", "\<\" Odor Traps coverage\"\>"},
+    {"\<\"time_ODO_on\"\>", "\<\" When Odor Traps are applied (days)\"\>"},
+    {"\<\"SPAcov\"\>", "\<\" Spatial Repellents coverage\"\>"},
+    {"\<\"time_SPA_on\"\>", "\<\" When Space Repellents are applied \
+(days)\"\>"},
     {"\<\"beta\"\>", "\<\" Number of eggs laid per day per female \
 mosquito\"\>"},
     {"\<\"muEL\"\>", "\<\" Early larval instar daily mortality\"\>"},
@@ -343,28 +391,32 @@ infectious bite\"\>"}
    3.6713888277570877`*^9, 3.671388886041439*^9}, {3.671388997669395*^9, 
    3.671389012204503*^9}, 3.6713894421519823`*^9, 3.67138992185116*^9, 
    3.671482091804675*^9, 3.671482372253051*^9, 3.6715478524238787`*^9, {
-   3.671547903761304*^9, 3.6715479252602262`*^9}}],
+   3.671547903761304*^9, 3.671547925188884*^9}, 3.671549164568158*^9, 
+   3.671549537840641*^9, 3.67155240119829*^9}],
 
 Cell[BoxData["\<\"DOC_parametersDescription.txt\"\>"], "Output",
  CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
    3.6713888277570877`*^9, 3.671388886041439*^9}, {3.671388997669395*^9, 
    3.671389012204503*^9}, 3.6713894421519823`*^9, 3.67138992185116*^9, 
    3.671482091804675*^9, 3.671482372253051*^9, 3.6715478524238787`*^9, {
-   3.671547903761304*^9, 3.671547925292935*^9}}],
+   3.671547903761304*^9, 3.671547925188884*^9}, 3.671549164568158*^9, 
+   3.671549537840641*^9, 3.671552401219645*^9}],
 
 Cell[BoxData["\<\"DOC_parametersDescription.csv\"\>"], "Output",
  CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
    3.6713888277570877`*^9, 3.671388886041439*^9}, {3.671388997669395*^9, 
    3.671389012204503*^9}, 3.6713894421519823`*^9, 3.67138992185116*^9, 
    3.671482091804675*^9, 3.671482372253051*^9, 3.6715478524238787`*^9, {
-   3.671547903761304*^9, 3.671547925307517*^9}}],
+   3.671547903761304*^9, 3.671547925188884*^9}, 3.671549164568158*^9, 
+   3.671549537840641*^9, 3.671552401235649*^9}],
 
 Cell[BoxData["\<\"DOC_parametersDescription.png\"\>"], "Output",
  CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
    3.6713888277570877`*^9, 3.671388886041439*^9}, {3.671388997669395*^9, 
    3.671389012204503*^9}, 3.6713894421519823`*^9, 3.67138992185116*^9, 
    3.671482091804675*^9, 3.671482372253051*^9, 3.6715478524238787`*^9, {
-   3.671547903761304*^9, 3.671547926344795*^9}}]
+   3.671547903761304*^9, 3.671547925188884*^9}, 3.671549164568158*^9, 
+   3.671549537840641*^9, 3.67155240247367*^9}]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
@@ -395,22 +447,22 @@ Cell[CellGroupData[{
 Cell[856, 32, 93, 1, 64, "Section"],
 Cell[CellGroupData[{
 Cell[974, 37, 3560, 83, 199, "Input"],
-Cell[4537, 122, 553, 9, 28, "Output"],
-Cell[5093, 133, 2198, 41, 291, "Output"],
-Cell[7294, 176, 382, 5, 28, "Output"],
-Cell[7679, 183, 382, 5, 28, "Output"],
-Cell[8064, 190, 382, 5, 28, "Output"]
+Cell[4537, 122, 623, 10, 28, "Output"],
+Cell[5163, 134, 2408, 44, 309, "Output"],
+Cell[7574, 180, 452, 6, 28, "Output"],
+Cell[8029, 188, 452, 6, 28, "Output"],
+Cell[8484, 196, 450, 6, 28, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[8495, 201, 97, 1, 64, "Section"],
+Cell[8983, 208, 97, 1, 64, "Section"],
 Cell[CellGroupData[{
-Cell[8617, 206, 2598, 71, 199, "Input"],
-Cell[11218, 279, 571, 9, 28, "Output"],
-Cell[11792, 290, 2929, 55, 561, "Output"],
-Cell[14724, 347, 399, 5, 28, "Output"],
-Cell[15126, 354, 399, 5, 28, "Output"],
-Cell[15528, 361, 399, 5, 28, "Output"]
+Cell[9105, 213, 2598, 71, 199, "Input"],
+Cell[11706, 286, 641, 10, 28, "Output"],
+Cell[12350, 298, 4702, 96, 1191, "Output"],
+Cell[17055, 396, 469, 6, 28, "Output"],
+Cell[17527, 404, 469, 6, 28, "Output"],
+Cell[17999, 412, 468, 6, 28, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
