@@ -6,9 +6,9 @@
 #=======================================================================
 ########################################################################
 REQUIRED_PARAMETERS_LIST_GLOBAL = c("beta","muEL","muLL","muPL","durEL","durLL","durPL","durEV",
-    "gamma","tau1","tau2","muV","Q0","phiB","phiI","rOVI","sOVI","rFOG","sFOG","rLAR","sLAR",
-    "rBIO","sBIO","rSRE","sSRE","rIRS","sIRS","rITN","sITN","rIVM","sIVM","rHOU","sHOU","rODO",
-    "sODO","rSPA","sSPA")
+                                    "gamma","tau1","tau2","muV","Q0","phiB","phiI","rOVI","sOVI","rFOG","sFOG","rLAR","sLAR",
+                                    "rBIO","sBIO","rSRE","sSRE","rIRS","sIRS","rITN","sITN","rIVM","sIVM","rHOU","sHOU","rODO",
+                                    "sODO","rSPA","sSPA")
 
 plotTrajectory = function(IVM_traj){
   #. plotTrajectory: Plots the evolution of the dynamics of the system
@@ -61,10 +61,19 @@ importCSVParametersFromDirectory = function(fileName){
   #. importCSVParametersFromDirectory: Loads the parameters from a CSV file into the workflow
   inputDataFrame=read.csv(file=fileName,head=FALSE,sep=",",row.names=1,fill=FALSE,stringsAsFactors=FALSE)
   inputDataFrame[,1]=as.numeric(inputDataFrame[,1])
-  return(inputDataFrame)
+  return(validateCSVParameters(inputDataFrame))
 }
 validateCSVParameters = function(inputDataFrame){
   #. validateCSVParameters: Verifies that the user has imported a valid CSV file with all the parameters defined
-  containsNA=anyNA(data[REQUIRED_PARAMETERS_LIST_GLOBAL,1])
-  if(containsNA==FALSE){return(data)}else{return(NA)}
+  containsNA=anyNA(inputDataFrame[REQUIRED_PARAMETERS_LIST_GLOBAL,1])
+  if(containsNA==FALSE){
+    print("FILE IS CORRECT")
+    return(inputDataFrame)
+  }else{
+    print("ERROR IN FILE")
+    n = c("YOU MADE A MISTAKE AND SHOULD FEEL ASHAMED!!!") 
+    s = c("")
+    df = data.frame(n, s)
+    return(data.frame(df))
+  }
 }

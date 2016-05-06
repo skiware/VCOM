@@ -51,7 +51,9 @@ shinyServer(
     inFile <- input$csvImport
     if (is.null(inFile))
       return(NULL)
-    read.csv(inFile$datapath,header=FALSE,sep=",")
+    #importedCSVParameters<<-read.csv(inFile$datapath,head=FALSE,sep=",",row.names=1,fill=FALSE,stringsAsFactors=FALSE)
+    #validateCSVParameters(importedCSVParameters)
+    importCSVParametersFromDirectory(inFile$datapath)
   })
 })
 ###############################################################################
