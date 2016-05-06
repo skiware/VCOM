@@ -56,10 +56,28 @@ getTheta = function(
 #* Q0:      Human blood index
 #* phiB:    Proportion of bites on a person while they are in bed
 #* phiI:    Proportion of bites on a person while they are indoors
-#* rITN:    Probability of mosquito repeating a feeding attempt due to IRS
-#* sITN:    Probability of mosquito feeding and surviving in presence of ITN
+#* rOVI:    
+#* sOVI:
+#* rFOG:
+#* sFOG:
+#* rLAR:
+#* sLAR:
+#* rBIO:
+#* sBIO:
+#* rSRE:
+#* sSRE:
 #* rIRS:    Probability of mosquito repeating a feeding attempt due to IRS
 #* sIRS:    Probability of mosquito feeding and surviving in presence of IRS
+#* rITN:    Probability of mosquito repeating a feeding attempt due to IRS
+#* sITN:    Probability of mosquito feeding and surviving in presence of ITN
+#* rIVM:
+#* sIVM:
+#* rHOU:
+#* sHOU:
+#* rODO:
+#* sODO:
+#* rSPA:
+#* sSPA:
 #------------------------------------------------------------------------
 getAnGambiaeParameters = function(){
   #. getAnGambiaeParameters: Returns the list of Anopheles Gambiae specific parameters
@@ -119,10 +137,28 @@ getAnFunestusParameters = function(){
 #------------------------------------------------------------------------
 ############ INTERVENTIONS PARAMETERS ###################################
 #------------------------------------------------------------------------
-#* ITNcov:        ITN coverage
+#* OVIcov:        Ovitraps coverage
+#* time_OVI_on:   When Ovitraps are applied (days)
+#* FOGcov:        Fogging coverage
+#* time_FOG_on:   When Fogging is applied (days)
+#* LARcov:        Larvacide coverage
+#* time_LAR_on:   When Larvacide is applied (days)
+#* BIOcov:        Biological Control coverage
+#* time_BIO_on:   When Biological Control is applied (days)
+#* SREcov:        Source Reduction coverage
+#* time_SRE_on:   When Source Reduction is applied (days)
 #* IRScov:        IRS coverage
-#* time_ITN_on:   When ITNs are applied (days)
 #* time_IRS_on:   When IRSs are applied (days)
+#* ITNcov:        ITN coverage
+#* time_ITN_on:   When ITNs are applied (days)
+#* IVMcov:        Ivermectin coverage
+#* time_IVM_on:   When Ivermectin is applied (days)
+#* HOUcov:        House Modification coverage
+#* time_HOU_on:   When House Modifications are applied (days)
+#* ODOcov:        Odor Traps coverage
+#* time_ODO_on:   When Odor Traps are applied (days)
+#* SPAcov:        Spatial Repellents coverage
+#* time_SPA_on:   When Space Repellents are applied (days)
 #------------------------------------------------------------------------
 getInterventionsParameters = function(){
   #. getInterventionsParameters: Returns the list of intervention parameters

@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     14804,        375]
-NotebookOptionsPosition[     13838,        336]
-NotebookOutlinePosition[     14196,        352]
-CellTagsIndexPosition[     14153,        349]
+NotebookDataLength[     17025,        413]
+NotebookOptionsPosition[     15979,        372]
+NotebookOutlinePosition[     16337,        388]
+CellTagsIndexPosition[     16294,        385]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -75,13 +75,16 @@ Cell[BoxData[{
       RowBox[{"Riffle", "[", 
        RowBox[{"#", ",", "\"\< \>\""}], "]"}], "]"}], "&"}], "/@", 
     "functionsSplits"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"functionsTable", "=", 
+   RowBox[{"StringSplit", "[", 
+    RowBox[{"functionsStrings", ",", "\"\<:\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{"functionsGrid", "=", 
   RowBox[{"Grid", "[", 
    RowBox[{
     RowBox[{"Prepend", "[", 
-     RowBox[{
-      RowBox[{"StringSplit", "[", 
-       RowBox[{"functionsStrings", ",", "\"\<:\>\""}], "]"}], ",", 
+     RowBox[{"functionsTable", ",", 
       RowBox[{"{", 
        RowBox[{"\"\<Name\>\"", ",", "\"\<Description\>\""}], "}"}]}], "]"}], 
     ",", 
@@ -92,6 +95,9 @@ Cell[BoxData[{
     RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}]}], "\[IndentingNewLine]", 
  RowBox[{"Export", "[", 
   RowBox[{"\"\<DOC_functionsDescription.txt\>\"", ",", "functionsStrings"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Export", "[", 
+  RowBox[{"\"\<DOC_functionsDescription.csv\>\"", ",", "functionsTable"}], 
   "]"}], "\[IndentingNewLine]", 
  RowBox[{"Export", "[", 
   RowBox[{"\"\<DOC_functionsDescription.png\>\"", ",", "functionsGrid", ",", 
@@ -112,7 +118,7 @@ Cell[BoxData[{
    3.671388194892323*^9}, {3.671388237329262*^9, 3.6713882600319233`*^9}, {
    3.671388412145625*^9, 3.6713885529042892`*^9}, {3.671388650472258*^9, 
    3.671388712098859*^9}, {3.671388958273246*^9, 3.671388962874832*^9}, 
-   3.6713890256241007`*^9}],
+   3.6713890256241007`*^9, {3.671548068562018*^9, 3.671548090329624*^9}}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -122,7 +128,8 @@ Cell[BoxData[
  CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
    3.6713886841425734`*^9, 3.6713887125307713`*^9}, {3.671388996829238*^9, 
    3.671389025875333*^9}, 3.671389441338258*^9, 3.6713899202035437`*^9, 
-   3.6714820901636753`*^9}],
+   3.6714820901636753`*^9, 3.6714823711064777`*^9, {3.67154808478664*^9, 
+   3.671548090687114*^9}}],
 
 Cell[BoxData[
  TagBox[GridBox[{
@@ -133,6 +140,8 @@ the system\"\>"},
 the amount of mosquitos in each life stage\"\>"},
     {"\<\"parseImportedCSVParameters\"\>", "\<\" Once a csv file has been \
 imported this function converts the data into a theta object\"\>"},
+    {"\<\"importCSVParametersFromDirectory\"\>", "\<\" Loads the parameters \
+from a CSV file into the workflow\"\>"},
     {"\<\"runODE\"\>", "\<\" Main ODE wrapper for simulating the mosquito \
 population\"\>"},
     {"\<\"calculateInitialState\"\>", "\<\" Calculates the initial conditions \
@@ -162,19 +171,29 @@ transmission parameters\"\>"}
  CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
    3.6713886841425734`*^9, 3.6713887125307713`*^9}, {3.671388996829238*^9, 
    3.671389025875333*^9}, 3.671389441338258*^9, 3.6713899202035437`*^9, 
-   3.671482090278132*^9}],
+   3.6714820901636753`*^9, 3.6714823711064777`*^9, {3.67154808478664*^9, 
+   3.671548090840044*^9}}],
 
 Cell[BoxData["\<\"DOC_functionsDescription.txt\"\>"], "Output",
  CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
    3.6713886841425734`*^9, 3.6713887125307713`*^9}, {3.671388996829238*^9, 
    3.671389025875333*^9}, 3.671389441338258*^9, 3.6713899202035437`*^9, 
-   3.671482090298665*^9}],
+   3.6714820901636753`*^9, 3.6714823711064777`*^9, {3.67154808478664*^9, 
+   3.6715480908641243`*^9}}],
+
+Cell[BoxData["\<\"DOC_functionsDescription.csv\"\>"], "Output",
+ CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
+   3.6713886841425734`*^9, 3.6713887125307713`*^9}, {3.671388996829238*^9, 
+   3.671389025875333*^9}, 3.671389441338258*^9, 3.6713899202035437`*^9, 
+   3.6714820901636753`*^9, 3.6714823711064777`*^9, {3.67154808478664*^9, 
+   3.6715480908862953`*^9}}],
 
 Cell[BoxData["\<\"DOC_functionsDescription.png\"\>"], "Output",
  CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
    3.6713886841425734`*^9, 3.6713887125307713`*^9}, {3.671388996829238*^9, 
    3.671389025875333*^9}, 3.671389441338258*^9, 3.6713899202035437`*^9, 
-   3.671482091470315*^9}]
+   3.6714820901636753`*^9, 3.6714823711064777`*^9, {3.67154808478664*^9, 
+   3.6715480915263853`*^9}}]
 }, Open  ]]
 }, Open  ]],
 
@@ -225,13 +244,16 @@ Cell[BoxData[{
       RowBox[{"Riffle", "[", 
        RowBox[{"#", ",", "\"\< \>\""}], "]"}], "]"}], "&"}], "/@", 
     "functionsSplits"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"functionsTable", "=", 
+   RowBox[{"StringSplit", "[", 
+    RowBox[{"functionsStrings", ",", "\"\<:\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{"functionsGrid", "=", 
   RowBox[{"Grid", "[", 
    RowBox[{
     RowBox[{"Prepend", "[", 
-     RowBox[{
-      RowBox[{"StringSplit", "[", 
-       RowBox[{"functionsStrings", ",", "\"\<:\>\""}], "]"}], ",", 
+     RowBox[{"functionsTable", ",", 
       RowBox[{"{", 
        RowBox[{"\"\<Name\>\"", ",", "\"\<Description\>\""}], "}"}]}], "]"}], 
     ",", 
@@ -244,13 +266,16 @@ Cell[BoxData[{
   RowBox[{"\"\<DOC_parametersDescription.txt\>\"", ",", "functionsStrings"}], 
   "]"}], "\[IndentingNewLine]", 
  RowBox[{"Export", "[", 
+  RowBox[{"\"\<DOC_parametersDescription.csv\>\"", ",", "functionsTable"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Export", "[", 
   RowBox[{
   "\"\<DOC_parametersDescription.png\>\"", ",", "functionsGrid", ",", 
    RowBox[{"ImageSize", "\[Rule]", "1500"}], ",", 
    RowBox[{"ImageResolution", "\[Rule]", "150"}]}], "]"}]}], "Input",
  CellChangeTimes->{{3.67138873497936*^9, 3.671388765259427*^9}, {
   3.671388832869417*^9, 3.6713888852297487`*^9}, {3.6713889505523157`*^9, 
-  3.671388955491416*^9}}],
+  3.671388955491416*^9}, {3.671547893658914*^9, 3.6715479248468513`*^9}}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -260,7 +285,8 @@ Cell[BoxData[
  CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
    3.6713888277570877`*^9, 3.671388886041439*^9}, {3.671388997669395*^9, 
    3.671389012204503*^9}, 3.6713894421519823`*^9, 3.67138992185116*^9, 
-   3.671482091804675*^9}],
+   3.671482091804675*^9, 3.671482372253051*^9, 3.6715478524238787`*^9, {
+   3.671547903761304*^9, 3.671547925188884*^9}}],
 
 Cell[BoxData[
  TagBox[GridBox[{
@@ -316,25 +342,35 @@ infectious bite\"\>"}
  CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
    3.6713888277570877`*^9, 3.671388886041439*^9}, {3.671388997669395*^9, 
    3.671389012204503*^9}, 3.6713894421519823`*^9, 3.67138992185116*^9, 
-   3.67148209187635*^9}],
+   3.671482091804675*^9, 3.671482372253051*^9, 3.6715478524238787`*^9, {
+   3.671547903761304*^9, 3.6715479252602262`*^9}}],
 
 Cell[BoxData["\<\"DOC_parametersDescription.txt\"\>"], "Output",
  CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
    3.6713888277570877`*^9, 3.671388886041439*^9}, {3.671388997669395*^9, 
    3.671389012204503*^9}, 3.6713894421519823`*^9, 3.67138992185116*^9, 
-   3.671482091896442*^9}],
+   3.671482091804675*^9, 3.671482372253051*^9, 3.6715478524238787`*^9, {
+   3.671547903761304*^9, 3.671547925292935*^9}}],
+
+Cell[BoxData["\<\"DOC_parametersDescription.csv\"\>"], "Output",
+ CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
+   3.6713888277570877`*^9, 3.671388886041439*^9}, {3.671388997669395*^9, 
+   3.671389012204503*^9}, 3.6713894421519823`*^9, 3.67138992185116*^9, 
+   3.671482091804675*^9, 3.671482372253051*^9, 3.6715478524238787`*^9, {
+   3.671547903761304*^9, 3.671547925307517*^9}}],
 
 Cell[BoxData["\<\"DOC_parametersDescription.png\"\>"], "Output",
  CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
    3.6713888277570877`*^9, 3.671388886041439*^9}, {3.671388997669395*^9, 
    3.671389012204503*^9}, 3.6713894421519823`*^9, 3.67138992185116*^9, 
-   3.67148209293696*^9}]
+   3.671482091804675*^9, 3.671482372253051*^9, 3.6715478524238787`*^9, {
+   3.671547903761304*^9, 3.671547926344795*^9}}]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{1116, 790},
+WindowSize->{1272, 790},
 WindowMargins->{{68, Automatic}, {Automatic, 0}},
 FrontEndVersion->"10.4 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 25, \
 2016)",
@@ -358,21 +394,23 @@ Cell[710, 27, 121, 1, 65, "Chapter"],
 Cell[CellGroupData[{
 Cell[856, 32, 93, 1, 64, "Section"],
 Cell[CellGroupData[{
-Cell[974, 37, 3289, 77, 182, "Input"],
-Cell[4266, 116, 480, 8, 28, "Output"],
-Cell[4749, 126, 2004, 38, 273, "Output"],
-Cell[6756, 166, 305, 4, 28, "Output"],
-Cell[7064, 172, 305, 4, 28, "Output"]
+Cell[974, 37, 3560, 83, 199, "Input"],
+Cell[4537, 122, 553, 9, 28, "Output"],
+Cell[5093, 133, 2198, 41, 291, "Output"],
+Cell[7294, 176, 382, 5, 28, "Output"],
+Cell[7679, 183, 382, 5, 28, "Output"],
+Cell[8064, 190, 382, 5, 28, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[7418, 182, 97, 1, 64, "Section"],
+Cell[8495, 201, 97, 1, 64, "Section"],
 Cell[CellGroupData[{
-Cell[7540, 187, 2324, 65, 182, "Input"],
-Cell[9867, 254, 475, 8, 28, "Output"],
-Cell[10345, 264, 2830, 54, 561, "Output"],
-Cell[13178, 320, 303, 4, 28, "Output"],
-Cell[13484, 326, 302, 4, 28, "Output"]
+Cell[8617, 206, 2598, 71, 199, "Input"],
+Cell[11218, 279, 571, 9, 28, "Output"],
+Cell[11792, 290, 2929, 55, 561, "Output"],
+Cell[14724, 347, 399, 5, 28, "Output"],
+Cell[15126, 354, 399, 5, 28, "Output"],
+Cell[15528, 361, 399, 5, 28, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]

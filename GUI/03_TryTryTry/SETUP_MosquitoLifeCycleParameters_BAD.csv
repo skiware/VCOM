@@ -17,7 +17,7 @@ phiB,0.9, Proportion of bites on a person while they are in bed
 phiI,0.98, Proportion of bites on a person while they are indoors
 rOVI,0,
 sOVI,0,
-rFOG,0,
+rFOG,error,
 sFOG,0,
 rLAR,0,
 sLAR,0,
