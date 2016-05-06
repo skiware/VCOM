@@ -134,7 +134,7 @@ shinyUI(
         downloadButton(NA, 'Download CSV Parameters'),
         downloadButton(NA, 'Download CSV Output'),
         downloadButton(NA, 'Download EPS Plots'),
-        downloadButton(NA, 'Download CSV Parameters Template')
+        downloadButton("downloadData", 'Download CSV Parameters Template')
       ),
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
       tabPanel("Runtime Data",

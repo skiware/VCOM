@@ -20,8 +20,15 @@ shinyServer(
 #     #paste("Model Was Run!!!",IVM_traj[[2]])
 #     #output$barChartPlot = renderPlot({barChartMosquitoDemographics(IVM_traj)})
 #   })
+    
   output$barChartPlot = renderPlot({
     plotTrajectory(IVM_traj)
   })
+  
+  # DOWNLOAD TEMPLATE HANDLER #################################################
+  output$downloadData <- downloadHandler(
+    filename <- function(){paste("VCOM_SimSetupFile", "xls", sep=".")},
+    content <- function(file){file.copy("SETUP_MosquitoLifeCycleParameters.xls", file)}
+  )
 })
 ###############################################################################
