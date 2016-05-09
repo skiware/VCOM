@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     19568,        465]
-NotebookOptionsPosition[     18519,        424]
-NotebookOutlinePosition[     18877,        440]
-CellTagsIndexPosition[     18834,        437]
+NotebookDataLength[     28269,        662]
+NotebookOptionsPosition[     26944,        612]
+NotebookOutlinePosition[     27307,        628]
+CellTagsIndexPosition[     27264,        625]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -122,7 +122,8 @@ Cell[BoxData[{
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"\<\"ODEAuxiliaryFunctions.R\"\>", ",", "\<\"ODEModel.R\"\>", 
+  RowBox[{"\<\"ODEAuxiliaryFunctions.R\"\>", 
+   ",", "\<\"ODEControlMeasuresParameters.R\"\>", ",", "\<\"ODEModel.R\"\>", 
    ",", "\<\"ODEMosquitoParameters.R\"\>", ",", "\<\"ODE.R\"\>", 
    ",", "\<\"server.r\"\>", ",", "\<\"ui.r\"\>"}], "}"}]], "Output",
  CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
@@ -130,7 +131,7 @@ Cell[BoxData[
    3.671389025875333*^9}, 3.671389441338258*^9, 3.6713899202035437`*^9, 
    3.6714820901636753`*^9, 3.6714823711064777`*^9, {3.67154808478664*^9, 
    3.671548090687114*^9}, 3.671549163437726*^9, 3.671549536754277*^9, 
-   3.671552399858946*^9}],
+   3.671552399858946*^9, 3.671803293819989*^9}],
 
 Cell[BoxData[
  TagBox[GridBox[{
@@ -145,6 +146,8 @@ imported this function converts the data into a theta object\"\>"},
 from a CSV file into the workflow\"\>"},
     {"\<\"validateCSVParameters\"\>", "\<\" Verifies that the user has \
 imported a valid CSV file with all the parameters defined\"\>"},
+    {"\<\"getInterventionsParameters\"\>", "\<\" Returns the list of \
+intervention parameters\"\>"},
     {"\<\"runODE\"\>", "\<\" Main ODE wrapper for simulating the mosquito \
 population\"\>"},
     {"\<\"calculateInitialState\"\>", "\<\" Calculates the initial conditions \
@@ -158,8 +161,6 @@ Gambiae specific parameters\"\>"},
 Arabiensis specific parameters\"\>"},
     {"\<\"getAnFunestusParameters\"\>", "\<\" Returns the list of Anopheles \
 Funestus specific parameters\"\>"},
-    {"\<\"getInterventionsParameters\"\>", "\<\" Returns the list of \
-intervention parameters\"\>"},
     {"\<\"getMosquitoLifeCycleParameters\"\>", "\<\" Returns the list of \
 mosquito life cycle parameters\"\>"},
     {"\<\"getAdditionalTransmissionParameters\"\>", "\<\" Returns the \
@@ -176,7 +177,7 @@ transmission parameters\"\>"}
    3.671389025875333*^9}, 3.671389441338258*^9, 3.6713899202035437`*^9, 
    3.6714820901636753`*^9, 3.6714823711064777`*^9, {3.67154808478664*^9, 
    3.671548090687114*^9}, 3.671549163437726*^9, 3.671549536754277*^9, 
-   3.6715523999904757`*^9}],
+   3.671552399858946*^9, 3.671803293879134*^9}],
 
 Cell[BoxData["\<\"DOC_functionsDescription.txt\"\>"], "Output",
  CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
@@ -184,7 +185,7 @@ Cell[BoxData["\<\"DOC_functionsDescription.txt\"\>"], "Output",
    3.671389025875333*^9}, 3.671389441338258*^9, 3.6713899202035437`*^9, 
    3.6714820901636753`*^9, 3.6714823711064777`*^9, {3.67154808478664*^9, 
    3.671548090687114*^9}, 3.671549163437726*^9, 3.671549536754277*^9, 
-   3.6715524000122843`*^9}],
+   3.671552399858946*^9, 3.671803293897653*^9}],
 
 Cell[BoxData["\<\"DOC_functionsDescription.csv\"\>"], "Output",
  CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
@@ -192,7 +193,7 @@ Cell[BoxData["\<\"DOC_functionsDescription.csv\"\>"], "Output",
    3.671389025875333*^9}, 3.671389441338258*^9, 3.6713899202035437`*^9, 
    3.6714820901636753`*^9, 3.6714823711064777`*^9, {3.67154808478664*^9, 
    3.671548090687114*^9}, 3.671549163437726*^9, 3.671549536754277*^9, 
-   3.6715524000358343`*^9}],
+   3.671552399858946*^9, 3.6718032939134398`*^9}],
 
 Cell[BoxData["\<\"DOC_functionsDescription.png\"\>"], "Output",
  CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
@@ -200,7 +201,7 @@ Cell[BoxData["\<\"DOC_functionsDescription.png\"\>"], "Output",
    3.671389025875333*^9}, 3.671389441338258*^9, 3.6713899202035437`*^9, 
    3.6714820901636753`*^9, 3.6714823711064777`*^9, {3.67154808478664*^9, 
    3.671548090687114*^9}, 3.671549163437726*^9, 3.671549536754277*^9, 
-   3.671552400803789*^9}]
+   3.671552399858946*^9, 3.671803294861205*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -286,7 +287,8 @@ Cell[BoxData[{
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"\<\"ODEAuxiliaryFunctions.R\"\>", ",", "\<\"ODEModel.R\"\>", 
+  RowBox[{"\<\"ODEAuxiliaryFunctions.R\"\>", 
+   ",", "\<\"ODEControlMeasuresParameters.R\"\>", ",", "\<\"ODEModel.R\"\>", 
    ",", "\<\"ODEMosquitoParameters.R\"\>", ",", "\<\"ODE.R\"\>", 
    ",", "\<\"server.r\"\>", ",", "\<\"ui.r\"\>"}], "}"}]], "Output",
  CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
@@ -294,11 +296,38 @@ Cell[BoxData[
    3.671389012204503*^9}, 3.6713894421519823`*^9, 3.67138992185116*^9, 
    3.671482091804675*^9, 3.671482372253051*^9, 3.6715478524238787`*^9, {
    3.671547903761304*^9, 3.671547925188884*^9}, 3.671549164568158*^9, 
-   3.671549537840641*^9, 3.671552401126684*^9}],
+   3.671549537840641*^9, 3.671552401126684*^9, 3.671802888575375*^9, 
+   3.671803295270152*^9}],
 
 Cell[BoxData[
  TagBox[GridBox[{
     {"\<\"Name\"\>", "\<\"Description\"\>"},
+    {"\<\"OVIcov\"\>", "\<\" Ovitraps coverage\"\>"},
+    {"\<\"time_OVI_on\"\>", "\<\" When Ovitraps are applied (days)\"\>"},
+    {"\<\"FOGcov\"\>", "\<\" Fogging coverage\"\>"},
+    {"\<\"time_FOG_on\"\>", "\<\" When Fogging is applied (days)\"\>"},
+    {"\<\"LARcov\"\>", "\<\" Larvacide coverage\"\>"},
+    {"\<\"time_LAR_on\"\>", "\<\" When Larvacide is applied (days)\"\>"},
+    {"\<\"BIOcov\"\>", "\<\" Biological Control coverage\"\>"},
+    {"\<\"time_BIO_on\"\>", "\<\" When Biological Control is applied (days)\"\
+\>"},
+    {"\<\"SREcov\"\>", "\<\" Source Reduction coverage\"\>"},
+    {"\<\"time_SRE_on\"\>", "\<\" When Source Reduction is applied \
+(days)\"\>"},
+    {"\<\"IRScov\"\>", "\<\" IRS coverage\"\>"},
+    {"\<\"time_IRS_on\"\>", "\<\" When IRSs are applied (days)\"\>"},
+    {"\<\"ITNcov\"\>", "\<\" ITN coverage\"\>"},
+    {"\<\"time_ITN_on\"\>", "\<\" When ITNs are applied (days)\"\>"},
+    {"\<\"IVMcov\"\>", "\<\" Ivermectin coverage\"\>"},
+    {"\<\"time_IVM_on\"\>", "\<\" When Ivermectin is applied (days)\"\>"},
+    {"\<\"HOUcov\"\>", "\<\" House Modification coverage\"\>"},
+    {"\<\"time_HOU_on\"\>", "\<\" When House Modifications are applied (days)\
+\"\>"},
+    {"\<\"ODOcov\"\>", "\<\" Odor Traps coverage\"\>"},
+    {"\<\"time_ODO_on\"\>", "\<\" When Odor Traps are applied (days)\"\>"},
+    {"\<\"SPAcov\"\>", "\<\" Spatial Repellents coverage\"\>"},
+    {"\<\"time_SPA_on\"\>", "\<\" When Space Repellents are applied \
+(days)\"\>"},
     {"\<\"muV\"\>", "\<\" Adult mosquito daily mortality\"\>"},
     {"\<\"Q0\"\>", "\<\" Human blood index\"\>"},
     {"\<\"phiB\"\>", "\<\" Proportion of bites on a person while they are in \
@@ -331,32 +360,6 @@ presence of ITN\"\>"},
     {"\<\"sODO\"\>", ""},
     {"\<\"rSPA\"\>", ""},
     {"\<\"sSPA\"\>", ""},
-    {"\<\"OVIcov\"\>", "\<\" Ovitraps coverage\"\>"},
-    {"\<\"time_OVI_on\"\>", "\<\" When Ovitraps are applied (days)\"\>"},
-    {"\<\"FOGcov\"\>", "\<\" Fogging coverage\"\>"},
-    {"\<\"time_FOG_on\"\>", "\<\" When Fogging is applied (days)\"\>"},
-    {"\<\"LARcov\"\>", "\<\" Larvacide coverage\"\>"},
-    {"\<\"time_LAR_on\"\>", "\<\" When Larvacide is applied (days)\"\>"},
-    {"\<\"BIOcov\"\>", "\<\" Biological Control coverage\"\>"},
-    {"\<\"time_BIO_on\"\>", "\<\" When Biological Control is applied (days)\"\
-\>"},
-    {"\<\"SREcov\"\>", "\<\" Source Reduction coverage\"\>"},
-    {"\<\"time_SRE_on\"\>", "\<\" When Source Reduction is applied \
-(days)\"\>"},
-    {"\<\"IRScov\"\>", "\<\" IRS coverage\"\>"},
-    {"\<\"time_IRS_on\"\>", "\<\" When IRSs are applied (days)\"\>"},
-    {"\<\"ITNcov\"\>", "\<\" ITN coverage\"\>"},
-    {"\<\"time_ITN_on\"\>", "\<\" When ITNs are applied (days)\"\>"},
-    {"\<\"IVMcov\"\>", "\<\" Ivermectin coverage\"\>"},
-    {"\<\"time_IVM_on\"\>", "\<\" When Ivermectin is applied (days)\"\>"},
-    {"\<\"HOUcov\"\>", "\<\" House Modification coverage\"\>"},
-    {"\<\"time_HOU_on\"\>", "\<\" When House Modifications are applied (days)\
-\"\>"},
-    {"\<\"ODOcov\"\>", "\<\" Odor Traps coverage\"\>"},
-    {"\<\"time_ODO_on\"\>", "\<\" When Odor Traps are applied (days)\"\>"},
-    {"\<\"SPAcov\"\>", "\<\" Spatial Repellents coverage\"\>"},
-    {"\<\"time_SPA_on\"\>", "\<\" When Space Repellents are applied \
-(days)\"\>"},
     {"\<\"beta\"\>", "\<\" Number of eggs laid per day per female \
 mosquito\"\>"},
     {"\<\"muEL\"\>", "\<\" Early larval instar daily mortality\"\>"},
@@ -392,7 +395,8 @@ infectious bite\"\>"}
    3.671389012204503*^9}, 3.6713894421519823`*^9, 3.67138992185116*^9, 
    3.671482091804675*^9, 3.671482372253051*^9, 3.6715478524238787`*^9, {
    3.671547903761304*^9, 3.671547925188884*^9}, 3.671549164568158*^9, 
-   3.671549537840641*^9, 3.67155240119829*^9}],
+   3.671549537840641*^9, 3.671552401126684*^9, 3.671802888575375*^9, 
+   3.6718032953895397`*^9}],
 
 Cell[BoxData["\<\"DOC_parametersDescription.txt\"\>"], "Output",
  CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
@@ -400,7 +404,8 @@ Cell[BoxData["\<\"DOC_parametersDescription.txt\"\>"], "Output",
    3.671389012204503*^9}, 3.6713894421519823`*^9, 3.67138992185116*^9, 
    3.671482091804675*^9, 3.671482372253051*^9, 3.6715478524238787`*^9, {
    3.671547903761304*^9, 3.671547925188884*^9}, 3.671549164568158*^9, 
-   3.671549537840641*^9, 3.671552401219645*^9}],
+   3.671549537840641*^9, 3.671552401126684*^9, 3.671802888575375*^9, 
+   3.671803295405798*^9}],
 
 Cell[BoxData["\<\"DOC_parametersDescription.csv\"\>"], "Output",
  CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
@@ -408,7 +413,8 @@ Cell[BoxData["\<\"DOC_parametersDescription.csv\"\>"], "Output",
    3.671389012204503*^9}, 3.6713894421519823`*^9, 3.67138992185116*^9, 
    3.671482091804675*^9, 3.671482372253051*^9, 3.6715478524238787`*^9, {
    3.671547903761304*^9, 3.671547925188884*^9}, 3.671549164568158*^9, 
-   3.671549537840641*^9, 3.671552401235649*^9}],
+   3.671549537840641*^9, 3.671552401126684*^9, 3.671802888575375*^9, 
+   3.671803295425562*^9}],
 
 Cell[BoxData["\<\"DOC_parametersDescription.png\"\>"], "Output",
  CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
@@ -416,14 +422,196 @@ Cell[BoxData["\<\"DOC_parametersDescription.png\"\>"], "Output",
    3.671389012204503*^9}, 3.6713894421519823`*^9, 3.67138992185116*^9, 
    3.671482091804675*^9, 3.671482372253051*^9, 3.6715478524238787`*^9, {
    3.671547903761304*^9, 3.671547925188884*^9}, 3.671549164568158*^9, 
-   3.671549537840641*^9, 3.67155240247367*^9}]
+   3.671549537840641*^9, 3.671552401126684*^9, 3.671802888575375*^9, 
+   3.6718032965761023`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"filesTuples", "=", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"StringSplit", "[", 
+           RowBox[{"#", ",", "\"\<.\>\""}], "]"}], "&"}], "/@", "fileNames"}],
+         ")"}], "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "1"}], "]"}], "]"}], ",", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"StringSplit", "[", 
+           RowBox[{
+            RowBox[{"StringJoin", "[", 
+             RowBox[{"Riffle", "[", 
+              RowBox[{"#", ",", "\"\< \>\""}], "]"}], "]"}], ",", 
+            "\"\<:\>\""}], "]"}], "&"}], "/@", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"functions", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", 
+             RowBox[{"2", ";;", "All"}]}], "]"}], "]"}], ")"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", 
+          RowBox[{"functions", "//", "Length"}]}], "}"}]}], "]"}]}], "}"}], "//",
+     "Transpose"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Export", "[", 
+    RowBox[{
+     RowBox[{"\"\<www/\>\"", "<>", 
+      RowBox[{"#", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "<>", "\"\<.csv\>\""}], ",", 
+     RowBox[{"#", "[", 
+      RowBox[{"[", "2", "]"}], "]"}]}], "]"}], "&"}], "/@", 
+  "filesTuples"}]}], "Input",
+ CellChangeTimes->{{3.671803066279821*^9, 3.6718030931918716`*^9}, {
+  3.671803377452751*^9, 3.671803460449407*^9}, {3.6718035100595016`*^9, 
+  3.671803514973959*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"ODEAuxiliaryFunctions.csv\"\>", 
+   ",", "\<\"ODEControlMeasuresParameters.csv\"\>", 
+   ",", "\<\"ODEModel.csv\"\>", ",", "\<\"ODEMosquitoParameters.csv\"\>", 
+   ",", "\<\"ODE.csv\"\>", ",", "\<\"server.csv\"\>", ",", "\<\"ui.csv\"\>"}],
+   "}"}]], "Output",
+ CellChangeTimes->{
+  3.6718030935534487`*^9, {3.671803287512491*^9, 3.6718032967019243`*^9}, 
+   3.67180340290907*^9, {3.671803439629834*^9, 3.671803461354678*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"filesTuples", "[", 
+  RowBox[{"[", 
+   RowBox[{"1", ",", "3"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.671803118221251*^9, 3.671803127862208*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partw"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part \[NoBreak]\\!\\(\\*RowBox[{\\\"3\\\"}]\\)\[NoBreak] \
+of \[NoBreak]\\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{\\\"\\\\\\\"ODEAuxiliaryFunctions\\\\\\\"\\\", \\\",\\\", \
+RowBox[{\\\"{\\\", \\\"}\\\"}]}], \\\"}\\\"}]\\)\[NoBreak] does not exist. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/partw\\\", \
+ButtonNote -> \\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{
+  3.6718031283474197`*^9, {3.671803289661591*^9, 3.6718032968097773`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"\<\"ODEAuxiliaryFunctions\"\>", ",", 
+      RowBox[{"{", "}"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\<\"ODEControlMeasuresParameters\"\>", ",", 
+      RowBox[{"{", 
+       RowBox[{"\<\"#* OVIcov: Ovitraps coverage\"\>", 
+        ",", "\<\"#* time_OVI_on: When Ovitraps are applied (days)\"\>", 
+        ",", "\<\"#* FOGcov: Fogging coverage\"\>", 
+        ",", "\<\"#* time_FOG_on: When Fogging is applied (days)\"\>", 
+        ",", "\<\"#* LARcov: Larvacide coverage\"\>", 
+        ",", "\<\"#* time_LAR_on: When Larvacide is applied (days)\"\>", 
+        ",", "\<\"#* BIOcov: Biological Control coverage\"\>", 
+        ",", "\<\"#* time_BIO_on: When Biological Control is applied (days)\"\
+\>", ",", "\<\"#* SREcov: Source Reduction coverage\"\>", 
+        ",", "\<\"#* time_SRE_on: When Source Reduction is applied \
+(days)\"\>", ",", "\<\"#* IRScov: IRS coverage\"\>", 
+        ",", "\<\"#* time_IRS_on: When IRSs are applied (days)\"\>", 
+        ",", "\<\"#* ITNcov: ITN coverage\"\>", 
+        ",", "\<\"#* time_ITN_on: When ITNs are applied (days)\"\>", 
+        ",", "\<\"#* IVMcov: Ivermectin coverage\"\>", 
+        ",", "\<\"#* time_IVM_on: When Ivermectin is applied (days)\"\>", 
+        ",", "\<\"#* HOUcov: House Modification coverage\"\>", 
+        ",", "\<\"#* time_HOU_on: When House Modifications are applied (days)\
+\"\>", ",", "\<\"#* ODOcov: Odor Traps coverage\"\>", 
+        ",", "\<\"#* time_ODO_on: When Odor Traps are applied (days)\"\>", 
+        ",", "\<\"#* SPAcov: Spatial Repellents coverage\"\>", 
+        ",", "\<\"#* time_SPA_on: When Space Repellents are applied \
+(days)\"\>"}], "}"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\<\"ODEModel\"\>", ",", 
+      RowBox[{"{", "}"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\<\"ODEMosquitoParameters\"\>", ",", 
+      RowBox[{"{", 
+       RowBox[{"\<\"#* muV: Adult mosquito daily mortality\"\>", 
+        ",", "\<\"#* Q0: Human blood index\"\>", 
+        ",", "\<\"#* phiB: Proportion of bites on a person while they are in \
+bed\"\>", 
+        ",", "\<\"#* phiI: Proportion of bites on a person while they are \
+indoors\"\>", ",", "\<\"#* rOVI:\"\>", ",", "\<\"#* sOVI:\"\>", 
+        ",", "\<\"#* rFOG:\"\>", ",", "\<\"#* sFOG:\"\>", 
+        ",", "\<\"#* rLAR:\"\>", ",", "\<\"#* sLAR:\"\>", 
+        ",", "\<\"#* rBIO:\"\>", ",", "\<\"#* sBIO:\"\>", 
+        ",", "\<\"#* rSRE:\"\>", ",", "\<\"#* sSRE:\"\>", 
+        ",", "\<\"#* rIRS: Probability of mosquito repeating a feeding \
+attempt due to IRS\"\>", 
+        ",", "\<\"#* sIRS: Probability of mosquito feeding and surviving in \
+presence of IRS\"\>", 
+        ",", "\<\"#* rITN: Probability of mosquito repeating a feeding \
+attempt due to IRS\"\>", 
+        ",", "\<\"#* sITN: Probability of mosquito feeding and surviving in \
+presence of ITN\"\>", ",", "\<\"#* rIVM:\"\>", ",", "\<\"#* sIVM:\"\>", 
+        ",", "\<\"#* rHOU:\"\>", ",", "\<\"#* sHOU:\"\>", 
+        ",", "\<\"#* rODO:\"\>", ",", "\<\"#* sODO:\"\>", 
+        ",", "\<\"#* rSPA:\"\>", ",", "\<\"#* sSPA:\"\>", 
+        ",", "\<\"#* beta: Number of eggs laid per day per female \
+mosquito\"\>", ",", "\<\"#* muEL: Early larval instar daily mortality\"\>", 
+        ",", "\<\"#* muLL: Late larvarl instar daily mortality\"\>", 
+        ",", "\<\"#* muPL: Pupal daily mortality\"\>", 
+        ",", "\<\"#* durEL: Duration of early instar stage\"\>", 
+        ",", "\<\"#* durLL: Duration of late instar stage\"\>", 
+        ",", "\<\"#* durPL: Pupal daily mortality\"\>", 
+        ",", "\<\"#* durPL: Duration of pupal stage\"\>", 
+        ",", "\<\"#* durEV: Duration of latent period in mosquito (days)\"\>",
+         ",", "\<\"#* gamma: Effect of density-dependence on late instars \
+relative to early instars\"\>", 
+        ",", "\<\"#* tau1: Time spent foraginf for a blood meal at 0% ITN \
+coverage\"\>", 
+        ",", "\<\"#* tau2: Time spent resting and ovipositing by a mosquito\"\
+\>", ",", "\<\"#* f0: Daily biting rate by mosquitoes on animals and humans\"\
+\>", ",", "\<\"#* epsilon0: Daily entomological inolculation rate\"\>", 
+        ",", "\<\"#* iH_eq: Equilibrium malaria prevalence in humans\"\>", 
+        ",", "\<\"#* NH_eq: Equilibrium human population size\"\>", 
+        ",", "\<\"#* bV: Probability of transmission from human to vector per \
+infectious bite\"\>"}], "}"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\<\"ODE\"\>", ",", 
+      RowBox[{"{", "}"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\<\"server\"\>", ",", 
+      RowBox[{"{", "}"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\<\"ui\"\>", ",", 
+      RowBox[{"{", "}"}]}], "}"}]}], "}"}], "\[LeftDoubleBracket]", 
+  RowBox[{"1", ",", "3"}], "\[RightDoubleBracket]"}]], "Output",
+ CellChangeTimes->{{3.67180312470111*^9, 3.671803128366371*^9}, {
+  3.6718032896756897`*^9, 3.671803296826756*^9}}]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{1272, 790},
-WindowMargins->{{68, Automatic}, {Automatic, 0}},
+WindowSize->{1265, 970},
+WindowMargins->{{Automatic, -1377}, {619, Automatic}},
 FrontEndVersion->"10.4 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 25, \
 2016)",
 StyleDefinitions->"Default.nb"
@@ -447,22 +635,31 @@ Cell[CellGroupData[{
 Cell[856, 32, 93, 1, 64, "Section"],
 Cell[CellGroupData[{
 Cell[974, 37, 3560, 83, 199, "Input"],
-Cell[4537, 122, 623, 10, 28, "Output"],
-Cell[5163, 134, 2408, 44, 309, "Output"],
-Cell[7574, 180, 452, 6, 28, "Output"],
-Cell[8029, 188, 452, 6, 28, "Output"],
-Cell[8484, 196, 450, 6, 28, "Output"]
+Cell[4537, 122, 696, 11, 28, "Output"],
+Cell[5236, 135, 2428, 44, 309, "Output"],
+Cell[7667, 181, 472, 6, 28, "Output"],
+Cell[8142, 189, 474, 6, 28, "Output"],
+Cell[8619, 197, 472, 6, 28, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[8983, 208, 97, 1, 64, "Section"],
+Cell[9140, 209, 97, 1, 64, "Section"],
 Cell[CellGroupData[{
-Cell[9105, 213, 2598, 71, 199, "Input"],
-Cell[11706, 286, 641, 10, 28, "Output"],
-Cell[12350, 298, 4702, 96, 1191, "Output"],
-Cell[17055, 396, 469, 6, 28, "Output"],
-Cell[17527, 404, 469, 6, 28, "Output"],
-Cell[17999, 412, 468, 6, 28, "Output"]
+Cell[9262, 214, 2598, 71, 199, "Input"],
+Cell[11863, 287, 740, 12, 28, "Output"],
+Cell[12606, 301, 4753, 97, 1191, "Output"],
+Cell[17362, 400, 517, 7, 28, "Output"],
+Cell[17882, 409, 517, 7, 28, "Output"],
+Cell[18402, 418, 519, 7, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18958, 430, 1646, 48, 80, "Input"],
+Cell[20607, 480, 470, 9, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21114, 494, 177, 4, 28, "Input"],
+Cell[21294, 500, 674, 13, 24, "Message"],
+Cell[21971, 515, 4921, 91, 420, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]

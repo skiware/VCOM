@@ -135,49 +135,6 @@ getAnFunestusParameters = function(){
 }
 ######################################################################################
 #------------------------------------------------------------------------
-############ INTERVENTIONS PARAMETERS ###################################
-#------------------------------------------------------------------------
-#* OVIcov:        Ovitraps coverage
-#* time_OVI_on:   When Ovitraps are applied (days)
-#* FOGcov:        Fogging coverage
-#* time_FOG_on:   When Fogging is applied (days)
-#* LARcov:        Larvacide coverage
-#* time_LAR_on:   When Larvacide is applied (days)
-#* BIOcov:        Biological Control coverage
-#* time_BIO_on:   When Biological Control is applied (days)
-#* SREcov:        Source Reduction coverage
-#* time_SRE_on:   When Source Reduction is applied (days)
-#* IRScov:        IRS coverage
-#* time_IRS_on:   When IRSs are applied (days)
-#* ITNcov:        ITN coverage
-#* time_ITN_on:   When ITNs are applied (days)
-#* IVMcov:        Ivermectin coverage
-#* time_IVM_on:   When Ivermectin is applied (days)
-#* HOUcov:        House Modification coverage
-#* time_HOU_on:   When House Modifications are applied (days)
-#* ODOcov:        Odor Traps coverage
-#* time_ODO_on:   When Odor Traps are applied (days)
-#* SPAcov:        Spatial Repellents coverage
-#* time_SPA_on:   When Space Repellents are applied (days)
-#------------------------------------------------------------------------
-getInterventionsParameters = function(){
-  #. getInterventionsParameters: Returns the list of intervention parameters
-  c(
-    OVIcov = 0.0, time_OVI_on = 00,
-    FOGcov = 0.0, time_FOG_on = 00,
-    LARcov = 0.0, time_LAR_on = 00,
-    BIOcov = 0.0, time_BIO_on = 00,
-    SREcov = 0.0, time_SRE_on = 00,
-    IRScov = 0.8, time_IRS_on = 50,
-    ITNcov = 0.8, time_ITN_on = 50,
-    IVMcov = 0.0, time_IVM_on = 00,
-    HOUcov = 0.0, time_HOU_on = 00,
-    ODOcov = 0.0, time_ODO_on = 00,
-    SPAcov = 0.0, time_SPA_on = 00
-  )
-}
-######################################################################################
-#------------------------------------------------------------------------
 ############ MOSQUITO LIFE CYCLE PARAMETERS #############################
 #------------------------------------------------------------------------
 #* beta:    Number of eggs laid per day per female mosquito
@@ -200,24 +157,6 @@ getMosquitoLifeCycleParameters = function(){
     muEL = 0.034, muLL = 0.035, muPL = 0.25,
     durEL = 6.64, durLL = 3.72, durPL = 0.64, durEV = 10,
     gamma = 13.25, tau1 = 0.68, tau2 = 2.32
-  )
-}
-######################################################################################
-#------------------------------------------------------------------------
-############ ADDITIONAL TRANSMISSION PARAMETERS #########################
-#------------------------------------------------------------------------
-#* f0:        Daily biting rate by mosquitoes on animals and humans
-#* epsilon0:  Daily entomological inolculation rate
-#* iH_eq:     Equilibrium malaria prevalence in humans
-#* NH_eq:     Equilibrium human population size
-#* bV:        Probability of transmission from human to vector per infectious bite
-#------------------------------------------------------------------------
-getAdditionalTransmissionParameters = function(){
-  #. getAdditionalTransmissionParameters: Returns the transmission parameters
-  c(
-    f0 = 1/3, epsilon0 = 10/365, 
-    iH_eq = 0.35, NH_eq = 200, 
-    bV = 0.05
   )
 }
 ######################################################################################

@@ -9,6 +9,8 @@ library(kulife)
 source("ODEModel.R")
 source("ODEMosquitoParameters.R")
 source("ODEAuxiliaryFunctions.R")
+source("ODEControlMeasuresParameters.R")
+source("ODETransmissionParameters.R")
 ###############################################################################
 shinyUI(
   fluidPage(theme = "bootstrapSpace.css",
@@ -50,7 +52,8 @@ shinyUI(
         sidebarLayout(
           sidebarPanel(
             titlePanel(h2("Parameters Descriptions",align="center")),
-            img(src="DOC_parametersDescription.png",width = 375)  
+            #img(src="DOC_parametersDescription.png",width = 375)  
+            dataTableOutput("mosquitoParametersTable")
           ),
           mainPanel(
             titlePanel(h2("Parameters Setup",align="center"))
@@ -61,8 +64,8 @@ shinyUI(
       tabPanel("Control Measures Parameters",
         sidebarLayout(
           sidebarPanel(
-            headerPanel(h2("Parameters Description",align="center")),
-            p("TEST")
+            headerPanel(h2("Parameters Descriptions",align="center")),
+            dataTableOutput("controlMeasuresParametersTable")
           ),
           mainPanel(
             fluidRow( 
@@ -118,7 +121,9 @@ shinyUI(
         sidebarLayout(
          sidebarPanel(
             titlePanel(h2("Parameters Descriptions",align="center")),
-            img(src="DOC_parametersDescription.png",width = 375)),
+            dataTableOutput("transmissionParametersTable")
+            #img(src="DOC_parametersDescription.png",width = 375)
+          ),
           mainPanel(
             titlePanel(h2("Parameters Setup",align="center"))
           )
@@ -147,3 +152,14 @@ shinyUI(
   )
 )
 ###############################################################################
+
+div(
+  tabsetPanel(
+    tabPanel("Mosquito Parameters", 
+             plotOutput(
+               outputId = "histogram", 
+               height = "400px",
+               width = "400px")),
+    tabPanel("Summary",
+             verbatimTextOutput(outputId = "datsummary"))
+  ), class = "span7")

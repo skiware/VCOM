@@ -19,6 +19,7 @@ library(ggplot2)
 source("ODEModel.R")
 source("ODEMosquitoParameters.R")
 source("ODEAuxiliaryFunctions.R")
+source("ODEControlMeasuresParameters.R")
 ########### INIT MODEL ##################################################
 theta = getTheta()
 initState = calculateInitialState(theta) 
@@ -29,4 +30,3 @@ par(mfrow=c(2,1))
 barChartMosquitoDemographics(IVM_traj)
 plotTrajectory(IVM_traj)
 #------------------------------------------------------------------------
-

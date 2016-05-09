@@ -59,7 +59,7 @@ parseImportedCSVParameters = function(inputDataFrame){
 }
 importCSVParametersFromDirectory = function(fileName){
   #. importCSVParametersFromDirectory: Loads the parameters from a CSV file into the workflow
-  inputDataFrame=read.csv(file=fileName,head=FALSE,sep=",",row.names=1,fill=FALSE,stringsAsFactors=FALSE)
+  inputDataFrame=read.csv(file=fileName,head=FALSE,sep=",",row.names=1,col.names=c("ID","Value","Description"),fill=FALSE,stringsAsFactors=FALSE)
   inputDataFrame[,1]=as.numeric(inputDataFrame[,1])
   return(validateCSVParameters(inputDataFrame))
 }
@@ -71,9 +71,7 @@ validateCSVParameters = function(inputDataFrame){
     return(inputDataFrame)
   }else{
     print("ERROR IN FILE")
-    n = c("YOU MADE A MISTAKE AND SHOULD FEEL ASHAMED!!!") 
-    s = c("")
-    df = data.frame(n, s)
-    return(data.frame(df))
+    sub=subset(inputDataFrame,is.na(inputDataFrame))
+    return(sub)
   }
 }
