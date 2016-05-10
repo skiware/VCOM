@@ -38,9 +38,6 @@ shinyServer(
   output$controlMeasuresParametersTable = renderDataTable(controlMeasuresParametersTable,options=list(searching=FALSE,paging = FALSE))
   output$transmissionParametersTable = renderDataTable(transmissionParametersTable,options=list(searching=FALSE,paging = FALSE))
   #############################################################################
-  # PLOTS #####################################################################
-  output$barChartPlot = renderPlot({plotTrajectory(IVM_traj)})
-  #############################################################################
   # DOWNLOAD TEMPLATE HANDLER #################################################
   output$downloadTemplate <- downloadHandler(
     filename <- function(){paste("VCOM_SimSetupFile","xls",sep=".")},
@@ -56,6 +53,17 @@ shinyServer(
   })  
   observeEvent(input$checkboxesControlMeasures,{
     cat("Checkbox event!\n")
+  })
+  observeEvent(input$sliderTime,{
+    cat("Slider event!\n")
+  })
+  observeEvent(input$buttonRun,{
+    cat("Button event!\n")
+    IVM_traj <<- runODE(input$sliderTime,1,initState,theta,"lsoda")
+    output$IVM_Runtime = renderTable(IVM_traj)
+    output$plotDemographics = renderPlot({barChartMosquitoDemographics(IVM_traj)})
+    output$plotTrajectory = renderPlot({plotTrajectory(IVM_traj)})
+    #print(IVM_traj)
   })
   #############################################################################
   # DOWNLOAD PLOTS EVENT HANDLERS #############################################

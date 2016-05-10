@@ -32,6 +32,7 @@ shinyUI(
   fluidPage(theme = "bootstrapSpace.css",
     titlePanel(h1("VCOM",align="center")),
     titlePanel(h4("Vector Control Optimization Model",align="center")),
+    actionButton("buttonRun","Run Model",width="100%"),
     #actionButton("buttonImport","Import XML Parameters File",width="100%"),
     #actionButton("buttonExport","Export XML Parameters File",width="100%"),
     navbarPage("",id="nav",
@@ -46,7 +47,7 @@ shinyUI(
                            "An. arabiensis"="ARA",
                            "An. funestus"="FUN"
                          ),selected="ARA"),
-            sliderInput("maxTime","Days to Simulate:",min=1,max=365,value=80),
+            sliderInput("sliderTime","Days to Simulate:",min=1,max=365,value=80),
             checkboxGroupInput("checkboxesControlMeasures", "Control Measures:",
               c(
                 "Ovitraps"="OBIBool",
@@ -87,10 +88,10 @@ shinyUI(
           mainPanel(
             #headerPanel(h2("OUT"))       
             #textOutput("demographics"),
-            plotOutput("barChartPlot")
+            plotOutput("plotTrajectory"),
+            plotOutput("plotDemographics")
           )
         ),
-        actionButton("buttonRun","Run Model",width="100%"),
         actionButton("buttonTest","TEST!",width="100%"),
         br(),
         br(),
@@ -252,7 +253,7 @@ shinyUI(
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
       tabPanel("Runtime Data",
         titlePanel("Runtime data"),
-        textOutput("IVM_Runtime"),
+        tableOutput("IVM_Runtime"),
         tableOutput("contents")
       )
       ###########################################################################
