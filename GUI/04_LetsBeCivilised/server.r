@@ -47,6 +47,17 @@ shinyServer(
     content <- function(file){file.copy("SETUP_MosquitoLifeCycleParameters.xls",file)}
   )
   #############################################################################
+  # CLICK EVENTS ##############################################################
+  observeEvent(input$buttonTest,{
+    cat("Button event!\n")
+  })
+  observeEvent(input$radioSpecies,{
+    cat("Radio event!\n")
+  })  
+  observeEvent(input$checkboxesControlMeasures,{
+    cat("Checkbox event!\n")
+  })
+  #############################################################################
   # DOWNLOAD PLOTS EVENT HANDLERS #############################################
   #   plotInput <- reactive({
   #     pdf("plot.pdf", width=100, height=100)
@@ -64,8 +75,7 @@ shinyServer(
   # IMPORT CSV EVENT HANDLERS #################################################
   output$contents <- renderTable({
     inFile <- input$csvImport
-    if (is.null(inFile))
-      return(NULL)
+    if(is.null(inFile)){return(NULL)}
     #importedCSVParameters<<-read.csv(inFile$datapath,head=FALSE,sep=",",row.names=1,fill=FALSE,stringsAsFactors=FALSE)
     #validateCSVParameters(importedCSVParameters)
     importCSVParametersFromDirectory(inFile$datapath)

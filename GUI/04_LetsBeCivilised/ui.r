@@ -40,31 +40,46 @@ shinyUI(
         sidebarLayout(  
           sidebarPanel(
             #headerPanel(h2("IN")),
-            radioButtons("radio",label=h4("Species Selection"),
+            radioButtons("radioSpecies",label=h4("Species Selection"),
                          choices=list(
                            "An. gambiae"="GAM",
                            "An. arabiensis"="ARA",
                            "An. funestus"="FUN"
                          ),selected="ARA"),
             sliderInput("maxTime","Days to Simulate:",min=1,max=365,value=80),
-            fluidRow( 
-              column(5,
-                #titlePanel(h3("Effectivity",align="center")),
-                checkboxInput("OVIBool","Ovitraps",value=FALSE),
-                checkboxInput("FOGBool","Fogging",value=FALSE),
-                checkboxInput("LARBool","Larvaciding",value=FALSE),
-                checkboxInput("BIOBool","Biological Control",value=FALSE),
-                checkboxInput("SREBool","Source Reduction",value=FALSE),
-                checkboxInput("IRSBool","Indoor Residual Spraying",value=FALSE)
-              ),
-              column(5,
-                checkboxInput("ITNBool","Insecticide Treated Nets",value=FALSE),
-                checkboxInput("IVMBool","Ivermectin",value=FALSE),
-                checkboxInput("HOUBool","House Modification",value=FALSE),
-                checkboxInput("ODOBool","Odor Traps",value=FALSE),
-                checkboxInput("SPABool","Spatial Repellants",value=FALSE)
+            checkboxGroupInput("checkboxesControlMeasures", "Control Measures:",
+              c(
+                "Ovitraps"="OBIBool",
+                "Fogging"="FOGBool",
+                "Larvaciding"="LARBool",
+                "Biological Control"="BIOBool",
+                "Source Reduction"="SREBool",
+                "Indoor Residual Spraying"="IRSBool",
+                "Insecticide-Treated Nets"="ITNBool",
+                "Ivermectin"="IVMBool",
+                "House Modifications"="HOUBool",
+                "Odor Traps"="ODOBool",
+                "Spatial Repellents"="SREBool"
               )
             ),
+#             fluidRow( 
+#               column(5,
+#                 #titlePanel(h3("Effectivity",align="center")),
+#                 checkboxInput("OVIBool","Ovitraps",value=FALSE),
+#                 checkboxInput("FOGBool","Fogging",value=FALSE),
+#                 checkboxInput("LARBool","Larvaciding",value=FALSE),
+#                 checkboxInput("BIOBool","Biological Control",value=FALSE),
+#                 checkboxInput("SREBool","Source Reduction",value=FALSE),
+#                 checkboxInput("IRSBool","Indoor Residual Spraying",value=FALSE)
+#               ),
+#               column(5,
+#                 checkboxInput("ITNBool","Insecticide Treated Nets",value=FALSE),
+#                 checkboxInput("IVMBool","Ivermectin",value=FALSE),
+#                 checkboxInput("HOUBool","House Modification",value=FALSE),
+#                 checkboxInput("ODOBool","Odor Traps",value=FALSE),
+#                 checkboxInput("SPABool","Spatial Repellants",value=FALSE)
+#               )
+#             ),
             helpText("If you want to modify the species or simulation's parameters go to the corresponding tab. If 
               you're just looking for fun hit the 'Run Model'  button"
             )
@@ -76,7 +91,7 @@ shinyUI(
           )
         ),
         actionButton("buttonRun","Run Model",width="100%"),
-        actionButton("buttonPlot","Plot Model",width="100%"),
+        actionButton("buttonTest","TEST!",width="100%"),
         br(),
         br(),
         p("Cite as: VCOM!!! The coolest model ever!!!")
