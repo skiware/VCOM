@@ -13,8 +13,10 @@ library(shiny)
 ###############################################################################
 #---# RUN WHEN THE APP IS LAUNCHED ############################################
 #BOXES_WIDTH <<- "100px"
-initState <<- calculateInitialState(theta)
-IVM_traj <<- runODE(80,1,initState,theta,"lsoda")  
+initState = calculateInitialState(theta)
+IVM_traj = runODE(80,1,initState,theta,"lsoda")  
+
+###############################################################################  
 mosquitoParametersTable=read.csv("www/ODEMosquitoParameters.csv",header=FALSE)
 controlMeasuresParametersTable=read.csv("www/ODEControlMeasuresParameters.csv",header=FALSE)
 mosquitoParametersTable = read.csv("www/ODEMosquitoParameters.csv",header=FALSE)
@@ -50,6 +52,11 @@ shinyServer(
   })
   observeEvent(input$radioSpecies,{
     cat("Radio event!\n")
+    #print(input$radioSpecies)
+    #if(input$radioSpecies=="GAM"){theta<<-TEMPLATE_AN_GAMBIAE}
+    #if(input$radioSpecies=="ARA"){theta<<-TEMPLATE_AN_ARABIENSIS}
+    #if(input$radioSpecies=="FUN"){theta<<-TEMPLATE_AN_FUNESTUS}
+    print(theta)
   })  
   observeEvent(input$checkboxesControlMeasures,{
     cat("Checkbox event!\n")

@@ -1,5 +1,5 @@
 Life Cycle Parameters,Value,Description
-beta,21.19,Number of eggs laid per day per female mosquito
+beta,10,Number of eggs laid per day per female mosquito
 muEL,0.034,Early larval instar daily mortality
 muLL,0.035,Late larvarl instar daily mortality
 muPL,0.25,Pupal daily mortality

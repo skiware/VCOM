@@ -20,13 +20,17 @@ source("ODEAuxiliaryFunctions.R")
 source("ODEControlMeasuresParameters.R")
 source("ODETransmissionParameters.R")
 ################################################################################
-BOXES_WIDTH <<- "75px"
+BOXES_WIDTH<<-"75px"
 # Theta from code----------------------------------
 #initialTheta <<- getTheta()
 # Theta from setup CSV----------------------------- 
-initialParametersValues <<- importCSVParametersFromDirectory("SETUP_MosquitoLifeCycleParameters.csv")
-initialTheta <<- parseImportedCSVParameters(initialParametersValues)
+initialParametersValues<<-importCSVParametersFromDirectory("SETUP_MosquitoLifeCycleParameters.csv")
+initialTheta<<-parseImportedCSVParameters(initialParametersValues)
 print(initialTheta)
+################################################################################
+#TEMPLATE_AN_ARABIENSIS<<-importCSVParametersFromDirectory("Template_AnFunestus.csv")
+#TEMPLATE_AN_FUNESTUS<<-importCSVParametersFromDirectory("Template_AnFunestus.csv")
+#TEMPLATE_AN_GAMBIAE<<-importCSVParametersFromDirectory("Template_AnGambiae.csv")
 ################################################################################
 shinyUI(
   fluidPage(theme = "bootstrapSpace.css",
@@ -63,24 +67,6 @@ shinyUI(
                 "Spatial Repellents"="SREBool"
               )
             ),
-#             fluidRow( 
-#               column(5,
-#                 #titlePanel(h3("Effectivity",align="center")),
-#                 checkboxInput("OVIBool","Ovitraps",value=FALSE),
-#                 checkboxInput("FOGBool","Fogging",value=FALSE),
-#                 checkboxInput("LARBool","Larvaciding",value=FALSE),
-#                 checkboxInput("BIOBool","Biological Control",value=FALSE),
-#                 checkboxInput("SREBool","Source Reduction",value=FALSE),
-#                 checkboxInput("IRSBool","Indoor Residual Spraying",value=FALSE)
-#               ),
-#               column(5,
-#                 checkboxInput("ITNBool","Insecticide Treated Nets",value=FALSE),
-#                 checkboxInput("IVMBool","Ivermectin",value=FALSE),
-#                 checkboxInput("HOUBool","House Modification",value=FALSE),
-#                 checkboxInput("ODOBool","Odor Traps",value=FALSE),
-#                 checkboxInput("SPABool","Spatial Repellants",value=FALSE)
-#               )
-#             ),
             helpText("If you want to modify the species or simulation's parameters go to the corresponding tab. If 
               you're just looking for fun hit the 'Run Model'  button"
             )
@@ -248,13 +234,14 @@ shinyUI(
         downloadButton(NA, 'Download CSV Parameters'),
         downloadButton(NA, 'Download CSV Output'),
         downloadButton("downloadPlot", 'Download Plot'),
-        downloadButton("downloadTemplate", 'Download CSV Parameters Template')
+        downloadButton("downloadTemplate", 'Download CSV Parameters Template'),
+        titlePanel(h1("Debugging Stuff",align="left")),
+        tableOutput("contents")
       ),
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
       tabPanel("Runtime Data",
         titlePanel("Runtime data"),
-        tableOutput("IVM_Runtime"),
-        tableOutput("contents")
+        tableOutput("IVM_Runtime")
       )
       ###########################################################################
     )
