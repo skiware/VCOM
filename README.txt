@@ -1,8 +1,9 @@
+README--------------	
 Rise and shine Mr. Freeman... rise and shine...
 
 
 
-Parameters	
+Parameters--------------	
 OVIcov	 Ovitraps coverage
 time_OVI_on	 When Ovitraps are applied (days)
 FOGcov	 Fogging coverage
@@ -69,7 +70,7 @@ iH_eq	 Equilibrium malaria prevalence in humans
 NH_eq	 Equilibrium human population size
 bV	 Probability of transmission from human to vector per infectious bite
 
-Functions	
+Functions--------------	
 OVIcov	 Ovitraps coverage
 time_OVI_on	 When Ovitraps are applied (days)
 FOGcov	 Fogging coverage

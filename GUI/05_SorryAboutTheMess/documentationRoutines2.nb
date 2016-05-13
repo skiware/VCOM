@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     50382,       1248]
-NotebookOptionsPosition[     48791,       1189]
-NotebookOutlinePosition[     49148,       1205]
-CellTagsIndexPosition[     49105,       1202]
+NotebookDataLength[     50748,       1256]
+NotebookOptionsPosition[     49157,       1197]
+NotebookOutlinePosition[     49514,       1213]
+CellTagsIndexPosition[     49471,       1210]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -786,18 +786,21 @@ Cell[BoxData[{
     RowBox[{
      RowBox[{"{", 
       RowBox[{
+       RowBox[{"{", 
+        RowBox[{"\"\<README--------------\>\"", ",", "\"\<\>\""}], "}"}], ",", 
        RowBox[{"{", "description", "}"}], ",", 
        RowBox[{"{", "}"}], ",", 
        RowBox[{"{", "}"}], ",", 
        RowBox[{"{", "}"}], ",", 
        RowBox[{"{", 
-        RowBox[{"\"\<Parameters\>\"", ",", "\"\<\>\""}], "}"}]}], "}"}], ",", 
-     "functionsTable", ",", 
+        RowBox[{"\"\<Parameters--------------\>\"", ",", "\"\<\>\""}], 
+        "}"}]}], "}"}], ",", "functionsTable", ",", 
      RowBox[{"{", 
       RowBox[{
        RowBox[{"{", "}"}], ",", 
        RowBox[{"{", 
-        RowBox[{"\"\<Functions\>\"", ",", "\"\<\>\""}], "}"}]}], "}"}], ",", 
+        RowBox[{"\"\<Functions--------------\>\"", ",", "\"\<\>\""}], "}"}]}],
+       "}"}], ",", 
      RowBox[{"Flatten", "[", 
       RowBox[{
        RowBox[{"filesTuples", "[", 
@@ -814,18 +817,20 @@ Cell[BoxData[{
  CellChangeTimes->{{3.6721490793703203`*^9, 3.672149108699397*^9}, {
    3.672149162927423*^9, 3.672149223159924*^9}, {3.672149262867424*^9, 
    3.672149286696879*^9}, 3.672149322414568*^9, {3.672149372187242*^9, 
-   3.672149708630149*^9}}],
+   3.672149708630149*^9}, {3.6721499073601837`*^9, 3.6721499291969624`*^9}}],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
+   RowBox[{"{", 
+    RowBox[{"\<\"README--------------\"\>", ",", "\<\"\"\>"}], "}"}], ",", 
    RowBox[{
    "{", "\<\"Rise and shine Mr. Freeman... rise and shine...\"\>", "}"}], ",", 
    RowBox[{"{", "}"}], ",", 
    RowBox[{"{", "}"}], ",", 
    RowBox[{"{", "}"}], ",", 
    RowBox[{"{", 
-    RowBox[{"\<\"Parameters\"\>", ",", "\<\"\"\>"}], "}"}], ",", 
+    RowBox[{"\<\"Parameters--------------\"\>", ",", "\<\"\"\>"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"\<\"OVIcov\"\>", ",", "\<\" Ovitraps coverage\"\>"}], "}"}], ",", 
    RowBox[{"{", 
@@ -998,7 +1003,8 @@ coverage\"\>"}], "}"}], ",",
 infectious bite\"\>"}], "}"}], ",", 
    RowBox[{"{", "}"}], ",", 
    RowBox[{"{", 
-    RowBox[{"\<\"Functions\"\>", ",", "\<\"\"\>"}], "}"}], ",", 
+    RowBox[{"\<\"Functions--------------\"\>", ",", "\<\"\"\>"}], "}"}], ",", 
+   
    RowBox[{"{", 
     RowBox[{"\<\"OVIcov\"\>", ",", "\<\" Ovitraps coverage\"\>"}], "}"}], ",", 
    RowBox[{"{", 
@@ -1173,7 +1179,8 @@ infectious bite\"\>"}], "}"}]}], "}"}]], "Output",
    3.672149170434374*^9, 3.672149223542457*^9}, {3.6721492649826393`*^9, 
    3.672149283739147*^9}, 3.672149322888214*^9, {3.672149382428684*^9, 
    3.672149417652503*^9}, {3.672149460911723*^9, 3.672149611017638*^9}, {
-   3.672149663015913*^9, 3.672149709078621*^9}, 3.672149766819046*^9}],
+   3.672149663015913*^9, 3.672149709078621*^9}, 3.672149766819046*^9, 
+   3.672149929635209*^9}],
 
 Cell[BoxData["\<\"/Users/chipdelmal/Documents/School/Research/ODE_\
 MalariaVectors/README.txt\"\>"], "Output",
@@ -1181,7 +1188,8 @@ MalariaVectors/README.txt\"\>"], "Output",
    3.672149170434374*^9, 3.672149223542457*^9}, {3.6721492649826393`*^9, 
    3.672149283739147*^9}, 3.672149322888214*^9, {3.672149382428684*^9, 
    3.672149417652503*^9}, {3.672149460911723*^9, 3.672149611017638*^9}, {
-   3.672149663015913*^9, 3.672149709078621*^9}, 3.672149766848186*^9}]
+   3.672149663015913*^9, 3.672149709078621*^9}, 3.672149766819046*^9, 
+   3.672149929665452*^9}]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
@@ -1243,9 +1251,9 @@ Cell[24212, 557, 8594, 209, 70, "Output"]
 Cell[CellGroupData[{
 Cell[32855, 772, 91, 1, 50, "Section"],
 Cell[CellGroupData[{
-Cell[32971, 777, 1388, 39, 63, "Input"],
-Cell[34362, 818, 13906, 357, 607, "Output"],
-Cell[48271, 1177, 468, 6, 28, "Output"]
+Cell[32971, 777, 1577, 42, 80, "Input"],
+Cell[34551, 821, 14057, 361, 607, "Output"],
+Cell[48611, 1184, 494, 7, 28, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]

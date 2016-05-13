@@ -223,7 +223,8 @@ shinyUI(
         downloadButton("downloadPlot", 'Download Plot'),
         downloadButton("downloadTemplate", 'Download CSV Parameters Template'),
         titlePanel(h1("Debugging Stuff",align="left")),
-        tableOutput("contents")
+        tableOutput("contentsCSV"),
+        tableOutput("contentsXLS")
       ),
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
       tabPanel("Runtime Data",

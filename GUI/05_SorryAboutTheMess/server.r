@@ -76,14 +76,21 @@ shinyServer(
   #     }
   #   )
   #############################################################################
-  # IMPORT CSV EVENT HANDLERS #################################################
-  output$contents <- renderTable({
+  # IMPORT FILES EVENT HANDLERS ###############################################
+  output$contentsCSV <- renderTable({
     inFile <- input$csvImport
     if(is.null(inFile)){return(NULL)}
-    #importedCSVParameters<<-read.csv(inFile$datapath,head=FALSE,sep=",",row.names=1,fill=FALSE,stringsAsFactors=FALSE)
-    #validateCSVParameters(importedCSVParameters)
     importCSVParametersFromDirectory(inFile$datapath)
+  })
+  output$contentsXLS <- renderTable({
+    inFile <- input$xlsImport
+    print(input$xlsImport[["type"]])
+    if(is.null(inFile)){return(NULL)}
+    importXLSParametersFromDirectory(inFile$datapath)
   })
   #############################################################################
 })
 #---###########################################################################
+
+#"text/csv"
+#"application/vnd.ms-excel"
