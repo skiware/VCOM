@@ -91,7 +91,7 @@ importXLSParametersFromDirectory = function(fileName){
   return(validateCSVParameters(inputDataFrame))
 }
 importCSVXLSParametersFromDirectoryShiny = function(fileName,typeString){
-  print(typeString)
+  #. importCSVXLSParametersFromDirectoryShiny: Wrapper function that works only within shiny to select the proper import function to use on a given file
   if(typeString == "text/csv"){return(importCSVParametersFromDirectory(fileName))}
   if(typeString == "application/vnd.ms-excel"){return(importXLSParametersFromDirectory(fileName))}
 }

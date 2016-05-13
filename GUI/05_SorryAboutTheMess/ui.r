@@ -29,9 +29,9 @@ initialParametersValues<<-importCSVParametersFromDirectory("SETUP_MosquitoLifeCy
 theta<<-parseImportedCSVParameters(initialParametersValues)
 print(theta)
 ################################################################################
-#TEMPLATE_AN_ARABIENSIS<<-importCSVParametersFromDirectory("Template_AnFunestus.csv")
-#TEMPLATE_AN_FUNESTUS<<-importCSVParametersFromDirectory("Template_AnFunestus.csv")
-#TEMPLATE_AN_GAMBIAE<<-importCSVParametersFromDirectory("Template_AnGambiae.csv")
+TEMPLATE_AN_ARABIENSIS<<-importCSVParametersFromDirectory("Template_AnArabiensis.csv")
+TEMPLATE_AN_FUNESTUS<<-importCSVParametersFromDirectory("Template_AnFunestus.csv")
+TEMPLATE_AN_GAMBIAE<<-importCSVParametersFromDirectory("Template_AnGambiae.csv")
 ################################################################################
 shinyUI(
   fluidPage(theme = "bootstrapSpace.css",
@@ -74,9 +74,9 @@ shinyUI(
             plotOutput("plotDemographics")
           )
         ),
-        actionButton("buttonTest","TEST!",width="100%"),
-        br(),
-        br(),
+        #actionButton("buttonTest","TEST!",width="100%"),
+        #br(),
+        #br(),
         p("Cite as: VCOM!!! The coolest model ever!!!")
       ),
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
@@ -213,17 +213,18 @@ shinyUI(
       ),
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
       tabPanel("Files I/O",
+        titlePanel(h1("Import Parameters Files",align="left")),
         #fileInput('csvImport', 'Import CSV Parameters File', accept = c('.csv')),
         #fileInput('xlsImport', 'Import XLS Parameters File', accept = c('.xls')),
         fileInput('fileImport', 'Import CSV/XLS Parameters File', accept = c('.xls','.csv')),
         helpText("Select a CSV/XLS file to load the parameters set for the desired scenario. If it is the first time you are 
           using this option a good starting point is to download the 'CSV Parameters Template' and modify it."),
-        titlePanel(h3("Output",align="left")),
-        downloadButton(NA, 'Download CSV Parameters'),
-        downloadButton(NA, 'Download CSV Output'),
-        downloadButton("downloadPlot", 'Download Plot'),
+        titlePanel(h1("Export and Download",align="left")),
         downloadButton("downloadTemplate", 'Download CSV Parameters Template'),
-        titlePanel(h1("Debugging Stuff",align="left")),
+        #downloadButton(NA, 'Download CSV Parameters'),
+        downloadButton("downloadTrace", 'Download CSV Trace'),
+        #downloadButton("downloadPlot", 'Download Plot'),
+        titlePanel(h1("Debugging and Other Super Fun Stuff",align="left")),
         tableOutput("contentsCSV"),
         tableOutput("contentsXLS"),
         tableOutput("contents")
