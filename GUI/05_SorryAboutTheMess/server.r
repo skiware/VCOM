@@ -13,7 +13,6 @@ library(shiny)
 ###############################################################################
 #---# RUN WHEN THE APP IS LAUNCHED ############################################
 #BOXES_WIDTH <<- "100px"
-initState = calculateInitialState(theta)
 IVM_traj = runODE(80,1,initState,theta,"lsoda")  
 ###############################################################################  
 mosquitoParametersTable=read.csv("www/ODEMosquitoParameters.csv",header=FALSE)
@@ -35,14 +34,14 @@ shinyServer(
   })
   observeEvent(input$radioSpecies,{
     cat("Radio event!\n")
-    theta <- switch(input$radioSpecies,
-        "GAM" = TEMPLATE_AN_GAMBIAE,
-        "ARA" = TEMPLATE_AN_ARABIENSIS,
-        "FUN" = TEMPLATE_AN_FUNESTUS
+    print(theta[["time_IRS_on"]])
+    theta <<- switch(input$radioSpecies,
+        "GAM" = getTheta(speciesSpecificParameters=getAnGambiaeParameters()),#parseImportedCSVParameters(TEMPLATE_AN_GAMBIAE),
+        "ARA" = getTheta(speciesSpecificParameters=getAnArabiensisParameters()),#parseImportedCSVParameters(TEMPLATE_AN_ARABIENSIS),
+        "FUN" = getTheta(speciesSpecificParameters=getAnFunestusParameters())#parseImportedCSVParameters(TEMPLATE_AN_FUNESTUS)
     )
-    #initState = calculateInitialState(theta)
     print(theta)
-    print(initState)
+    #print(initState)
   })  
   observeEvent(input$checkboxesControlMeasures,{
     cat("Checkbox event!\n")
@@ -52,6 +51,8 @@ shinyServer(
   })
   observeEvent(input$buttonRun,{
     cat("Button event!\n")
+    print(theta)
+    initState = calculateInitialState(theta)
     IVM_traj <<- runODE(input$sliderTime,1,initState,theta,"lsoda")
     output$IVM_Runtime = renderTable(IVM_traj)
     output$plotDemographics = renderPlot({barChartMosquitoDemographics(IVM_traj)})
@@ -90,6 +91,3 @@ shinyServer(
   #############################################################################
 })
 #---###########################################################################
-
-#"text/csv"
-#"application/vnd.ms-excel"

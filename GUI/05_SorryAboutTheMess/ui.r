@@ -26,7 +26,9 @@ BOXES_WIDTH<<-"75px"
 #initialTheta <<- getTheta()
 # Theta from setup CSV----------------------------- 
 initialParametersValues<<-importCSVParametersFromDirectory("SETUP_MosquitoLifeCycleParameters.csv")
-theta<<-parseImportedCSVParameters(initialParametersValues)
+#print(initialParametersValues)
+theta <<- parseImportedCSVParameters(initialParametersValues)
+initState <<- calculateInitialState(theta)
 print(theta)
 ################################################################################
 TEMPLATE_AN_ARABIENSIS<<-importCSVParametersFromDirectory("Template_AnArabiensis.csv")
@@ -74,9 +76,6 @@ shinyUI(
             plotOutput("plotDemographics")
           )
         ),
-        #actionButton("buttonTest","TEST!",width="100%"),
-        #br(),
-        #br(),
         p("Cite as: VCOM!!! The coolest model ever!!!")
       ),
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.

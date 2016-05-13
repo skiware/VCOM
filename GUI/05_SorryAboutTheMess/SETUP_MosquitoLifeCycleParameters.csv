@@ -53,8 +53,8 @@ BIOeff,0,TEXT
 SREcov,0, Source Reduction coverage
 time_SRE_on,0, When Source Reduction is applied (days)
 SREeff,0,TEXT
-IRScov,0, IRS coverage
-time_IRS_on,0, When IRSs are applied (days)
+IRScov,.8, IRS coverage
+time_IRS_on,50, When IRSs are applied (days)
 IRSeff,0,TEXT
 ITNcov,0, ITN coverage
 time_ITN_on,0, When ITNs are applied (days)

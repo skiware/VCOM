@@ -20,11 +20,12 @@ source("ODEModel.R")
 source("ODEMosquitoParameters.R")
 source("ODEAuxiliaryFunctions.R")
 source("ODEControlMeasuresParameters.R")
+source("ODETransmissionParameters.R")
 ########### INIT MODEL ##################################################
 theta = getTheta()
 initState = calculateInitialState(theta) 
 ########### RUN THE IVM ODEs ############################################
-IVM_traj = runODE(365,1,initState,theta,"lsoda")
+IVM_traj = runODE(360,1,initState,theta,"lsoda")
 ########### PLOT RESULTS ################################################
 par(mfrow=c(2,1))
 barChartMosquitoDemographics(IVM_traj)
