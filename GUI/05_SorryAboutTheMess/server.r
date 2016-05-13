@@ -77,16 +77,20 @@ shinyServer(
   #   )
   #############################################################################
   # IMPORT FILES EVENT HANDLERS ###############################################
-  output$contentsCSV <- renderTable({
-    inFile <- input$csvImport
+#   output$contentsCSV <- renderTable({
+#     inFile <- input$csvImport
+#     if(is.null(inFile)){return(NULL)}
+#     importCSVParametersFromDirectory(inFile$datapath)
+#   })
+#   output$contentsXLS <- renderTable({
+#     inFile <- input$xlsImport
+#     if(is.null(inFile)){return(NULL)}
+#     importXLSParametersFromDirectory(inFile$datapath)
+#   })
+  output$contents <- renderTable({
+    inFile <- input$fileImport
     if(is.null(inFile)){return(NULL)}
-    importCSVParametersFromDirectory(inFile$datapath)
-  })
-  output$contentsXLS <- renderTable({
-    inFile <- input$xlsImport
-    print(input$xlsImport[["type"]])
-    if(is.null(inFile)){return(NULL)}
-    importXLSParametersFromDirectory(inFile$datapath)
+    importCSVXLSParametersFromDirectoryShiny(inFile$datapath,input$fileImport[["type"]])
   })
   #############################################################################
 })

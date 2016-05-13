@@ -90,3 +90,8 @@ importXLSParametersFromDirectory = function(fileName){
   inputDataFrame[,1]=as.numeric(inputDataFrame[,1])
   return(validateCSVParameters(inputDataFrame))
 }
+importCSVXLSParametersFromDirectoryShiny = function(fileName,typeString){
+  print(typeString)
+  if(typeString == "text/csv"){return(importCSVParametersFromDirectory(fileName))}
+  if(typeString == "application/vnd.ms-excel"){return(importXLSParametersFromDirectory(fileName))}
+}

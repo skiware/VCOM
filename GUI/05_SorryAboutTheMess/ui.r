@@ -213,9 +213,10 @@ shinyUI(
       ),
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
       tabPanel("Files I/O",
-        fileInput('csvImport', 'Import CSV Parameters File', accept = c('.csv')),
-        fileInput('xlsImport', 'Import XLS Parameters File', accept = c('.xls')),
-        helpText("Select a CSV file to load the parameters set for the desired scenario. If it is the first time you are 
+        #fileInput('csvImport', 'Import CSV Parameters File', accept = c('.csv')),
+        #fileInput('xlsImport', 'Import XLS Parameters File', accept = c('.xls')),
+        fileInput('fileImport', 'Import CSV/XLS Parameters File', accept = c('.xls','.csv')),
+        helpText("Select a CSV/XLS file to load the parameters set for the desired scenario. If it is the first time you are 
           using this option a good starting point is to download the 'CSV Parameters Template' and modify it."),
         titlePanel(h3("Output",align="left")),
         downloadButton(NA, 'Download CSV Parameters'),
@@ -224,7 +225,8 @@ shinyUI(
         downloadButton("downloadTemplate", 'Download CSV Parameters Template'),
         titlePanel(h1("Debugging Stuff",align="left")),
         tableOutput("contentsCSV"),
-        tableOutput("contentsXLS")
+        tableOutput("contentsXLS"),
+        tableOutput("contents")
       ),
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
       tabPanel("Runtime Data",
