@@ -25,8 +25,8 @@ BOXES_WIDTH<<-"75px"
 #initialTheta <<- getTheta()
 # Theta from setup CSV----------------------------- 
 initialParametersValues<<-importCSVParametersFromDirectory("SETUP_MosquitoLifeCycleParameters.csv")
-initialTheta<<-parseImportedCSVParameters(initialParametersValues)
-print(initialTheta)
+theta<<-parseImportedCSVParameters(initialParametersValues)
+print(theta)
 ################################################################################
 #TEMPLATE_AN_ARABIENSIS<<-importCSVParametersFromDirectory("Template_AnFunestus.csv")
 #TEMPLATE_AN_FUNESTUS<<-importCSVParametersFromDirectory("Template_AnFunestus.csv")
@@ -96,46 +96,46 @@ shinyUI(
             fluidRow( 
               column(3,align="center",
                 #titlePanel(h3("Effectivity",align="center")),
-                textInput("muV","muV",value=initialTheta[["muV"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("Q0","Q0",value=initialTheta[["Q0"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("phiB","phiB",value=initialTheta[["phiB"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("phiI","phiI",value=initialTheta[["phiI"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("beta","beta",value=initialTheta[["beta"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("muEL","muEL",value=initialTheta[["muEL"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("muLL","muLL",value=initialTheta[["muLL"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("durPL","durPL",value=initialTheta[["durPL"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("durPL","durPL",value=initialTheta[["durPL"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("durEV","durEV",value=initialTheta[["durEV"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("gamma","gamma",value=initialTheta[["gamma"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("tau1","tau1",value=initialTheta[["tau1"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("tau2","tau2",value=initialTheta[["tau2"]],placeholder=0.5,width=BOXES_WIDTH)
+                textInput("muV","muV",value=theta[["muV"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("Q0","Q0",value=theta[["Q0"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("phiB","phiB",value=theta[["phiB"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("phiI","phiI",value=theta[["phiI"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("beta","beta",value=theta[["beta"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("muEL","muEL",value=theta[["muEL"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("muLL","muLL",value=theta[["muLL"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("durPL","durPL",value=theta[["durPL"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("durPL","durPL",value=theta[["durPL"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("durEV","durEV",value=theta[["durEV"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("gamma","gamma",value=theta[["gamma"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("tau1","tau1",value=theta[["tau1"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("tau2","tau2",value=theta[["tau2"]],placeholder=0.5,width=BOXES_WIDTH)
               ),
               #headerPanel(h2("Parameters Matrix",align="center")),
               column(3,align="center",
                 #titlePanel(h3("C",align="center")),
-                textInput("rOVI","rOVI",value=initialTheta[["rOVI"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("rFOG","rFOG",value=initialTheta[["rFOG"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("rLAR","rLAR",value=initialTheta[["rLAR"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("rBIO","rBIO",value=initialTheta[["rBIO"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("rSRE","rSRE",value=initialTheta[["rSRE"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("rIRS","rIRS",value=initialTheta[["rIRS"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("rIVM","rIVM",value=initialTheta[["rIVM"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("rHOU","rHOU",value=initialTheta[["rHOU"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("rODO","rODO",value=initialTheta[["rODO"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("rSPA","rSPA",value=initialTheta[["rSPA"]],placeholder=0.5,width=BOXES_WIDTH)
+                textInput("rOVI","rOVI",value=theta[["rOVI"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("rFOG","rFOG",value=theta[["rFOG"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("rLAR","rLAR",value=theta[["rLAR"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("rBIO","rBIO",value=theta[["rBIO"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("rSRE","rSRE",value=theta[["rSRE"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("rIRS","rIRS",value=theta[["rIRS"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("rIVM","rIVM",value=theta[["rIVM"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("rHOU","rHOU",value=theta[["rHOU"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("rODO","rODO",value=theta[["rODO"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("rSPA","rSPA",value=theta[["rSPA"]],placeholder=0.5,width=BOXES_WIDTH)
               ),
               column(3,align="center",
                 #titlePanel(h3("Activation Day",align="center")),
-                textInput("sOVI","sOVI",value=initialTheta[["sOVI"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("sFOG","sFOG",value=initialTheta[["sFOG"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("sLAR","sLAR",value=initialTheta[["sLAR"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("sBIO","sBIO",value=initialTheta[["sBIO"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("sSRE","sSRE",value=initialTheta[["sSRE"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("sIRS","sIRS",value=initialTheta[["sIRS"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("sIVM","sIVM",value=initialTheta[["sIVM"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("sHOU","sHOU",value=initialTheta[["sHOU"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("sODO","sODO",value=initialTheta[["sODO"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("sSPA","sSPA",value=initialTheta[["sSPA"]],placeholder=0.5,width=BOXES_WIDTH)
+                textInput("sOVI","sOVI",value=theta[["sOVI"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("sFOG","sFOG",value=theta[["sFOG"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("sLAR","sLAR",value=theta[["sLAR"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("sBIO","sBIO",value=theta[["sBIO"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("sSRE","sSRE",value=theta[["sSRE"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("sIRS","sIRS",value=theta[["sIRS"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("sIVM","sIVM",value=theta[["sIVM"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("sHOU","sHOU",value=theta[["sHOU"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("sODO","sODO",value=theta[["sODO"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("sSPA","sSPA",value=theta[["sSPA"]],placeholder=0.5,width=BOXES_WIDTH)
               )
             )
           )
@@ -153,31 +153,31 @@ shinyUI(
               #headerPanel(h2("Parameters Matrix",align="center")),
               column(3,align="center",
                 titlePanel(h3("Coverage",align="center")),
-                textInput("OVIcov","OVI",value=initialTheta[["OVIcov"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("FOGcov","FOG",value=initialTheta[["FOGcov"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("LARcov","LAR",value=initialTheta[["LARcov"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("BIOcov","BIO",value=initialTheta[["BIOcov"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("SREcov","SRE",value=initialTheta[["SREcov"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("IRScov","IRS",value=initialTheta[["IRScov"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("ITNcov","ITN",value=initialTheta[["ITNcov"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("IVMcov","IVM",value=initialTheta[["IVMcov"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("HOUcov","HOU",value=initialTheta[["HOUcov"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("ODOcov","ODO",value=initialTheta[["ODOcov"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("SPAcov","SPA",value=initialTheta[["SPAcov"]],placeholder=0.5,width=BOXES_WIDTH)
+                textInput("OVIcov","OVI",value=theta[["OVIcov"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("FOGcov","FOG",value=theta[["FOGcov"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("LARcov","LAR",value=theta[["LARcov"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("BIOcov","BIO",value=theta[["BIOcov"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("SREcov","SRE",value=theta[["SREcov"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("IRScov","IRS",value=theta[["IRScov"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("ITNcov","ITN",value=theta[["ITNcov"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("IVMcov","IVM",value=theta[["IVMcov"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("HOUcov","HOU",value=theta[["HOUcov"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("ODOcov","ODO",value=theta[["ODOcov"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("SPAcov","SPA",value=theta[["SPAcov"]],placeholder=0.5,width=BOXES_WIDTH)
               ),
               column(3,align="center",
                 titlePanel(h3("Init Day",align="center")),
-                textInput("time_OVI_on","OVI",value=initialTheta[["time_OVI_on"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("time_FOG_on","FOG",value=initialTheta[["time_FOG_on"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("time_LAR_on","LAR",value=initialTheta[["time_LAR_on"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("time_BIO_on","BIO",value=initialTheta[["time_BIO_on"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("time_SRE_on","SRE",value=initialTheta[["time_SRE_on"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("time_IRS_on","IRS",value=initialTheta[["time_IRS_on"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("time_ITN_on","ITN",value=initialTheta[["time_ITN_on"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("time_IVM_on","IVM",value=initialTheta[["time_IVM_on"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("time_HOU_on","HOU",value=initialTheta[["time_HOU_on"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("time_ODO_on","ODO",value=initialTheta[["time_ODO_on"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("time_SPA_on","SPA",value=initialTheta[["time_SPA_on"]],placeholder=0.5,width=BOXES_WIDTH)
+                textInput("time_OVI_on","OVI",value=theta[["time_OVI_on"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("time_FOG_on","FOG",value=theta[["time_FOG_on"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("time_LAR_on","LAR",value=theta[["time_LAR_on"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("time_BIO_on","BIO",value=theta[["time_BIO_on"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("time_SRE_on","SRE",value=theta[["time_SRE_on"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("time_IRS_on","IRS",value=theta[["time_IRS_on"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("time_ITN_on","ITN",value=theta[["time_ITN_on"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("time_IVM_on","IVM",value=theta[["time_IVM_on"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("time_HOU_on","HOU",value=theta[["time_HOU_on"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("time_ODO_on","ODO",value=theta[["time_ODO_on"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("time_SPA_on","SPA",value=theta[["time_SPA_on"]],placeholder=0.5,width=BOXES_WIDTH)
               ),
               column(3,align="center",
                 titlePanel(h3("Effectivity",align="center")),
@@ -210,15 +210,15 @@ shinyUI(
             fluidRow( 
               #headerPanel(h2("Parameters Matrix",align="center")),
               column(3,align="center",
-                textInput("f0","f0",value=initialTheta[["f0"]],placeholder=0.5,width=BOXES_WIDTH),
-                textInput("epsilon0","epsilon0",value=initialTheta[["epsilon0"]],placeholder=0.5,width=BOXES_WIDTH)
+                textInput("f0","f0",value=theta[["f0"]],placeholder=0.5,width=BOXES_WIDTH),
+                textInput("epsilon0","epsilon0",value=theta[["epsilon0"]],placeholder=0.5,width=BOXES_WIDTH)
               ),
               column(2,align="center",
-               textInput("iH_eq","iH_eq",value=initialTheta[["iH_eq"]],placeholder=0.5,width=BOXES_WIDTH),
-               textInput("NH_eq","NH_eq",value=initialTheta[["NH_eq"]],placeholder=0.5,width=BOXES_WIDTH)
+               textInput("iH_eq","iH_eq",value=theta[["iH_eq"]],placeholder=0.5,width=BOXES_WIDTH),
+               textInput("NH_eq","NH_eq",value=theta[["NH_eq"]],placeholder=0.5,width=BOXES_WIDTH)
               ),
               column(3,align="center",
-                textInput("bv","bV",value=initialTheta[["bV"]],placeholder=0.5,width=BOXES_WIDTH)
+                textInput("bv","bV",value=theta[["bV"]],placeholder=0.5,width=BOXES_WIDTH)
               )
             )
           )

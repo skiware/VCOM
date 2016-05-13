@@ -15,7 +15,6 @@ library(shiny)
 #BOXES_WIDTH <<- "100px"
 initState = calculateInitialState(theta)
 IVM_traj = runODE(80,1,initState,theta,"lsoda")  
-
 ###############################################################################  
 mosquitoParametersTable=read.csv("www/ODEMosquitoParameters.csv",header=FALSE)
 controlMeasuresParametersTable=read.csv("www/ODEControlMeasuresParameters.csv",header=FALSE)
