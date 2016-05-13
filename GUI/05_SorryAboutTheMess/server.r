@@ -15,10 +15,10 @@ library(shiny)
 #BOXES_WIDTH <<- "100px"
 IVM_traj = runODE(80,1,initState,theta,"lsoda")  
 ###############################################################################  
-mosquitoParametersTable=read.csv("www/ODEMosquitoParameters.csv",header=FALSE)
-controlMeasuresParametersTable=read.csv("www/ODEControlMeasuresParameters.csv",header=FALSE)
-mosquitoParametersTable = read.csv("www/ODEMosquitoParameters.csv",header=FALSE)
-transmissionParametersTable = read.csv("www/ODETransmissionParameters.csv",header=FALSE)
+mosquitoParametersTable=read.csv("Documentation/ODEMosquitoParameters.csv",header=FALSE)
+controlMeasuresParametersTable=read.csv("Documentation/ODEControlMeasuresParameters.csv",header=FALSE)
+mosquitoParametersTable = read.csv("Documentation/ODEMosquitoParameters.csv",header=FALSE)
+transmissionParametersTable = read.csv("Documentation/ODETransmissionParameters.csv",header=FALSE)
 #---# MAIN SHINY SERVER APPLICATION ###########################################
 shinyServer(
   function(input,output,session){

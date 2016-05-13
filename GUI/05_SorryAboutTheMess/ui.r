@@ -25,15 +25,15 @@ BOXES_WIDTH<<-"75px"
 # Theta from code----------------------------------
 #initialTheta <<- getTheta()
 # Theta from setup CSV----------------------------- 
-initialParametersValues<<-importCSVParametersFromDirectory("SETUP_MosquitoLifeCycleParameters.csv")
+initialParametersValues<<-importCSVParametersFromDirectory("SetupTemplates/SETUP_MosquitoLifeCycleParameters.csv")
 #print(initialParametersValues)
 theta <<- parseImportedCSVParameters(initialParametersValues)
 initState <<- calculateInitialState(theta)
 print(theta)
 ################################################################################
-TEMPLATE_AN_ARABIENSIS<<-importCSVParametersFromDirectory("Template_AnArabiensis.csv")
-TEMPLATE_AN_FUNESTUS<<-importCSVParametersFromDirectory("Template_AnFunestus.csv")
-TEMPLATE_AN_GAMBIAE<<-importCSVParametersFromDirectory("Template_AnGambiae.csv")
+TEMPLATE_AN_ARABIENSIS<<-importCSVParametersFromDirectory("SetupTemplates/Template_AnArabiensis.csv")
+TEMPLATE_AN_FUNESTUS<<-importCSVParametersFromDirectory("SetupTemplates/Template_AnFunestus.csv")
+TEMPLATE_AN_GAMBIAE<<-importCSVParametersFromDirectory("SetupTemplates/Template_AnGambiae.csv")
 ################################################################################
 shinyUI(
   fluidPage(theme = "bootstrapSpace.css",

@@ -4,6 +4,7 @@ parseImportedCSVParameters, Once a csv file has been imported this function conv
 importCSVParametersFromDirectory, Loads the verified parameters of the simulation from a CSV file into the workflow
 validateCSVParameters, Verifies that the user has imported a valid CSV file with all the parameters defined
 importXLSParametersFromDirectory, Loads the verified parameters of the simulation from an XLS file into the workflow
+importCSVXLSParametersFromDirectoryShiny, Wrapper function that works only within shiny to select the proper import function to use on a given file
 getInterventionsParameters, Returns the list of intervention parameters
 runODE, Main ODE wrapper for simulating the mosquito population
 calculateInitialState, Calculates the initial conditions of a system given the theta parameters
