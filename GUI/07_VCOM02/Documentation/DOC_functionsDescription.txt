@@ -1,0 +1,17 @@
+plotTrajectory: Plots the evolution of the dynamics of the system
+barChartMosquitoDemographics: Generates a bar chart with the amount of mosquitos in each life stage
+parseImportedCSVParameters: Once a csv file has been imported this function converts the data into a theta object
+importCSVParametersFromDirectory: Loads the verified parameters of the simulation from a CSV file into the workflow
+validateCSVParameters: Verifies that the user has imported a valid CSV file with all the parameters defined
+importXLSParametersFromDirectory: Loads the verified parameters of the simulation from an XLS file into the workflow
+importCSVXLSParametersFromDirectoryShiny: Wrapper function that works only within shiny to select the proper import function to use on a given file
+getInterventionsParameters: Returns the list of intervention parameters
+runODE: Main ODE wrapper for simulating the mosquito population
+calculateInitialState: Calculates the initial conditions of a system given the theta parameters
+IVM_ode: ODE Model definition
+getTheta: Facade function to return theta from selected parameters
+getAnGambiaeParameters: Returns the list of Anopheles Gambiae specific parameters
+getAnArabiensisParameters: Returns the list of Anopheles Arabiensis specific parameters
+getAnFunestusParameters: Returns the list of Anopheles Funestus specific parameters
+getMosquitoLifeCycleParameters: Returns the list of mosquito life cycle parameters
+getAdditionalTransmissionParameters: Returns the transmission parameters
