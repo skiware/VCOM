@@ -22,7 +22,7 @@ source("ODEAuxiliaryFunctions.R")
 source("ODEControlMeasuresParameters.R")
 source("ODETransmissionParameters.R")
 ########### INIT MODEL ##################################################
-theta = getTheta()
+theta = getTheta(speciesSpecificParameters=getAnFunestusParameters())
 initState = calculateInitialState(theta) 
 ########### RUN THE IVM ODEs ############################################
 IVM_traj = runODE(360,1,initState,theta,"lsoda")

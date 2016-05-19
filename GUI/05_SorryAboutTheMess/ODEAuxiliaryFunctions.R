@@ -95,3 +95,8 @@ importCSVXLSParametersFromDirectoryShiny = function(fileName,typeString){
   if(typeString == "text/csv"){return(importCSVParametersFromDirectory(fileName))}
   if(typeString == "application/vnd.ms-excel"){return(importXLSParametersFromDirectory(fileName))}
 }
+selectNonDescriptionElements = function(importedFileData){
+  #. selectNonDescriptionElements: Returns the subset of elements whose second column does not match "Description"
+  boolVct=1-(importedFileData[[2]]=="Description")
+  importedFileData[as.logical(boolVct),]
+}

@@ -38,7 +38,8 @@ shinyServer(
     theta <<- switch(input$radioSpecies,
         "GAM" = getTheta(speciesSpecificParameters=getAnGambiaeParameters()),#parseImportedCSVParameters(TEMPLATE_AN_GAMBIAE),
         "ARA" = getTheta(speciesSpecificParameters=getAnArabiensisParameters()),#parseImportedCSVParameters(TEMPLATE_AN_ARABIENSIS),
-        "FUN" = getTheta(speciesSpecificParameters=getAnFunestusParameters())#parseImportedCSVParameters(TEMPLATE_AN_FUNESTUS)
+        "FUN" = getTheta(speciesSpecificParameters=getAnFunestusParameters()),#parseImportedCSVParameters(TEMPLATE_AN_FUNESTUS)
+        "USD" = getTheta()
     )
     print(theta)
     #print(initState)
@@ -74,13 +75,13 @@ shinyServer(
   output$contents <- renderTable({
     inFile <- input$fileImport
     if(is.null(inFile)){return(NULL)}
-    importCSVXLSParametersFromDirectoryShiny(inFile$datapath,input$fileImport[["type"]])
+    importedFileData <<- importCSVXLSParametersFromDirectoryShiny(inFile$datapath,input$fileImport[["type"]])
   })
   #############################################################################
   # DOWNLOADS HANDLERS ########################################################
   output$downloadTemplate <- downloadHandler(
     filename <- function(){paste("VCOM_SimSetupFile","xls",sep=".")},
-    content <- function(file){file.copy("SETUP_MosquitoLifeCycleParameters.xls",file)}
+    content <- function(file){file.copy("SetupTemplates/SETUP_MosquitoLifeCycleParameters.xls",file)}
   )
   output$downloadTrace <- downloadHandler(
     filename <- function(){paste("VCOM_Trace","csv",sep=".")},

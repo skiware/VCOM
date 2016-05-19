@@ -49,12 +49,13 @@ shinyUI(
                          choices=list(
                            "An. gambiae"="GAM",
                            "An. arabiensis"="ARA",
-                           "An. funestus"="FUN"
+                           "An. funestus"="FUN",
+                           "User-Defined"="USD"
                          ),selected="ARA"),
             sliderInput("sliderTime","Days to Simulate:",min=1,max=365,value=80),
             checkboxGroupInput("checkboxesControlMeasures", "Control Measures:",
               c(
-                "Ovitraps"="OBIBool",
+                "Ovitraps"="OVIBool",
                 "Fogging"="FOGBool",
                 "Larvaciding"="LARBool",
                 "Biological Control"="BIOBool",
