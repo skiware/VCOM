@@ -55,6 +55,7 @@ plotTrajectory(IVM_traj)
 binary_tuples <- function(n_tuples){
   return(expand.grid(rep(list(c(0,1)),n_tuples)))
 }
+tuples = binary_tuples(2)
 for(i in 1:4){
   inter=  c(
     OVIcov = 0.0, time_OVI_on = 10,
