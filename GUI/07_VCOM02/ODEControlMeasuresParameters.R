@@ -1,4 +1,4 @@
-########################################################################
+######################################################################
 #=======================================================================
 # ODEControlMeasuresParameters.R
 # Contains the functions that handle the population's interventions
@@ -33,21 +33,33 @@
 #* SPAcov:        Spatial Repellents coverage
 #* time_SPA_on:   When Space Repellents are applied (days)
 #------------------------------------------------------------------------
-getInterventionsParameters = function(){
+getInterventionsParameters = function(
+  OVIcov=0,time_OVI_on=0,
+  FOGcov=0,time_FOG_on=0,
+  LARcov=0,time_LAR_on=0,
+  BIOcov=0,time_BIO_on=0,
+  SREcov=0,time_SRE_on=0,
+  IRScov=0,time_IRS_on=0,
+  ITNcov=0,time_ITN_on=0,
+  IVMcov=0,time_IVM_on=0,
+  HOUcov=0,time_HOU_on=0,
+  ODOcov=0,time_ODO_on=0,
+  SPAcov=0,time_SPA_on=0
+){
   #. getInterventionsParameters: Returns the list of intervention parameters
   # (SK) and the time that a particular intervention is on
   c(
-    OVIcov = 0.0, time_OVI_on = 00,
-    FOGcov = 0.0, time_FOG_on = 00,
-    LARcov = 0.0, time_LAR_on = 00,
-    BIOcov = 0.0, time_BIO_on = 00,
-    SREcov = 0.0, time_SRE_on = 00,
-    IRScov = 0.0, time_IRS_on = 10,
-    ITNcov = 0.0, time_ITN_on = 00,
-    IVMcov = 0.0, time_IVM_on = 00,
-    HOUcov = 0.0, time_HOU_on = 00,
-    ODOcov = 0.0, time_ODO_on = 00,
-    SPAcov = 0.0, time_SPA_on = 00
+    OVIcov=OVIcov,time_OVI_on=time_OVI_on,
+    FOGcov=FOGcov,time_FOG_on=time_FOG_on,
+    LARcov=LARcov,time_LAR_on=time_LAR_on,
+    BIOcov=BIOcov,time_BIO_on=time_BIO_on,
+    SREcov=SREcov,time_SRE_on=time_SRE_on,
+    IRScov=IRScov,time_IRS_on=time_IRS_on,
+    ITNcov=ITNcov,time_ITN_on=time_ITN_on,
+    IVMcov=IVMcov,time_IVM_on=time_IVM_on,
+    HOUcov=HOUcov,time_HOU_on=time_HOU_on,
+    ODOcov=ODOcov,time_ODO_on=time_ODO_on,
+    SPAcov=SPAcov,time_SPA_on=time_SPA_on
   )
 }
 ######################################################################################

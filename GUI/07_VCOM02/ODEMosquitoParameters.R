@@ -12,11 +12,11 @@
 #------------------------------------------------------------------------
 getTheta = function(
   #. getTheta: Facade function to return theta from selected parameters
-                    speciesSpecificParameters=getAnGambiaeParameters(), 
-                    interventionParameters=getInterventionsParameters(),
-                    additionalTransmissionParameters=getAdditionalTransmissionParameters(), 
-                    mosquitoLifeCycleParameters=getMosquitoLifeCycleParameters()
-                  ){
+  speciesSpecificParameters=getAnGambiaeParameters(), 
+  interventionParameters=getInterventionsParameters(),
+  additionalTransmissionParameters=getAdditionalTransmissionParameters(), 
+  mosquitoLifeCycleParameters=getMosquitoLifeCycleParameters()
+){
   c(
     beta = mosquitoLifeCycleParameters[["beta"]],
     muEL = mosquitoLifeCycleParameters[["muEL"]],
@@ -150,13 +150,17 @@ getAnFunestusParameters = function(){
 #* tau1:    Time spent foraginf for a blood meal at 0% ITN coverage
 #* tau2:    Time spent resting and ovipositing by a mosquito
 #------------------------------------------------------------------------
-getMosquitoLifeCycleParameters = function(){
+getMosquitoLifeCycleParameters = function(
+  beta=21.19,muEL=0.034,muLL=0.035,muPL=0.25,
+  durEL=6.64,durLL=6.64,durPL=0.64,durEV=10,gamma=13.25,
+  tau1=0.68,tau2=2.32
+){
   #. getMosquitoLifeCycleParameters: Returns the list of mosquito life cycle parameters
   c(
-    beta = 21.19,
-    muEL = 0.034, muLL = 0.035, muPL = 0.25,
-    durEL = 6.64, durLL = 3.72, durPL = 0.64, durEV = 10,
-    gamma = 13.25, tau1 = 0.68, tau2 = 2.32
+    beta=beta,
+    muEL=muEL,muLL=muLL,muPL=muPL,
+    durEL=durEL,durLL=durLL,durPL=durPL,durEV=durEV,
+    gamma=gamma,tau1=tau1,tau2=tau2
   )
 }
 ######################################################################################

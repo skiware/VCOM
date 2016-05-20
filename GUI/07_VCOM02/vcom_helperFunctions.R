@@ -65,13 +65,17 @@ getAnFunestusParameters = function(){
   )
 }
 
-getMosquitoLifeCycleParameters = function(){
+getMosquitoLifeCycleParameters = function(
+    beta=21.19,muEL=0.034,muLL=0.035,muPL=0.25,
+    durEL=6.64,durLL=6.64,durPL=0.64,gamma=13.25,
+    tau1=0.68,tau2=2.32
+  ){
   #. getMosquitoLifeCycleParameters: Returns the list of mosquito life cycle parameters
   c(
-    beta = 21.19,
-    muEL = 0.034, muLL = 0.035, muPL = 0.25,
-    durEL = 6.64, durLL = 3.72, durPL = 0.64, durEV = 10,
-    gamma = 13.25, tau1 = 0.68, tau2 = 2.32
+    beta=beta,
+    muEL=muEL,muLL=muLL,muPL=muPL,
+    durEL=durEL,durLL=durLL,durPL=durPL,durEV=durEV,
+    gamma=gamma,tau1=tau1,tau2=tau2
   )
 }
 
@@ -103,16 +107,18 @@ getInterventionsParameters <- function(OVI=0,FOG=0,LAR=0,BIO=0,SRE=0,IRS=0,ITN=0
   }
   return(parms)
 }
-
-getAdditionalTransmissionParameters = function(){
+getAdditionalTransmissionParameters = function(
+    f0=1/3,epsilon0=10/365, 
+    iH_eq=0.35,NH_eq=2000, 
+    bV=0.05 
+  ){
   #. getAdditionalTransmissionParameters: Returns the transmission parameters
   c(
-    f0 = 1/3, epsilon0 = 10/365, 
-    iH_eq = 0.35, NH_eq = 2000, 
-    bV = 0.05
+    f0=f0,epsilon0=epsilon0, 
+    iH_eq=iH_eq,NH_eq=NH_eq, 
+    bV=bV
   )
 }
-
 getTheta = function(
   #. getTheta: Facade function to return theta from selected parameters
   speciesSpecificParameters=getAnGambiaeParameters(), 
