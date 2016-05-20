@@ -52,29 +52,55 @@ plotTrajectory(IVM_traj)
 
 #########################################################################
 ############Binary Sweep Experiment######################################
-binary_tuples <- function(n_tuples){
-  return(expand.grid(rep(list(c(0,1)),n_tuples)))
-}
-for(i in 1:4){
+# binary_tuples <- function(n_tuples){
+#   return(expand.grid(rep(list(c(0,.5,1)),n_tuples)))
+# }
+# tuples = binary_tuples(2)
+# for(i in 1:4){
+#   inter=  c(
+#     OVIcov = 0.0, time_OVI_on = 10,
+#     FOGcov = 0.0, time_FOG_on = 10,
+#     LARcov = 0.0, time_LAR_on = 10,
+#     BIOcov = 0.0, time_BIO_on = 10,
+#     SREcov = 0.0, time_SRE_on = 10,
+#     IRScov = tuples$Var1[i],   time_IRS_on = 10,
+#     ITNcov = tuples$Var2[i],   time_ITN_on = 10,
+#     IVMcov = 0.0, time_IVM_on = 10,
+#     HOUcov = 0.0, time_HOU_on = 10,
+#     ODOcov = 0.0, time_ODO_on = 10,
+#     SPAcov = 0.0, time_SPA_on = 10
+#   )
+#   theta = getTheta(interventionParameters=inter)
+#   initState = calculateInitialState(theta) 
+#   ########### RUN THE IVM ODEs ##########################################
+#   tMax <- 360 # Simulation runs up to 365 days
+#   tIncrement <- 1 #time increment
+#   IVM_traj = runODE(tMax,tIncrement,initState,theta,"lsoda")
+#   write.csv(IVM_traj,paste(tuples$Var1[i],tuples$Var2[i],".csv"))
+# }
+#########################################################################
+############Optimization#################################################
+optimisationInAHurry = function(A,B,C,D,E){
   inter=  c(
     OVIcov = 0.0, time_OVI_on = 10,
     FOGcov = 0.0, time_FOG_on = 10,
-    LARcov = 0.0, time_LAR_on = 10,
-    BIOcov = 0.0, time_BIO_on = 10,
+    LARcov = A,   time_LAR_on = 10,
+    BIOcov = B,   time_BIO_on = 10,
     SREcov = 0.0, time_SRE_on = 10,
-    IRScov = tuples$Var1[i],   time_IRS_on = 10,
-    ITNcov = tuples$Var2[i],   time_ITN_on = 10,
+    IRScov = C,   time_IRS_on = 10,
+    ITNcov = D,   time_ITN_on = 10,
     IVMcov = 0.0, time_IVM_on = 10,
     HOUcov = 0.0, time_HOU_on = 10,
     ODOcov = 0.0, time_ODO_on = 10,
-    SPAcov = 0.0, time_SPA_on = 10
+    SPAcov = 0.0, time_SPA_on = 10,
+    SUGcov = E,   time_SPA_on = 10
   )
   theta = getTheta(interventionParameters=inter)
   initState = calculateInitialState(theta) 
   ########### RUN THE IVM ODEs ##########################################
   tMax <- 360 # Simulation runs up to 365 days
   tIncrement <- 1 #time increment
-  IVM_traj = runODE(tMax,tIncrement,initState,theta,"lsoda")
-  write.csv(IVM_traj,paste(tuples$Var1[i],tuples$Var2[i],".csv"))
+  runODE(tMax,tIncrement,initState,theta,"lsoda")
 }
+optimisationInAHurry(0,0,0,0,0)
 #########################################################################
