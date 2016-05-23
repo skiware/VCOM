@@ -82,54 +82,36 @@ getTheta = function(
 getAnGambiaeParameters = function(){
   #. getAnGambiaeParameters: Returns the list of Anopheles Gambiae specific parameters
   c(
-    muV = 1/7.6, Q0 = 0.92,
-    phiB = 0.89, phiI = 0.97,
-    rOVI = 0.00, sOVI = 0.00,
-    rFOG = 0.00, sFOG = 0.00,
-    rLAR = 0.00, sLAR = 0.00,
-    rBIO = 0.00, sBIO = 0.00,
-    rSRE = 0.00, sSRE = 0.00,
-    rIRS = 0.60, sIRS = 0.00,
-    rITN = 0.56, sITN = 0.03,
-    rIVM = 0.00, sIVM = 0.00,
-    rHOU = 0.00, sHOU = 0.00,
-    rODO = 0.00, sODO = 0.00,
+    muV = 1/7.6, Q0 = 0.92, phiB = 0.89, phiI = 0.97,
+    rOVI = 0.00, sOVI = 0.00, rFOG = 0.00, sFOG = 0.00,
+    rLAR = 0.00, sLAR = 0.00, rBIO = 0.00, sBIO = 0.00,
+    rSRE = 0.00, sSRE = 0.00, rIRS = 0.60, sIRS = 0.00,
+    rITN = 0.56, sITN = 0.03, rIVM = 0.00, sIVM = 0.00,
+    rHOU = 0.00, sHOU = 0.00, rODO = 0.00, sODO = 0.00,
     rSPA = 0.00, sSPA = 0.00
   )
 }
 getAnArabiensisParameters = function(){
   #. getAnArabiensisParameters: Returns the list of Anopheles Arabiensis specific parameters
   c(
-    muV = 1/7.6, Q0 = 0.71,
-    phiB = 0.90, phiI = 0.96,
-    rOVI = 0.00, sOVI = 0.00,
-    rFOG = 0.00, sFOG = 0.00,
-    rLAR = 0.00, sLAR = 0.00,
-    rBIO = 0.00, sBIO = 0.00,
-    rSRE = 0.00, sSRE = 0.00,
-    rIRS = 0.60, sIRS = 0.00,
-    rITN = 0.56, sITN = 0.03,
-    rIVM = 0.00, sIVM = 0.00,
-    rHOU = 0.00, sHOU = 0.00,
-    rODO = 0.00, sODO = 0.00,
+    muV = 1/7.6, Q0 = 0.71, phiB = 0.90, phiI = 0.96,
+    rOVI = 0.00, sOVI = 0.00, rFOG = 0.00, sFOG = 0.00,
+    rLAR = 0.00, sLAR = 0.00, rBIO = 0.00, sBIO = 0.00,
+    rSRE = 0.00, sSRE = 0.00, rIRS = 0.60, sIRS = 0.00,
+    rITN = 0.56, sITN = 0.03, rIVM = 0.00, sIVM = 0.00,
+    rHOU = 0.00, sHOU = 0.00, rODO = 0.00, sODO = 0.00,
     rSPA = 0.00, sSPA = 0.00
   )
 }
 getAnFunestusParameters = function(){
   #. getAnFunestusParameters: Returns the list of Anopheles Funestus specific parameters
   c(
-    muV = 1/8.9, Q0 = 0.94,
-    phiB = 0.90, phiI = 0.98,
-    rOVI = 0.00, sOVI = 0.00,
-    rFOG = 0.00, sFOG = 0.00,
-    rLAR = 0.00, sLAR = 0.00,
-    rBIO = 0.00, sBIO = 0.00,
-    rSRE = 0.00, sSRE = 0.00,
-    rIRS = 0.60, sIRS = 0.00,
-    rITN = 0.56, sITN = 0.03,
-    rIVM = 0.00, sIVM = 0.00,
-    rHOU = 0.00, sHOU = 0.00,
-    rODO = 0.00, sODO = 0.00,
+    muV = 1/8.9, Q0 = 0.94, phiB = 0.90, phiI = 0.98,
+    rOVI = 0.00, sOVI = 0.00, rFOG = 0.00, sFOG = 0.00,
+    rLAR = 0.00, sLAR = 0.00, rBIO = 0.00, sBIO = 0.00,
+    rSRE = 0.00, sSRE = 0.00, rIRS = 0.60, sIRS = 0.00,
+    rITN = 0.56, sITN = 0.03, rIVM = 0.00, sIVM = 0.00,
+    rHOU = 0.00, sHOU = 0.00, rODO = 0.00, sODO = 0.00,
     rSPA = 0.00, sSPA = 0.00
   )
 }
