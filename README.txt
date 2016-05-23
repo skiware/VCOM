@@ -1,9 +1,7 @@
-README--------------	
+-*-*-*-*-*-*-*-README-*-*-*-*-*-*-*-*-*-*-*-*-*-*-	
 Rise and shine Mr. Freeman. Rise and shine...
 
-
-
-Parameters--------------	
+-*-*-*-*-*-*-*-PARAMETERS-*-*-*-*-*-*-*-*-*-*-*-*-	
 OVIcov	 Ovitraps coverage
 time_OVI_on	 When Ovitraps are applied (days)
 FOGcov	 Fogging coverage
@@ -70,7 +68,7 @@ iH_eq	 Equilibrium malaria prevalence in humans
 NH_eq	 Equilibrium human population size
 bV	 Probability of transmission from human to vector per infectious bite
 
-Functions--------------	
+-*-*-*-*-*-*-*-FUNCTIONS-*-*-*-*-*-*-*-*-*-*-*-*-*	
 plotTrajectory	 Plots the evolution of the dynamics of the system
 barChartMosquitoDemographics	 Generates a bar chart with the amount of mosquitos in each life stage
 parseImportedCSVParameters	 Once a csv file has been imported this function converts the data into a theta object
