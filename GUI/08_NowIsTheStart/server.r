@@ -16,20 +16,20 @@ library(shiny)
 ###############################################################################  
 mosquitoParametersTable=read.csv("Documentation/ODEMosquitoParameters.csv",header=FALSE)
 controlMeasuresParametersTable=read.csv("Documentation/ODEControlMeasuresParameters.csv",header=FALSE)
-mosquitoParametersTable = read.csv("Documentation/ODEMosquitoParameters.csv",header=FALSE)
-transmissionParametersTable = read.csv("Documentation/ODETransmissionParameters.csv",header=FALSE)
+mosquitoParametersTable=read.csv("Documentation/ODEMosquitoParameters.csv",header=FALSE)
+transmissionParametersTable=read.csv("Documentation/ODETransmissionParameters.csv",header=FALSE)
 #---# MAIN SHINY SERVER APPLICATION ###########################################
 shinyServer(
   function(input,output,session){
   #############################################################################
   # PRIMING GUI ###############################################################  
-  output$plotTrajectory = renderPlot({plotTrajectory(IVM_traj)})
-  output$IVM_Runtime = renderTable(IVM_traj)
+  output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
+  output$IVM_Runtime=renderTable(IVM_traj)
   #############################################################################
   # PARAMETER TABLES ##########################################################
-  output$mosquitoParametersTable = renderDataTable(mosquitoParametersTable,options=list(searching=FALSE,paging = FALSE))
-  output$controlMeasuresParametersTable = renderDataTable(controlMeasuresParametersTable,options=list(searching=FALSE,paging = FALSE))
-  output$transmissionParametersTable = renderDataTable(transmissionParametersTable,options=list(searching=FALSE,paging = FALSE))
+  output$mosquitoParametersTable=renderDataTable(mosquitoParametersTable,options=list(searching=FALSE,paging = FALSE))
+  output$controlMeasuresParametersTable=renderDataTable(controlMeasuresParametersTable,options=list(searching=FALSE,paging = FALSE))
+  output$transmissionParametersTable=renderDataTable(transmissionParametersTable,options=list(searching=FALSE,paging = FALSE))
   #############################################################################
   # CLICK EVENTS ##############################################################
   observeEvent(input$buttonTest,{
@@ -39,10 +39,10 @@ shinyServer(
     cat("Radio event!\n")
     #print(theta[["time_IRS_on"]])
     theta <<- switch(input$radioSpecies,
-      "GAM" = getTheta(speciesSpecificParameters=getAnGambiaeParameters()),#getTheta(parseImportedCSVParameters(TEMPLATE_AN_GAMBIAE)),
-      "ARA" = getTheta(speciesSpecificParameters=getAnArabiensisParameters()),#getTheta(parseImportedCSVParameters(TEMPLATE_AN_ARABIENSIS)),
-      "FUN" = getTheta(speciesSpecificParameters=getAnFunestusParameters()),#getTheta(parseImportedCSVParameters(TEMPLATE_AN_FUNESTUS))
-      "USD" = getTheta()
+      "GAM"=getTheta(speciesSpecificParameters=getAnGambiaeParameters()),#getTheta(parseImportedCSVParameters(TEMPLATE_AN_GAMBIAE)),
+      "ARA"=getTheta(speciesSpecificParameters=getAnArabiensisParameters()),#getTheta(parseImportedCSVParameters(TEMPLATE_AN_ARABIENSIS)),
+      "FUN"=getTheta(speciesSpecificParameters=getAnFunestusParameters()),#getTheta(parseImportedCSVParameters(TEMPLATE_AN_FUNESTUS))
+      "USD"=getTheta()
     )
     print(theta)
     #print(initState)
@@ -97,12 +97,20 @@ shinyServer(
   )
   output$downloadTemplate <- downloadHandler(
     filename <- function(){paste("VCOM_SimSetupFile","xls",sep=".")},
-    content <- function(file){file.copy("SETUP_MosquitoLifeCycleParameters.xls",file)}
+    content <- function(file){file.copy("SetupTemplates/SETUP_MosquitoLifeCycleParameters.xls",file)}
   )
   output$downloadTrace <- downloadHandler(
     filename <- function(){paste("VCOM_Trace","csv",sep=".")},
     content <- function(file){
       write.csv(IVM_traj,file)
+    }
+  )
+  output$downloadPlot <- downloadHandler(
+    filename = function(){paste(input$dataset, 'TrajectoryPlot', sep='')},
+    #filename = function(){paste(input$dataset, input$radioFormat, sep='')},
+    content = function(file) {
+      device <- function(...,width,height){grDevices::png(...,width=width,height=height,res=300,units="in")}
+      ggsave(file, plot = plotTrajectory(IVM_traj), device = device)
     }
   )
   #############################################################################

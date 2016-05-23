@@ -21,11 +21,11 @@ source("ODEAuxiliaryFunctions.R")
 source("ODEControlMeasuresParameters.R")
 source("ODETransmissionParameters.R")
 ################################################################################
-BOXES_WIDTH<<-"75px"
+BOXES_WIDTH <<- "75px"
 # Theta from code----------------------------------
 #initialTheta <<- getTheta()
 # Theta from setup CSV----------------------------- 
-initialParametersValues<<-importCSVParametersFromDirectory("SetupTemplates/SETUP_MosquitoLifeCycleParameters.csv")
+initialParametersValues <<- importCSVParametersFromDirectory("SetupTemplates/SETUP_MosquitoLifeCycleParameters.csv")
 #print(initialParametersValues)
 theta <<- parseImportedCSVParameters(initialParametersValues)
 initState <<- calculateInitialState(theta)
@@ -52,7 +52,7 @@ shinyUI(
                  "An. arabiensis"="ARA",
                  "An. funestus"="FUN",
                  "User-Defined"="USD"
-               ),selected="ARA"),
+            ),selected="ARA"),
             sliderInput("sliderTime","Days to Simulate:",min=1,max=365,value=80),
             checkboxGroupInput("checkboxesControlMeasures", "Control Measures:",
               c(
@@ -223,10 +223,20 @@ shinyUI(
         helpText("Select a CSV/XLS file to load the parameters set for the desired scenario. If it is the first time you are 
           using this option a good starting point is to download the 'CSV Parameters Template' and modify it."),
         titlePanel(h1("Export and Download",align="left")),
-        downloadButton("downloadTemplate", 'Download CSV Parameters Template'),
-        downloadButton("downloadParameters", 'Download CSV Parameters'),
-        downloadButton("downloadTrace", 'Download CSV Trace'),
-        #downloadButton("downloadPlot", 'Download Plot'),
+        fluidRow( 
+          column(4,align="center",
+           titlePanel(h3("Parameters Files",align="center")), 
+           downloadButton("downloadTemplate", 'Download CSV Parameters Template'),
+           downloadButton("downloadParameters", 'Download CSV Parameters'),
+           downloadButton("downloadTrace", 'Download CSV Trace')
+          ),
+          column(4,""),
+          column(4,align="center",
+            titlePanel(h3("Plots",align="center")), 
+            #radioButtons("radioFormat",label=h4("Plot Format"),choices=list("JPG"=".jpg","PNG"=".png"),selected="PNG"),
+            downloadButton("downloadPlot", 'Download Trajectory Plot')
+          )
+        ),
         titlePanel(h1("Debugging and Other Super Fun Stuff",align="left")),
         tableOutput("contentsCSV"),
         tableOutput("contentsXLS"),
