@@ -78,10 +78,11 @@ shinyServer(
   output$contents <- renderTable({
     inFile <- input$fileImport
     if(is.null(inFile)){return(NULL)}
-    importedFile=importCSVXLSParametersFromDirectoryShiny(inFile$datapath,input$fileImport[["type"]])
+    importedFile<<-importCSVXLSParametersFromDirectoryShiny(inFile$datapath,input$fileImport[["type"]])
     #theta<<-getTheta(parseImportedCSVParameters(importedFile))
+    theta<<-parseImportedCSVParameters(importedFile)
     #print(theta)
-    #importedFile
+    importedFile
   })
   #############################################################################
   # DOWNLOADS HANDLERS ########################################################

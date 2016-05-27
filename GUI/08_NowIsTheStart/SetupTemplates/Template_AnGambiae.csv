@@ -49,7 +49,7 @@ time_BIO_on,0, When Biological Control is applied (days)
 SREcov,0, Source Reduction coverage
 time_SRE_on,0, When Source Reduction is applied (days)
 IRScov,.5, IRS coverage
-time_IRS_cov,70, When IRSs are applied (days)
+time_IRS_on,70, When IRSs are applied (days)
 ITNcov,0, ITN coverage
 time_ITN_on,0, When ITNs are applied (days)
 IVMcov,0, Ivermectin coverage

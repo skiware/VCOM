@@ -46,14 +46,7 @@ calculateInitialState = function(theta){
   EV_eq <- eV_eq*NV_eq
   IV_eq <- iV_eq*NV_eq
   
-  initState <- c(
-    EL = EL_eq,
-    LL = LL_eq,
-    PL = PL_eq, 
-    SV = SV_eq, 
-    EV = EV_eq, 
-    IV = IV_eq
-  )
+  initState <- c(EL = EL_eq,LL = LL_eq,PL = PL_eq,SV = SV_eq,EV = EV_eq,IV = IV_eq)
   
   return(initState)
 }

@@ -21,6 +21,7 @@ source("ODEAuxiliaryFunctions.R")
 source("ODEControlMeasuresParameters.R")
 source("ODETransmissionParameters.R")
 ################################################################################
+importedFile = NULL
 BOXES_WIDTH <<- "75px"
 # Theta from code----------------------------------
 #initialTheta <<- getTheta()
