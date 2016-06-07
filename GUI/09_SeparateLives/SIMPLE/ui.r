@@ -122,6 +122,8 @@ shinyUI(
             downloadButton("downloadParameters", 'Download CSV Parameters'),
             fluidRow(h4("")),
             downloadButton("downloadTrace", 'Download CSV Trace'),
+            fluidRow(h4("")),
+            downloadButton("downloadPlot", 'Download Trajectory Plot'),
             helpText("If you want to modify the species or simulation's parameters go to the corresponding tab. If 
               you're just looking for fun hit the 'Run Model'  button"
             )
@@ -131,7 +133,6 @@ shinyUI(
             plotOutput("plotDemographics")
           )
         ),
-        #tableOutput("IVM_Runtime"),
         p("Cite as: VCOM!!! The coolest model ever!!!")
     )
   )
