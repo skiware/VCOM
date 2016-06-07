@@ -1,24 +1,13 @@
-#------------------------------------------------------------------------------#
-################################################################################
-## Malaria vector ODE model GUI                                               ##
-## Hector M. Sanchez C. (sanchez.hmsc@itesm.mx)                               ##
-## 02/May/2016                                                                ##
-################################################################################
-#------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------##
+#################################################################################
+## Hector M. Sanchez C. (sanchez.hmsc@itesm.mx)                               ###
+## Malaria vector ODE model GUI                                               ###
+## 02/May/2016                                                                ###
+#################################################################################
+#------------------------------------------------------------------------------##
 
-###############################################################################
-#LOAD LIBRARIES AND FILES
-###############################################################################
-library(shiny)
-###############################################################################
-#---# RUN WHEN THE APP IS LAUNCHED ############################################
-#BOXES_WIDTH <<- "100px" 
-###############################################################################  
-mosquitoParametersTable=read.csv("Documentation/ODEMosquitoParameters.csv",header=FALSE)
-controlMeasuresParametersTable=read.csv("Documentation/ODEControlMeasuresParameters.csv",header=FALSE)
-mosquitoParametersTable=read.csv("Documentation/ODEMosquitoParameters.csv",header=FALSE)
-transmissionParametersTable=read.csv("Documentation/ODETransmissionParameters.csv",header=FALSE)
-#---# MAIN SHINY SERVER APPLICATION ###########################################
+#################################################################################
+#---# MAIN SHINY SERVER APPLICATION #############################################
 shinyServer(
   function(input,output,session){
     #############################################################################
@@ -37,29 +26,29 @@ shinyServer(
     })
     observeEvent(input$radioSpecies,{
       cat("Radio event!\n")
-      #print(theta[["time_IRS_on"]])
       theta <<- switch(input$radioSpecies,
-        "GAM"=getTheta(speciesSpecificParameters=getAnGambiaeParameters()),#getTheta(parseImportedCSVParameters(TEMPLATE_AN_GAMBIAE)),
-        "ARA"=getTheta(speciesSpecificParameters=getAnArabiensisParameters()),#getTheta(parseImportedCSVParameters(TEMPLATE_AN_ARABIENSIS)),
-        "FUN"=getTheta(speciesSpecificParameters=getAnFunestusParameters())#getTheta(parseImportedCSVParameters(TEMPLATE_AN_FUNESTUS))
+        "GAM"=getTheta(speciesSpecificParameters=getAnGambiaeParameters()),
+        "ARA"=getTheta(speciesSpecificParameters=getAnArabiensisParameters()),
+        "FUN"=getTheta(speciesSpecificParameters=getAnFunestusParameters())
       )
       print(theta)
-      #print(initState)
     })  
     observeEvent(input$sliderTime,{
       cat("Slider event!\n")
     })
-    #################INTERVENTIONS_EVENTS##################################
+    #############################################################################
+    # INTERVENTIONS_EVENTS ######################################################
     observeEvent(input$OVIcov|input$FOGcov|input$LARcov|input$BIOcov|input$SREcov|input$ITNcov|input$IRScov|input$IVMcov|input$HOUcov|input$ODOcov|input$SREcov
       #input$time_OVI_on|input$time_FOG_on|input$time_LAR_on|input$time_BIO_on|input$time_SRE_on|input$time_ITN_on|input$time_IRS_on|input$time_IVM_on|input$time_HOU_on|input$time_ODO_on|input$time_SRE_on
       ,{
         cat("Coverage Slider Event!\n")
     })
-#     observeEvent(input$time_OVI_on|input$time_LAR_on#|input$time_LAR_on|input$time_BIO_on|input$time_SRE_on|input$time_ITN_on|input$time_IRS_on|input$time_IVM_on|input$time_HOU_on|input$time_ODO_on|input$time_SRE_on
-#       ,{
-#         cat("Coverage Text Event!\n")
-#     })
-    #######################################################################
+    #observeEvent(input$time_OVI_on|input$time_LAR_on#|input$time_LAR_on|input$time_BIO_on|input$time_SRE_on|input$time_ITN_on|input$time_IRS_on|input$time_IVM_on|input$time_HOU_on|input$time_ODO_on|input$time_SRE_on
+    #  ,{
+    #    cat("Coverage Text Event!\n")
+    #})
+    #############################################################################
+    # RUN MODEL #################################################################
     observeEvent(input$buttonRun,{
       cat("Button event!\n")
       print(theta)
@@ -68,28 +57,6 @@ shinyServer(
       output$IVM_Runtime = renderTable(IVM_traj)
       output$plotDemographics = renderPlot({barChartMosquitoDemographics(IVM_traj)})
       output$plotTrajectory = renderPlot({plotTrajectory(IVM_traj)})
-      #print(IVM_traj)
-    })
-    #############################################################################
-    # IMPORT FILES EVENT HANDLERS ###############################################
-    #   output$contentsCSV <- renderTable({
-    #     inFile <- input$csvImport
-    #     if(is.null(inFile)){return(NULL)}
-    #     importCSVParametersFromDirectory(inFile$datapath)
-    #   })
-    #   output$contentsXLS <- renderTable({
-    #     inFile <- input$xlsImport
-    #     if(is.null(inFile)){return(NULL)}
-    #     importXLSParametersFromDirectory(inFile$datapath)
-    #   })
-    output$contents <- renderTable({
-      inFile <- input$fileImport
-      if(is.null(inFile)){return(NULL)}
-      importedFile<<-importCSVXLSParametersFromDirectoryShiny(inFile$datapath,input$fileImport[["type"]])
-      theta<<-parseImportedCSVParameters(importedFile)
-      print(theta)
-      #updateRadioButtons(session, "radioSpecies", selected="USD")
-      importedFile
     })
     #############################################################################
     # DOWNLOADS HANDLERS ########################################################
@@ -101,7 +68,6 @@ shinyServer(
         df$Description = 0
         names(df) = c("Value","Description")
         write.csv(df,file)
-        #write.csv(cbind(theta,NewColumn=0),file)
       }
     )
     output$downloadTemplate <- downloadHandler(
@@ -116,12 +82,11 @@ shinyServer(
     )
     output$downloadPlot <- downloadHandler(
       filename = function(){paste(input$dataset, 'TrajectoryPlot', sep='')},
-      #filename = function(){paste(input$dataset, input$radioFormat, sep='')},
-      content = function(file) {
+      content = function(file){
         device <- function(...,width,height){grDevices::png(...,width=width,height=height,res=300,units="in")}
         ggsave(file, plot = plotTrajectory(IVM_traj), device = device)
       }
     )
     #############################################################################
   })
-#---###########################################################################
+#---#############################################################################

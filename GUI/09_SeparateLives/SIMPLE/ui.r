@@ -12,34 +12,28 @@
 library(shiny)
 library(deSolve)
 library(ggplot2)
-library(XLConnect)
-#library(XML)
-#library(kulife)
 source("ODEModel.R")
 source("ODEMosquitoParameters.R")
 source("ODEAuxiliaryFunctions.R")
 source("ODEControlMeasuresParameters.R")
 source("ODETransmissionParameters.R")
 ################################################################################
+# GLOBAL GUI PARAMETERS ########################################################
 importedFile = NULL
 BOXES_WIDTH <<- "75px"
 COVERAGE_STEP_SIZE = .025
 COVERAGE_LABELS_SIZE = 4
 COVERAGE_BAR_SIZE = 5
 COVERAGE_INIT_SIZE = 3
-# Theta from code----------------------------------
-#initialTheta <<- getTheta()
-# Theta from setup CSV----------------------------- 
-initialParametersValues <<- importCSVParametersFromDirectory("SetupTemplates/SETUP_MosquitoLifeCycleParameters.csv")
-#print(initialParametersValues)
-theta <<- parseImportedCSVParameters(initialParametersValues)
-initState <<- calculateInitialState(theta)
-IVM_traj <<- runODE(80,1,initState,theta,"lsoda") 
-#print(theta)
+INITIAL_TIME_VALUE = 80
 ################################################################################
-TEMPLATE_AN_ARABIENSIS<<-importCSVParametersFromDirectory("SetupTemplates/Template_AnArabiensis.csv")
-TEMPLATE_AN_FUNESTUS<<-importCSVParametersFromDirectory("SetupTemplates/Template_AnFunestus.csv")
-TEMPLATE_AN_GAMBIAE<<-importCSVParametersFromDirectory("SetupTemplates/Template_AnGambiae.csv")
+# PRIME SYSTEM  ################################################################
+theta <<- getTheta()
+#initialParametersValues <<- importCSVParametersFromDirectory("SetupTemplates/SETUP_MosquitoLifeCycleParameters.csv")
+#theta <<- parseImportedCSVParameters(initialParametersValues)
+# MODEL -------------------------------------
+initState <<- calculateInitialState(theta)
+IVM_traj <<- runODE(INITIAL_TIME_VALUE,1,initState,theta,"lsoda") 
 ################################################################################
 shinyUI(
   fluidPage(theme = "bootstrapSpace.css",
@@ -57,7 +51,7 @@ shinyUI(
                  "An. gambiae"="GAM",
                  "An. arabiensis"="ARA",
                  "An. funestus"="FUN"
-            ),selected="ARA"),
+            ),selected="GAM"),
             #####################################################################
             fluidRow(h3("Simulation Time")),
             sliderInput("sliderTime","Days to Simulate:",min=1,max=365,value=80),
@@ -139,37 +133,6 @@ shinyUI(
         ),
         #tableOutput("IVM_Runtime"),
         p("Cite as: VCOM!!! The coolest model ever!!!")
-      #),
-      #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
-      #tabPanel("Files Output",
-#         helpText("Select a CSV/XLS file to load the parameters set for the desired scenario. If it is the first time you are 
-#           using this option a good starting point is to download the 'CSV Parameters Template' and modify it."),
-#         titlePanel(h1("Export and Download",align="left")),
-#         fluidRow( 
-#           column(4,align="center",
-#            titlePanel(h3("Parameters Files",align="center")), 
-#            downloadButton("downloadTemplate", 'Download CSV Parameters Template'),
-#            downloadButton("downloadParameters", 'Download CSV Parameters'),
-#            downloadButton("downloadTrace", 'Download CSV Trace')
-#           ),
-#           column(4,""),
-#           column(4,align="center",
-#             titlePanel(h3("Plots",align="center")), 
-#             #radioButtons("radioFormat",label=h4("Plot Format"),choices=list("JPG"=".jpg","PNG"=".png"),selected="PNG"),
-#             downloadButton("downloadPlot", 'Download Trajectory Plot')
-#           )
-#         ),
-#         titlePanel(h1("Debugging and Other Super Fun Stuff",align="left")),
-#         tableOutput("contentsCSV"),
-#         tableOutput("contentsXLS"),
-#         tableOutput("contents")
-#       ),
-      #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
-      #tabPanel("Runtime Data",
-      #  titlePanel("Runtime data"),
-        
-      #)
-      ###########################################################################
     )
   )
 )
