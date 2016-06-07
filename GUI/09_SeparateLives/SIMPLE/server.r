@@ -41,18 +41,25 @@ shinyServer(
       theta <<- switch(input$radioSpecies,
         "GAM"=getTheta(speciesSpecificParameters=getAnGambiaeParameters()),#getTheta(parseImportedCSVParameters(TEMPLATE_AN_GAMBIAE)),
         "ARA"=getTheta(speciesSpecificParameters=getAnArabiensisParameters()),#getTheta(parseImportedCSVParameters(TEMPLATE_AN_ARABIENSIS)),
-        "FUN"=getTheta(speciesSpecificParameters=getAnFunestusParameters()),#getTheta(parseImportedCSVParameters(TEMPLATE_AN_FUNESTUS))
-        "USD"=theta#getTheta()
+        "FUN"=getTheta(speciesSpecificParameters=getAnFunestusParameters())#getTheta(parseImportedCSVParameters(TEMPLATE_AN_FUNESTUS))
       )
       print(theta)
       #print(initState)
     })  
-    observeEvent(input$checkboxesControlMeasures,{
-      cat("Checkbox event!\n")
-    })
     observeEvent(input$sliderTime,{
       cat("Slider event!\n")
     })
+    #################INTERVENTIONS_EVENTS##################################
+    observeEvent(input$OVIcov|input$FOGcov|input$LARcov|input$BIOcov|input$SREcov|input$ITNcov|input$IRScov|input$IVMcov|input$HOUcov|input$ODOcov|input$SREcov
+      #input$time_OVI_on|input$time_FOG_on|input$time_LAR_on|input$time_BIO_on|input$time_SRE_on|input$time_ITN_on|input$time_IRS_on|input$time_IVM_on|input$time_HOU_on|input$time_ODO_on|input$time_SRE_on
+      ,{
+        cat("Coverage Slider Event!\n")
+    })
+#     observeEvent(input$time_OVI_on|input$time_LAR_on#|input$time_LAR_on|input$time_BIO_on|input$time_SRE_on|input$time_ITN_on|input$time_IRS_on|input$time_IVM_on|input$time_HOU_on|input$time_ODO_on|input$time_SRE_on
+#       ,{
+#         cat("Coverage Text Event!\n")
+#     })
+    #######################################################################
     observeEvent(input$buttonRun,{
       cat("Button event!\n")
       print(theta)
