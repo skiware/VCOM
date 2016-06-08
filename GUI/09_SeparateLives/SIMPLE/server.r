@@ -40,10 +40,11 @@ shinyServer(
         "FUN"=getAnFunestusParameters()
       )
       INTERVENTION_PARAMETERS <<- getInterventionsParameters(
-        OVIcov=input$OVIcov,FOGcov=input$FOGcov,LARcov=input$LARcov,
-        BIOcov=input$BIOcov,SREcov=input$SREcov,ITNcov=input$ITNcov,
-        IRScov=input$IRScov,IVMcov=input$IVMcov,HOUcov=input$HOUcov,
-        ODOcov=input$ODOcov,SPAcov=input$SPAcov
+        OVIcov=input$OVIcov,FOGcov=input$FOGcov,LARcov=input$LARcov,BIOcov=input$BIOcov,SREcov=input$SREcov,ITNcov=input$ITNcov,
+        IRScov=input$IRScov,IVMcov=input$IVMcov,HOUcov=input$HOUcov,ODOcov=input$ODOcov,SPAcov=input$SPAcov,
+        time_OVI_on=input$time_OVI_on,time_FOG_on=input$time_FOG_on,time_LAR_on=input$time_LAR_on,time_BIO_on=input$time_BIO_on,
+        time_SRE_on=input$time_SRE_on,time_ITN_on=input$time_ITN_on,time_IRS_on=input$time_IRS_on,time_IVM_on=input$time_IVM_on,
+        time_HOU_on=input$time_HOU_on,time_ODO_on=input$time_ODO_on,time_SPA_on=input$time_SPA_on
       )
       theta <<- getTheta(
         speciesSpecificParameters=MOSQUITO_PARAMETERS,
