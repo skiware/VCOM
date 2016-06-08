@@ -28,6 +28,8 @@ COVERAGE_INIT_SIZE = 3
 INITIAL_TIME_VALUE = 80
 ################################################################################
 # PRIME SYSTEM  ################################################################
+MOSQUITO_PARAMETERS = getAnGambiaeParameters()
+INTERVENTION_PARAMETERS = getInterventionsParameters()
 theta <<- getTheta()
 #initialParametersValues <<- importCSVParametersFromDirectory("SetupTemplates/SETUP_MosquitoLifeCycleParameters.csv")
 #theta <<- parseImportedCSVParameters(initialParametersValues)
@@ -63,57 +65,57 @@ shinyUI(
               column(COVERAGE_INIT_SIZE,h4("Time",align="center"))
             ),
             fluidRow(
-              column(COVERAGE_LABELS_SIZE,h5("Ovitraps",align="left")),
+              column(COVERAGE_LABELS_SIZE,h5("OVI",align="left")),
               column(COVERAGE_BAR_SIZE,sliderInput("OVIcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
               column(COVERAGE_INIT_SIZE,textInput("time_OVI_on",NULL,value = 0))
             ),
             fluidRow(
-              column(COVERAGE_LABELS_SIZE,h5("Fogging",align="left")),
+              column(COVERAGE_LABELS_SIZE,h5("FOG",align="left")),
               column(COVERAGE_BAR_SIZE,sliderInput("FOGcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
               column(COVERAGE_INIT_SIZE,textInput("time_FOG_on",NULL,value = 0))
             ),
             fluidRow(
-              column(COVERAGE_LABELS_SIZE,h5("Larvaciding",align="left")),
+              column(COVERAGE_LABELS_SIZE,h5("LAR",align="left")),
               column(COVERAGE_BAR_SIZE,sliderInput("LARcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
               column(COVERAGE_INIT_SIZE,textInput("time_LAR_on",NULL,value = 0))
             ),
             fluidRow(
-              column(COVERAGE_LABELS_SIZE,h5("Bio Control",align="left")),
+              column(COVERAGE_LABELS_SIZE,h5("BIO",align="left")),
               column(COVERAGE_BAR_SIZE,sliderInput("BIOcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
               column(COVERAGE_INIT_SIZE,textInput("time_OVI_on",NULL,value = 0))
             ),
             fluidRow(
-              column(COVERAGE_LABELS_SIZE,h5("Source Reduction",align="left")),
+              column(COVERAGE_LABELS_SIZE,h5("SRE",align="left")),
               column(COVERAGE_BAR_SIZE,sliderInput("SREcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
               column(COVERAGE_INIT_SIZE,textInput("time_SRE_on",NULL,value = 0))
             ),
             fluidRow(
-              column(COVERAGE_LABELS_SIZE,h5("Insecticide Nets",align="left")),
+              column(COVERAGE_LABELS_SIZE,h5("ITN",align="left")),
               column(COVERAGE_BAR_SIZE,sliderInput("ITNcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
               column(COVERAGE_INIT_SIZE,textInput("time_ITN_on",NULL,value = 0))
             ),
             fluidRow(
-              column(COVERAGE_LABELS_SIZE,h5("Indoor Spraying",align="left")),
+              column(COVERAGE_LABELS_SIZE,h5("IRS",align="left")),
               column(COVERAGE_BAR_SIZE,sliderInput("IRScov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
               column(COVERAGE_INIT_SIZE,textInput("time_IRS_on",NULL,value = 0))
             ),
             fluidRow(
-              column(COVERAGE_LABELS_SIZE,h5("Ivermectin",align="left")),
+              column(COVERAGE_LABELS_SIZE,h5("IVM",align="left")),
               column(COVERAGE_BAR_SIZE,sliderInput("IVMcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
               column(COVERAGE_INIT_SIZE,textInput("time_IVM_on",NULL,value = 0))
             ),
             fluidRow(
-              column(COVERAGE_LABELS_SIZE,h5("House Modification",align="left")),
+              column(COVERAGE_LABELS_SIZE,h5("HOU",align="left")),
               column(COVERAGE_BAR_SIZE,sliderInput("HOUcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
               column(COVERAGE_INIT_SIZE,textInput("time_HOU_on",NULL,value = 0))
             ),
             fluidRow(
-              column(COVERAGE_LABELS_SIZE,h5("Odor Traps",align="left")),
+              column(COVERAGE_LABELS_SIZE,h5("ODO",align="left")),
               column(COVERAGE_BAR_SIZE,sliderInput("ODOcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
               column(COVERAGE_INIT_SIZE,textInput("time_ODO_on",NULL,value = 0))
             ),
             fluidRow(
-              column(COVERAGE_LABELS_SIZE,h5("Spatial Repellents",align="left")),
+              column(COVERAGE_LABELS_SIZE,h5("SPA",align="left")),
               column(COVERAGE_BAR_SIZE,sliderInput("SPAcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
               column(COVERAGE_INIT_SIZE,textInput("time_SPA_on",NULL,value = 0))
             ),
@@ -124,8 +126,8 @@ shinyUI(
             downloadButton("downloadTrace", 'Download CSV Trace'),
             fluidRow(h4("")),
             downloadButton("downloadPlot", 'Download Trajectory Plot'),
-            helpText("If you want to modify the species or simulation's parameters go to the corresponding tab. If 
-              you're just looking for fun hit the 'Run Model'  button"
+            helpText("If you want to modify the species or simulation's parameters go to the corresponding tab. 
+              If you're just looking for fun hit the 'Run Model'  button"
             )
           ),
           mainPanel(

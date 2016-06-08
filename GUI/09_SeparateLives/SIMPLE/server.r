@@ -21,23 +21,36 @@ shinyServer(
     })
     observeEvent(input$radioSpecies,{
       cat("Radio event!\n")
-      MOSQUITO_PARAMETERS <<- switch(input$radioSpecies,
-        "GAM"=getAnGambiaeParameters(),
-        "ARA"=getAnArabiensisParameters(),
-        "FUN"=getAnFunestusParameters()
-      )
+
     })  
     observeEvent(input$sliderTime,{cat("Slider event!\n")})
     #############################################################################
     # INTERVENTIONS_EVENTS ######################################################
-    observeEvent(input$OVIcov|input$FOGcov|input$LARcov|input$BIOcov|input$SREcov|input$ITNcov|input$IRScov|input$IVMcov|input$HOUcov|input$ODOcov|input$SREcov,{
+    observeEvent(input$OVIcov|input$FOGcov|input$LARcov|input$BIOcov|input$SREcov|input$ITNcov|input$IRScov|input$IVMcov|input$HOUcov|input$ODOcov|input$SPAcov,{
         cat("Coverage Slider Event!\n")
     })
     #############################################################################
     # RUN MODEL #################################################################
     observeEvent(input$buttonRun,{
-      cat("Button event!\n")
-      theta <<- getTheta(speciesSpecificParameters=MOSQUITO_PARAMETERS)
+      cat("Run button event!\n")
+      # CALCULATE THETA ---------------------------------------------------------
+      MOSQUITO_PARAMETERS <<- switch(input$radioSpecies,
+        "GAM"=getAnGambiaeParameters(),
+        "ARA"=getAnArabiensisParameters(),
+        "FUN"=getAnFunestusParameters()
+      )
+      INTERVENTION_PARAMETERS <<- getInterventionsParameters(
+        OVIcov=input$OVIcov,FOGcov=input$FOGcov,LARcov=input$LARcov,
+        BIOcov=input$BIOcov,SREcov=input$SREcov,ITNcov=input$ITNcov,
+        IRScov=input$IRScov,IVMcov=input$IVMcov,HOUcov=input$HOUcov,
+        ODOcov=input$ODOcov,SPAcov=input$SPAcov
+      )
+      theta <<- getTheta(
+        speciesSpecificParameters=MOSQUITO_PARAMETERS,
+        interventionParameters=INTERVENTION_PARAMETERS
+      )
+      #--------------------------------------------------------------------------
+      print(INTERVENTION_PARAMETERS)
       initState = calculateInitialState(theta)
       IVM_traj <<- runODE(input$sliderTime,1,initState,theta,"lsoda")
       output$plotDemographics = renderPlot({barChartMosquitoDemographics(IVM_traj)})

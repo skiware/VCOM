@@ -34,17 +34,17 @@
 #* time_SPA_on:   When Space Repellents are applied (days)
 #------------------------------------------------------------------------
 getInterventionsParameters = function(
-  OVIcov=0,time_OVI_on=0,
-  FOGcov=0,time_FOG_on=0,
-  LARcov=0,time_LAR_on=0,
-  BIOcov=0,time_BIO_on=0,
-  SREcov=0,time_SRE_on=0,
-  IRScov=0,time_IRS_on=0,
-  ITNcov=.5,time_ITN_on=20,
-  IVMcov=0,time_IVM_on=0,
-  HOUcov=0,time_HOU_on=0,
-  ODOcov=0,time_ODO_on=0,
-  SPAcov=0,time_SPA_on=0
+  OVIcov=0,   time_OVI_on=0,
+  FOGcov=0,   time_FOG_on=0,
+  LARcov=0,   time_LAR_on=0,
+  BIOcov=0,   time_BIO_on=0,
+  SREcov=0,   time_SRE_on=0,
+  IRScov=0,   time_IRS_on=0,
+  ITNcov=.5,  time_ITN_on=20,
+  IVMcov=0,   time_IVM_on=0,
+  HOUcov=0,   time_HOU_on=0,
+  ODOcov=0,   time_ODO_on=0,
+  SPAcov=0,   time_SPA_on=0
 ){
   #. getInterventionsParameters: Returns the list of intervention parameters
   # (SK) and the time that a particular intervention is on
