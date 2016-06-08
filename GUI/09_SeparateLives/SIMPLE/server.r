@@ -52,20 +52,19 @@ shinyServer(
       )
       #--------------------------------------------------------------------------
       print(INTERVENTION_PARAMETERS)
-      initState = calculateInitialState(theta)
-      IVM_traj <<- runODE(input$sliderTime,1,initState,theta,"lsoda")
-      output$plotDemographics = renderPlot({barChartMosquitoDemographics(IVM_traj)})
-      output$plotTrajectory = renderPlot({plotTrajectory(IVM_traj)})
+      initState=calculateInitialState(theta)
+      IVM_traj<<-runODE(input$sliderTime,1,initState,theta,"lsoda")
+      output$plotDemographics=renderPlot({barChartMosquitoDemographics(IVM_traj)})
+      output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     })
     #############################################################################
     # DOWNLOADS HANDLERS ########################################################
     output$downloadParameters <- downloadHandler(
       filename <- function(){paste("VCOM_Parameters","csv",sep=".")},
       content <- function(file){
-        print(theta)
         df=data.frame(theta)
-        df$Description = 0
-        names(df) = c("Value","Description")
+        df$Description=0
+        names(df)=c("Value","Description")
         write.csv(df,file)
       }
     )
@@ -76,10 +75,10 @@ shinyServer(
       }
     )
     output$downloadPlot <- downloadHandler(
-      filename = function(){paste(input$dataset, 'TrajectoryPlot', sep='')},
+      filename = function(){paste(input$dataset,'TrajectoryPlot',sep='')},
       content = function(file){
         device <- function(...,width,height){grDevices::png(...,width=width,height=height,res=300,units="in")}
-        ggsave(file, plot = plotTrajectory(IVM_traj), device = device)
+        ggsave(file,plot=plotTrajectory(IVM_traj),device=device)
       }
     )
     #############################################################################
