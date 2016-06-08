@@ -26,11 +26,13 @@ COVERAGE_LABELS_SIZE = 3
 COVERAGE_BAR_SIZE = 5
 COVERAGE_INIT_SIZE = 4
 INITIAL_TIME_VALUE = 80
+INITIAL_ITN_COVERAGE = .5
+INITIAL_ITN_TIME = 50
 ################################################################################
 # PRIME SYSTEM  ################################################################
 MOSQUITO_PARAMETERS = getAnGambiaeParameters()
-INTERVENTION_PARAMETERS = getInterventionsParameters()
-theta <<- getTheta()
+INTERVENTION_PARAMETERS = getInterventionsParameters(ITNcov=INITIAL_ITN_COVERAGE,time_ITN_on=INITIAL_ITN_TIME)
+theta <<- getTheta(interventionParameters=INTERVENTION_PARAMETERS)
 #initialParametersValues <<- importCSVParametersFromDirectory("SetupTemplates/SETUP_MosquitoLifeCycleParameters.csv")
 #theta <<- parseImportedCSVParameters(initialParametersValues)
 # MODEL -------------------------------------
@@ -89,8 +91,8 @@ shinyUI(
           ),
           fluidRow(
             column(COVERAGE_LABELS_SIZE,h5("ITN",align="left")),
-            column(COVERAGE_BAR_SIZE,sliderInput("ITNcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
-            column(COVERAGE_INIT_SIZE,numericInput("time_ITN_on",NULL,value=0,min=0,max=365))
+            column(COVERAGE_BAR_SIZE,sliderInput("ITNcov",NULL,min=0,max=1,value=INITIAL_ITN_COVERAGE,step=COVERAGE_STEP_SIZE)),
+            column(COVERAGE_INIT_SIZE,numericInput("time_ITN_on",NULL,value=INITIAL_ITN_TIME,min=0,max=365))
           ),
           fluidRow(
             column(COVERAGE_LABELS_SIZE,h5("IRS",align="left")),

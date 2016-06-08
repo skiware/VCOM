@@ -40,7 +40,7 @@ getInterventionsParameters = function(
   BIOcov=0,   time_BIO_on=0,
   SREcov=0,   time_SRE_on=0,
   IRScov=0,   time_IRS_on=0,
-  ITNcov=.5,  time_ITN_on=20,
+  ITNcov=0,   time_ITN_on=0,
   IVMcov=0,   time_IVM_on=0,
   HOUcov=0,   time_HOU_on=0,
   ODOcov=0,   time_ODO_on=0,
