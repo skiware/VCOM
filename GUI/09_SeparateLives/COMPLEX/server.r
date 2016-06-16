@@ -12,8 +12,8 @@
 library(shiny)
 ###############################################################################
 #---# RUN WHEN THE APP IS LAUNCHED ############################################
-#BOXES_WIDTH <<- "100px" 
-###############################################################################  
+#BOXES_WIDTH <<- "100px"
+###############################################################################
 mosquitoParametersTable=read.csv("Documentation/ODEMosquitoParameters.csv",header=FALSE)
 controlMeasuresParametersTable=read.csv("Documentation/ODEControlMeasuresParameters.csv",header=FALSE)
 mosquitoParametersTable=read.csv("Documentation/ODEMosquitoParameters.csv",header=FALSE)
@@ -22,7 +22,7 @@ transmissionParametersTable=read.csv("Documentation/ODETransmissionParameters.cs
 shinyServer(
   function(input,output,session){
     #############################################################################
-    # PRIMING GUI ###############################################################  
+    # PRIMING GUI ###############################################################
     output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
     #############################################################################
@@ -32,27 +32,7 @@ shinyServer(
     output$transmissionParametersTable=renderDataTable(transmissionParametersTable,options=list(searching=FALSE,paging = FALSE))
     #############################################################################
     # CLICK EVENTS ##############################################################
-    observeEvent(input$buttonTest,{
-      cat("Button event!\n")
-    })
-    observeEvent(input$radioSpecies,{
-      cat("Radio event!\n")
-      #print(theta[["time_IRS_on"]])
-      theta <<- switch(input$radioSpecies,
-        "GAM"=getTheta(speciesSpecificParameters=getAnGambiaeParameters()),#getTheta(parseImportedCSVParameters(TEMPLATE_AN_GAMBIAE)),
-        "ARA"=getTheta(speciesSpecificParameters=getAnArabiensisParameters()),#getTheta(parseImportedCSVParameters(TEMPLATE_AN_ARABIENSIS)),
-        "FUN"=getTheta(speciesSpecificParameters=getAnFunestusParameters()),#getTheta(parseImportedCSVParameters(TEMPLATE_AN_FUNESTUS))
-        "USD"=theta#getTheta()
-      )
-      print(theta)
-      #print(initState)
-    })  
-    observeEvent(input$checkboxesControlMeasures,{
-      cat("Checkbox event!\n")
-    })
-    observeEvent(input$sliderTime,{
-      cat("Slider event!\n")
-    })
+    observeEvent(input$sliderTime,{cat("Slider event!\n")})
     observeEvent(input$buttonRun,{
       cat("Button event!\n")
       print(theta)
