@@ -36,29 +36,32 @@ TEMPLATE_AN_GAMBIAE<<-importCSVParametersFromDirectory("SetupTemplates/Template_
 ################################################################################
 shinyUI(
   fluidPage(theme = "bootstrapSpace.css",
-    titlePanel(h1("VCOM",align="center")),
+    titlePanel(h1("VCOM: Expert",align="center")),
     titlePanel(h4("Vector Control Optimization Model",align="center")),
-    actionButton("buttonRun","Run Model",width="100%"),
     navbarPage("",id="nav",
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
       tabPanel("Main",
         sidebarLayout(
           sidebarPanel(
-            sliderInput("sliderTime","Days to Simulate:",min=1,max=365,value=80),
-            fileInput('fileImport','Import CSV/XLS Parameters File',accept=c('.xls','.csv')),
-            textOutput("importedMessage")
+            titlePanel(h4("Instructions",align="left")),
+            helpText("(1) Select the number of days to simulate, (2) import the file that contains the simulation setup and (3) hit the 'Run Model' button."),
+            sliderInput("sliderTime","1. Days to Simulate:",min=1,max=365,value=80),
+            fileInput('fileImport','2. Import CSV/XLS Parameters File',accept=c('.xls','.csv')),
+            textOutput("importedMessage"),
+            actionButton("buttonRun","3. Run Model",width="100%")
           ),
           mainPanel(
             plotOutput("plotTrajectory")
             #plotOutput("plotDemographics")
           )
         ),
-        p("Cite as: VCOM!!! The coolest model ever!!!")
+        p("Cite as: VCOM!!! The coolest model ever!!!"),
+        helpText("CSS theme used with MIT licence (http://bootswatch.com)"),
+        helpText("Contacts: <Model: Samson.Kiware@ucsf.edu> <GUI: sanchez.hmsc@itesm.mx>")
       ),
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
       tabPanel("More Plots",
         mainPanel(
-          #plotOutput("plotTrajectory"),
           plotOutput("plotDemographics")
         )
       ),
@@ -80,8 +83,6 @@ shinyUI(
           )
         ),
         titlePanel(h1("Debugging and Other Super Fun Stuff",align="left")),
-        #tableOutput("contentsCSV"),
-        #tableOutput("contentsXLS"),
         tableOutput("contents")
       ),
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
