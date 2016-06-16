@@ -51,8 +51,8 @@ shinyUI(
               titlePanel(h1("Instructions",align="left")),
               titlePanel(h6("(1) Select the mosquito species.")),
               titlePanel(h6("(2) Select the number of days.")),
-              titlePanel(h6("(3) Setup the desired interventions.")),
-              titlePanel(h6("(4) Run the model!")),
+              titlePanel(h6("(3) Run the model!")),
+              titlePanel(h6("(4) Setup the desired interventions and repeat step 3 as required.")),
               titlePanel(h6("(5) Additionally you can download results in the 'Files Output' tab.")),
               fluidRow(h3("1. Mosquito Selection")),
               radioButtons("radioSpecies",label=NULL,
@@ -65,7 +65,10 @@ shinyUI(
               fluidRow(h3("2. Simulation Time")),
               sliderInput("sliderTime","Days to Simulate:",min=1,max=365,value=80),
               #####################################################################
-              fluidRow(h3("3. Interventions")),
+              fluidRow(h3("3. Run Model")),
+              actionButton("buttonRun","Run",width="100%"),
+              #####################################################################
+              fluidRow(h3("4. Interventions")),
               fluidRow(
                 column(COVERAGE_LABELS_SIZE,h4("",align="center")),
                 column(COVERAGE_BAR_SIZE,h4("Coverage",align="center")),
@@ -125,9 +128,7 @@ shinyUI(
                 column(COVERAGE_LABELS_SIZE,h5("SPA",align="left")),
                 column(COVERAGE_BAR_SIZE,sliderInput("SPAcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
                 column(COVERAGE_INIT_SIZE,numericInput("time_SPA_on",NULL,value=0,min=0,max=365))
-              ),
-              fluidRow(h3("4. Run Model")),
-              actionButton("buttonRun","Run",width="100%")
+              )
             ),mainPanel(
               plotOutput("plotTrajectory"),
               plotOutput("plotDemographics")

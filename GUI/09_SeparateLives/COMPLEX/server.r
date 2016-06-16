@@ -25,6 +25,7 @@ shinyServer(
     # PRIMING GUI ###############################################################
     output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
+    output$plotDemographics = renderPlot({barChartMosquitoDemographics(IVM_traj)})
     #############################################################################
     # PARAMETER TABLES ##########################################################
     output$mosquitoParametersTable=renderDataTable(mosquitoParametersTable,options=list(searching=FALSE,paging = FALSE))
@@ -53,6 +54,7 @@ shinyServer(
       print(theta)
       output$contents=renderTable({importedFile})
       output$importedMessage=renderText({"Imported File"})
+      output$fileContents <- renderTable({importedFile})
     })
     #############################################################################
     # DOWNLOADS HANDLERS ########################################################
@@ -69,14 +71,14 @@ shinyServer(
     )
     output$downloadTemplate <- downloadHandler(
       filename <- function(){paste("VCOM_SimSetupFile","xls",sep=".")},
-      content <- function(file){file.copy("SetupTemplates/SETUP_MosquitoLifeCycleParameters.xls",file)}
+      content <- function(file){file.copy("SetupTemplates/SETUP_VCOM.xls",file)}
     )
-    output$downloadTrace <- downloadHandler(
-      filename <- function(){paste("VCOM_Trace","csv",sep=".")},
-      content <- function(file){
-        write.csv(IVM_traj,file)
-      }
-    )
+#     output$downloadTrace <- downloadHandler(
+#       filename <- function(){paste("VCOM_Trace","csv",sep=".")},
+#       content <- function(file){
+#         write.csv(IVM_traj,file)
+#       }
+#     )
     output$downloadPlot <- downloadHandler(
       filename = function(){paste(input$dataset, 'TrajectoryPlot', sep='')},
       #filename = function(){paste(input$dataset, input$radioFormat, sep='')},

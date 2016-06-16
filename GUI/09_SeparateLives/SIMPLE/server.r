@@ -11,13 +11,13 @@
 shinyServer(
   function(input,output,session){
     #############################################################################
-    # PRIMING GUI ###############################################################  
+    # PRIMING GUI ###############################################################
     output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
     #############################################################################
     # CLICK EVENTS ##############################################################
     observeEvent(input$buttonTest,{cat("Button event!\n")})
-    observeEvent(input$radioSpecies,{cat("Radio event!\n")})  
+    observeEvent(input$radioSpecies,{cat("Radio event!\n")})
     observeEvent(input$sliderTime,{cat("Slider event!\n")})
     #############################################################################
     # INTERVENTIONS_EVENTS ######################################################
