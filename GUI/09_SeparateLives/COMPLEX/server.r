@@ -54,31 +54,23 @@ shinyServer(
       print(theta)
       output$contents=renderTable({importedFile})
       output$importedMessage=renderText({"Imported File"})
-      output$fileContents <- renderTable({importedFile})
+      df=importedFile
+      names(df) <- NULL
+      #df = df[-1,]
+      output$fileContents <- renderTable({df})
     })
     #############################################################################
     # DOWNLOADS HANDLERS ########################################################
-    output$downloadParameters <- downloadHandler(
-      filename <- function(){paste("VCOM_Parameters","csv",sep=".")},
-      content <- function(file){
-        print(theta)
-        df=data.frame(theta)
-        df$Description = 0
-        names(df) = c("Value","Description")
-        write.csv(df,file)
-        #write.csv(cbind(theta,NewColumn=0),file)
-      }
-    )
     output$downloadTemplate <- downloadHandler(
       filename <- function(){paste("VCOM_SimSetupFile","xls",sep=".")},
       content <- function(file){file.copy("SetupTemplates/SETUP_VCOM.xls",file)}
     )
-#     output$downloadTrace <- downloadHandler(
-#       filename <- function(){paste("VCOM_Trace","csv",sep=".")},
-#       content <- function(file){
-#         write.csv(IVM_traj,file)
-#       }
-#     )
+    output$downloadTrace <- downloadHandler(
+      filename <- function(){paste("VCOM_Trace","csv",sep=".")},
+      content <- function(file){
+        write.csv(IVM_traj,file)
+      }
+    )
     output$downloadPlot <- downloadHandler(
       filename = function(){paste(input$dataset, 'TrajectoryPlot', sep='')},
       #filename = function(){paste(input$dataset, input$radioFormat, sep='')},

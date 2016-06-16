@@ -49,11 +49,11 @@ shinyUI(
           sidebarLayout(
             sidebarPanel(
               titlePanel(h1("Instructions",align="left")),
-              titlePanel(h6("(1) Select the mosquito species.")),
-              titlePanel(h6("(2) Select the number of days.")),
-              titlePanel(h6("(3) Run the model!")),
-              titlePanel(h6("(4) Setup the desired interventions and repeat step 3 as required.")),
-              titlePanel(h6("(5) Additionally you can download results in the 'Files Output' tab.")),
+              helpText("(1) Select the mosquito species."),
+              helpText("(2) Select the number of days."),
+              helpText("(3) Run the model!"),
+              helpText("(4) Setup the desired interventions and repeat step 3 as required (for now only ITN and IRS are implemented)."),
+              helpText("(5) Additionally you can download results in the 'Files Output' tab."),
               fluidRow(h3("1. Mosquito Selection")),
               radioButtons("radioSpecies",label=NULL,
                 choices=list(
@@ -134,7 +134,7 @@ shinyUI(
               plotOutput("plotDemographics")
             )
           ),
-          helpText("CSS theme used with MIT licence (http://bootswatch.com)"),
+          helpText("CSS theme downloaded from: http://bootswatch.com (MIT licence)"),
           helpText("Contacts: <Model: Samson.Kiware@ucsf.edu> <GUI: sanchez.hmsc@itesm.mx>")
         ),
         tabPanel("Files Output",

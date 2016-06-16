@@ -45,9 +45,9 @@ shinyUI(
         sidebarLayout(
           sidebarPanel(
             titlePanel(h1("Instructions",align="left")),
-            titlePanel(h6("(1) Select the number of days for the simulation to run.")),
-            titlePanel(h6("(2) Load the simulation setup file (CSV or XLS format). In case you currently do not have the template download it from the 'Downloads/'")),
-            titlePanel(h6("(3) Run the model!")),
+            helpText("(1) Select the number of days for the simulation to run."),
+            helpText("(2) Load the simulation setup file (CSV or XLS format). In case you currently do not have the template download it from the 'Downloads/'"),
+            helpText("(3) Run the model!"),
             sliderInput("sliderTime","1. Days to Simulate:",min=1,max=365,value=80),
             fileInput('fileImport','2. Import CSV/XLS Parameters File',accept=c('.xls','.csv')),
             #textOutput("importedMessage"),
@@ -58,7 +58,7 @@ shinyUI(
             #plotOutput("plotDemographics")
           )
         ),
-        helpText("CSS theme used with MIT licence (http://bootswatch.com)"),
+        helpText("CSS theme downloaded from: http://bootswatch.com (MIT licence)"),
         helpText("Contacts: <Model: Samson.Kiware@ucsf.edu> <GUI: sanchez.hmsc@itesm.mx>")
       ),
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
@@ -68,21 +68,34 @@ shinyUI(
         )
       ),
       tabPanel("Loaded Parameters",
-        tableOutput("fileContents")
+        sidebarLayout(
+          sidebarPanel(
+            helpText("The table shows the parameters that are currently loaded into the model."),
+            helpText("If there is no table shown the model should be running on the default parameters."),
+            helpText("Go to 'Main/Import CSV/XLS Parameters File' to load your configuration."),
+            helpText("If you do not have a configuration file go to 'Downloads/Download XLS Parameters Table'")
+          ),
+          mainPanel(
+            tableOutput("fileContents")
+          )
+        )
       ),
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
       tabPanel("Downloads",
-        titlePanel(h1("Templates",align="left")),
+        #titlePanel(h1("Templates",align="left")),
         fluidRow(
           column(4,align="center",
             titlePanel(h3("Parameters Files",align="center")),
+            titlePanel(h6("")),
             downloadButton("downloadTemplate", 'Download XLS Parameters Template'),
-            downloadButton("downloadParameters", 'Download Current CSV Parameters'),
+            #downloadButton("downloadParameters", 'Download Current CSV Parameters'),
+            titlePanel(h6("")),
             downloadButton("downloadTrace", 'Download CSV Trace')
           ),
           column(4,""),
           column(4,align="center",
             titlePanel(h3("Plots",align="center")),
+            titlePanel(h6("")),
             #radioButtons("radioFormat",label=h4("Plot Format"),choices=list("JPG"=".jpg","PNG"=".png"),selected="PNG"),
             downloadButton("downloadPlot", 'Download Trajectory Plot')
           )

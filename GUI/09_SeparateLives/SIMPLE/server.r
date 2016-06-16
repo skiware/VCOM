@@ -14,6 +14,7 @@ shinyServer(
     # PRIMING GUI ###############################################################
     output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
+    output$plotDemographics = renderPlot({barChartMosquitoDemographics(IVM_traj)})
     #############################################################################
     # CLICK EVENTS ##############################################################
     observeEvent(input$buttonTest,{cat("Button event!\n")})
