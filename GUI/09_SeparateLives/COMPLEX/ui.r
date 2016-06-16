@@ -12,7 +12,6 @@
 library(shiny)
 library(deSolve)
 library(ggplot2)
-library(XLConnect)
 source("ODEModel.R")
 source("ODEMosquitoParameters.R")
 source("ODEAuxiliaryFunctions.R")
@@ -46,7 +45,8 @@ shinyUI(
         sidebarLayout(
           sidebarPanel(
             sliderInput("sliderTime","Days to Simulate:",min=1,max=365,value=80),
-            fileInput('fileImport', 'Import CSV/XLS Parameters File', accept = c('.xls','.csv'))
+            fileInput('fileImport','Import CSV/XLS Parameters File',accept=c('.xls','.csv')),
+            textOutput("importedMessage")
           ),
           mainPanel(
             plotOutput("plotTrajectory")
@@ -67,10 +67,10 @@ shinyUI(
         titlePanel(h1("Export and Download",align="left")),
         fluidRow(
           column(4,align="center",
-           titlePanel(h3("Parameters Files",align="center")),
-           downloadButton("downloadTemplate", 'Download CSV Parameters Template'),
-           downloadButton("downloadParameters", 'Download CSV Parameters'),
-           downloadButton("downloadTrace", 'Download CSV Trace')
+            titlePanel(h3("Parameters Files",align="center")),
+            downloadButton("downloadTemplate", 'Download CSV Parameters Template'),
+            downloadButton("downloadParameters", 'Download CSV Parameters'),
+            downloadButton("downloadTrace", 'Download CSV Trace')
           ),
           column(4,""),
           column(4,align="center",
@@ -80,8 +80,8 @@ shinyUI(
           )
         ),
         titlePanel(h1("Debugging and Other Super Fun Stuff",align="left")),
-        tableOutput("contentsCSV"),
-        tableOutput("contentsXLS"),
+        #tableOutput("contentsCSV"),
+        #tableOutput("contentsXLS"),
         tableOutput("contents")
       ),
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.

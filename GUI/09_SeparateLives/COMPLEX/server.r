@@ -45,24 +45,14 @@ shinyServer(
     })
     #############################################################################
     # IMPORT FILES EVENT HANDLERS ###############################################
-    #   output$contentsCSV <- renderTable({
-    #     inFile <- input$csvImport
-    #     if(is.null(inFile)){return(NULL)}
-    #     importCSVParametersFromDirectory(inFile$datapath)
-    #   })
-    #   output$contentsXLS <- renderTable({
-    #     inFile <- input$xlsImport
-    #     if(is.null(inFile)){return(NULL)}
-    #     importXLSParametersFromDirectory(inFile$datapath)
-    #   })
-    output$contents <- renderTable({
+    observeEvent(input$fileImport,{
       inFile <- input$fileImport
       if(is.null(inFile)){return(NULL)}
       importedFile<<-importCSVXLSParametersFromDirectoryShiny(inFile$datapath,input$fileImport[["type"]])
       theta<<-parseImportedCSVParameters(importedFile)
       print(theta)
-      #updateRadioButtons(session, "radioSpecies", selected="USD")
-      importedFile
+      output$contents=renderTable({importedFile})
+      output$importedMessage=renderText({"Imported File"})
     })
     #############################################################################
     # DOWNLOADS HANDLERS ########################################################
