@@ -16,13 +16,8 @@ shinyServer(
     output$IVM_Runtime=renderTable(IVM_traj)
     #############################################################################
     # CLICK EVENTS ##############################################################
-    observeEvent(input$buttonTest,{
-      cat("Button event!\n")
-    })
-    observeEvent(input$radioSpecies,{
-      cat("Radio event!\n")
-
-    })  
+    observeEvent(input$buttonTest,{cat("Button event!\n")})
+    observeEvent(input$radioSpecies,{cat("Radio event!\n")})  
     observeEvent(input$sliderTime,{cat("Slider event!\n")})
     #############################################################################
     # INTERVENTIONS_EVENTS ######################################################
