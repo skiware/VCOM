@@ -52,10 +52,16 @@ shinyUI(
             helpText("(2) Load the simulation setup file (CSV or XLS format). In case you currently do not have the template download it from the 'Downloads/'"),
             helpText("(3) Run the model!"),
             sliderInput("sliderTime","1. Days to Simulate:",min=1,max=365,value=80),
-            fileInput('fileImport','2. Import CSV/XLS Parameters File',accept=c('.xls','.csv')),
+            fileInput('fileImport','2. Import CSV/XLS Parameters File',accept=c(
+              'application/vnd.ms-excel',
+              'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+              '.xls',
+              '.xlsx')
+            ),
+            #fileInput('file1', 'Choose CSV/TXT File',accept=c('text/csv', 'text/comma-separated-values,text/plain')),
             #textOutput("importedMessage"),
             actionButton("buttonRun","3. Run Model",width="100%"),
-            titlePanel(h1("Messages",align="left")),
+            #titlePanel(h1("Messages",align="left")),
             textOutput("debugOutput")
           ),
           mainPanel(
