@@ -40,7 +40,7 @@ TEMPLATE_AN_GAMBIAE<<-importCSVParametersFromDirectory("SetupTemplates/Template_
 shinyUI(
   fluidPage(theme = "bootstrapCerulean.css",
     useShinyjs(),
-    titlePanel(h1("VCOM: Expert",align="center")),
+    titlePanel(h1("VCOM: Expert",align="center"),windowTitle="VCOM: Expert"),
     titlePanel(h4("Vector Control Optimization Model",align="center")),
     navbarPage("",id="nav",
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
