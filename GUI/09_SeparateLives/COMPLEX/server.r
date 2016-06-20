@@ -24,11 +24,11 @@ shinyServer(
   function(input,output,session){
     #############################################################################
     # PRIMING GUI ###############################################################
+    shinyjs::disable("buttonRun")
     output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
     output$plotDemographics=renderPlot({barChartMosquitoDemographics(IVM_traj)})
     output$debugOutput=renderText("Load setup file for the 'Run Model' button to be activated.")
-    shinyjs::disable("buttonRun")
     #############################################################################
     # PARAMETER TABLES ##########################################################
     output$mosquitoParametersTable=renderDataTable(mosquitoParametersTable,options=list(searching=FALSE,paging = FALSE))
@@ -59,7 +59,6 @@ shinyServer(
       output$importedMessage=renderText({"Imported File"})
       df=importedFile
       names(df) <- NULL
-      #df = df[-1,]
       nasNumber=sum(is.na(theta))
       print(nasNumber)
       debugLoadText="SETUP FILE LOADED CORRECTLY!"
