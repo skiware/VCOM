@@ -12,6 +12,7 @@
 library(shiny)
 library(deSolve)
 library(ggplot2)
+library(shinyjs)
 source("ODEModel.R")
 source("ODEMosquitoParameters.R")
 source("ODEAuxiliaryFunctions.R")
@@ -40,9 +41,10 @@ initState <<- calculateInitialState(theta)
 IVM_traj <<- runODE(INITIAL_TIME_VALUE,1,initState,theta,"lsoda")
 ###################################################################################
 shinyUI(
-  fluidPage(theme = "bootstrapCerulean.css",
+  fluidPage(theme="bootstrapCerulean.css",
     titlePanel(h1("VCOM: Simple",align="center"),windowTitle="VCOM: Simple"),
     titlePanel(h4("Vector Control Optimization Model",align="center")),
+    useShinyjs(),
     navbarPage("",id="nav",
         #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
         tabPanel("Main",

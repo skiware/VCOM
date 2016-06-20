@@ -20,17 +20,17 @@ source("ODEAuxiliaryFunctions.R")
 source("ODEControlMeasuresParameters.R")
 source("ODETransmissionParameters.R")
 ################################################################################
-importedFile = NULL
-BOXES_WIDTH <<- "75px"
-NAS_ALLOWED <<- 11
+importedFile=NULL
+BOXES_WIDTH<<-"75px"
+NAS_ALLOWED<<-11
 # Theta from code----------------------------------
 #initialTheta <<- getTheta()
 # Theta from setup CSV-----------------------------
-initialParametersValues <<- importCSVParametersFromDirectory("SetupTemplates/SETUP_MosquitoLifeCycleParameters.csv")
+initialParametersValues<<-importCSVParametersFromDirectory("SetupTemplates/SETUP_MosquitoLifeCycleParameters.csv")
 #print(initialParametersValues)
-theta <<- parseImportedCSVParameters(initialParametersValues)
-initState <<- calculateInitialState(theta)
-IVM_traj <<- runODE(80,1,initState,theta,"lsoda")
+theta<<-parseImportedCSVParameters(initialParametersValues)
+initState<<-calculateInitialState(theta)
+IVM_traj<<-runODE(80,1,initState,theta,"lsoda")
 #print(theta)
 ################################################################################
 TEMPLATE_AN_ARABIENSIS<<-importCSVParametersFromDirectory("SetupTemplates/Template_AnArabiensis.csv")
@@ -55,13 +55,13 @@ shinyUI(
             fileInput('fileImport','2. Import CSV/XLS Parameters File',accept=c(
               'application/vnd.ms-excel',
               'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-              '.xls',
-              '.xlsx')
+              '.xls')
             ),
             #fileInput('file1', 'Choose CSV/TXT File',accept=c('text/csv', 'text/comma-separated-values,text/plain')),
             #textOutput("importedMessage"),
             actionButton("buttonRun","3. Run Model",width="100%"),
             #titlePanel(h1("Messages",align="left")),
+            titlePanel(h1("")),
             textOutput("debugOutput")
           ),
           mainPanel(
@@ -93,22 +93,29 @@ shinyUI(
       ),
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
       tabPanel("Downloads",
-        #titlePanel(h1("Templates",align="left")),
-        fluidRow(
-          column(4,align="center",
-            titlePanel(h3("Parameters Files",align="center")),
-            titlePanel(h6("")),
-            downloadButton("downloadTemplate", 'Download XLS Parameters Template'),
-            #downloadButton("downloadParameters", 'Download Current CSV Parameters'),
-            titlePanel(h6("")),
-            downloadButton("downloadTrace", 'Download CSV Trace')
+        sidebarLayout(
+          sidebarPanel(
+            helpText("Please note that some of the buttons will only activate after the model has been run at least once and will be disabled if a file with an error was uploaded.")
           ),
-          column(4,""),
-          column(4,align="center",
-            titlePanel(h3("Plots",align="center")),
-            titlePanel(h6("")),
-            #radioButtons("radioFormat",label=h4("Plot Format"),choices=list("JPG"=".jpg","PNG"=".png"),selected="PNG"),
-            downloadButton("downloadPlot", 'Download Trajectory Plot')
+          mainPanel(
+            #titlePanel(h1("Templates",align="left")),
+            fluidRow(
+              column(5,align="center",
+                titlePanel(h3("CSV/XLS Downloads",align="center")),
+                titlePanel(h6("")),
+                downloadButton("downloadTemplate", 'Download XLS Parameters Template'),
+                #downloadButton("downloadParameters", 'Download Current CSV Parameters'),
+                titlePanel(h6("")),
+                downloadButton("downloadTrace", 'Download CSV Trace')
+              ),
+              column(5,""),
+              column(5,align="center",
+                titlePanel(h3("Plots",align="center")),
+                titlePanel(h6("")),
+                #radioButtons("radioFormat",label=h4("Plot Format"),choices=list("JPG"=".jpg","PNG"=".png"),selected="PNG"),
+                downloadButton("downloadPlot", 'Download Trajectory Plot')
+              )
+            )
           )
         )
       )#,

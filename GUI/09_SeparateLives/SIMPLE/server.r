@@ -12,6 +12,8 @@ shinyServer(
   function(input,output,session){
     #############################################################################
     # PRIMING GUI ###############################################################
+    shinyjs::disable("downloadTrace")
+    shinyjs::disable("downloadPlot")
     output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
     output$plotDemographics = renderPlot({barChartMosquitoDemographics(IVM_traj)})
@@ -48,6 +50,8 @@ shinyServer(
       )
       #--------------------------------------------------------------------------
       print(INTERVENTION_PARAMETERS)
+      shinyjs::enable("downloadTrace")
+      shinyjs::enable("downloadPlot")
       initState=calculateInitialState(theta)
       IVM_traj<<-runODE(input$sliderTime,1,initState,theta,"lsoda")
       output$plotDemographics=renderPlot({barChartMosquitoDemographics(IVM_traj)})

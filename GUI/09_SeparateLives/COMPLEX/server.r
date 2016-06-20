@@ -25,6 +25,8 @@ shinyServer(
     #############################################################################
     # PRIMING GUI ###############################################################
     shinyjs::disable("buttonRun")
+    shinyjs::disable("downloadTrace")
+    shinyjs::disable("downloadPlot")
     output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
     output$plotDemographics=renderPlot({barChartMosquitoDemographics(IVM_traj)})
@@ -45,6 +47,8 @@ shinyServer(
       output$IVM_Runtime = renderTable(IVM_traj)
       output$plotDemographics = renderPlot({barChartMosquitoDemographics(IVM_traj)})
       output$plotTrajectory = renderPlot({plotTrajectory(IVM_traj)})
+      shinyjs::enable("downloadTrace")
+      shinyjs::enable("downloadPlot")
       #print(IVM_traj)
     })
     #############################################################################
@@ -60,11 +64,13 @@ shinyServer(
       df=importedFile
       names(df) <- NULL
       nasNumber=sum(is.na(theta))
-      print(nasNumber)
+      #print(nasNumber)
       debugLoadText="SETUP FILE LOADED CORRECTLY!"
       shinyjs::enable("buttonRun")
       if(nasNumber > NAS_ALLOWED){
         shinyjs::disable("buttonRun")
+        shinyjs::disable("downloadTrace")
+        shinyjs::disable("downloadPlot")
         debugLoadText="ERROR IN SETUP FILE. Please see 'Loaded Parameters' tab for more information."
       }
       output$debugOutput=renderText(debugLoadText)
