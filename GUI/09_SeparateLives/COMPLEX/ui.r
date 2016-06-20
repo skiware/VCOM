@@ -13,6 +13,7 @@ library(shiny)
 library(deSolve)
 library(ggplot2)
 library(XLConnect)
+library(shinyjs)
 source("ODEModel.R")
 source("ODEMosquitoParameters.R")
 source("ODEAuxiliaryFunctions.R")
@@ -21,6 +22,7 @@ source("ODETransmissionParameters.R")
 ################################################################################
 importedFile = NULL
 BOXES_WIDTH <<- "75px"
+NAS_ALLOWED <<- 11
 # Theta from code----------------------------------
 #initialTheta <<- getTheta()
 # Theta from setup CSV-----------------------------
@@ -37,6 +39,7 @@ TEMPLATE_AN_GAMBIAE<<-importCSVParametersFromDirectory("SetupTemplates/Template_
 ################################################################################
 shinyUI(
   fluidPage(theme = "bootstrapCerulean.css",
+    useShinyjs(),
     titlePanel(h1("VCOM: Expert",align="center")),
     titlePanel(h4("Vector Control Optimization Model",align="center")),
     navbarPage("",id="nav",
@@ -51,7 +54,9 @@ shinyUI(
             sliderInput("sliderTime","1. Days to Simulate:",min=1,max=365,value=80),
             fileInput('fileImport','2. Import CSV/XLS Parameters File',accept=c('.xls','.csv')),
             #textOutput("importedMessage"),
-            actionButton("buttonRun","3. Run Model",width="100%")
+            actionButton("buttonRun","3. Run Model",width="100%"),
+            titlePanel(h1("Messages",align="left")),
+            textOutput("debugOutput")
           ),
           mainPanel(
             plotOutput("plotTrajectory")

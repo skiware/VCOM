@@ -1,31 +1,34 @@
-#------------------------------------------------------------------------------#
-################################################################################
-## Malaria vector ODE model GUI                                               ##
-## Hector M. Sanchez C. (sanchez.hmsc@itesm.mx)                               ##
-## 02/May/2016                                                                ##
-################################################################################
-#------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------##
+#################################################################################
+## Malaria vector ODE model GUI                                               ###
+## Hector M. Sanchez C. (sanchez.hmsc@itesm.mx)                               ###
+## 02/May/2016                                                                ###
+#################################################################################
+#------------------------------------------------------------------------------##
 
-###############################################################################
+#################################################################################
 #LOAD LIBRARIES AND FILES
-###############################################################################
+#################################################################################
 library(shiny)
-###############################################################################
-#---# RUN WHEN THE APP IS LAUNCHED ############################################
+#################################################################################
+#---# RUN WHEN THE APP IS LAUNCHED ##############################################
 #BOXES_WIDTH <<- "100px"
-###############################################################################
+#################################################################################
 mosquitoParametersTable=read.csv("Documentation/ODEMosquitoParameters.csv",header=FALSE)
 controlMeasuresParametersTable=read.csv("Documentation/ODEControlMeasuresParameters.csv",header=FALSE)
 mosquitoParametersTable=read.csv("Documentation/ODEMosquitoParameters.csv",header=FALSE)
 transmissionParametersTable=read.csv("Documentation/ODETransmissionParameters.csv",header=FALSE)
-#---# MAIN SHINY SERVER APPLICATION ###########################################
+#################################################################################
+#---# MAIN SHINY SERVER APPLICATION #############################################
 shinyServer(
   function(input,output,session){
     #############################################################################
     # PRIMING GUI ###############################################################
     output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
-    output$plotDemographics = renderPlot({barChartMosquitoDemographics(IVM_traj)})
+    output$plotDemographics=renderPlot({barChartMosquitoDemographics(IVM_traj)})
+    output$debugOutput=renderText("Load setup file for the 'Run Model' button to be activated.")
+    shinyjs::disable("buttonRun")
     #############################################################################
     # PARAMETER TABLES ##########################################################
     output$mosquitoParametersTable=renderDataTable(mosquitoParametersTable,options=list(searching=FALSE,paging = FALSE))
@@ -57,7 +60,16 @@ shinyServer(
       df=importedFile
       names(df) <- NULL
       #df = df[-1,]
-      output$fileContents <- renderTable({df})
+      nasNumber=sum(is.na(theta))
+      print(nasNumber)
+      debugLoadText="SETUP FILE LOADED CORRECTLY!"
+      shinyjs::enable("buttonRun")
+      if(nasNumber > NAS_ALLOWED){
+        shinyjs::disable("buttonRun")
+        debugLoadText="ERROR IN SETUP FILE. Please see 'Loaded Parameters' tab for more information."
+      }
+      output$debugOutput=renderText(debugLoadText)
+      output$fileContents<-renderTable({df})
     })
     #############################################################################
     # DOWNLOADS HANDLERS ########################################################
@@ -81,4 +93,4 @@ shinyServer(
     )
     #############################################################################
   })
-#---###########################################################################
+#---#############################################################################
