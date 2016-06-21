@@ -14,6 +14,7 @@ library(deSolve)
 library(ggplot2)
 library(XLConnect)
 library(shinyjs)
+library(shinythemes)
 source("ODEModel.R")
 source("ODEMosquitoParameters.R")
 source("ODEAuxiliaryFunctions.R")
@@ -38,7 +39,7 @@ TEMPLATE_AN_FUNESTUS<<-importCSVParametersFromDirectory("SetupTemplates/Template
 TEMPLATE_AN_GAMBIAE<<-importCSVParametersFromDirectory("SetupTemplates/Template_AnGambiae.csv")
 ################################################################################
 shinyUI(
-  fluidPage(theme = "bootstrapCerulean.css",
+  fluidPage(theme=shinytheme("cosmo"),
     useShinyjs(),
     titlePanel(h1("VCOM: Expert",align="center"),windowTitle="VCOM: Expert"),
     titlePanel(h4("Vector Control Optimization Model",align="center")),

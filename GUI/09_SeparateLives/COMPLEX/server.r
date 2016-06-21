@@ -89,7 +89,7 @@ shinyServer(
       }
     )
     output$downloadPlot <- downloadHandler(
-      filename = function(){paste(input$dataset, 'TrajectoryPlot', sep='')},
+      filename = function(){paste(input$dataset, 'TrajectoryPlot.png', sep='')},
       #filename = function(){paste(input$dataset, input$radioFormat, sep='')},
       content = function(file) {
         device <- function(...,width,height){grDevices::png(...,width=width,height=height,res=300,units="in")}
