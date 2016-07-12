@@ -91,6 +91,7 @@ IVM_ode <- function(time, state, theta){
   ECTcov <- theta[["ECTcov"]] # endocticide (e.g., ivermectin) coverage - topical coverage
   time_ECT_on <- theta[["time_ECT_on"]] # When cattle are treated (topical) (days)
   sECT <- theta[["sECT"]] # Probability of mosquito feeding and surviving in presence of topical-treated cattle
+  rECT <- theta[["rECT"]] # Probability of mosquito repeating a feeding attempt due to topical-treated cattle
   
   
   # Moden house
@@ -121,11 +122,9 @@ IVM_ode <- function(time, state, theta){
   K <- 2*NV_eq*muV*durLL*(1 + muPL*durPL)*gamma*(omega+1)/(omega/(muLL*durEL) - 1/(muLL*durLL) - 1) # Larval carrying capacity
   ## Derived parameters which depend on intervention status:
   
-  #Indoor protection
+  ##*************************Human - Indoor protection *********************************##
   if (time > time_ITN_on) { ITNcov_t <- ITNcov } else { ITNcov_t <- 0 }
   if (time > time_IRS_on) { IRScov_t <- IRScov } else { IRScov_t <- 0 }
-  
-  ## zCom: Probability of a mosquito being repelled from an ITN or IRS-treated house:
  
   # Unprotected proportion (SK
   c0 <- 1 - ITNcov_t - IRScov_t + ITNcov_t*IRScov_t
@@ -139,7 +138,14 @@ IVM_ode <- function(time, state, theta){
   rCom <- rIRS + (1-rIRS)*rITN
   sCom  <- (1-rIRS)*sITN*sIRS
   
-  ## Cattle *****************************************************************
+  #Human - new search probability after a mosq is repelled (SK) by indoor interventions
+  zCom_Human <- Q0*cITN*phiB*rITN + Q0*cIRS*phiI*rIRS + Q0*cCom*(phiI-phiB)*rIRS + Q0*cCom*phiB*rCom
+  
+  # Human - Probability that a surviving mosquito succeeds in feeding during a single attempt:##
+  wComHuman <- 1 - Q0 + Q0*c0 + Q0*cITN*(1-phiB+phiB*sITN) + Q0*cIRS*(1-phiI+phiI*sIRS) + Q0*cCom*((phiI-phiB)*sIRS + 1-phiI + phiB*sCom)
+  
+  
+  ##*************************** Cattle *********************************************##
   if (time > time_ECS_on) { ECScov_t <- ECScov } else { ECScov_t <- 0 }
   if (time > time_ECT_on) { ECTcov_t <- ECTcov } else { ECTcov_t <- 0 }
   
@@ -152,26 +158,21 @@ IVM_ode <- function(time, state, theta){
   # neither applied
   c0_Cattle <- 1 - ECScov_t - ECTcov_t + ECScov_t*ECTcov_t
   
-  # repeating due to topical applied (only)
-  #rCom_cattle <- rIRS + (1-rIRS)*rITN
-  #sCom  <- (1-rIRS)*sITN*sIRS
-  
-  #zcom new search probability after a mosq is repelled (SK
-  zCom <- Q0*cITN*phiB*rITN + Q0*cIRS*phiI*rIRS + Q0*cCom*(phiI-phiB)*rIRS + Q0*cCom*phiB*rCom 
-  #Equation 7
-  # deltaCom: Inverse of gonotrophic cycle length with ITNs & IRS: (SK equation 2)
-  deltaCom <- 1/(tau1/(1-zCom) + tau2)
-  
-  #**************************************************************************************
-  ## wCom: Probability that a surviving mosquito succeeds in feeding during a single attempt:##
- 
-  # unprotected human (Q0C0), and protected human
-  wComHuman <- 1 - Q0 + Q0*c0 + Q0*cITN*(1-phiB+phiB*sITN) + Q0*cIRS*(1-phiI+phiI*sIRS) + Q0*cCom*((phiI-phiB)*sIRS + 1-phiI + phiB*sCom)
+  # repeating due to encountering insecticide (topical applied (only)) treated cattle
+  #Human - new search probability after a mosq is repelled (SK) by insecticide treated cattle (topical)
+  zCom_Cattle <- (1 - Q0)*(cECT*rECT+cCom_Cattle*rECT)
   
   #Add cattle treated with endocticide (systemic and/or topical applied)
   wComCattle <- (1 - Q0)*(c0_Cattle+cECS*sECS+cECT*sECT+cCom_Cattle*sECS*sECT)
   
-  # So, wCom is given by adding all portions
+  ######**************************************************************************#####
+  
+  ## zCom: Probability of a mosquito being repelled : SAM CHECK THIS
+  zCom <- zCom_Cattle + zCom_Human
+  # deltaCom: Inverse of gonotrophic cycle length with ITNs & IRS: (SK equation 2)
+  deltaCom <- 1/(tau1/(1-zCom) + tau2)
+  
+  ### wCom: Probability that a surviving mosquito succeeds in feeding during a single attempt:##
   wCom <- wComCattle + wComHuman
   #******************************************************************************************
   ## muVCom: Female mosquito death rate in presence of ITNs & IRS:

@@ -98,7 +98,7 @@ getAnGambiaeParameters = function(){
     rSRE = 0.00, sSRE = 0.00, rIRS = 0.60, sIRS = 0.00,
     rITN = 0.56, sITN = 0.03, rECS = 0.40, sECS = 0.05,
     rHOU = 0.00, sHOU = 0.00, rODO = 0.00, sODO = 0.00,
-    rSPA = 0.00, sSPA = 0.00, rECT = 0.40, sECT = 0.05
+    rSPA = 0.00, sSPA = 0.00, rECT = 0.00, sECT = 0.50
   )
 }
 getAnArabiensisParameters = function(){
