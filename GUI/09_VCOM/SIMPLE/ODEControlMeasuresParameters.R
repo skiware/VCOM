@@ -47,7 +47,8 @@ getInterventionsParameters = function(
   ECTcov=0,   time_ECT_on=0,
   HOUcov=0,   time_HOU_on=0,
   ODOcov=0,   time_ODO_on=0,
-  SPAcov=0,   time_SPA_on=0
+  SPRcov=0,   time_SPR_on=0,
+  PPMcov=0,   time_PPM_on=0
 ){
   #. getInterventionsParameters: Returns the list of intervention parameters
   # (SK) and the time that a particular intervention is on
@@ -63,7 +64,8 @@ getInterventionsParameters = function(
     ECTcov=ECTcov,time_ECT_on=time_ECT_on,
     HOUcov=HOUcov,time_HOU_on=time_HOU_on,
     ODOcov=ODOcov,time_ODO_on=time_ODO_on,
-    SPAcov=SPAcov,time_SPA_on=time_SPA_on
+    SPRcov=SPRcov,time_SPR_on=time_SPR_on,
+    PPMcov=PPMcov,time_PPM_on=time_PPM_on
   )
 }
 ######################################################################################

@@ -1,39 +1,139 @@
 
+########################################################################
+#=======================================================================
+# ODEInterventions.R
+
+# Contains function for all interventions - Targeting mosquito while 
+#           Feeding upon Human Indoor: LLINs, IRS, and mosquito proofed housing (HOU)
+#           Feeding Upon Human Outdoor: 
+#           Feeding upon Cattle: 
+# 
+#=======================================================================
+
+
 #Include global parameters here Q0, phiB, phiI
 
 #REQUIRED_PARAMETERS_LIST_GLOBAL = c("Q0")
 
+##******************************************Interventions*****************************##
 
-impactIndoorInterventions = function(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,rITN,sITN,rIRS,sIRS,Q0, phiB, phiI){
+
+##***********************************Protecting Humans Indoor**********************##
+impactIndoorInterventions = function(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOUcov,time_HOU_on,
+                                     rITN,sITN,rIRS,rHOU,sIRS,sHOU, Q0, phiB, phiI,dHOU,dIRS){
   #. impactIndoorInterventions: compute both zcom and wcom for indoor interventions
   
   ##*************************Human - Indoor protection *********************************##
   if (time > time_ITN_on) { ITNcov_t <- ITNcov } else { ITNcov_t <- 0 }
   if (time > time_IRS_on) { IRScov_t <- IRScov } else { IRScov_t <- 0 }
+  if (time > time_HOU_on) { HOUcov_t <- HOUcov } else { HOUcov_t <- 0 }
   
-  # Unprotected proportion (SK
-  c0 <- 1 - ITNcov_t - IRScov_t + ITNcov_t*IRScov_t
-  #ITN protection (SK) Equation 4a
-  cITN <- ITNcov_t - ITNcov_t*IRScov_t
-  # IRS protection (SK) - Equation 4b
-  cIRS <- IRScov_t - ITNcov_t*IRScov_t
-  #ITN & IRS combined protection (SK) - Equation 4c
-  cCom <- ITNcov_t*IRScov_t
-  # repeating due to IRS
-  rCom <- rIRS + (1-rIRS)*rITN
-  sCom  <- (1-rIRS)*sITN*sIRS
+  #Coverage with LLINs only
+  cITN <- ITNcov_t - ITNcov_t*IRScov_t - ITNcov_t*HOUcov_t + ITNcov_t*IRScov_t*HOUcov_t 
+  # Coverage with IRS only
+  cIRS <- IRScov_t - ITNcov_t*IRScov_t - IRScov_t*HOUcov_t + ITNcov_t*IRScov_t*HOUcov_t
+  # Coverage with house modification only
+  cHOU <- HOUcov_t - ITNcov_t*HOUcov_t - IRScov_t*HOUcov_t + ITNcov_t*IRScov_t*HOUcov_t
+  #LLINs and IRS
+  cITN_IRS <- ITNcov_t*IRScov_t - ITNcov_t*IRScov_t*HOUcov_t
+  #LLINs and HOU
+  cITN_HOU <- ITNcov_t*HOUcov_t - ITNcov_t*IRScov_t*HOUcov_t
+  #IRS and HOU
+  cIRS_HOU <- IRScov_t*HOUcov_t - ITNcov_t*IRScov_t*HOUcov_t
+  #LLIN and IRS and HOU
+  cCom <- ITNcov_t*IRScov_t*HOUcov_t
+  #Neither of them
+  c0 <- 1 - ITNcov_t - IRScov_t - HOUcov_t + ITNcov_t*IRScov_t + ITNcov_t*HOUcov_t + IRScov_t*HOUcov_t- 2* ITNcov_t*IRScov_t*HOUcov_t 
+  
+  # repeating due to LLINs and IRS
+  r_LLIN_IRS <- rIRS + (1-rIRS)*rITN
+  
+  # repeating due to LLINs and HOU
+  r_LLIN_HOU <- rHOU + (1-rHOU)*rITN
+  
+  # repeating due to IRS and HOU
+  r_IRS_HOU <- rHOU + (1-rHOU)*rIRS
+  
+  # repeating due to LLINs, IRS and HOU
+  rCom <- rHOU + (1-rHOU)*rIRS + (1-rHOU)*(1-rIRS)*rITN
   
   #Human - new search probability after a mosq is repelled (SK) by indoor interventions
   zCom_Human <- Q0*cITN*phiB*rITN + Q0*cIRS*phiI*rIRS + Q0*cCom*(phiI-phiB)*rIRS + Q0*cCom*phiB*rCom
-  
+  # zCom_Human <- Q0*(cHOU*phiI*rHOU + cITN*phiB*rITN + cIRS*phiI*rIRS + cITN_HOU*((phiI-phiB)*rHOU+phiB*r_LLIN_HOU) 
+  #                   + cIRS_HOU*phiI*r_IRS_HOU + cITN_IRS*((phiI-phiB)*rIRS+phiB*r_LLIN_IRS) 
+  #                   + cCom*((phiI-phiB)*rIRS + phiB*rCom))
+  # 
+  #ENDELEA HAPA
   # Human - Probability that a surviving mosquito succeeds in feeding during a single attempt:##
-  wCom_Human <- 1 - Q0 + Q0*c0 + Q0*cITN*(1-phiB+phiB*sITN) + Q0*cIRS*(1-phiI+phiI*sIRS) + Q0*cCom*((phiI-phiB)*sIRS + 1-phiI + phiB*sCom)
   
+  #Succesfully Feeding in presence of LLINs and HM
+  s_ITN_HOU <- (1-rHOU)*sITN*sHOU
+  
+  #Succesfully Feeding in presence of LLINs and IRS
+  s_ITN_IRS <- (1-rIRS)*sITN*sIRS
+  
+  #Succesfully Feeding in presence of IRS and HM
+  s_IRS_HOU <- (1-rHOU)*(1-rIRS)*sIRS*sHOU
+  #dIRS - death due to IRS, and dHOU death due to HM - required to normalize SIR and SHM since the killing effect occurs later
+  #Feeding in presence of LLINs and IRS and HM
+  sCom  <- (1-rHOU)*(1-rIRS)*sITN*(sIRS/(sIRS+dIRS))*(sHOU/(sHOU+dHOU))
+  
+  #Prob succesfully feeding in presence of one or all of these interventions
+  # wCom_Human <- Q0*(cHOU*((1-phiI)+phiI*sHOU)+cITN*((1-phiB)+phiB*sITN)+cIRS*((1-phiI)+phiI*sIRS) 
+  #                   + cITN_HOU*((1-phiI)+(phiI-phiB)*sHOU+phiB*s_ITN_HOU)
+  #                   + cITN_IRS*((1-phiI)+(phiI-phiB)*sIRS+phiB*s_ITN_IRS)   
+  #                   + cIRS_HOU*((1-phiI)+(phiI )*s_IRS_HOU               ) 
+  #                   + cCom*((1-phiI)+(phiI-phiB)*s_IRS_HOU+sCom)         )
+  # 
+  wCom_Human <- Q0*cITN*(1-phiB+phiB*sITN) + Q0*cIRS*(1-phiI+phiI*sIRS) + Q0*cCom*((phiI-phiB)*sIRS + 1-phiI + phiB*sCom)
+  
+  #Extracting zcom and wcom
   impactIndoor <- c(zCom_Human,wCom_Human)
+  
+ # print(c(cITN, c0, cCom, sCom,rCom,sITN,zCom_Human,wCom_Human))
   
   return(impactIndoor)
   
 }
+
+##*********Protecting humans outdoor **********************************************##
+
+impactOutdoorProtection = function(time,time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,sSSR,sPPM,Q0,phiI){
+  #. impactInsecticideTreatedCattle: compute both zcom and wcom for insecticide treated cattle (systemic and topical)
+  
+  if (time > time_SPR_on) { SPRcov_t <- SPRcov } else { SPRcov_t <- 0 }
+  if (time > time_PPM_on) { PPMcov_t <- PPMcov } else { PPMcov_t <- 0 }
+  
+  #Coverage spatial repelent only
+  cSPR <- SPRcov_t - SPRcov_t*PPMcov_t
+  # Coverage with personal protection measure only
+  cPPM <- PPMcov_t -  SPRcov_t*PPMcov_t
+  #both applied
+  cCom_Outdoor <-  SPRcov_t*PPMcov_t
+  # neither applied
+  c0_Outdoor <- 1 - SPRcov_t - PPMcov_t +  SPRcov_t*PPMcov_t
+  
+  # repeating due to encountering any
+  r_SPR_PPM <- rSRP + (1-SRP)*rPPM
+  
+  
+  #Human - new search probability after a mosq is repelled by SRP and/or PPM
+  zCom_Outdoor <- Q0*(1-phiI)*(cSPR*rSPR+cPPM*rPPM+cCom_Outdoor*r_SPR_PPM)
+  
+  # succesfully feeding in presence of both interventions
+  s_SPR_PPM <- (1-SRP)*sSRP*sPPM
+  
+  #Add cattle treated with endocticide (systemic and/or topical applied)
+  wCom_Outdoor <- Q0*(1-phiI)*(c0_Outdoor+cSRP*sSRP+cPPM*sPPM+cCom_Outdoor*sSRP*sPPM)
+  
+  impactOutdoor <- c(zCom_Outdoor,wCom_Outdoor)
+  
+  return(impactOutdoor)
+  
+}
+
+
+##**********************Protection by insecticide treated cattle **********************##
 
 impactInsecticideTreatedCattle = function(time,time_ECS_on,ECScov,time_ECT_on,ECTcov,rECT,sECS,sECT,Q0){
   #. impactInsecticideTreatedCattle: compute both zcom and wcom for insecticide treated cattle (systemic and topical)
@@ -62,3 +162,12 @@ impactInsecticideTreatedCattle = function(time,time_ECS_on,ECScov,time_ECT_on,EC
   return(impactCattle)
   
 }
+
+
+
+
+
+###Notes for Sam####
+# 1. Check intersection of three intervention - ITNcov_t*IRScov_t*HOUcov_t
+# 2. Check double counting? c0_Outdoor
+

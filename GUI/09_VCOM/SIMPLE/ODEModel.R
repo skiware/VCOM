@@ -80,8 +80,17 @@ IVM_ode <- function(time, state, theta){
   sITN <- theta[["sITN"]] # Probability of mosquito feeding and surviving in presence of ITNs
   rIRS <- theta[["rIRS"]] # Probability of mosquito repeating a feeding attempt due to IRS
   sIRS <- theta[["sIRS"]] # Probability of mosquito feeding and surviving in presence of IRS
+  dIRS <- theta[["dIRS"]] # death rate after encountering IRS
+  dHOU <- theta[["dHOU"]] # death rate after encountering mosquito proofed housing
   ## Add other interventions - SK
  
+  ## Mosquito proofed housing
+  HOUcov <- theta[["HOUcov"]] # proportion of houses that are mosquito proofed housing
+  time_HOU_on <- theta[["time_HOU_on"]] # When HM is applied (days)
+  rHOU <- theta[["rHOU"]] # Probability of mosquito repeating a feeding attempt due to a mosquito proofed housing
+  sHOU <- theta[["sHOU"]] # Probability of mosquito feeding and surviving in presence of mosquito proofed housing
+  
+  
   ## endocticide-treated cattle (either topical or systemic)
   ECScov <- theta[["ECScov"]] # endocticide (e.g., ivermectin) coverage - systemic coverage
   time_ECS_on <- theta[["time_ECS_on"]] # When cattle are treated (systemic) (days)
@@ -93,13 +102,15 @@ IVM_ode <- function(time, state, theta){
   sECT <- theta[["sECT"]] # Probability of mosquito feeding and surviving in presence of topical-treated cattle
   rECT <- theta[["rECT"]] # Probability of mosquito repeating a feeding attempt due to topical-treated cattle
   
-  
-  # Moden house
-  #HMcov <- theta[["HMcov"]] # proportion of houses that are mosquito proofed housing
-  #rHM <- theta[["rHM"]] # Probability of mosquito repeating a feeding attempt due to a mosquito proofed housing
-  #sHM <- theta[["sHM"]] # Probability of mosquito feeding and surviving in presence of mosquito proofed housing
-  
-  
+  ## Protecting human outdoor - Spatial repellents and Personal protection Measures***************
+  SPRcov <- theta[["SPRcov"]] # proportion of a defined space with Spatial repelents
+  time_SPR_on <- theta[["time_SPR_on"]] # When SPR is on)
+  rSPR <- theta[["rSPR"]] # Probability of mosquito repeating a feeding attempt due personal protection measure (PPM)
+  sSPR <- theta[["sSPR"]] # Probability of mosquito feeding in presence of PPM
+  PPMcov <- theta[["PPMcov"]] # proportion of people outside with PPM
+  time_PPM_on <- theta[["time_PPM_on"]] # When PPM is on)
+  rPPM <- theta[["rPPM"]] # Probability of mosquito repeating a feeding attempt due personal protection measures
+  sPPM <- theta[["sPPM"]] # Probability of mosquito feeding in presence of PPM
   
   
   
@@ -123,59 +134,31 @@ IVM_ode <- function(time, state, theta){
   ## Derived parameters which depend on intervention status:
   
   ##*************************Human - Indoor protection *********************************##
-  if (time > time_ITN_on) { ITNcov_t <- ITNcov } else { ITNcov_t <- 0 }
-  if (time > time_IRS_on) { IRScov_t <- IRScov } else { IRScov_t <- 0 }
- 
-  # Unprotected proportion (SK
-  c0 <- 1 - ITNcov_t - IRScov_t + ITNcov_t*IRScov_t
-  #ITN protection (SK) Equation 4a
-  cITN <- ITNcov_t - ITNcov_t*IRScov_t
-  # IRS protection (SK) - Equation 4b
-  cIRS <- IRScov_t - ITNcov_t*IRScov_t
-  #ITN & IRS combined protection (SK) - Equation 4c
-  cCom <- ITNcov_t*IRScov_t
-  # repeating due to IRS
-  rCom <- rIRS + (1-rIRS)*rITN
-  sCom  <- (1-rIRS)*sITN*sIRS
+  impactIndoor <<- impactIndoorInterventions(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOUcov,time_HOU_on,
+                                            rITN,sITN,rIRS,rHOU,sIRS,sHOU, Q0, phiB, phiI,dHOU,dIRS)
   
-  #Human - new search probability after a mosq is repelled (SK) by indoor interventions
-  zCom_Human <- Q0*cITN*phiB*rITN + Q0*cIRS*phiI*rIRS + Q0*cCom*(phiI-phiB)*rIRS + Q0*cCom*phiB*rCom
   
-  # Human - Probability that a surviving mosquito succeeds in feeding during a single attempt:##
-  wComHuman <- 1 - Q0 + Q0*c0 + Q0*cITN*(1-phiB+phiB*sITN) + Q0*cIRS*(1-phiI+phiI*sIRS) + Q0*cCom*((phiI-phiB)*sIRS + 1-phiI + phiB*sCom)
-  
+  zCom_Human = impactIndoor[1]
+  wCom_Human = impactIndoor[2]
   
   ##*************************** Cattle *********************************************##
-  if (time > time_ECS_on) { ECScov_t <- ECScov } else { ECScov_t <- 0 }
-  if (time > time_ECT_on) { ECTcov_t <- ECTcov } else { ECTcov_t <- 0 }
+  impactCattle = impactInsecticideTreatedCattle(time,time_ECS_on,ECScov,time_ECT_on,ECTcov,rECT,sECS,sECT,Q0)
+  zCom_Cattle = impactCattle[1]
+  wCom_Cattle = impactCattle[2]
   
-  #Coverage with systemic insecticide only
-  cECS <- ECScov_t - ECScov_t*ECTcov_t
-  # Coverage with topical insecticide only
-  cECT <- ECTcov_t - ECScov_t*ECTcov_t
-  #both applied
-  cCom_Cattle <- ECScov_t*ECTcov_t
-  # neither applied
-  c0_Cattle <- 1 - ECScov_t - ECTcov_t + ECScov_t*ECTcov_t
-  
-  # repeating due to encountering insecticide (topical applied (only)) treated cattle
-  #Human - new search probability after a mosq is repelled (SK) by insecticide treated cattle (topical)
-  zCom_Cattle <- (1 - Q0)*(cECT*rECT+cCom_Cattle*rECT)
-  
-  #Add cattle treated with endocticide (systemic and/or topical applied)
-  wComCattle <- (1 - Q0)*(c0_Cattle+cECS*sECS+cECT*sECT+cCom_Cattle*sECS*sECT)
-  
-  ######**************************************************************************#####
+  ######**************************Computing overall impact***********************************#####
   
   ## zCom: Probability of a mosquito being repelled : SAM CHECK THIS
   zCom <- zCom_Cattle + zCom_Human
-  # deltaCom: Inverse of gonotrophic cycle length with ITNs & IRS: (SK equation 2)
+  # deltaCom: Inverse of gonotrophic cycle length with ITNs & IRS: 
   deltaCom <- 1/(tau1/(1-zCom) + tau2)
   
   ### wCom: Probability that a surviving mosquito succeeds in feeding during a single attempt:##
-  wCom <- wComCattle + wComHuman
+  wCom <- wCom_Cattle + wCom_Human
   #******************************************************************************************
-  ## muVCom: Female mosquito death rate in presence of ITNs & IRS:
+  
+  
+  ## muVCom: Female mosquito death rate in presence of interventions:
   
   # probability of surviving feeding period in the absence of an intervetion (SK)
   p10 <- exp(-muV*tau1)
@@ -220,3 +203,4 @@ IVM_ode <- function(time, state, theta){
   return(list(c(dEL, dLL, dPL, dSV, dEV, dIV))) 
 }
 ######################################################################################
+

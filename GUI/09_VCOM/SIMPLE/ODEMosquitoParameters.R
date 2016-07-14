@@ -33,10 +33,16 @@ getTheta = function(
     IRScov      = interventionParameters[["IRScov"]],
     ECScov      = interventionParameters[["ECScov"]],
     ECTcov      = interventionParameters[["ECTcov"]],
+    HOUcov      = interventionParameters[["HOUcov"]],
+    SPRcov      = interventionParameters[["SPRcov"]],
+    PPMcov      = interventionParameters[["PPMcov"]],
     time_ITN_on = interventionParameters[["time_ITN_on"]],
     time_IRS_on = interventionParameters[["time_IRS_on"]],
+    time_HOU_on = interventionParameters[["time_HOU_on"]],
     time_ECS_on = interventionParameters[["time_ECS_on"]],
     time_ECT_on = interventionParameters[["time_ECT_on"]],
+    time_SPR_on = interventionParameters[["time_SPR_on"]],
+    time_PPM_on = interventionParameters[["time_PPM_on"]],
     muV         = speciesSpecificParameters[["muV"]],
     Q0          = speciesSpecificParameters[["Q0"]],
     phiB        = speciesSpecificParameters[["phiB"]],
@@ -45,9 +51,18 @@ getTheta = function(
     sITN        = speciesSpecificParameters[["sITN"]],
     rIRS        = speciesSpecificParameters[["rIRS"]],
     sIRS        = speciesSpecificParameters[["sIRS"]],
+    rHOU        = speciesSpecificParameters[["rHOU"]],
+    sHOU        = speciesSpecificParameters[["sHOU"]],
+    rSPR        = speciesSpecificParameters[["rSPR"]],
+    sSPR        = speciesSpecificParameters[["sSPR"]],
+    rPPM        = speciesSpecificParameters[["rPPM"]],
+    sPPM        = speciesSpecificParameters[["sPPM"]],
+    rECS        = speciesSpecificParameters[["rECS"]],
     sECS        = speciesSpecificParameters[["sECS"]],
     rECT        = speciesSpecificParameters[["rECT"]],
     sECT        = speciesSpecificParameters[["sECT"]],
+    dIRS        = speciesSpecificParameters[["dIRS"]],
+    dHOU        = speciesSpecificParameters[["dHOU"]],
     f0          = additionalTransmissionParameters[["f0"]],
     epsilon0    = additionalTransmissionParameters[["epsilon0"]],
     iH_eq       = additionalTransmissionParameters[["iH_eq"]],
@@ -73,21 +88,25 @@ getTheta = function(
 #* sBIO:
 #* rSRE:
 #* sSRE:
+#* rSPR:    Probability of mosquito repeating a feeding attempt due to spatial repelent
+#* sSPR:    Probability of mosquito feeding succesfully in presence to spatial repelent
+#* rPPM:    Probability of mosquito repeating a feeding attempt due to personal protection measures
+#* sPPM:    Probability of mosquito feeding succesfully in presence to personal protection measures
 #* rIRS:    Probability of mosquito repeating a feeding attempt due to IRS
 #* sIRS:    Probability of mosquito feeding and surviving in presence of IRS
 #* rITN:    Probability of mosquito repeating a feeding attempt due to IRS
 #* sITN:    Probability of mosquito feeding and surviving in presence of ITN
 #* rECT:    Probability of mosquito repeating a feeding attempt due to instecide (topical) treated cattle
 #* sECT:    Probability of mosquito feeding and surviving in presence of instecide (topical) treated cattle
+#* rECS:    Probability of mosquito repeating a feeding attempt due to instecide (systemic) treated cattle
 #* sECS:    Probability of mosquito feeding and surviving in presence of instecide (systemic) treated cattle
-#* rIVM:    
-#* sIVM:
+#* dHOU:    Death due to encountering mosquito proofed housing
+#* dIRS:    Death due to encountering IRS treated house
 #* rHOU:
 #* sHOU:
 #* rODO:
 #* sODO:
-#* rSPA:
-#* sSPA:
+
 #------------------------------------------------------------------------
 getAnGambiaeParameters = function(){
   #. getAnGambiaeParameters: Returns the list of Anopheles Gambiae specific parameters
@@ -95,10 +114,11 @@ getAnGambiaeParameters = function(){
     muV = 1/7.6, Q0 = 0.92, phiB = 0.89, phiI = 0.97,
     rOVI = 0.00, sOVI = 0.00, rFOG = 0.00, sFOG = 0.00,
     rLAR = 0.00, sLAR = 0.00, rBIO = 0.00, sBIO = 0.00,
-    rSRE = 0.00, sSRE = 0.00, rIRS = 0.60, sIRS = 0.00,
-    rITN = 0.56, sITN = 0.03, rECS = 0.40, sECS = 0.05,
+    rSRE = 0.00, sSRE = 0.00, rIRS = 0.00, sIRS = 0.00,
+    rITN = 0.56, sITN = 0.03, rECS = 0.00, sECS = 0.00,
     rHOU = 0.00, sHOU = 0.00, rODO = 0.00, sODO = 0.00,
-    rSPA = 0.00, sSPA = 0.00, rECT = 0.00, sECT = 0.50
+    rSPR = 0.00, sSPR = 0.00, rECT = 0.00, sECT = 0.00,
+    rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10
   )
 }
 getAnArabiensisParameters = function(){
@@ -110,7 +130,8 @@ getAnArabiensisParameters = function(){
     rSRE = 0.00, sSRE = 0.00, rIRS = 0.60, sIRS = 0.00,
     rITN = 0.56, sITN = 0.03, rECS = 0.50, sECS = 0.50,
     rHOU = 0.00, sHOU = 0.00, rODO = 0.00, sODO = 0.00,
-    rSPA = 0.00, sSPA = 0.00, rECT = 0.50, sECT = 0.50
+    rSPR = 0.00, sSPR = 0.00, rECT = 0.50, sECT = 0.50,
+    rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10
   )
 }
 getAnFunestusParameters = function(){
@@ -122,7 +143,8 @@ getAnFunestusParameters = function(){
     rSRE = 0.00, sSRE = 0.00, rIRS = 0.60, sIRS = 0.00,
     rITN = 0.56, sITN = 0.03, rECS = 0.60, sECS = 0.60,
     rHOU = 0.00, sHOU = 0.00, rODO = 0.00, sODO = 0.00,
-    rSPA = 0.00, sSPA = 0.00, rECT = 0.60, sECT = 0.60
+    rSPR = 0.00, sSPR = 0.00, rECT = 0.60, sECT = 0.60,
+    rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10
   )
 }
 ######################################################################################
