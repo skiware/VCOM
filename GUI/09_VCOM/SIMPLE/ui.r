@@ -19,6 +19,9 @@ source("ODEMosquitoParameters.R")
 source("ODEAuxiliaryFunctions.R")
 source("ODEControlMeasuresParameters.R")
 source("ODETransmissionParameters.R")
+source("ODEInterventions.R")
+#source("ODEInterventions - FirstPass.R")
+source("ODEModelOutput.R")
 ################################################################################
 # GLOBAL GUI PARAMETERS ########################################################
 importedFile = NULL
@@ -95,7 +98,7 @@ shinyUI(
               fluidRow(
                 column(COVERAGE_LABELS_SIZE,h5("BIO",align="left")),
                 column(COVERAGE_BAR_SIZE,sliderInput("BIOcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
-                column(COVERAGE_INIT_SIZE,numericInput("time_OVI_on",NULL,value=0,min=0,max=365))
+                column(COVERAGE_INIT_SIZE,numericInput("time_BIO_on",NULL,value=0,min=0,max=365))
               ),
               fluidRow(
                 column(COVERAGE_LABELS_SIZE,h5("SRE",align="left")),
@@ -113,9 +116,14 @@ shinyUI(
                 column(COVERAGE_INIT_SIZE,numericInput("time_IRS_on",NULL,value=0,min=0,max=365))
               ),
               fluidRow(
-                column(COVERAGE_LABELS_SIZE,h5("IVM",align="left")),
-                column(COVERAGE_BAR_SIZE,sliderInput("IVMcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
-                column(COVERAGE_INIT_SIZE,numericInput("time_IVM_on",NULL,value=0,min=0,max=365))
+                column(COVERAGE_LABELS_SIZE,h5("ECS",align="left")),
+                column(COVERAGE_BAR_SIZE,sliderInput("ECScov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
+                column(COVERAGE_INIT_SIZE,numericInput("time_ECS_on",NULL,value=0,min=0,max=365))
+              ),
+              fluidRow(
+                column(COVERAGE_LABELS_SIZE,h5("ECT",align="left")),
+                column(COVERAGE_BAR_SIZE,sliderInput("ECTcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
+                column(COVERAGE_INIT_SIZE,numericInput("time_ECT_on",NULL,value=0,min=0,max=365))
               ),
               fluidRow(
                 column(COVERAGE_LABELS_SIZE,h5("HOU",align="left")),
@@ -128,9 +136,14 @@ shinyUI(
                 column(COVERAGE_INIT_SIZE,numericInput("time_ODO_on",NULL,value=0,min=0,max=365))
               ),
               fluidRow(
-                column(COVERAGE_LABELS_SIZE,h5("SPA",align="left")),
-                column(COVERAGE_BAR_SIZE,sliderInput("SPAcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
-                column(COVERAGE_INIT_SIZE,numericInput("time_SPA_on",NULL,value=0,min=0,max=365))
+                column(COVERAGE_LABELS_SIZE,h5("SPR",align="left")),
+                column(COVERAGE_BAR_SIZE,sliderInput("SPRcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
+                column(COVERAGE_INIT_SIZE,numericInput("time_SPR_on",NULL,value=0,min=0,max=365))
+              ),
+              fluidRow(
+                column(COVERAGE_LABELS_SIZE,h5("PPM",align="left")),
+                column(COVERAGE_BAR_SIZE,sliderInput("PPMcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
+                column(COVERAGE_INIT_SIZE,numericInput("time_PPM_on",NULL,value=0,min=0,max=365))
               )
             ),mainPanel(
               plotOutput("plotTrajectory"),
