@@ -58,7 +58,7 @@ shinyUI(
               helpText("(1) Select the mosquito species."),
               helpText("(2) Select the number of days."),
               helpText("(3) Run the model!"),
-              helpText("(4) Setup the desired interventions and repeat step 3 as required (for now only ITN and IRS are implemented)."),
+              helpText("(4) Setup the desired interventions and repeat step 3 as required (ITN,IRS,HOU,ECS,ECT)."),
               helpText("(5) Additionally you can download results in the 'Files Output' tab."),
               fluidRow(h3("1. Mosquito Selection")),
               radioButtons("radioSpecies",label=NULL,
