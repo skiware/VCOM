@@ -32,8 +32,10 @@
 #* time_HOU_on:   When House Modifications are applied (days)
 #* ODOcov:        Odor Traps coverage
 #* time_ODO_on:   When Odor Traps are applied (days)
-#* SPAcov:        Spatial Repellents coverage
-#* time_SPA_on:   When Space Repellents are applied (days)
+#* SPRcov:        Spatial Repellents coverage
+#* time_SPR_on:   When Space Repellents are applied (days)
+#* PPMcov:
+#* time_PPM_on:   
 #------------------------------------------------------------------------
 getInterventionsParameters = function(
   OVIcov=0,   time_OVI_on=0,
