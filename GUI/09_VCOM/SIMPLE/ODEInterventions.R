@@ -19,9 +19,9 @@
 
 
 ##***********************************Protecting Humans Indoor**********************##
-impactIndoorInterventions = function(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOUcov,time_HOU_on,
+impactIndoorProtection = function(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOUcov,time_HOU_on,
                                      rITN,sITN,rIRS,rHOU,sIRS,sHOU, Q0, phiB, phiI,dHOU,dIRS){
-  #. impactIndoorInterventions: compute both zcom and wcom for indoor interventions
+  #. impactIndoorProtection: compute both zcom and wcom for indoor interventions
   
   ##*************************Human - Indoor protection *********************************##
   if (time > time_ITN_on) { ITNcov_t <- ITNcov } else { ITNcov_t <- 0 }
@@ -87,10 +87,11 @@ impactIndoorInterventions = function(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,
   # 
   wCom_Human <- Q0*cITN*(1-phiB+phiB*sITN) + Q0*cIRS*(1-phiI+phiI*sIRS) + Q0*cCom*((phiI-phiB)*sIRS + 1-phiI + phiB*sCom)
   
+  #browser()
   #Extracting zcom and wcom
-  impactIndoor <- c(zCom_Human,wCom_Human)
+  impactIndoor <- c(zCom_Human,wCom_Human,c0)
   
- # print(c(cITN, c0, cCom, sCom,rCom,sITN,zCom_Human,wCom_Human))
+  #print(c(cITN, c0, cCom, sCom,rCom,sITN,zCom_Human,wCom_Human))
   
   return(impactIndoor)
   
@@ -98,7 +99,7 @@ impactIndoorInterventions = function(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,
 
 ##*********Protecting humans outdoor **********************************************##
 
-impactOutdoorProtection = function(time,time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,sSSR,sPPM,Q0,phiI){
+impactOutdoorProtection = function(time,time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,Q0,phiI,c0){
   #. impactInsecticideTreatedCattle: compute both zcom and wcom for insecticide treated cattle (systemic and topical)
   
   if (time > time_SPR_on) { SPRcov_t <- SPRcov } else { SPRcov_t <- 0 }
@@ -114,20 +115,24 @@ impactOutdoorProtection = function(time,time_SPR_on,SPRcov,time_PPM_on,PPMcov,rS
   c0_Outdoor <- 1 - SPRcov_t - PPMcov_t +  SPRcov_t*PPMcov_t
   
   # repeating due to encountering any
-  r_SPR_PPM <- rSRP + (1-SRP)*rPPM
+  r_SPR_PPM <- rSPR + (1-rSPR)*rPPM
   
+  #browser()
   
   #Human - new search probability after a mosq is repelled by SRP and/or PPM
-  zCom_Outdoor <- Q0*(1-phiI)*(cSPR*rSPR+cPPM*rPPM+cCom_Outdoor*r_SPR_PPM)
+  zCom_Outdoor <- Q0*c0*(cSPR*rSPR+cPPM*rPPM+cCom_Outdoor*r_SPR_PPM)
   
   # succesfully feeding in presence of both interventions
-  s_SPR_PPM <- (1-SRP)*sSRP*sPPM
+  s_SPR_PPM <- (1-rSPR)*sSPR*sPPM
   
   #Add cattle treated with endocticide (systemic and/or topical applied)
-  wCom_Outdoor <- Q0*(1-phiI)*(c0_Outdoor+cSRP*sSRP+cPPM*sPPM+cCom_Outdoor*sSRP*sPPM)
+  #wCom_Outdoor <- Q0*(1-phiI)*(c0_Outdoor+cSPR*sSPR+cPPM*sPPM+cCom_Outdoor*s_SPR_PPM)
+  wCom_Outdoor <- Q0*c0*(c0_Outdoor+cSPR*sSPR+cPPM*sPPM+cCom_Outdoor*s_SPR_PPM)
   
   impactOutdoor <- c(zCom_Outdoor,wCom_Outdoor)
   
+  #browser()
+ 
   return(impactOutdoor)
   
 }
@@ -153,7 +158,8 @@ impactInsecticideTreatedCattle = function(time,time_ECS_on,ECScov,time_ECT_on,EC
   # repeating due to encountering insecticide (topical applied (only)) treated cattle
   #Human - new search probability after a mosq is repelled (SK) by insecticide treated cattle (topical)
   zCom_Cattle <- (1 - Q0)*(cECT*rECT+cCom_Cattle*rECT)
-  
+ 
+   #browser()
   #Add cattle treated with endocticide (systemic and/or topical applied)
   wCom_Cattle <- (1 - Q0)*(c0_Cattle+cECS*sECS+cECT*sECT+cCom_Cattle*sECS*sECT)
   
@@ -170,4 +176,5 @@ impactInsecticideTreatedCattle = function(time,time_ECS_on,ECScov,time_ECT_on,EC
 ###Notes for Sam####
 # 1. Check intersection of three intervention - ITNcov_t*IRScov_t*HOUcov_t
 # 2. Check double counting? c0_Outdoor
+# 3. (1-phiI) not included in oudoor? but co
 

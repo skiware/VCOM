@@ -133,13 +133,25 @@ IVM_ode <- function(time, state, theta){
   K <- 2*NV_eq*muV*durLL*(1 + muPL*durPL)*gamma*(omega+1)/(omega/(muLL*durEL) - 1/(muLL*durLL) - 1) # Larval carrying capacity
   ## Derived parameters which depend on intervention status:
   
+  #browser()
   ##*************************Human - Indoor protection *********************************##
-  impactIndoor <<- impactIndoorInterventions(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOUcov,time_HOU_on,
+  impactIndoor <<- impactIndoorProtection(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOUcov,time_HOU_on,
                                             rITN,sITN,rIRS,rHOU,sIRS,sHOU, Q0, phiB, phiI,dHOU,dIRS)
   
+  ##*******************For testing only****************#
+  #impactIndoor <<- impactIndoorProtection(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,rITN,sITN,rIRS,sIRS,Q0, phiB, phiI)
   
-  zCom_Human = impactIndoor[1]
-  wCom_Human = impactIndoor[2]
+  
+  zCom_Human_Indoor = impactIndoor[1]
+  wCom_Human_Indoor = impactIndoor[2]
+  c0                = impactIndoor[3]  #Extract cO from indoor see eqn
+  
+  ##*************************Human - Outdoor protection *********************************##
+   impactOutdoor <<- impactOutdoorProtection(time,time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,Q0,phiI,c0)
+  # 
+   
+   zCom_Human_Outdoor = impactOutdoor[1]
+   wCom_Human_Outdoor = impactOutdoor[2]
   
   ##*************************** Cattle *********************************************##
   impactCattle = impactInsecticideTreatedCattle(time,time_ECS_on,ECScov,time_ECT_on,ECTcov,rECT,sECS,sECT,Q0)
@@ -149,12 +161,16 @@ IVM_ode <- function(time, state, theta){
   ######**************************Computing overall impact***********************************#####
   
   ## zCom: Probability of a mosquito being repelled : SAM CHECK THIS
-  zCom <- zCom_Cattle + zCom_Human
+  zCom <- zCom_Cattle + zCom_Human_Outdoor + zCom_Human_Indoor
+  #zCom <- zCom_Cattle  + zCom_Human_Indoor
+  
+  ##************************************************
   # deltaCom: Inverse of gonotrophic cycle length with ITNs & IRS: 
   deltaCom <- 1/(tau1/(1-zCom) + tau2)
   
   ### wCom: Probability that a surviving mosquito succeeds in feeding during a single attempt:##
-  wCom <- wCom_Cattle + wCom_Human
+  wCom <- wCom_Cattle + wCom_Human_Outdoor + wCom_Human_Indoor
+  #wCom <- wCom_Cattle  + wCom_Human_Indoor
   #******************************************************************************************
   
   

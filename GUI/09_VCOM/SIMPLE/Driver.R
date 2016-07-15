@@ -19,6 +19,7 @@ source("ODEAuxiliaryFunctions.R")
 source("ODEControlMeasuresParameters.R")
 source("ODETransmissionParameters.R")
 source("ODEInterventions.R")
+#source("ODEInterventions - FirstPass.R")
 source("ODEModelOutput.R")
 
 ## Get parameter for a specific specie ######
@@ -29,22 +30,22 @@ MOSQUITO_PARAMETERS = getAnGambiaeParameters()
 # Set values for control measures??
 INITIAL_TIME_VALUE   = 365
 #LLINs, coverage value, time it is on
-INITIAL_ITN_COVERAGE = 0.50
-INITIAL_ITN_TIME     = 100
+INITIAL_ITN_COVERAGE = .60
+INITIAL_ITN_TIME     = 40
 #IRS
-INITIAL_IRS_COVERAGE = 0.00
-INITIAL_IRS_TIME     = 200
+INITIAL_IRS_COVERAGE = 0.50
+INITIAL_IRS_TIME     = 20
 #House modification
-INITIAL_HOU_COVERAGE = 0.0
-INITIAL_HOU_TIME     = 200
+INITIAL_HOU_COVERAGE = 0.20
+INITIAL_HOU_TIME     = 20
 #Cattle - Systemic
-INITIAL_ECS_COVERAGE = 0.0
-INITIAL_ECS_TIME     = 200
+INITIAL_ECS_COVERAGE = 0.20
+INITIAL_ECS_TIME     = 20
 #Cattle - Topical
-INITIAL_ECT_COVERAGE = 0.00
-INITIAL_ECT_TIME     = 100
+INITIAL_ECT_COVERAGE = 0.20
+INITIAL_ECT_TIME     =20
 
-
+# Sam - check the behaviour of cattle
 ## Get intervetions parameters - LLINs for testing
 #INTERVENTION_PARAMETERS = getInterventionsParameters(ITNcov=INITIAL_ITN_COVERAGE,time_ITN_on=INITIAL_ITN_TIME)
 
@@ -82,3 +83,4 @@ plotTrajectory(IVM_traj)
 
 ##Notes for Sam #######
 #1. Adding rECT (repelency for topical) - number of Suc Mosq increases instead of descreading - Check behaviour
+#browser() IF YOU WANT TO DEBURG
