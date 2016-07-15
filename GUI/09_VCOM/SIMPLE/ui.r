@@ -147,7 +147,8 @@ shinyUI(
               )
             ),mainPanel(
               plotOutput("plotTrajectory"),
-              plotOutput("plotDemographics")
+              plotOutput("plotDemographics"),
+              textOutput("results")
             )
           ),
           helpText("CSS theme downloaded from: http://bootswatch.com (MIT licence)"),
@@ -166,7 +167,8 @@ shinyUI(
               downloadButton("downloadPlot", 'Download Trajectory Plot')
             )
           )
-        )
+        )#,
+        #tags$script('$(document).on("keydown", function(e){Shiny.onInputChange("keypressed", e.which);});')
       )
     )
   )

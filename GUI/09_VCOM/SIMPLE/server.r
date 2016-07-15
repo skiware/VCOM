@@ -82,6 +82,7 @@ shinyServer(
         ggsave(file,plot=plotTrajectory(IVM_traj),device=device)
       }
     )
+    #output$results = renderPrint({if(input$keypressed==13){input$keypressed}})
     #############################################################################
   })
 #---#############################################################################
