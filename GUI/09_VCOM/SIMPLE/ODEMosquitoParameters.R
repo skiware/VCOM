@@ -36,6 +36,7 @@ getTheta = function(
     HOUcov      = interventionParameters[["HOUcov"]],
     SPRcov      = interventionParameters[["SPRcov"]],
     PPMcov      = interventionParameters[["PPMcov"]],
+    OBTcov      = interventionParameters[["OBTcov"]],
     time_ITN_on = interventionParameters[["time_ITN_on"]],
     time_IRS_on = interventionParameters[["time_IRS_on"]],
     time_HOU_on = interventionParameters[["time_HOU_on"]],
@@ -43,6 +44,7 @@ getTheta = function(
     time_ECT_on = interventionParameters[["time_ECT_on"]],
     time_SPR_on = interventionParameters[["time_SPR_on"]],
     time_PPM_on = interventionParameters[["time_PPM_on"]],
+    time_OBT_on = interventionParameters[["time_OBT_on"]],
     muV         = speciesSpecificParameters[["muV"]],
     Q0          = speciesSpecificParameters[["Q0"]],
     phiB        = speciesSpecificParameters[["phiB"]],
@@ -63,6 +65,7 @@ getTheta = function(
     sECT        = speciesSpecificParameters[["sECT"]],
     dIRS        = speciesSpecificParameters[["dIRS"]],
     dHOU        = speciesSpecificParameters[["dHOU"]],
+    aOBT        = speciesSpecificParameters[["aOBT"]],
     f0          = additionalTransmissionParameters[["f0"]],
     epsilon0    = additionalTransmissionParameters[["epsilon0"]],
     iH_eq       = additionalTransmissionParameters[["iH_eq"]],
@@ -102,6 +105,7 @@ getTheta = function(
 #* sECS:    Probability of mosquito feeding and surviving in presence of instecide (systemic) treated cattle
 #* dHOU:    Death due to encountering mosquito proofed housing
 #* dIRS:    Death due to encountering IRS treated house
+#* aOBT:    availability of one odor baited trap in relation to one human
 #* rHOU:
 #* sHOU:
 #* rODO:
@@ -118,7 +122,8 @@ getAnGambiaeParameters = function(){
     rITN = 0.56, sITN = 0.03, rECS = 0.00, sECS = 0.20,
     rHOU = 0.00, sHOU = 0.00, rODO = 0.00, sODO = 0.00,
     rSPR = 0.00, sSPR = 0.00, rECT = 0.30, sECT = 0.40,
-    rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10
+    rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10,
+    aOBT = 2.00
   )
 }
 getAnArabiensisParameters = function(){
@@ -131,7 +136,8 @@ getAnArabiensisParameters = function(){
     rITN = 0.56, sITN = 0.03, rECS = 0.50, sECS = 0.50,
     rHOU = 0.00, sHOU = 0.00, rODO = 0.00, sODO = 0.00,
     rSPR = 0.00, sSPR = 0.00, rECT = 0.50, sECT = 0.50,
-    rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10
+    rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10,
+    aOBT = 0.00
   )
 }
 getAnFunestusParameters = function(){
@@ -144,7 +150,8 @@ getAnFunestusParameters = function(){
     rITN = 0.56, sITN = 0.03, rECS = 0.60, sECS = 0.60,
     rHOU = 0.00, sHOU = 0.00, rODO = 0.00, sODO = 0.00,
     rSPR = 0.00, sSPR = 0.00, rECT = 0.60, sECT = 0.60,
-    rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10
+    rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10,
+    aOBT = 0.00
   )
 }
 ######################################################################################

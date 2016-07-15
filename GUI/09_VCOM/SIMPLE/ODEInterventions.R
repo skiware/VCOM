@@ -17,12 +17,28 @@
 
 ##******************************************Interventions*****************************##
 
+##**********The impact of Odor baited traps ****##############################
+impactOdorBaitedTraps = function(time,Q0,aOBT,OBTcov,time_OBT_on){
+  #. impactOdorBaitedTraps: compute the impact of odor baited traps in reducing Q0
+  #aOBT = availability
+  #OBTcov = coverage same as ratio trap to human
+  
+  if (time > time_OBT_on) { OBTcov_t <- OBTcov } else { OBTcov_t <- 0 }
+  
+  Q0_t_h = Q0*(1/(1+aOBT*OBTcov))  #Impact on Q0 for humans
+  Q0_t_c = (1-Q0)*(1/(1+aOBT*OBTcov)) #Impact on 1-Q0 prop going to Cattle
+  impactOdor <- c(Q0_t_h,Q0_t_c)
+  
+  return(impactOdor)
+  
+}
 
 ##***********************************Protecting Humans Indoor**********************##
 impactIndoorProtection = function(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOUcov,time_HOU_on,
-                                     rITN,sITN,rIRS,rHOU,sIRS,sHOU, Q0, phiB, phiI,dHOU,dIRS){
+                                     rITN,sITN,rIRS,rHOU,sIRS,sHOU, Q0_t_h, phiB, phiI,dHOU,dIRS){
   #. impactIndoorProtection: compute both zcom and wcom for indoor interventions
   
+  Q0 = Q0_t_h  # Incorporate odor baited traps
   ##*************************Human - Indoor protection *********************************##
   if (time > time_ITN_on) { ITNcov_t <- ITNcov } else { ITNcov_t <- 0 }
   if (time > time_IRS_on) { IRScov_t <- IRScov } else { IRScov_t <- 0 }
@@ -99,8 +115,10 @@ impactIndoorProtection = function(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOU
 
 ##*********Protecting humans outdoor **********************************************##
 
-impactOutdoorProtection = function(time,time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,Q0,phiI,c0){
+impactOutdoorProtection = function(time,time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,Q0_t_h,phiI,c0){
   #. impactInsecticideTreatedCattle: compute both zcom and wcom for insecticide treated cattle (systemic and topical)
+  
+  Q0 = Q0_t_h  # Incorporate odor baited traps
   
   if (time > time_SPR_on) { SPRcov_t <- SPRcov } else { SPRcov_t <- 0 }
   if (time > time_PPM_on) { PPMcov_t <- PPMcov } else { PPMcov_t <- 0 }
@@ -140,8 +158,9 @@ impactOutdoorProtection = function(time,time_SPR_on,SPRcov,time_PPM_on,PPMcov,rS
 
 ##**********************Protection by insecticide treated cattle **********************##
 
-impactInsecticideTreatedCattle = function(time,time_ECS_on,ECScov,time_ECT_on,ECTcov,rECT,sECS,sECT,Q0){
+impactInsecticideTreatedCattle = function(time,time_ECS_on,ECScov,time_ECT_on,ECTcov,rECT,sECS,sECT,Q0_t_c){
   #. impactInsecticideTreatedCattle: compute both zcom and wcom for insecticide treated cattle (systemic and topical)
+  Q0_t_C = Q0_t_c  # Incorporate odor baited traps - prop going to cattle
   
   if (time > time_ECS_on) { ECScov_t <- ECScov } else { ECScov_t <- 0 }
   if (time > time_ECT_on) { ECTcov_t <- ECTcov } else { ECTcov_t <- 0 }
@@ -157,11 +176,12 @@ impactInsecticideTreatedCattle = function(time,time_ECS_on,ECScov,time_ECT_on,EC
   
   # repeating due to encountering insecticide (topical applied (only)) treated cattle
   #Human - new search probability after a mosq is repelled (SK) by insecticide treated cattle (topical)
-  zCom_Cattle <- (1 - Q0)*(cECT*rECT+cCom_Cattle*rECT)
+  #zCom_Cattle <- (1 - Q0)*(cECT*rECT+cCom_Cattle*rECT)
+  zCom_Cattle <- Q0_t_C*(cECT*rECT+cCom_Cattle*rECT)
  
    #browser()
   #Add cattle treated with endocticide (systemic and/or topical applied)
-  wCom_Cattle <- (1 - Q0)*(c0_Cattle+cECS*sECS+cECT*sECT+cCom_Cattle*sECS*sECT)
+  wCom_Cattle <- Q0_t_C*(c0_Cattle+cECS*sECS+cECT*sECT+cCom_Cattle*sECS*sECT)
   
   impactCattle <- c(zCom_Cattle,wCom_Cattle)
   

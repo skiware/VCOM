@@ -112,7 +112,10 @@ IVM_ode <- function(time, state, theta){
   rPPM <- theta[["rPPM"]] # Probability of mosquito repeating a feeding attempt due personal protection measures
   sPPM <- theta[["sPPM"]] # Probability of mosquito feeding in presence of PPM
   
-  
+  ##***********Odor baited traps ********************
+  time_OBT_on <- theta[["time_OBT_on"]] # When OBT is on)
+  aOBT <- theta[["aOBT"]] # availability of one trap in relation to one human
+  OBTcov <- theta[["OBTcov"]] # ratio of traps to human (i.e., coverage)
   
   ## Add other scenarios e.g., probability of dying after feeding FOR each intervention - SK
   ## States:  - Defn added by SK
@@ -134,9 +137,16 @@ IVM_ode <- function(time, state, theta){
   ## Derived parameters which depend on intervention status:
   
   #browser()
+  
+  ##************************Host seeking - Odor baited traps********************
+  impactOdorT <<- impactOdorBaitedTraps(time,Q0,aOBT,OBTcov,time_OBT_on)
+  
+  Q0_t_h = impactOdorT[1]
+  Q0_t_c = impactOdorT[2]   # Proportion to cattle affected by traps
+  
   ##*************************Human - Indoor protection *********************************##
   impactIndoor <<- impactIndoorProtection(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOUcov,time_HOU_on,
-                                            rITN,sITN,rIRS,rHOU,sIRS,sHOU, Q0, phiB, phiI,dHOU,dIRS)
+                                            rITN,sITN,rIRS,rHOU,sIRS,sHOU, Q0_t_h, phiB, phiI,dHOU,dIRS)
   
   ##*******************For testing only****************#
   #impactIndoor <<- impactIndoorProtection(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,rITN,sITN,rIRS,sIRS,Q0, phiB, phiI)
@@ -147,14 +157,14 @@ IVM_ode <- function(time, state, theta){
   c0                = impactIndoor[3]  #Extract cO from indoor see eqn
   
   ##*************************Human - Outdoor protection *********************************##
-   impactOutdoor <<- impactOutdoorProtection(time,time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,Q0,phiI,c0)
+   impactOutdoor <<- impactOutdoorProtection(time,time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,Q0_t_h,phiI,c0)
   # 
    
    zCom_Human_Outdoor = impactOutdoor[1]
    wCom_Human_Outdoor = impactOutdoor[2]
   
   ##*************************** Cattle *********************************************##
-  impactCattle = impactInsecticideTreatedCattle(time,time_ECS_on,ECScov,time_ECT_on,ECTcov,rECT,sECS,sECT,Q0)
+  impactCattle = impactInsecticideTreatedCattle(time,time_ECS_on,ECScov,time_ECT_on,ECTcov,rECT,sECS,sECT,Q0_t_c)
   zCom_Cattle = impactCattle[1]
   wCom_Cattle = impactCattle[2]
   

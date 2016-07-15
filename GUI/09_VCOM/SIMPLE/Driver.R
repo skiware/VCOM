@@ -29,20 +29,24 @@ MOSQUITO_PARAMETERS = getAnGambiaeParameters()
 
 # Set values for control measures??
 INITIAL_TIME_VALUE   = 365
+
+#Odor Traps, coverage value, time it is on
+INITIAL_OBT_COVERAGE = .00
+INITIAL_OBT_TIME     = 0
 #LLINs, coverage value, time it is on
 INITIAL_ITN_COVERAGE = .60
-INITIAL_ITN_TIME     = 40
+INITIAL_ITN_TIME     = 80
 #IRS
-INITIAL_IRS_COVERAGE = 0.50
-INITIAL_IRS_TIME     = 20
+INITIAL_IRS_COVERAGE = 0.0
+INITIAL_IRS_TIME     = 50
 #House modification
-INITIAL_HOU_COVERAGE = 0.20
-INITIAL_HOU_TIME     = 20
+INITIAL_HOU_COVERAGE = 0.0
+INITIAL_HOU_TIME     = 60
 #Cattle - Systemic
-INITIAL_ECS_COVERAGE = 0.20
-INITIAL_ECS_TIME     = 20
+INITIAL_ECS_COVERAGE = 0.0
+INITIAL_ECS_TIME     = 60
 #Cattle - Topical
-INITIAL_ECT_COVERAGE = 0.20
+INITIAL_ECT_COVERAGE = 0.0
 INITIAL_ECT_TIME     =20
 
 # Sam - check the behaviour of cattle
@@ -51,6 +55,8 @@ INITIAL_ECT_TIME     =20
 
 ## Get intervetions parameters
 INTERVENTION_PARAMETERS = getInterventionsParameters(
+                                  #Odor Traps
+                          OBTcov=INITIAL_OBT_COVERAGE,time_OBT_on=INITIAL_OBT_TIME,
                                  #LLINs
                           ITNcov=INITIAL_ITN_COVERAGE,time_ITN_on=INITIAL_ITN_TIME,
                                   #IRS
@@ -60,7 +66,7 @@ INTERVENTION_PARAMETERS = getInterventionsParameters(
                                   #Cattle - Systemic
                           ECScov=INITIAL_ECS_COVERAGE,time_ECS_on=INITIAL_ECS_TIME,
                                  #Cattle - topical
-                           ECTcov=INITIAL_ECT_COVERAGE,time_ECT_on=INITIAL_ECT_TIME)
+                          ECTcov=INITIAL_ECT_COVERAGE,time_ECT_on=INITIAL_ECT_TIME)
 
 
 theta <<- getTheta(interventionParameters=INTERVENTION_PARAMETERS)
