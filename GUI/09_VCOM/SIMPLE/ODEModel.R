@@ -194,9 +194,9 @@ IVM_ode <- function(time, state, theta){
   # EIR
   # Sam, add delay explanation in the write-up
   ## ODEs:
-  if (time < durEV) {
+  if(time < durEV){
     SVLag <- SV
-  } else {
+  }else{
     lagStates <- lagvalue(time-durEV)
     SVLag <- lagStates[4]
   }
