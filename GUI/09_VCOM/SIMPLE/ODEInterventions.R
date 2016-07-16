@@ -17,6 +17,17 @@
 
 ##******************************************Interventions*****************************##
 
+##**********Aquatic habitats - impact of source management ****##############################
+impactSourceReduction = function(time,eBIO,BIOcov,time_BIO_on,K){
+  
+  if (time > time_BIO_on) { BIOcov_t <- BIOcov } else { BIOcov_t <- 0 }
+  
+  K_sr = (1-eBIO*BIOcov)*K
+  return(K_sr)
+  
+  
+}
+
 ##**********The impact of Odor baited traps ****##############################
 impactOdorBaitedTraps = function(time,Q0,aOBT,OBTcov,time_OBT_on){
   #. impactOdorBaitedTraps: compute the impact of odor baited traps in reducing Q0
@@ -32,6 +43,14 @@ impactOdorBaitedTraps = function(time,Q0,aOBT,OBTcov,time_OBT_on){
   return(impactOdor)
   
 }
+
+##**********Host Seeking - ATSB and Space Spraying ****##############################
+impactATSBSpaceSprayin = function(time){
+  
+  
+  
+}
+
 
 ##***********************************Protecting Humans Indoor**********************##
 impactIndoorProtection = function(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOUcov,time_HOU_on,

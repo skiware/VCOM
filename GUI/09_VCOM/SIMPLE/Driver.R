@@ -31,11 +31,15 @@ MOSQUITO_PARAMETERS = getAnGambiaeParameters()
 INITIAL_TIME_VALUE   = 365
 
 #Odor Traps, coverage value, time it is on
-INITIAL_OBT_COVERAGE = .00
-INITIAL_OBT_TIME     = 0
+INITIAL_BIO_COVERAGE = .0
+INITIAL_BIO_TIME     = 60
+
+#Odor Traps, coverage value, time it is on
+INITIAL_OBT_COVERAGE = .10
+INITIAL_OBT_TIME     = 60
 #LLINs, coverage value, time it is on
 INITIAL_ITN_COVERAGE = .60
-INITIAL_ITN_TIME     = 80
+INITIAL_ITN_TIME     = 60
 #IRS
 INITIAL_IRS_COVERAGE = 0.0
 INITIAL_IRS_TIME     = 50
@@ -49,12 +53,19 @@ INITIAL_ECS_TIME     = 60
 INITIAL_ECT_COVERAGE = 0.0
 INITIAL_ECT_TIME     =20
 
+Q0 = 0.92
+aOBT =0.4
+OBTcov = 0.2
+Q0_trap = Q0*(1/(1+aOBT*OBTcov))
+
 # Sam - check the behaviour of cattle
 ## Get intervetions parameters - LLINs for testing
 #INTERVENTION_PARAMETERS = getInterventionsParameters(ITNcov=INITIAL_ITN_COVERAGE,time_ITN_on=INITIAL_ITN_TIME)
 
 ## Get intervetions parameters
 INTERVENTION_PARAMETERS = getInterventionsParameters(
+                                  #Odor Traps
+                          BIOcov=INITIAL_BIO_COVERAGE,time_BIO_on=INITIAL_BIO_TIME,
                                   #Odor Traps
                           OBTcov=INITIAL_OBT_COVERAGE,time_OBT_on=INITIAL_OBT_TIME,
                                  #LLINs

@@ -110,16 +110,19 @@ IVM_ode <- function(time, state, theta){
   time_PPM_on <- theta[["time_PPM_on"]] # When PPM is on)
   rPPM <- theta[["rPPM"]] # Probability of mosquito repeating a feeding attempt due personal protection measures
   sPPM <- theta[["sPPM"]] # Probability of mosquito feeding in presence of PPM
-<<<<<<< HEAD
+
   
   ##***********Odor baited traps ********************
   time_OBT_on <- theta[["time_OBT_on"]] # When OBT is on)
   aOBT <- theta[["aOBT"]] # availability of one trap in relation to one human
   OBTcov <- theta[["OBTcov"]] # ratio of traps to human (i.e., coverage)
   
-=======
+  ##***********Biological Control ********************
+  time_BIO_on <- theta[["time_BIO_on"]] # When source reduction is on)
+  eBIO <- theta[["eBIO"]] # effectiveness of source reduction
+  BIOcov <- theta[["BIOcov"]] # prop of aquatic habitats covered by source reduction
+  
 
->>>>>>> 3bc6e25fca388bba6f82af836a84a7662e7e9a6e
   ## Add other scenarios e.g., probability of dying after feeding FOR each intervention - SK
   ## States:  - Defn added by SK
   EL <- state[["EL"]]  # Early Instar stage
@@ -139,7 +142,14 @@ IVM_ode <- function(time, state, theta){
   K <- 2*NV_eq*muV*durLL*(1 + muPL*durPL)*gamma*(omega+1)/(omega/(muLL*durEL) - 1/(muLL*durLL) - 1) # Larval carrying capacity
   ## Derived parameters which depend on intervention status:
 
-  #browser()
+ #browser()
+  
+  
+  ##**********Aquatic habitats - impact of source management ****##############################
+  K_sr    <<- impactSourceReduction(time,eBIO,BIOcov,time_BIO_on,K)
+  
+   #Update K 
+  K = K_sr
   
   ##************************Host seeking - Odor baited traps********************
   impactOdorT <<- impactOdorBaitedTraps(time,Q0,aOBT,OBTcov,time_OBT_on)
@@ -149,13 +159,10 @@ IVM_ode <- function(time, state, theta){
   
   ##*************************Human - Indoor protection *********************************##
   impactIndoor <<- impactIndoorProtection(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOUcov,time_HOU_on,
-<<<<<<< HEAD
+
                                             rITN,sITN,rIRS,rHOU,sIRS,sHOU, Q0_t_h, phiB, phiI,dHOU,dIRS)
   
-=======
-                                            rITN,sITN,rIRS,rHOU,sIRS,sHOU, Q0, phiB, phiI,dHOU,dIRS)
 
->>>>>>> 3bc6e25fca388bba6f82af836a84a7662e7e9a6e
   ##*******************For testing only****************#
   #impactIndoor <<- impactIndoorProtection(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,rITN,sITN,rIRS,sIRS,Q0, phiB, phiI)
 
@@ -164,14 +171,14 @@ IVM_ode <- function(time, state, theta){
   c0                = impactIndoor[3]  #Extract cO from indoor see eqn
 
   ##*************************Human - Outdoor protection *********************************##
-<<<<<<< HEAD
+
    impactOutdoor <<- impactOutdoorProtection(time,time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,Q0_t_h,phiI,c0)
   # 
    
-=======
+
    impactOutdoor <<- impactOutdoorProtection(time,time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,Q0,phiI,c0)
   #
->>>>>>> 3bc6e25fca388bba6f82af836a84a7662e7e9a6e
+
    zCom_Human_Outdoor = impactOutdoor[1]
    wCom_Human_Outdoor = impactOutdoor[2]
 

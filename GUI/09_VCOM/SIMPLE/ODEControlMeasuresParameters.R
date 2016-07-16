@@ -30,21 +30,18 @@
 #* time_ECT_on:   When endocticide is (topical) applied (days)
 #* HOUcov:        House Modification coverage
 #* time_HOU_on:   When House Modifications are applied (days)
-<<<<<<< HEAD
 #* OBTcov:        Odor Traps coverage (ratio of traps to human)
 #* time_OBT_on:   When Odor Traps are applied (days)
 #* SPRcov:        Spatial Repellents coverage
 #* time_SPR_on:   When Space Repellents are applied (days)
 #* aOBT:          availability of one trap in relation to one human
-
-=======
 #* ODOcov:        Odor Traps coverage
 #* time_ODO_on:   When Odor Traps are applied (days)
 #* SPRcov:        Spatial Repellents coverage
 #* time_SPR_on:   When Space Repellents are applied (days)
 #* PPMcov:
 #* time_PPM_on:   
->>>>>>> 3bc6e25fca388bba6f82af836a84a7662e7e9a6e
+
 #------------------------------------------------------------------------
 getInterventionsParameters = function(
   OVIcov=0,   time_OVI_on=0,
