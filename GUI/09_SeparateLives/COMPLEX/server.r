@@ -71,10 +71,15 @@ shinyServer(
         shinyjs::disable("buttonRun")
         shinyjs::disable("downloadTrace")
         shinyjs::disable("downloadPlot")
-        debugLoadText="ERROR IN SETUP FILE. Please see 'Loaded Parameters' tab for more information."
+        debugLoadText="ERROR IN SETUP FILE. Please see 'Loaded Parameters' tab for a list of the parameters with error."
       }
       output$debugOutput=renderText(debugLoadText)
-      output$fileContents<-renderTable({df})
+      #print(df[which(!rownames(df) %in% DISALLOWED_HEADS),])
+      printDFFiltered=df[which(!rownames(df) %in% DISALLOWED_HEADS),]
+      #test=colnames(printDFFiltered)<-c("NULL","NULL")
+      output$fileContents<-renderTable({printDFFiltered})
+      #print(subset(df,Col2>0))
+      #output$fileContents<-renderTable({})
     })
     #############################################################################
     # DOWNLOADS HANDLERS ########################################################
