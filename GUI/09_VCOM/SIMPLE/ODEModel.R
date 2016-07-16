@@ -122,6 +122,15 @@ IVM_ode <- function(time, state, theta){
   eBIO <- theta[["eBIO"]] # effectiveness of source reduction
   BIOcov <- theta[["BIOcov"]] # prop of aquatic habitats covered by source reduction
   
+  ##***********ATSB and Space spraying ********************
+  time_ATSB_on <- theta[["time_ATSB_on"]] # When ATSB is on)
+  fATSB <- theta[["fATSB"]] # factor allowing for increased death rate due to ATSB
+  ATSBcov <- theta[["ATSBcov"]] # prop of vegation sprayed with 
+  
+  time_SSP_on <- theta[["time_SSP_on"]] # When space spraying is on)
+  fSSP <- theta[["fSSP"]] # factor allowing for increased death rate due to space spraying
+  SSPcov <- theta[["SSPcov"]] # prop of a defined area sprayed with insecticide
+  
 
   ## Add other scenarios e.g., probability of dying after feeding FOR each intervention - SK
   ## States:  - Defn added by SK
@@ -150,6 +159,13 @@ IVM_ode <- function(time, state, theta){
   
    #Update K 
   K = K_sr
+  
+  ##**********Host seeking - ATSB and space spraying ****##############################
+  muV_1 <<- impactATSBSpaceSpraying(time,time_ATSB_on,ATSBcov,time_SSP_on,SSPcov,fSSP,fATSB,muV)
+  
+  #update muV with muv_1
+  
+  muV = muV_1
   
   ##************************Host seeking - Odor baited traps********************
   impactOdorT <<- impactOdorBaitedTraps(time,Q0,aOBT,OBTcov,time_OBT_on)

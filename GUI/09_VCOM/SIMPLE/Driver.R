@@ -30,16 +30,24 @@ MOSQUITO_PARAMETERS = getAnGambiaeParameters()
 # Set values for control measures??
 INITIAL_TIME_VALUE   = 365
 
-#Odor Traps, coverage value, time it is on
-INITIAL_BIO_COVERAGE = .0
-INITIAL_BIO_TIME     = 60
+#Source reduction, coverage value, time it is on
+INITIAL_BIO_COVERAGE = .40
+INITIAL_BIO_TIME     = 20
+
+#ATSB, coverage value, time it is on
+INITIAL_ATSB_COVERAGE = .00
+INITIAL_ATSB_TIME     = 20
+
+#Space Spraying, coverage value, time it is on
+INITIAL_SSP_COVERAGE = .00
+INITIAL_SSP_TIME     = 20
 
 #Odor Traps, coverage value, time it is on
 INITIAL_OBT_COVERAGE = .10
 INITIAL_OBT_TIME     = 60
 #LLINs, coverage value, time it is on
 INITIAL_ITN_COVERAGE = .60
-INITIAL_ITN_TIME     = 60
+INITIAL_ITN_TIME     = 100
 #IRS
 INITIAL_IRS_COVERAGE = 0.0
 INITIAL_IRS_TIME     = 50
@@ -65,7 +73,11 @@ Q0_trap = Q0*(1/(1+aOBT*OBTcov))
 ## Get intervetions parameters
 INTERVENTION_PARAMETERS = getInterventionsParameters(
                                   #Odor Traps
-                          BIOcov=INITIAL_BIO_COVERAGE,time_BIO_on=INITIAL_BIO_TIME,
+                          BIOcov=INITIAL_BIO_COVERAGE,time_BIO_on=INITIAL_BIO_TIME, 
+                                  #ATSB
+                          ATSBcov=INITIAL_ATSB_COVERAGE,time_ATSB_on=INITIAL_ATSB_TIME,
+                                #Space Spraying
+                          SSPcov=INITIAL_SSP_COVERAGE,time_SSP_on=INITIAL_SSP_TIME,
                                   #Odor Traps
                           OBTcov=INITIAL_OBT_COVERAGE,time_OBT_on=INITIAL_OBT_TIME,
                                  #LLINs

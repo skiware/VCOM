@@ -33,7 +33,11 @@
 #* OBTcov:        Odor Traps coverage (ratio of traps to human)
 #* time_OBT_on:   When Odor Traps are applied (days)
 #* SPRcov:        Spatial Repellents coverage
-#* time_SPR_on:   When Space Repellents are applied (days)
+#* time_SPR_on:   When Spatial Repellents are applied (days)
+#* time_ATSB_on:  When ATSB are applied (days)
+#* ATSBcov:       ATSB coverage
+#* time_SSP_on:   When Space spraying are applied (days)
+#* SSPcov:        Space spraying coverage
 #* aOBT:          availability of one trap in relation to one human
 #* ODOcov:        Odor Traps coverage
 #* time_ODO_on:   When Odor Traps are applied (days)
@@ -56,7 +60,9 @@ getInterventionsParameters = function(
   HOUcov=0,   time_HOU_on=0,
   OBTcov=0,   time_OBT_on=0,
   SPRcov=0,   time_SPR_on=0,
-  PPMcov=0,   time_PPM_on=0
+  PPMcov=0,   time_PPM_on=0,
+  ATSBcov=0,  time_ATSB_on=0,
+  SSPcov=0,   time_SSP_on=0
   
 ){
   #. getInterventionsParameters: Returns the list of intervention parameters
@@ -74,7 +80,9 @@ getInterventionsParameters = function(
     HOUcov=HOUcov,time_HOU_on=time_HOU_on,
     OBTcov=OBTcov,time_OBT_on=time_OBT_on,
     SPRcov=SPRcov,time_SPR_on=time_SPR_on,
-    PPMcov=PPMcov,time_PPM_on=time_PPM_on
+    PPMcov=PPMcov,time_PPM_on=time_PPM_on,
+    ATSBcov=ATSBcov,time_ATSB_on=time_ATSB_on,
+    SSPcov=SSPcov,time_SSP_on=time_SSP_on
   )
 }
 ######################################################################################

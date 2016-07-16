@@ -38,6 +38,8 @@ getTheta = function(
     PPMcov      = interventionParameters[["PPMcov"]],
     OBTcov      = interventionParameters[["OBTcov"]],
     BIOcov      = interventionParameters[["BIOcov"]],
+    ATSBcov     = interventionParameters[["ATSBcov"]],
+    SSPcov      = interventionParameters[["SSPcov"]],
     time_ITN_on = interventionParameters[["time_ITN_on"]],
     time_IRS_on = interventionParameters[["time_IRS_on"]],
     time_HOU_on = interventionParameters[["time_HOU_on"]],
@@ -47,6 +49,8 @@ getTheta = function(
     time_PPM_on = interventionParameters[["time_PPM_on"]],
     time_OBT_on = interventionParameters[["time_OBT_on"]],
     time_BIO_on = interventionParameters[["time_BIO_on"]],
+    time_ATSB_on = interventionParameters[["time_ATSB_on"]],   #Need to use 3 letters, lol
+    time_SSP_on = interventionParameters[["time_SSP_on"]],
     muV         = speciesSpecificParameters[["muV"]],
     Q0          = speciesSpecificParameters[["Q0"]],
     phiB        = speciesSpecificParameters[["phiB"]],
@@ -69,6 +73,8 @@ getTheta = function(
     dHOU        = speciesSpecificParameters[["dHOU"]],
     aOBT        = speciesSpecificParameters[["aOBT"]],
     eBIO        = speciesSpecificParameters[["eBIO"]],
+    fATSB       = speciesSpecificParameters[["fATSB"]],
+    fSSP        = speciesSpecificParameters[["fSSP"]],
     f0          = additionalTransmissionParameters[["f0"]],
     epsilon0    = additionalTransmissionParameters[["epsilon0"]],
     iH_eq       = additionalTransmissionParameters[["iH_eq"]],
@@ -110,10 +116,11 @@ getTheta = function(
 #* dIRS:    Death due to encountering IRS treated house
 #* aOBT:    availability of one odor baited trap in relation to one human
 #* eBIO:    effectiveness of the impact of source reduction in K
+#* fATSB    factor allowing for increased mosquito death due to ATBS
+#* fSSP     factor allowing for increased mosquito death due to space spraying
 #* rHOU:
 #* sHOU:
-#* rODO:
-#* sODO:
+
 
 #------------------------------------------------------------------------
 getAnGambiaeParameters = function(){
@@ -127,7 +134,7 @@ getAnGambiaeParameters = function(){
     rHOU = 0.00, sHOU = 0.00, rODO = 0.00, sODO = 0.00,
     rSPR = 0.00, sSPR = 0.00, rECT = 0.30, sECT = 0.40,
     rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10,
-    aOBT = 2.00, eBIO = 0.70
+    aOBT = 2.00, eBIO = 0.70, fATSB =0.10, fSSP = 0.10
   )
 }
 getAnArabiensisParameters = function(){
@@ -141,7 +148,7 @@ getAnArabiensisParameters = function(){
     rHOU = 0.00, sHOU = 0.00, rODO = 0.00, sODO = 0.00,
     rSPR = 0.00, sSPR = 0.00, rECT = 0.50, sECT = 0.50,
     rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10,
-    aOBT = 2.00, eBIO = 0.70
+    aOBT = 2.00, eBIO = 0.70, fATSB =0.10, fSSP = 0.10
   )
 }
 getAnFunestusParameters = function(){
@@ -155,7 +162,7 @@ getAnFunestusParameters = function(){
     rHOU = 0.00, sHOU = 0.00, rODO = 0.00, sODO = 0.00,
     rSPR = 0.00, sSPR = 0.00, rECT = 0.60, sECT = 0.60,
     rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10,
-    aOBT = 2.00, eBIO = 0.70
+    aOBT = 2.00, eBIO = 0.70, fATSB =0.10, fSSP = 0.10
   )
 }
 ######################################################################################

@@ -17,8 +17,10 @@
 
 ##******************************************Interventions*****************************##
 
+
 ##**********Aquatic habitats - impact of source management ****##############################
 impactSourceReduction = function(time,eBIO,BIOcov,time_BIO_on,K){
+  #. impactSourceReduction: compute updated K due to source management
   
   if (time > time_BIO_on) { BIOcov_t <- BIOcov } else { BIOcov_t <- 0 }
   
@@ -27,6 +29,34 @@ impactSourceReduction = function(time,eBIO,BIOcov,time_BIO_on,K){
   
   
 }
+
+
+##**********Host Seeking - ATSB and Space Spraying ****##############################
+impactATSBSpaceSpraying = function(time,time_ATSB_on,ATSBcov,time_SSP_on,SSPcov,fSSP,fATSB,muV){
+  #. impactATSBSpaceSpraying: compute the impact of ATSB and SS on P1
+  
+  
+  
+  if (time > time_ATSB_on) { ATSBcov_t <- ATSBcov } else { ATSBcov_t <- 0 }
+  if (time > time_SSP_on) { SSPcov_t <- SSPcov } else { SSPcov_t <- 0 }
+  
+  #Coverage ATSB only
+  cATSB <- ATSBcov_t - ATSBcov_t*SSPcov_t
+  # Coverage space spraying only
+  cSSP <- SSPcov_t -  SSPcov_t*ATSBcov_t
+  #both applied
+  cCom_Searching <-  ATSBcov_t*SSPcov_t
+  # neither applied
+  c0_Searching <- 1 - ATSBcov_t - SSPcov_t +  ATSBcov_t*SSPcov_t
+  
+  # Impact on mosquito mortality
+  muV_1 = muV*(cATSB*fATSB+cSSP*fSSP+cCom_Searching*fATSB*fSSP+c0_Searching)
+  
+  
+  return(muV_1)
+  
+}
+
 
 ##**********The impact of Odor baited traps ****##############################
 impactOdorBaitedTraps = function(time,Q0,aOBT,OBTcov,time_OBT_on){
@@ -43,14 +73,6 @@ impactOdorBaitedTraps = function(time,Q0,aOBT,OBTcov,time_OBT_on){
   return(impactOdor)
   
 }
-
-##**********Host Seeking - ATSB and Space Spraying ****##############################
-impactATSBSpaceSprayin = function(time){
-  
-  
-  
-}
-
 
 ##***********************************Protecting Humans Indoor**********************##
 impactIndoorProtection = function(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOUcov,time_HOU_on,
