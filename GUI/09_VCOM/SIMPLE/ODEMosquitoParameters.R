@@ -134,7 +134,7 @@ getAnGambiaeParameters = function(){
     rHOU = 0.00, sHOU = 0.00, rODO = 0.00, sODO = 0.00,
     rSPR = 0.00, sSPR = 0.00, rECT = 0.30, sECT = 0.40,
     rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10,
-    aOBT = 2.00, eBIO = 0.70, fATSB =0.10, fSSP = 0.10
+    aOBT = 2.00, eBIO = 0.70, fATSB =1.5, fSSP = 1.50
   )
 }
 getAnArabiensisParameters = function(){
@@ -148,7 +148,7 @@ getAnArabiensisParameters = function(){
     rHOU = 0.00, sHOU = 0.00, rODO = 0.00, sODO = 0.00,
     rSPR = 0.00, sSPR = 0.00, rECT = 0.50, sECT = 0.50,
     rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10,
-    aOBT = 2.00, eBIO = 0.70, fATSB =0.10, fSSP = 0.10
+    aOBT = 2.00, eBIO = 0.70, fATSB =1.50, fSSP = 1.50
   )
 }
 getAnFunestusParameters = function(){
@@ -162,7 +162,7 @@ getAnFunestusParameters = function(){
     rHOU = 0.00, sHOU = 0.00, rODO = 0.00, sODO = 0.00,
     rSPR = 0.00, sSPR = 0.00, rECT = 0.60, sECT = 0.60,
     rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10,
-    aOBT = 2.00, eBIO = 0.70, fATSB =0.10, fSSP = 0.10
+    aOBT = 2.00, eBIO = 0.70, fATSB =1.50, fSSP = 1.50
   )
 }
 ######################################################################################

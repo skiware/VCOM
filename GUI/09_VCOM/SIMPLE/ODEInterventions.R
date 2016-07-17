@@ -50,9 +50,10 @@ impactATSBSpaceSpraying = function(time,time_ATSB_on,ATSBcov,time_SSP_on,SSPcov,
   c0_Searching <- 1 - ATSBcov_t - SSPcov_t +  ATSBcov_t*SSPcov_t
   
   # Impact on mosquito mortality
+  #Initially on the MS
   muV_1 = muV*(cATSB*fATSB+cSSP*fSSP+cCom_Searching*fATSB*fSSP+c0_Searching)
   
-  
+  #muV_1 = muV*(1- (cATSB*fATSB+cSSP*fSSP - cCom_Searching*fATSB*fSSP))
   return(muV_1)
   
 }

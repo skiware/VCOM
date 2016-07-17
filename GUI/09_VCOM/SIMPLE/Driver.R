@@ -31,25 +31,25 @@ MOSQUITO_PARAMETERS = getAnGambiaeParameters()
 INITIAL_TIME_VALUE   = 365
 
 #Source reduction, coverage value, time it is on
-INITIAL_BIO_COVERAGE = .40
+INITIAL_BIO_COVERAGE = .00
 INITIAL_BIO_TIME     = 20
 
 #ATSB, coverage value, time it is on
-INITIAL_ATSB_COVERAGE = .00
+INITIAL_ATSB_COVERAGE = .20
 INITIAL_ATSB_TIME     = 20
 
 #Space Spraying, coverage value, time it is on
-INITIAL_SSP_COVERAGE = .00
-INITIAL_SSP_TIME     = 20
+INITIAL_SSP_COVERAGE = .20
+INITIAL_SSP_TIME     = 10
 
 #Odor Traps, coverage value, time it is on
-INITIAL_OBT_COVERAGE = .10
+INITIAL_OBT_COVERAGE = .00
 INITIAL_OBT_TIME     = 60
 #LLINs, coverage value, time it is on
 INITIAL_ITN_COVERAGE = .60
-INITIAL_ITN_TIME     = 100
+INITIAL_ITN_TIME     = 50
 #IRS
-INITIAL_IRS_COVERAGE = 0.0
+INITIAL_IRS_COVERAGE = 0.60
 INITIAL_IRS_TIME     = 50
 #House modification
 INITIAL_HOU_COVERAGE = 0.0
