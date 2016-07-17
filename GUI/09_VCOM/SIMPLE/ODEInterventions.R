@@ -53,7 +53,6 @@ impactATSBSpaceSpraying = function(time,time_ATSB_on,ATSBcov,time_SSP_on,SSPcov,
   #Initially on the MS
   muV_1 = muV*(cATSB*fATSB+cSSP*fSSP+cCom_Searching*fATSB*fSSP+c0_Searching)
   
-  #muV_1 = muV*(1- (cATSB*fATSB+cSSP*fSSP - cCom_Searching*fATSB*fSSP))
   return(muV_1)
   
 }
@@ -230,6 +229,43 @@ impactInsecticideTreatedCattle = function(time,time_ECS_on,ECScov,time_ECT_on,EC
   return(impactCattle)
   
 }
+
+
+##**************************Targeting Resting, ovipositing mosquitoes**********************##
+impactRestingOvipositing = function(time,time_OVI_on,OVIcov,time_ATSB_on,ATSBcov,SSPcov,time_SSP_on,
+                                  fOVI,fATSB,fSSP,muV){
+  #. impactRestingOvipositing: compute the impact of ATSB, Space Spraying, and ovitraps on muV_2
+  
+  
+  ##*************************Human - Indoor protection *********************************##
+  if (time > time_OVI_on) { OVIcov_t <- OVIcov } else { OVIcov_t <- 0 }
+  if (time > time_ATSB_on) { ATSBcov_t <- ATSBcov } else { ATSBcov_t <- 0 }
+  if (time > time_SSP_on) { SSPcov_t <- SSPcov } else { SSPcov_t <- 0 }
+  
+  #Coverage with ovitraps only
+  cOVI <- OVIcov_t - OVIcov_t*ATSBcov_t - OVIcov_t*SSPcov_t + OVIcov_t*ATSBcov_t*SSPcov_t 
+  # Coverage with ATSB only
+  cATSB <- ATSBcov_t - ATSBcov_t*OVIcov_t - ATSBcov_t*SSPcov_t + OVIcov_t*ATSBcov_t*SSPcov_t
+  # Coverage with space Spraying only
+  cSSP <- SSPcov_t - OVIcov_t*SSPcov_t - ATSBcov_t*SSPcov_t + OVIcov_t*ATSBcov_t*SSPcov_t
+  #OVI and ATSB
+  cOVI_ATSB <- OVIcov_t*ATSBcov_t - OVIcov_t*ATSBcov_t*SSPcov_t
+  #OVI and SSP
+  cOVI_SSP <- OVIcov_t*SSPcov_t - OVIcov_t*ATSBcov_t*SSPcov_t
+  #ATSB and SSP
+  cATSB_SSP <- ATSBcov_t*SSPcov_t - OVIcov_t*ATSBcov_t*SSPcov_t
+  #OVI and ATSB and OVI
+  cCom_RestingOvipositing <- OVIcov_t*ATSBcov_t*SSPcov_t
+  #Neither of them
+  c0_RestingOvipositing <- 1 - OVIcov_t - ATSBcov_t - SSPcov_t + OVIcov_t*ATSBcov_t + OVIcov_t*SSPcov_t + ATSBcov_t*OVIcov_t- 2* OVIcov_t*ATSBcov_t*SSPcov_t 
+  
+  muV_2_Com = muV*(cOVI*fOVI + cATSB*fATSB + cSSP*fSSP + cOVI_ATSB *fOVI*fATSB + cOVI_SSP *fOVI*fSSP + cATSB_SSP*fATSB*fSSP
+  + cCom_RestingOvipositing *fOVI*fATSB*fSSP + c0_RestingOvipositing)
+  
+  return(muV_2_Com)
+  
+}
+
 
 
 

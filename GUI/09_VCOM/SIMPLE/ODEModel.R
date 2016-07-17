@@ -122,7 +122,7 @@ IVM_ode <- function(time, state, theta){
   eBIO <- theta[["eBIO"]] # effectiveness of source reduction
   BIOcov <- theta[["BIOcov"]] # prop of aquatic habitats covered by source reduction
   
-  ##***********ATSB and Space spraying ********************
+  ##***********Host Seeking - ATSB and Space spraying ********************
   time_ATSB_on <- theta[["time_ATSB_on"]] # When ATSB is on)
   fATSB <- theta[["fATSB"]] # factor allowing for increased death rate due to ATSB
   ATSBcov <- theta[["ATSBcov"]] # prop of vegation sprayed with 
@@ -130,6 +130,13 @@ IVM_ode <- function(time, state, theta){
   time_SSP_on <- theta[["time_SSP_on"]] # When space spraying is on)
   fSSP <- theta[["fSSP"]] # factor allowing for increased death rate due to space spraying
   SSPcov <- theta[["SSPcov"]] # prop of a defined area sprayed with insecticide
+  
+  ##***********Resting and Ovipositing: ATSB, Space spraying, ovitraps ********************
+  time_OVI_on <- theta[["time_OVI_on"]] # When ATSB is on)
+  fOVI <- theta[["fOVI"]] # factor allowing for increased death rate due to ATSB
+  OVIcov <- theta[["OVIcov"]] # prop of ovitraps 
+  #ATSB and SSP - already defined - might have two differentiate the two
+  
   
 
   ## Add other scenarios e.g., probability of dying after feeding FOR each intervention - SK
@@ -151,7 +158,7 @@ IVM_ode <- function(time, state, theta){
   K <- 2*NV_eq*muV*durLL*(1 + muPL*durPL)*gamma*(omega+1)/(omega/(muLL*durEL) - 1/(muLL*durLL) - 1) # Larval carrying capacity
   ## Derived parameters which depend on intervention status:
 
- #browser()
+ #browser()   #break point
   
   
   ##**********Aquatic habitats - impact of source management ****##############################
@@ -161,11 +168,11 @@ IVM_ode <- function(time, state, theta){
   K = K_sr
   
   ##**********Host seeking - ATSB and space spraying ****##############################
-  muV_1 <<- impactATSBSpaceSpraying(time,time_ATSB_on,ATSBcov,time_SSP_on,SSPcov,fSSP,fATSB,muV)
+  muV_1_Com <<- impactATSBSpaceSpraying(time,time_ATSB_on,ATSBcov,time_SSP_on,SSPcov,fSSP,fATSB,muV)
   
   #update muV with muv_1
   
-  muV = muV_1
+  
   
   ##************************Host seeking - Odor baited traps********************
   impactOdorT <<- impactOdorBaitedTraps(time,Q0,aOBT,OBTcov,time_OBT_on)
@@ -202,6 +209,12 @@ IVM_ode <- function(time, state, theta){
   impactCattle = impactInsecticideTreatedCattle(time,time_ECS_on,ECScov,time_ECT_on,ECTcov,rECT,sECS,sECT,Q0_t_c)
   zCom_Cattle = impactCattle[1]
   wCom_Cattle = impactCattle[2]
+  
+  ##*************************** Resting & Ovipositing *********************************************##
+  
+  muV_2_Com = impactRestingOvipositing(time,time_OVI_on,OVIcov,time_ATSB_on,ATSBcov,SSPcov,time_SSP_on,
+                                      fOVI,fATSB,fSSP,muV)
+  
 
   ######**************************Computing overall impact***********************************#####
   ## zCom: Probability of a mosquito being repelled : SAM CHECK THIS
@@ -221,13 +234,13 @@ IVM_ode <- function(time, state, theta){
   ## muVCom: Female mosquito death rate in presence of interventions:
 
   # probability of surviving feeding period in the absence of an intervetion (SK)
-  p10 <- exp(-muV*tau1)
+  p10 <- exp(-muV_1_Com*tau1)
   #Equation 9
   # Probability of surviving the first attempt, second, and so on -eqn 3 (SK)
   p1Com <- p10*wCom/(1 - zCom*p10)
   #Equation 1b
   #probabbility of resting (SK)
-  p2 <- exp(-muV*tau2)
+  p2 <- exp(-muV_2_Com*tau2)
   #Equation 10
   #probability of surviving one day (SK)
   pCom <- (p1Com*p2)^deltaCom # SAme as eqn 4 in Menach (SK)

@@ -28,29 +28,29 @@ source("ODEModelOutput.R")
 MOSQUITO_PARAMETERS = getAnGambiaeParameters()
 
 # Set values for control measures??
-INITIAL_TIME_VALUE   = 365
+INITIAL_TIME_VALUE   = 100
 
 #Source reduction, coverage value, time it is on
 INITIAL_BIO_COVERAGE = .00
 INITIAL_BIO_TIME     = 20
 
 #ATSB, coverage value, time it is on
-INITIAL_ATSB_COVERAGE = .20
-INITIAL_ATSB_TIME     = 20
+INITIAL_ATSB_COVERAGE = .00
+INITIAL_ATSB_TIME     = 00
 
 #Space Spraying, coverage value, time it is on
-INITIAL_SSP_COVERAGE = .20
-INITIAL_SSP_TIME     = 10
+INITIAL_SSP_COVERAGE = .00
+INITIAL_SSP_TIME     = 00
 
 #Odor Traps, coverage value, time it is on
 INITIAL_OBT_COVERAGE = .00
 INITIAL_OBT_TIME     = 60
 #LLINs, coverage value, time it is on
-INITIAL_ITN_COVERAGE = .60
+INITIAL_ITN_COVERAGE = .00
 INITIAL_ITN_TIME     = 50
 #IRS
-INITIAL_IRS_COVERAGE = 0.60
-INITIAL_IRS_TIME     = 50
+INITIAL_IRS_COVERAGE = 0.00
+INITIAL_IRS_TIME     = 20
 #House modification
 INITIAL_HOU_COVERAGE = 0.0
 INITIAL_HOU_TIME     = 60
@@ -61,10 +61,11 @@ INITIAL_ECS_TIME     = 60
 INITIAL_ECT_COVERAGE = 0.0
 INITIAL_ECT_TIME     =20
 
-Q0 = 0.92
-aOBT =0.4
-OBTcov = 0.2
-Q0_trap = Q0*(1/(1+aOBT*OBTcov))
+#Resting and Ovipositing - OviTraps -assuming same coverage for ATSB and SSP
+INITIAL_OVI_COVERAGE = 0.60
+INITIAL_OVI_TIME     =20
+
+
 
 # Sam - check the behaviour of cattle
 ## Get intervetions parameters - LLINs for testing
@@ -89,7 +90,9 @@ INTERVENTION_PARAMETERS = getInterventionsParameters(
                                   #Cattle - Systemic
                           ECScov=INITIAL_ECS_COVERAGE,time_ECS_on=INITIAL_ECS_TIME,
                                  #Cattle - topical
-                          ECTcov=INITIAL_ECT_COVERAGE,time_ECT_on=INITIAL_ECT_TIME)
+                          ECTcov=INITIAL_ECT_COVERAGE,time_ECT_on=INITIAL_ECT_TIME,
+                                 #Resting & Ovipositing - Ovitraps --same for ATSB, SSP
+                          OVIcov=INITIAL_OVI_COVERAGE,time_OVI_on=INITIAL_OVI_TIME)
 
 
 theta <<- getTheta(interventionParameters=INTERVENTION_PARAMETERS)

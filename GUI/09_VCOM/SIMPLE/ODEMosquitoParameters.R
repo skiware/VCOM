@@ -40,6 +40,7 @@ getTheta = function(
     BIOcov      = interventionParameters[["BIOcov"]],
     ATSBcov     = interventionParameters[["ATSBcov"]],
     SSPcov      = interventionParameters[["SSPcov"]],
+    OVIcov      = interventionParameters[["OVIcov"]],
     time_ITN_on = interventionParameters[["time_ITN_on"]],
     time_IRS_on = interventionParameters[["time_IRS_on"]],
     time_HOU_on = interventionParameters[["time_HOU_on"]],
@@ -49,6 +50,7 @@ getTheta = function(
     time_PPM_on = interventionParameters[["time_PPM_on"]],
     time_OBT_on = interventionParameters[["time_OBT_on"]],
     time_BIO_on = interventionParameters[["time_BIO_on"]],
+    time_OVI_on = interventionParameters[["time_OVI_on"]],
     time_ATSB_on = interventionParameters[["time_ATSB_on"]],   #Need to use 3 letters, lol
     time_SSP_on = interventionParameters[["time_SSP_on"]],
     muV         = speciesSpecificParameters[["muV"]],
@@ -75,6 +77,7 @@ getTheta = function(
     eBIO        = speciesSpecificParameters[["eBIO"]],
     fATSB       = speciesSpecificParameters[["fATSB"]],
     fSSP        = speciesSpecificParameters[["fSSP"]],
+    fOVI        = speciesSpecificParameters[["fOVI"]],
     f0          = additionalTransmissionParameters[["f0"]],
     epsilon0    = additionalTransmissionParameters[["epsilon0"]],
     iH_eq       = additionalTransmissionParameters[["iH_eq"]],
@@ -118,6 +121,7 @@ getTheta = function(
 #* eBIO:    effectiveness of the impact of source reduction in K
 #* fATSB    factor allowing for increased mosquito death due to ATBS
 #* fSSP     factor allowing for increased mosquito death due to space spraying
+#* fOVI     factor allowing for increased mosquito death due to space spraying
 #* rHOU:
 #* sHOU:
 
@@ -134,7 +138,8 @@ getAnGambiaeParameters = function(){
     rHOU = 0.00, sHOU = 0.00, rODO = 0.00, sODO = 0.00,
     rSPR = 0.00, sSPR = 0.00, rECT = 0.30, sECT = 0.40,
     rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10,
-    aOBT = 2.00, eBIO = 0.70, fATSB =1.5, fSSP = 1.50
+    aOBT = 2.00, eBIO = 0.70, fATSB =1.5, fSSP =  1.50,
+    fOVI = 1.50
   )
 }
 getAnArabiensisParameters = function(){
@@ -148,7 +153,8 @@ getAnArabiensisParameters = function(){
     rHOU = 0.00, sHOU = 0.00, rODO = 0.00, sODO = 0.00,
     rSPR = 0.00, sSPR = 0.00, rECT = 0.50, sECT = 0.50,
     rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10,
-    aOBT = 2.00, eBIO = 0.70, fATSB =1.50, fSSP = 1.50
+    aOBT = 2.00, eBIO = 0.70, fATSB =1.50, fSSP = 1.50,
+    fOVI = 1.50
   )
 }
 getAnFunestusParameters = function(){
@@ -162,7 +168,8 @@ getAnFunestusParameters = function(){
     rHOU = 0.00, sHOU = 0.00, rODO = 0.00, sODO = 0.00,
     rSPR = 0.00, sSPR = 0.00, rECT = 0.60, sECT = 0.60,
     rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10,
-    aOBT = 2.00, eBIO = 0.70, fATSB =1.50, fSSP = 1.50
+    aOBT = 2.00, eBIO = 0.70, fATSB =1.50, fSSP = 1.50,
+    fOVI = 1.50
   )
 }
 ######################################################################################
