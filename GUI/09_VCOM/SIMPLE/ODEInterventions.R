@@ -30,6 +30,27 @@ impactSourceReduction = function(time,eSRE,SREcov,time_SRE_on,K){
   
 }
 
+##**********Aquatic habitats - impact of larvaciding and biological control ****##############################
+impactLarvacidingBiologicalControl= function(time,time_LAR_on, LARcov,time_BIO_on,BIOcov,fLAR,fBIO){
+  #. impactLarvacidingBiologicalControl: compute the impact of larvaciding and biological control
+  
+  if (time > time_LAR_on) { LARcov_t <- LARcov } else { LARcov_t <- 0 }
+  if (time > time_BIO_on) { BIOcov_t <- BIOcov } else { BIOcov_t <- 0 }
+  
+  #Coverage larvaciding only
+  cLAR <- LARcov_t - LARcov_t*BIOcov_t
+  # Coverage with biological control  only
+  cBIO <- BIOcov_t -  LARcov_t*BIOcov_t
+  #both applied
+  cCom_Larval <-  LARcov_t*BIOcov_t
+  # neither applied
+  c0_Larval <- 1 - LARcov_t - BIOcov_t +  LARcov_t*BIOcov_t
+  
+  f_LAR_BIO =fLAR*fBIO
+  
+  
+}
+
 
 ##**********Host Seeking - ATSB and Space Spraying ****##############################
 impactATSBSpaceSpraying = function(time,time_ATSB_on,ATSBcov,time_SSP_on,SSPcov,fSSP,fATSB,muV){
