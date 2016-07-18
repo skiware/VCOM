@@ -22,6 +22,7 @@ source("ODETransmissionParameters.R")
 source("ODEInterventions.R")
 #source("ODEInterventions - FirstPass.R")
 source("ODEModelOutput.R")
+source("FeedingCycle.R")
 ################################################################################
 # GLOBAL GUI PARAMETERS ########################################################
 importedFile = NULL
@@ -131,9 +132,9 @@ shinyUI(
                 column(COVERAGE_INIT_SIZE,numericInput("time_HOU_on",NULL,value=0,min=0,max=365))
               ),
               fluidRow(
-                column(COVERAGE_LABELS_SIZE,h5("ODO",align="left")),
-                column(COVERAGE_BAR_SIZE,sliderInput("ODOcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
-                column(COVERAGE_INIT_SIZE,numericInput("time_ODO_on",NULL,value=0,min=0,max=365))
+                column(COVERAGE_LABELS_SIZE,h5("OBT",align="left")),
+                column(COVERAGE_BAR_SIZE,sliderInput("OBTcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
+                column(COVERAGE_INIT_SIZE,numericInput("time_OBT_on",NULL,value=0,min=0,max=365))
               ),
               fluidRow(
                 column(COVERAGE_LABELS_SIZE,h5("SPR",align="left")),
