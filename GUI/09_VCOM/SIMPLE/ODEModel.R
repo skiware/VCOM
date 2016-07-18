@@ -117,10 +117,10 @@ IVM_ode <- function(time, state, theta){
   aOBT <- theta[["aOBT"]] # availability of one trap in relation to one human
   OBTcov <- theta[["OBTcov"]] # ratio of traps to human (i.e., coverage)
   
-  ##***********Biological Control ********************
-  time_BIO_on <- theta[["time_BIO_on"]] # When source reduction is on)
-  eBIO <- theta[["eBIO"]] # effectiveness of source reduction
-  BIOcov <- theta[["BIOcov"]] # prop of aquatic habitats covered by source reduction
+  ##***********Source Reduction ********************
+  time_SRE_on <- theta[["time_SRE_on"]] # When source reduction is on)
+  eSRE <- theta[["eSRE"]] # effectiveness of source reduction
+  SREcov <- theta[["SREcov"]] # prop of aquatic habitats covered by source reduction
   
   ##***********Host Seeking - ATSB and Space spraying ********************
   time_ATSB_on <- theta[["time_ATSB_on"]] # When ATSB is on)
@@ -137,9 +137,16 @@ IVM_ode <- function(time, state, theta){
   OVIcov <- theta[["OVIcov"]] # prop of ovitraps 
   #ATSB and SSP - already defined - might have two differentiate the two
   
+  ##**********************Larviciding and Biologica Control *********************
   
+  time_BIO_on <- theta[["time_BIO_on"]] # When biological control is on)
+  fBIO <- theta[["fOVI"]] # factor allowing for increased death rate due to biological control
+  BIOcov <- theta[["BIOcov"]] # prop of aquatic habitats covered by biological control
+  time_LAR_on <- theta[["time_LAR_on"]] # When larvicide is on)
+  fLAR <- theta[["fOVI"]] # factor allowing for increased death rate due to larvacide
+  LARcov <- theta[["LARcov"]] # prop of aquatic habitats covered by larvicide
 
-  ## Add other scenarios e.g., probability of dying after feeding FOR each intervention - SK
+ 
   ## States:  - Defn added by SK
   EL <- state[["EL"]]  # Early Instar stage
   LL <- state[["LL"]]  # Late Instar stage
@@ -162,7 +169,7 @@ IVM_ode <- function(time, state, theta){
   
   
   ##**********Aquatic habitats - impact of source management ****##############################
-  K_sr    <<- impactSourceReduction(time,eBIO,BIOcov,time_BIO_on,K)
+  K_sr    <<- impactSourceReduction(time,eSRE,SREcov,time_SRE_on,K)
   
    #Update K 
   K = K_sr
@@ -237,9 +244,27 @@ IVM_ode <- function(time, state, theta){
   muVCom  = feedingCycleImpact[1]
   betaCom = feedingCycleImpact[2]
   
-  ##**********************************
+  ##*********************************************************************
   
-  ## ODEs:
+  # ###Add Larviciding and biological control -move to a function
+  # if (time > time_LAR_on) { SPRcov_t <- LARcov } else { LARcov_t <- 0 }
+  # if (time > time_BIO_on) { PPMcov_t <- BIOcov } else { PPMcov_t <- 0 }
+  # 
+  # #Coverage spatial repelent only
+  # cSPR <- SPRcov_t - SPRcov_t*PPMcov_t
+  # # Coverage with personal protection measure only
+  # cPPM <- PPMcov_t -  SPRcov_t*PPMcov_t
+  # #both applied
+  # cCom_Outdoor <-  SPRcov_t*PPMcov_t
+  # # neither applied
+  # c0_Outdoor <- 1 - SPRcov_t - PPMcov_t +  SPRcov_t*PPMcov_t
+  
+  
+  
+  
+  #################**********************************
+  
+  ##********************************* ODEs:
   if(time < durEV){
     SVLag <- SV
   }else{

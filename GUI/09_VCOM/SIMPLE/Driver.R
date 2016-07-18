@@ -32,8 +32,8 @@ MOSQUITO_PARAMETERS = getAnGambiaeParameters()
 INITIAL_TIME_VALUE   = 100
 
 #Source reduction, coverage value, time it is on
-INITIAL_BIO_COVERAGE = .00
-INITIAL_BIO_TIME     = 20
+INITIAL_SRE_COVERAGE = .40
+INITIAL_SRE_TIME     = 20
 
 #ATSB, coverage value, time it is on
 INITIAL_ATSB_COVERAGE = .00
@@ -50,7 +50,7 @@ INITIAL_OBT_TIME     = 60
 INITIAL_ITN_COVERAGE = .50
 INITIAL_ITN_TIME     = 50
 #IRS
-INITIAL_IRS_COVERAGE = 0.50
+INITIAL_IRS_COVERAGE = 0.00
 INITIAL_IRS_TIME     = 20
 #House modification
 INITIAL_HOU_COVERAGE = 0.0
@@ -74,8 +74,8 @@ INITIAL_OVI_TIME     =20
 
 ## Get intervetions parameters
 INTERVENTION_PARAMETERS = getInterventionsParameters(
-                                  #Odor Traps
-                          BIOcov=INITIAL_BIO_COVERAGE,time_BIO_on=INITIAL_BIO_TIME, 
+                                  #Source Reduction
+                          SREcov=INITIAL_SRE_COVERAGE,time_SRE_on=INITIAL_SRE_TIME, 
                                   #ATSB
                           ATSBcov=INITIAL_ATSB_COVERAGE,time_ATSB_on=INITIAL_ATSB_TIME,
                                 #Space Spraying

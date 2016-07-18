@@ -19,12 +19,12 @@
 
 
 ##**********Aquatic habitats - impact of source management ****##############################
-impactSourceReduction = function(time,eBIO,BIOcov,time_BIO_on,K){
+impactSourceReduction = function(time,eSRE,SREcov,time_SRE_on,K){
   #. impactSourceReduction: compute updated K due to source management
   
-  if (time > time_BIO_on) { BIOcov_t <- BIOcov } else { BIOcov_t <- 0 }
+  if (time > time_SRE_on) { SREcov_t <- SREcov } else { SREcov_t <- 0 }
   
-  K_sr = (1-eBIO*BIOcov)*K
+  K_sr = (1-eSRE*SREcov)*K
   return(K_sr)
   
   

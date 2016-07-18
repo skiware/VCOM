@@ -38,9 +38,7 @@
 #* ATSBcov:       ATSB coverage
 #* time_SSP_on:   When Space spraying are applied (days)
 #* SSPcov:        Space spraying coverage
-#* aOBT:          availability of one trap in relation to one human
-#* ODOcov:        Odor Traps coverage
-#* time_ODO_on:   When Odor Traps are applied (days)
+#* aOBT:          availability of one odor baited trap in relation to one human
 #* SPRcov:        Spatial Repellents coverage
 #* time_SPR_on:   When Space Repellents are applied (days)
 #* PPMcov:
