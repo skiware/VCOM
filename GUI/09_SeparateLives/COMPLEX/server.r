@@ -74,12 +74,8 @@ shinyServer(
         debugLoadText="ERROR IN SETUP FILE. Please see 'Loaded Parameters' tab for a list of the parameters with error."
       }
       output$debugOutput=renderText(debugLoadText)
-      #print(df[which(!rownames(df) %in% DISALLOWED_HEADS),])
       printDFFiltered=df[which(!rownames(df) %in% DISALLOWED_HEADS),]
-      #test=colnames(printDFFiltered)<-c("NULL","NULL")
-      output$fileContents<-renderTable({printDFFiltered})
-      #print(subset(df,Col2>0))
-      #output$fileContents<-renderTable({})
+      output$fileContents<-renderTable({printDFFiltered},include.headnames=FALSE)
     })
     #############################################################################
     # DOWNLOADS HANDLERS ########################################################
