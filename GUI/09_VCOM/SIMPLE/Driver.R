@@ -21,6 +21,7 @@ source("ODETransmissionParameters.R")
 source("ODEInterventions.R")
 #source("ODEInterventions - FirstPass.R")
 source("ODEModelOutput.R")
+source("FeedingCycle.R")
 
 ## Get parameter for a specific specie ######
 
@@ -46,10 +47,10 @@ INITIAL_SSP_TIME     = 00
 INITIAL_OBT_COVERAGE = .00
 INITIAL_OBT_TIME     = 60
 #LLINs, coverage value, time it is on
-INITIAL_ITN_COVERAGE = .00
+INITIAL_ITN_COVERAGE = .50
 INITIAL_ITN_TIME     = 50
 #IRS
-INITIAL_IRS_COVERAGE = 0.00
+INITIAL_IRS_COVERAGE = 0.50
 INITIAL_IRS_TIME     = 20
 #House modification
 INITIAL_HOU_COVERAGE = 0.0
@@ -62,7 +63,7 @@ INITIAL_ECT_COVERAGE = 0.0
 INITIAL_ECT_TIME     =20
 
 #Resting and Ovipositing - OviTraps -assuming same coverage for ATSB and SSP
-INITIAL_OVI_COVERAGE = 0.60
+INITIAL_OVI_COVERAGE = 0.00
 INITIAL_OVI_TIME     =20
 
 

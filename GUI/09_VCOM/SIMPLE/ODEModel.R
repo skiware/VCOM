@@ -229,33 +229,16 @@ IVM_ode <- function(time, state, theta){
   wCom <- wCom_Cattle + wCom_Human_Outdoor + wCom_Human_Indoor
   #wCom <- wCom_Cattle  + wCom_Human_Indoor
   #******************************************************************************************
+  #browser()
 
-
-  ## muVCom: Female mosquito death rate in presence of interventions:
-
-  # probability of surviving feeding period in the absence of an intervetion (SK)
-  p10 <- exp(-muV_1_Com*tau1)
-  #Equation 9
-  # Probability of surviving the first attempt, second, and so on -eqn 3 (SK)
-  p1Com <- p10*wCom/(1 - zCom*p10)
-  #Equation 1b
-  #probabbility of resting (SK)
-  p2 <- exp(-muV_2_Com*tau2)
-  #Equation 10
-  #probability of surviving one day (SK)
-  pCom <- (p1Com*p2)^deltaCom # SAme as eqn 4 in Menach (SK)
-  #Need to add lambda the rate at which mosq emerge per human per day (constant value) - (SK)
-  #Equation 11
-  # female mosquito mortality rate due to ITN and IRS (SK)
-  muVCom <- -log(pCom)
-  #Equation 13
-  # betaCom: Eggs laid per day by female mosquitoes in presence of ITNs & IRS:
-  betaCom <- e_ov*muVCom/(exp(muVCom/deltaCom) - 1)
-  # SK - ADD the following output
-  # Vectorial capacity
-  # HBO
-  # EIR
-  # Sam, add delay explanation in the write-up
+  ##**************Feeding cycle in presence of interventions ****************************
+  feedingCycleImpact = impactFeedingCycleParameters(muV_1_Com,tau1,zCom,wCom,muV_2_Com,tau2,deltaCom,e_ov)
+  
+  muVCom  = feedingCycleImpact[1]
+  betaCom = feedingCycleImpact[2]
+  
+  ##**********************************
+  
   ## ODEs:
   if(time < durEV){
     SVLag <- SV
