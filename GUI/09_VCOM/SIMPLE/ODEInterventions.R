@@ -84,8 +84,7 @@ impactOdorBaitedTraps = function(time,Q0,aOBT,OBTcov,time_OBT_on){
   #. impactOdorBaitedTraps: compute the impact of odor baited traps in reducing Q0
   #aOBT = availability
   #OBTcov = coverage same as ratio trap to human
-  
-  if (time > time_OBT_on) { OBTcov_t <- OBTcov } else { OBTcov_t <- 0 }
+  if (time > time_OBT_on) {print("YEH");  OBTcov_t <- OBTcov } else {print("ERROR");print(time_OBT_on); OBTcov_t <- 0 }
   
   Q0_t_h = Q0*(1/(1+aOBT*OBTcov))  #Impact on Q0 for humans
   Q0_t_c = (1-Q0)*(1/(1+aOBT*OBTcov)) #Impact on 1-Q0 prop going to Cattle
@@ -97,10 +96,12 @@ impactOdorBaitedTraps = function(time,Q0,aOBT,OBTcov,time_OBT_on){
 
 ##***********************************Protecting Humans Indoor**********************##
 impactIndoorProtection = function(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOUcov,time_HOU_on,
-                                     rITN,sITN,rIRS,rHOU,sIRS,sHOU, Q0_t_h, phiB, phiI,dHOU,dIRS){
+                                     rITN,sITN,rIRS,rHOU,sIRS,sHOU, Q0_t_h,Q0, phiB, phiI,dHOU,dIRS,time_OBT_on){
   #. impactIndoorProtection: compute both zcom and wcom for indoor interventions
+  # Incorporate odor baited traps
+  if (time > time_OBT_on) { Q0 <- Q0_t_h} else {Q0 <- Q0 }
   
-  Q0 = Q0_t_h  # Incorporate odor baited traps
+   
   ##*************************Human - Indoor protection *********************************##
   if (time > time_ITN_on) { ITNcov_t <- ITNcov } else { ITNcov_t <- 0 }
   if (time > time_IRS_on) { IRScov_t <- IRScov } else { IRScov_t <- 0 }
@@ -177,10 +178,11 @@ impactIndoorProtection = function(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOU
 
 ##*********Protecting humans outdoor **********************************************##
 
-impactOutdoorProtection = function(time,time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,Q0_t_h,phiI,c0){
+impactOutdoorProtection = function(time,time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,Q0_t_h,Q0,phiI,c0,time_OBT_on){
   #. impactInsecticideTreatedCattle: compute both zcom and wcom for insecticide treated cattle (systemic and topical)
   
-  Q0 = Q0_t_h  # Incorporate odor baited traps
+  # Incorporate odor baited traps
+  if (time > time_OBT_on) { Q0 <- Q0_t_h} else {Q0 <- Q0 }
   
   if (time > time_SPR_on) { SPRcov_t <- SPRcov } else { SPRcov_t <- 0 }
   if (time > time_PPM_on) { PPMcov_t <- PPMcov } else { PPMcov_t <- 0 }
@@ -220,9 +222,11 @@ impactOutdoorProtection = function(time,time_SPR_on,SPRcov,time_PPM_on,PPMcov,rS
 
 ##**********************Protection by insecticide treated cattle **********************##
 
-impactInsecticideTreatedCattle = function(time,time_ECS_on,ECScov,time_ECT_on,ECTcov,rECT,sECS,sECT,Q0_t_c){
+impactInsecticideTreatedCattle = function(time,time_ECS_on,ECScov,time_ECT_on,ECTcov,rECT,sECS,sECT,Q0_t_c,Q0,time_OBT_on){
   #. impactInsecticideTreatedCattle: compute both zcom and wcom for insecticide treated cattle (systemic and topical)
-  Q0_t_C = Q0_t_c  # Incorporate odor baited traps - prop going to cattle
+ 
+   # Incorporate odor baited traps by changing prop of bites to cattle when OBT is on
+  if (time > time_OBT_on) { Q0_t_C <- Q0_t_c} else {Q0_t_C <-1- Q0 }
   
   if (time > time_ECS_on) { ECScov_t <- ECScov } else { ECScov_t <- 0 }
   if (time > time_ECT_on) { ECTcov_t <- ECTcov } else { ECTcov_t <- 0 }
@@ -237,7 +241,6 @@ impactInsecticideTreatedCattle = function(time,time_ECS_on,ECScov,time_ECT_on,EC
   c0_Cattle <- 1 - ECScov_t - ECTcov_t + ECScov_t*ECTcov_t
   
   # repeating due to encountering insecticide (topical applied (only)) treated cattle
-  #Human - new search probability after a mosq is repelled (SK) by insecticide treated cattle (topical)
   #zCom_Cattle <- (1 - Q0)*(cECT*rECT+cCom_Cattle*rECT)
   zCom_Cattle <- Q0_t_C*(cECT*rECT+cCom_Cattle*rECT)
  
@@ -294,6 +297,5 @@ impactRestingOvipositing = function(time,time_OVI_on,OVIcov,time_ATSB_on,ATSBcov
 
 ###Notes for Sam####
 # 1. Check intersection of three intervention - ITNcov_t*IRScov_t*HOUcov_t
-# 2. Check double counting? c0_Outdoor
-# 3. (1-phiI) not included in oudoor? but co
+
 

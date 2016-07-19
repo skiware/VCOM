@@ -29,7 +29,7 @@ source("FeedingCycle.R")
 MOSQUITO_PARAMETERS = getAnGambiaeParameters()
 
 # Set values for control measures??
-INITIAL_TIME_VALUE   = 100
+INITIAL_TIME_VALUE   = 60
 
 #Source reduction, coverage value, time it is on
 INITIAL_SRE_COVERAGE = .00
@@ -54,21 +54,21 @@ INITIAL_SSP_TIME     = 00
 
 #Odor Traps, coverage value, time it is on
 INITIAL_OBT_COVERAGE = .00
-INITIAL_OBT_TIME     = 60
+INITIAL_OBT_TIME     = 20
 #LLINs, coverage value, time it is on
-INITIAL_ITN_COVERAGE = .50
+INITIAL_ITN_COVERAGE = .00
 INITIAL_ITN_TIME     = 50
 #IRS
-INITIAL_IRS_COVERAGE = 0.60
+INITIAL_IRS_COVERAGE = 0.00
 INITIAL_IRS_TIME     = 20
 #House modification
 INITIAL_HOU_COVERAGE = 0.0
 INITIAL_HOU_TIME     = 60
 #Cattle - Systemic
-INITIAL_ECS_COVERAGE = 0.0
-INITIAL_ECS_TIME     = 60
+INITIAL_ECS_COVERAGE = 0.60
+INITIAL_ECS_TIME     = 20
 #Cattle - Topical
-INITIAL_ECT_COVERAGE = 0.0
+INITIAL_ECT_COVERAGE = 0.00
 INITIAL_ECT_TIME     =20
 
 #Resting and Ovipositing - OviTraps -assuming same coverage for ATSB and SSP

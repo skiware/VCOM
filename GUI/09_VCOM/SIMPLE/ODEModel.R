@@ -199,7 +199,7 @@ IVM_ode <- function(time, state, theta){
   ##*************************Human - Indoor protection *********************************##
   impactIndoor <<- impactIndoorProtection(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOUcov,time_HOU_on,
 
-                                            rITN,sITN,rIRS,rHOU,sIRS,sHOU, Q0_t_h, phiB, phiI,dHOU,dIRS)
+                                            rITN,sITN,rIRS,rHOU,sIRS,sHOU, Q0_t_h,Q0, phiB, phiI,dHOU,dIRS,time_OBT_on)
   
 
   ##*******************For testing only****************#
@@ -211,18 +211,18 @@ IVM_ode <- function(time, state, theta){
 
   ##*************************Human - Outdoor protection *********************************##
 
-   impactOutdoor <<- impactOutdoorProtection(time,time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,Q0_t_h,phiI,c0)
+   impactOutdoor <<- impactOutdoorProtection(time,time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,Q0_t_h,Q0,phiI,c0,time_OBT_on)
   # 
    
 
-   impactOutdoor <<- impactOutdoorProtection(time,time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,Q0,phiI,c0)
+   #impactOutdoor <<- impactOutdoorProtection(time,time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,Q0,phiI,c0)
   #
 
    zCom_Human_Outdoor = impactOutdoor[1]
    wCom_Human_Outdoor = impactOutdoor[2]
 
   ##*************************** Cattle *********************************************##
-  impactCattle = impactInsecticideTreatedCattle(time,time_ECS_on,ECScov,time_ECT_on,ECTcov,rECT,sECS,sECT,Q0_t_c)
+  impactCattle = impactInsecticideTreatedCattle(time,time_ECS_on,ECScov,time_ECT_on,ECTcov,rECT,sECS,sECT,Q0_t_c,Q0,time_OBT_on)
   zCom_Cattle = impactCattle[1]
   wCom_Cattle = impactCattle[2]
   
