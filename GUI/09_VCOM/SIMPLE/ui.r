@@ -55,6 +55,7 @@ shinyUI(
         tabPanel("Main",
           sidebarLayout(
             sidebarPanel(
+              #####################################################################
               titlePanel(h1("Instructions",align="left")),
               helpText("(1) Select the mosquito species."),
               helpText("(2) Select the number of days."),
@@ -69,13 +70,24 @@ shinyUI(
                   "An. funestus"="FUN"
                 ),selected="GAM"),
               #####################################################################
-              fluidRow(h3("2. Simulation Time")),
+              fluidRow(h3("2. EIR Level Selection")),
+              radioButtons("EIR",label=NULL,
+                choices=list(
+                  "<10"="10",
+                  "<100"="100",
+                  "<1000"="1000"
+                ),selected="100"),
+              #####################################################################
+              fluidRow(h3("3. Simulation Time")),
               sliderInput("sliderTime","Days to Simulate:",min=1,max=365,value=80),
               #####################################################################
-              fluidRow(h3("3. Run Model")),
+              fluidRow(h3("4. Simulation Time")),
+              sliderInput("cattleToHumanRatio","Cattle/Human (10^x):",min=-3,max=3,value=0,step=.05),
+              #####################################################################
+              fluidRow(h3("5. Run Model")),
               actionButton("buttonRun","Run",width="100%"),
               #####################################################################
-              fluidRow(h3("4. Interventions")),
+              fluidRow(h3("6. Interventions")),
               fluidRow(
                 column(COVERAGE_LABELS_SIZE,h4("",align="center")),
                 column(COVERAGE_BAR_SIZE,h4("Coverage",align="center")),
