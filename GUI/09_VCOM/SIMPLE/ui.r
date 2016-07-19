@@ -73,16 +73,16 @@ shinyUI(
               fluidRow(h3("2. EIR Level Selection")),
               radioButtons("EIR",label=NULL,
                 choices=list(
-                  "<10"="10",
-                  "<100"="100",
-                  "<1000"="1000"
+                  "0<=EIR<10"="10",
+                  "10<=EIR<100"="100",
+                  "100<=EIR<1000"="1000"
                 ),selected="100"),
               #####################################################################
-              fluidRow(h3("3. Simulation Time")),
-              sliderInput("sliderTime","Days to Simulate:",min=1,max=365,value=80),
+              fluidRow(h3("3. Q0")),
+              sliderInput("Q0",label=NULL,min=0,max=1,value=0,step=.01),
               #####################################################################
               fluidRow(h3("4. Simulation Time")),
-              sliderInput("cattleToHumanRatio","Cattle/Human (10^x):",min=-3,max=3,value=0,step=.05),
+              sliderInput("sliderTime","Days to Simulate:",min=1,max=365,value=80),
               #####################################################################
               fluidRow(h3("5. Run Model")),
               actionButton("buttonRun","Run",width="100%"),
