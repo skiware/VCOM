@@ -12,8 +12,9 @@ shinyServer(
   function(input,output,session){
     #############################################################################
     # PRIMING GUI ###############################################################
-    shinyjs::disable("downloadTrace")
-    shinyjs::disable("downloadPlot")
+    shinyjs::disable("downloadTrace"); shinyjs::disable("downloadPlot")
+    shinyjs::disable("downloadCSVEIR"); shinyjs::disable("downloadEIR")
+    shinyjs::disable("downloadCSVDemographics"); shinyjs::disable("downloadDemographics")
     output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
     output$plotDemographics = renderPlot({barChartMosquitoDemographics(IVM_traj)})
@@ -50,13 +51,15 @@ shinyServer(
         interventionParameters=INTERVENTION_PARAMETERS
       )
       #--------------------------------------------------------------------------
-      print(INTERVENTION_PARAMETERS)
-      shinyjs::enable("downloadTrace")
-      shinyjs::enable("downloadPlot")
       initState=calculateInitialState(theta)
       IVM_traj<<-runODE(input$sliderTime,1,initState,theta,"lsoda")
       output$plotDemographics=renderPlot({barChartMosquitoDemographics(IVM_traj)})
       output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
+      print(INTERVENTION_PARAMETERS)
+      #--------------------------------------------------------------------------
+      shinyjs::enable("downloadCSVTrace"); shinyjs::enable("downloadPlotTrace")
+      shinyjs::enable("downloadCSVEIR"); shinyjs::enable("downloadPlotEIR")
+      shinyjs::enable("downloadCSVDemographics"); shinyjs::enable("downloadPlotDemographics")
     })
     #############################################################################
     # DOWNLOADS HANDLERS ########################################################
@@ -69,13 +72,13 @@ shinyServer(
         write.csv(df,file)
       }
     )
-    output$downloadTrace <- downloadHandler(
+    output$downloadCSVTrace <- downloadHandler(
       filename <- function(){paste("VCOM_Trace","csv",sep=".")},
       content <- function(file){
         write.csv(IVM_traj,file)
       }
     )
-    output$downloadPlot <- downloadHandler(
+    output$downloadPlotTrace <- downloadHandler(
       filename = function(){paste(input$dataset,'TrajectoryPlot.png',sep='')},
       content = function(file){
         device <- function(...,width,height){grDevices::png(...,width=width,height=height,res=300,units="in")}

@@ -169,15 +169,20 @@ shinyUI(
         ),
         tabPanel("Files Output",
           titlePanel(h1("Export and Download",align="left")),
+          helpText("Run the model at least once for the buttons to activate."),
           fluidRow(
             column(4,align="center",
               titlePanel(h3("Data",align="center")),
-              downloadButton("downloadTrace", 'Download CSV Trace')
+              downloadButton("downloadCSVTrace", 'Download CSV Trace'),
+              downloadButton("downloadCSVEIR", 'Download CSV EIR'),
+              downloadButton("downloadCSVDemographics", 'Download CSV Demographics')
             ),
             column(4,""),
             column(4,align="center",
               titlePanel(h3("Plots",align="center")),
-              downloadButton("downloadPlot", 'Download Trajectory Plot')
+              downloadButton("downloadPlotTrace", 'Download Trajectory Plot'),
+              downloadButton("downloadPlotEIR", 'Download EIR Plot'),
+              downloadButton("downloadPlotDemographics", 'Download Demographics Plot')
             )
           )
         )#,
