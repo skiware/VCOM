@@ -33,15 +33,15 @@ INITIAL_TIME_VALUE   = 60
 
 #Source reduction, coverage value, time it is on
 INITIAL_SRE_COVERAGE = .00
-INITIAL_SRE_TIME     = 20
+INITIAL_SRE_TIME     = 50
 
 #LArvaciding, coverage value, time it is on
-#INITIAL_LAR_COVERAGE = .00
-#INITIAL_LAR_TIME     = 0
+INITIAL_LAR_COVERAGE = .00
+INITIAL_LAR_TIME     = 2
 
 #Biological, coverage value, time it is on
-#INITIAL_BIO_COVERAGE = .10
-#INITIAL_BIO_TIME     = 00
+INITIAL_BIO_COVERAGE = .00
+INITIAL_BIO_TIME     = 2
 
 
 #ATSB, coverage value, time it is on
@@ -56,16 +56,16 @@ INITIAL_SSP_TIME     = 00
 INITIAL_OBT_COVERAGE = .00
 INITIAL_OBT_TIME     = 20
 #LLINs, coverage value, time it is on
-INITIAL_ITN_COVERAGE = .00
+INITIAL_ITN_COVERAGE = .50
 INITIAL_ITN_TIME     = 50
 #IRS
-INITIAL_IRS_COVERAGE = 0.00
+INITIAL_IRS_COVERAGE = 0.50
 INITIAL_IRS_TIME     = 20
 #House modification
 INITIAL_HOU_COVERAGE = 0.0
 INITIAL_HOU_TIME     = 60
 #Cattle - Systemic
-INITIAL_ECS_COVERAGE = 0.60
+INITIAL_ECS_COVERAGE = 0.00
 INITIAL_ECS_TIME     = 20
 #Cattle - Topical
 INITIAL_ECT_COVERAGE = 0.00
@@ -75,9 +75,6 @@ INITIAL_ECT_TIME     =20
 INITIAL_OVI_COVERAGE = 0.00
 INITIAL_OVI_TIME     =20
 
-
-
-# Sam - check the behaviour of cattle
 ## Get intervetions parameters - LLINs for testing
 #INTERVENTION_PARAMETERS = getInterventionsParameters(ITNcov=INITIAL_ITN_COVERAGE,time_ITN_on=INITIAL_ITN_TIME)
 
@@ -86,9 +83,9 @@ INTERVENTION_PARAMETERS = getInterventionsParameters(
                                   #Source Reduction
                           SREcov=INITIAL_SRE_COVERAGE,time_SRE_on=INITIAL_SRE_TIME, 
                                 #Larvaciding
-                          #LARcov=INITIAL_LAR_COVERAGE,time_LAR_on=INITIAL_LAR_TIME,
+                          LARcov=INITIAL_LAR_COVERAGE,time_LAR_on=INITIAL_LAR_TIME,
                                 #Biological Control
-                          #BIOcov=INITIAL_BIO_COVERAGE,time_BIO_on=INITIAL_BIO_TIME,
+                          BIOcov=INITIAL_BIO_COVERAGE,time_BIO_on=INITIAL_BIO_TIME,
                           
                                   #ATSB
                           ATSBcov=INITIAL_ATSB_COVERAGE,time_ATSB_on=INITIAL_ATSB_TIME,

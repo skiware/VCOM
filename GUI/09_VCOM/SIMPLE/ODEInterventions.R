@@ -84,7 +84,7 @@ impactOdorBaitedTraps = function(time,Q0,aOBT,OBTcov,time_OBT_on){
   #. impactOdorBaitedTraps: compute the impact of odor baited traps in reducing Q0
   #aOBT = availability
   #OBTcov = coverage same as ratio trap to human
-  if (time > time_OBT_on) {print("YEH");  OBTcov_t <- OBTcov } else {print("ERROR");print(time_OBT_on); OBTcov_t <- 0 }
+  if (time > time_OBT_on) { OBTcov_t <- OBTcov } else {OBTcov_t <- 0 }
   
   Q0_t_h = Q0*(1/(1+aOBT*OBTcov))  #Impact on Q0 for humans
   Q0_t_c = (1-Q0)*(1/(1+aOBT*OBTcov)) #Impact on 1-Q0 prop going to Cattle

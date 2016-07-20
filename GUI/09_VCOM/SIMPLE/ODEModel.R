@@ -46,10 +46,13 @@ calculateInitialState = function(theta){
   EV_eq <- eV_eq*NV_eq
   IV_eq <- iV_eq*NV_eq
 
-  initState <- c(EL = EL_eq,LL = LL_eq,PL = PL_eq,SV = SV_eq,EV = EV_eq,IV = IV_eq)
-  # Initiated EL_LAR, etc as EL_eq etc, IS THIS OK?
+  #initState <- c(EL = EL_eq,LL = LL_eq,PL = PL_eq,SV = SV_eq,EV = EV_eq,IV = IV_eq)
+  # Initiated EL_LAR, etc as EL_eq etc, IS THIS OK? Initialized to 0
+  
   #initState <- c(EL = EL_eq,EL_LAR = EL_eq,EL_BIO = EL_eq,EL_LAR_BIO = EL_eq,LL = LL_eq,LL_LAR = LL_eq,LL_BIO = LL_eq,LL_LAR_BIO = LL_eq,PL = PL_eq,SV = SV_eq,EV = EV_eq,IV = IV_eq)
 
+  initState <- c(EL = EL_eq,EL_LAR = 0,EL_BIO = 0,EL_LAR_BIO = 0,LL = LL_eq,LL_LAR = 0,LL_BIO = 0,LL_LAR_BIO = 0,PL = PL_eq,SV = SV_eq,EV = EV_eq,IV = IV_eq)
+  
   return(initState)
 }
 ######################################################################################
@@ -151,13 +154,13 @@ IVM_ode <- function(time, state, theta){
  
   ## States:  - Defn added by SK
   EL         <- state[["EL"]]  # Early Instar stage
-  #EL_LAR     <- state[["EL_LAR"]]  # Early Instar stage in presence of larvaciding
- # EL_BIO     <- state[["EL_BIO"]]  # Early Instar stage in presence of biological control
- # EL_LAR_BIO <- state[["EL_LAR_BIO"]]  # Early Instar stage in presence of both
+  EL_LAR     <- state[["EL_LAR"]]  # Early Instar stage in presence of larvaciding
+  EL_BIO     <- state[["EL_BIO"]]  # Early Instar stage in presence of biological control
+  EL_LAR_BIO <- state[["EL_LAR_BIO"]]  # Early Instar stage in presence of both
   LL         <- state[["LL"]]  # Late Instar stage
- # LL_LAR     <- state[["LL_LAR"]]  # Late Instar stage in presence of larvaciding
-  #LL_BIO     <- state[["LL_BIO"]]  # Late Instar stage in presence of biological control
-  #LL_LAR_BIO <- state[["LL_LAR_BIO"]]  # Late Instar stage in presence of both
+  LL_LAR     <- state[["LL_LAR"]]  # Late Instar stage in presence of larvaciding
+  LL_BIO     <- state[["LL_BIO"]]  # Late Instar stage in presence of biological control
+  LL_LAR_BIO <- state[["LL_LAR_BIO"]]  # Late Instar stage in presence of both
   PL         <- state[["PL"]]  # Pupal stage
   SV         <- state[["SV"]]  # Susceptitable Vectors
   EV         <- state[["EV"]]  # Latent period
@@ -245,7 +248,6 @@ IVM_ode <- function(time, state, theta){
   wCom <- wCom_Cattle + wCom_Human_Outdoor + wCom_Human_Indoor
   #wCom <- wCom_Cattle  + wCom_Human_Indoor
   #******************************************************************************************
-  #browser()
 
   ##**************Feeding cycle in presence of interventions ****************************
   feedingCycleImpact = impactFeedingCycleParameters(muV_1_Com,tau1,zCom,wCom,muV_2_Com,tau2,deltaCom,e_ov)
@@ -283,38 +285,43 @@ IVM_ode <- function(time, state, theta){
   }
   
   
+  #if( time > 20){
+  #  browser()
+  #}
   
     ###
   
-  dEL   <- betaCom*NV - muEL*(1 + ((EL+LL)/K))*EL - EL/durEL
-  dLL   <-EL/durEL - muLL*(1 + gamma*((EL+LL)/K))*LL - LL/durLL
+  #dEL   <- betaCom*NV - muEL*(1 + ((EL+LL)/K))*EL - EL/durEL
+  #dLL   <-EL/durEL - muLL*(1 + gamma*((EL+LL)/K))*LL - LL/durLL
   
-   #dEL   <- c0_LAR_BIO*betaCom*NV - muEL*(1 + ((EL+LL)/K*c0_LAR_BIO))*EL - EL/durEL
+   dEL   <- c0_LAR_BIO*betaCom*NV - muEL*(1 + ((EL+LL)/K*c0_LAR_BIO))*EL - EL/durEL
+   dLL     <-c0_LAR_BIO*EL/durEL - muLL*(1 + gamma*((EL+LL)/K*c0_LAR_BIO))*LL - LL/durLL
+   dPL <- LL/durLL - muPL*PL - PL/durPL
   
    ###*************Enable Larvaciding and biological control************
-  # if( time > time_LAR_on){dEL_LAR <- cLAR*betaCom*NV - fLAR*muEL*(1 + ((EL_LAR+LL_LAR)/cLAR*K))*EL_LAR - EL_LAR/durEL}else{dEL_LAR<-0}
-  # if( time > time_BIO_on){dEL_BIO <- cBIO*betaCom*NV - fBIO*muEL*(1 + ((EL_BIO+LL_BIO)/cBIO*K))*EL_BIO - EL_BIO/durEL}else{dEL_BIO <-0}
-  # if( time > time_BIO_on && time > time_LAR_on){dEL_LAR_BIO <- c_LAR_BIO*betaCom*NV - f_LAR_BIO*muEL*(1 + ((EL_LAR_BIO+LL_LAR_BIO)/c_LAR_BIO*K))*EL_LAR_BIO - EL_LAR_BIO/durEL}else{dEL_LAR_BIO<-0}
-  # 
+   if( time > time_LAR_on && cLAR >0 ){dEL_LAR <- cLAR*betaCom*NV - fLAR*muEL*(1 + ((EL_LAR+LL_LAR)/cLAR*K))*EL_LAR - EL_LAR/durEL}else{dEL_LAR<-0}
+   if( time > time_BIO_on && cBIO >0){dEL_BIO <- cBIO*betaCom*NV - fBIO*muEL*(1 + ((EL_BIO+LL_BIO)/cBIO*K))*EL_BIO - EL_BIO/durEL}else{dEL_BIO <-0}
+   if( time > time_LAR_on && cLAR >0 && time > time_BIO_on && cBIO >0){dEL_LAR_BIO <- c_LAR_BIO*betaCom*NV - f_LAR_BIO*muEL*(1 + ((EL_LAR_BIO+LL_LAR_BIO)/c_LAR_BIO*K))*EL_LAR_BIO - EL_LAR_BIO/durEL}else{dEL_LAR_BIO<-0}
+
    
-  #dLL     <-c0_LAR_BIO*EL/durEL - muLL*(1 + gamma*((EL+LL)/K*c0_LAR_BIO))*LL - LL/durLL
-  # if( time > time_LAR_on){dLL_LAR <-cLAR*EL/durEL - fLAR*muLL*(1 + gamma*((EL_LAR+LL_LAR)/K*cLAR))*LL_LAR - LL_LAR/durLL}else{dLL_LAR<-0}
-  # if( time > time_BIO_on){dLL_BIO <-cBIO*EL/durEL - fBIO*muLL*(1 + gamma*((EL_BIO+LL_BIO)/K*cBIO))*LL_BIO - LL_BIO/durLL}else{dLL_BIO<-0}
-  # if( time > time_BIO_on && time > time_LAR_on){dLL_LAR_BIO <-c_LAR_BIO*EL/durEL - f_LAR_BIO*muLL*(1 + gamma*((EL_LAR_BIO+LL_LAR_BIO)/K*c_LAR_BIO))*LL_LAR_BIO - LL_LAR_BIO/durLL}else{dLL_LAR_BIO<-0}
+  
+  if( time > time_LAR_on && cLAR >0 ){dLL_LAR <-cLAR*EL/durEL - fLAR*muLL*(1 + gamma*((EL_LAR+LL_LAR)/K*cLAR))*LL_LAR - LL_LAR/durLL}else{dLL_LAR<-0}
+  if( time > time_BIO_on && cBIO >0 ){dLL_BIO <-cBIO*EL/durEL - fBIO*muLL*(1 + gamma*((EL_BIO+LL_BIO)/K*cBIO))*LL_BIO - LL_BIO/durLL}else{dLL_BIO<-0}
+  if( time > time_LAR_on && cLAR >0 && time > time_BIO_on && cBIO >0 ){dLL_LAR_BIO <-c_LAR_BIO*EL/durEL - f_LAR_BIO*muLL*(1 + gamma*((EL_LAR_BIO+LL_LAR_BIO)/K*c_LAR_BIO))*LL_LAR_BIO - LL_LAR_BIO/durLL}else{dLL_LAR_BIO<-0}
   # 
   #Do we need to LL = LL+LAR+BIO+LAR_BIO????
   
-  dPL <- LL/durLL - muPL*PL - PL/durPL
+  
   #0.5 only dealing with female mosquitoes
   dSV <- 0.5*PL/durPL - lambdaV*SV - muVCom*SV
   dEV <- lambdaV*SV - lambdaV*SVLag*exp(-muVCom*durEV) - muVCom*EV
   dIV <- lambdaV*SVLag*exp(-muVCom*durEV) - muVCom*IV
   
-  return(list(c(dEL, dLL, dPL, dSV, dEV, dIV)))
+  #return(list(c(dEL, dLL, dPL, dSV, dEV, dIV)))
   
   
   #With larvaciding and biological control
-  #return(list(c(dEL,dEL_LAR,dEL_BIO,dEL_LAR_BIO, dLL,dLL_LAR,dLL_BIO,dLL_LAR_BIO, dPL, dSV, dEV, dIV)))
+  return(list(c(dEL,dEL_LAR,dEL_BIO,dEL_LAR_BIO, dLL,dLL_LAR,dLL_BIO,dLL_LAR_BIO, dPL, dSV, dEV, dIV)))
 
   }
 ######################################################################################
