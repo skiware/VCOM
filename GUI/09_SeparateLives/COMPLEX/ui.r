@@ -49,6 +49,14 @@ shinyUI(
       tabPanel("Main",
         sidebarLayout(
           sidebarPanel(
+            tags$head(tags$style(type="text/css", "
+              #loadmessage {
+                position: fixed;top: 50%;left: 0px;line-height: 80px;height: 100px;
+                width: 100%;padding: 5px 0px 5px 0px;text-align: center;font-weight: bold;
+                font-size: 200%;color: #FFFFFF;background-color: rgba(0, 0, 0, .5);z-index: 105;
+              }
+            ")),
+            conditionalPanel(condition="$('html').hasClass('shiny-busy')",tags$div("Working...",id="loadmessage")),
             titlePanel(h1("Instructions",align="left")),
             helpText("(1) Select the number of days for the simulation to run."),
             helpText("(2) Load the simulation setup file (CSV or XLS format). In case you currently do not have the template download it from the 'Downloads/'"),

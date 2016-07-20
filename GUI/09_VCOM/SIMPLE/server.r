@@ -12,6 +12,7 @@ shinyServer(
   function(input,output,session){
     #############################################################################
     # PRIMING GUI ###############################################################
+    output$modelStatus <- renderText({"Waiting"})
     shinyjs::disable("downloadCSVTrace"); shinyjs::disable("downloadPlotTrace")
     shinyjs::disable("downloadCSVEIR"); shinyjs::disable("downloadPlotEIR")
     shinyjs::disable("downloadCSVDemographics"); shinyjs::disable("downloadPlotDemographics")
@@ -31,6 +32,7 @@ shinyServer(
     #############################################################################
     # RUN MODEL #################################################################
     observeEvent(input$buttonRun,{
+      output$modelStatus <- renderText({"Calculating. Please wait."})
       cat("Run button event!\n")
       # CALCULATE THETA ---------------------------------------------------------
       MOSQUITO_PARAMETERS <<- switch(input$radioSpecies,
@@ -60,6 +62,7 @@ shinyServer(
       shinyjs::enable("downloadCSVTrace"); shinyjs::enable("downloadPlotTrace")
       shinyjs::enable("downloadCSVEIR"); shinyjs::enable("downloadPlotEIR")
       shinyjs::enable("downloadCSVDemographics"); shinyjs::enable("downloadPlotDemographics")
+      output$modelStatus <- renderText({"Done!"})
     })
     #############################################################################
     # DOWNLOADS HANDLERS ########################################################

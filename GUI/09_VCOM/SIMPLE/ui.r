@@ -86,6 +86,18 @@ shinyUI(
               #####################################################################
               fluidRow(h3("5. Run Model")),
               actionButton("buttonRun","Run",width="100%"),
+              #fluidRow(
+              #  column(5,helpText("Model Status: ")),
+              #  column(2,helpText(textOutput("modelStatus")))
+              #),
+              tags$head(tags$style(type="text/css", "
+                #loadmessage {
+                  position: fixed;top: 50%;left: 0px;line-height: 80px;height: 100px;
+                  width: 100%;padding: 5px 0px 5px 0px;text-align: center;font-weight: bold;
+                  font-size: 200%;color: #FFFFFF;background-color: rgba(100, 200, 255, .75);z-index: 105;
+                }
+              ")),
+              conditionalPanel(condition="$('html').hasClass('shiny-busy')",tags$div("Working...",id="loadmessage")),
               #####################################################################
               fluidRow(h3("6. Interventions")),
               fluidRow(
