@@ -25,8 +25,8 @@ shinyServer(
     #############################################################################
     # PRIMING GUI ###############################################################
     shinyjs::disable("buttonRun")
-    shinyjs::disable("downloadCSVTrace")
-    shinyjs::disable("downloadPlotTrace")
+    shinyjs::disable("downloadTrace")
+    shinyjs::disable("downloadPlot")
     output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
     output$plotDemographics=renderPlot({barChartMosquitoDemographics(IVM_traj)})
@@ -47,8 +47,8 @@ shinyServer(
       output$IVM_Runtime = renderTable(IVM_traj)
       output$plotDemographics = renderPlot({barChartMosquitoDemographics(IVM_traj)})
       output$plotTrajectory = renderPlot({plotTrajectory(IVM_traj)})
-      shinyjs::enable("downloadCSVTrace")
-      shinyjs::enable("downloadPlotTrace")
+      shinyjs::enable("downloadTrace")
+      shinyjs::enable("downloadPlot")
       #print(IVM_traj)
     })
     #############################################################################
@@ -83,17 +83,17 @@ shinyServer(
       filename <- function(){paste("VCOM_SimSetupFile","xls",sep=".")},
       content <- function(file){file.copy("SetupTemplates/SETUP_VCOM.xls",file)}
     )
-    output$downloadCSVTrace <- downloadHandler(
+    output$downloadTrace <- downloadHandler(
       filename <- function(){paste("VCOM_Trace","csv",sep=".")},
       content <- function(file){
         write.csv(IVM_traj,file)
       }
     )
-    output$downloadPlotTrace <- downloadHandler(
+    output$downloadPlot <- downloadHandler(
       filename = function(){paste(input$dataset, 'TrajectoryPlot.png', sep='')},
       #filename = function(){paste(input$dataset, input$radioFormat, sep='')},
       content = function(file) {
-        device <- function(...,width,height){grDevices::png(...,width=2*width,height=height,res=300,units="in")}
+        device <- function(...,width,height){grDevices::png(...,width=width,height=height,res=300,units="in")}
         ggsave(file, plot = plotTrajectory(IVM_traj), device = device)
       }
     )

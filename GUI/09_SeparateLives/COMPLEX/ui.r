@@ -71,8 +71,9 @@ shinyUI(
             #plotOutput("plotDemographics")
           )
         ),
-        helpText("CSS theme downloaded from: http://bootswatch.com (MIT licence)"),
-        helpText("Contacts: <Model: Samson.Kiware@ucsf.edu> <GUI: sanchez.hmsc@itesm.mx>")
+        helpText("Contacts: <Model: Samson.Kiware@ucsf.edu> <GUI: sanchez.hmsc@itesm.mx>"),
+        helpText("Cite as: "),
+        helpText("CSS theme downloaded from: http://bootswatch.com (MIT licence)")
       ),
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
       tabPanel("Additional Output",
@@ -108,14 +109,14 @@ shinyUI(
                 downloadButton("downloadTemplate", 'Download XLS Parameters Template'),
                 #downloadButton("downloadParameters", 'Download Current CSV Parameters'),
                 titlePanel(h6("")),
-                downloadButton("downloadTrace", 'Download CSV Trace')
+                downloadButton("downloadCSVTrace", 'Download CSV Trace')
               ),
               column(5,""),
               column(5,align="center",
                 titlePanel(h3("Plots",align="center")),
                 titlePanel(h6("")),
                 #radioButtons("radioFormat",label=h4("Plot Format"),choices=list("JPG"=".jpg","PNG"=".png"),selected="PNG"),
-                downloadButton("downloadPlot", 'Download Trajectory Plot')
+                downloadButton("downloadPlotTrace", 'Download Trajectory Plot')
               )
             )
           )

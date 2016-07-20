@@ -164,8 +164,9 @@ shinyUI(
               textOutput("results")
             )
           ),
-          helpText("CSS theme downloaded from: http://bootswatch.com (MIT licence)"),
-          helpText("Contacts: <Model: Samson.Kiware@ucsf.edu> <GUI: sanchez.hmsc@itesm.mx>")
+          helpText("Cite as: "),
+          helpText("Contacts: <Model: Samson.Kiware@ucsf.edu> <GUI: sanchez.hmsc@itesm.mx>"),
+          helpText("CSS theme downloaded from: http://bootswatch.com (MIT licence)")
         ),
         tabPanel("Files Output",
           titlePanel(h1("Export and Download",align="left")),

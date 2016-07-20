@@ -12,9 +12,9 @@ shinyServer(
   function(input,output,session){
     #############################################################################
     # PRIMING GUI ###############################################################
-    shinyjs::disable("downloadTrace"); shinyjs::disable("downloadPlot")
-    shinyjs::disable("downloadCSVEIR"); shinyjs::disable("downloadEIR")
-    shinyjs::disable("downloadCSVDemographics"); shinyjs::disable("downloadDemographics")
+    shinyjs::disable("downloadCSVTrace"); shinyjs::disable("downloadPlotTrace")
+    shinyjs::disable("downloadCSVEIR"); shinyjs::disable("downloadPlotEIR")
+    shinyjs::disable("downloadCSVDemographics"); shinyjs::disable("downloadPlotDemographics")
     output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
     output$plotDemographics = renderPlot({barChartMosquitoDemographics(IVM_traj)})
@@ -81,7 +81,7 @@ shinyServer(
     output$downloadPlotTrace <- downloadHandler(
       filename = function(){paste(input$dataset,'TrajectoryPlot.png',sep='')},
       content = function(file){
-        device <- function(...,width,height){grDevices::png(...,width=width,height=height,res=300,units="in")}
+        device <- function(...,width,height){grDevices::png(...,width=2*width,height=height,res=300,units="in")}
         ggsave(file,plot=plotTrajectory(IVM_traj),device=device)
       }
     )

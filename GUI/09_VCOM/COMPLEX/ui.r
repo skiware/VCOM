@@ -21,6 +21,7 @@ source("ODEAuxiliaryFunctions.R")
 source("ODEControlMeasuresParameters.R")
 source("ODETransmissionParameters.R")
 ################################################################################
+DISALLOWED_HEADS<<-c("Life Cycle Parameters","Species-Specific Parameters","Interventions Parameters","Transmission Parameters","NA",paste0(rep("NA.",20),1:20))
 importedFile=NULL
 BOXES_WIDTH<<-"75px"
 NAS_ALLOWED<<-11
