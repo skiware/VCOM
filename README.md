@@ -1,5 +1,13 @@
+# VCOM
+
 ## Description	
-# Vector Control Optimization Model (VCOM) is a platform designed 
+Vector Control Optimization Model (VCOM) is a platform designed to do cool stuff...
+
+## Citation
+VCOM, Awesome Journal
+
+## Contact
+Awesome people
 
 ## Parameters	
 * OVIcov: Ovitraps coverage
@@ -33,22 +41,22 @@
 * aOBT: availability of one odor baited trap in relation to one human
 * SPRcov: Spatial Repellents coverage
 * time_SPR_on: When Space Repellents are applied (days)
-PPMcov:
-time_PPM_on:
+* PPMcov: NA
+* time_PPM_on: NA
 * muV: Adult mosquito daily mortality
 * Q0: Human blood index
 * phiB: Proportion of bites on a person while they are in bed
 * phiI: Proportion of bites on a person while they are indoors
-rOVI:
-sOVI:
-rFOG:
-sFOG:
-rLAR:
-sLAR:
-rBIO:
-sBIO:
-rSRE:
-sSRE:
+* rOVI: NA
+* sOVI: NA
+* rFOG: NA
+* sFOG: NA
+* rLAR: NA
+* sLAR: NA
+* rBIO: NA
+* sBIO: NA
+* rSRE: NA
+* sSRE: NA
 * rSPR: Probability of mosquito repeating a feeding attempt due to spatial repelent
 * sSPR: Probability of mosquito feeding succesfully in presence to spatial repelent
 * rPPM: Probability of mosquito repeating a feeding attempt due to personal protection measures
@@ -65,13 +73,13 @@ sSRE:
 * dIRS: Death due to encountering IRS treated house
 * aOBT: availability of one odor baited trap in relation to one human
 * eSRE: effectiveness of the impact of source reduction in K
-fATSB factor allowing for increased mosquito death due to ATBS:
-fLAR factor allowing for increased mosquito death due to larvaciding:
-fBIO factor allowing for increased mosquito death due to biological control:
-fSSP factor allowing for increased mosquito death due to space spraying:
-fOVI factor allowing for increased mosquito death due to space spraying:
-rHOU:
-sHOU:
+* fATSB factor allowing for increased mosquito death due to ATBS: NA
+* fLAR factor allowing for increased mosquito death due to larvaciding: NA
+* fBIO factor allowing for increased mosquito death due to biological control: NA
+* fSSP factor allowing for increased mosquito death due to space spraying: NA
+* fOVI factor allowing for increased mosquito death due to space spraying: NA
+* rHOU: NA
+* sHOU: NA
 * beta: Number of eggs laid per day per female mosquito
 * muEL: Early larval instar daily mortality
 * muLL: Late larvarl instar daily mortality
@@ -89,10 +97,12 @@ sHOU:
 * iH_eq: Equilibrium malaria prevalence in humans
 * NH_eq: Equilibrium human population size
 * bV: Probability of transmission from human to vector per infectious bite
+* bh: transmission efficiency from an infectious mosquito to an uninfected, susceptible human
 
 ## Functions	
 * impactFeedingCycleParameters: compute the impact of interventions on feeding cycle parameters
 * plotTrajectory: Plots the evolution of the dynamics of the system
+* plotEIR: Plots EIR dynamics of the system
 * barChartMosquitoDemographics: Generates a bar chart with the amount of mosquitos in each life stage
 * parseImportedCSVParameters: Once a csv file has been imported this function converts the data into a theta object
 * importCSVParametersFromDirectory: Loads the verified parameters of the simulation from a CSV file into the workflow
@@ -110,12 +120,13 @@ sHOU:
 * impactInsecticideTreatedCattle: compute both zcom and wcom for insecticide treated cattle (systemic and topical)
 * impactInsecticideTreatedCattle: compute both zcom and wcom for insecticide treated cattle (systemic and topical)
 * impactRestingOvipositing: compute the impact of ATSB, Space Spraying, and ovitraps on muV_2
-* produceHumanBitingRate: Main function that return human biting rate per mosquito in presence of intervetion
-* produceMosqDensity: Main function that return mosquito density in presence of intervetion
-* produceHBI: Main function that return human blood index
-* produceVC: Main function that return vectorial capacity
-* produceEIR: Main function that return entomological innoculation rate
-* produceR_0: Main function that return entomological innoculation rate
+* computeLengthGonotrophicycle: Main function that return the length of gonotrophic cycle in presence of interventions
+* computeHumanBitingRate: Main function that return human biting rate per mosquito in presence of intervetion
+* computeMosqDensity: Main function that return mosquito density in presence of intervetion
+* computeceHBI: Main function that return human blood index
+* computeVC: Main function that return vectorial capacity
+* computeEIR: Main function that return entomological innoculation rate
+* computeRO : Main function that return basic reproduction rate
 * runODE: Main ODE wrapper for simulating the mosquito population
 * calculateInitialState: Calculates the initial conditions of a system given the theta parameters
 * IVM_ode: ODE Model definition

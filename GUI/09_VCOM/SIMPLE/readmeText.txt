@@ -1,1 +1,0 @@
-# Vector Control Optimization Model (VCOM) is a platform designed 
