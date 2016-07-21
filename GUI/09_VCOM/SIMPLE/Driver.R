@@ -29,19 +29,19 @@ source("FeedingCycle.R")
 MOSQUITO_PARAMETERS = getAnGambiaeParameters()
 
 # Set values for control measures??
-INITIAL_TIME_VALUE   = 60
+INITIAL_TIME_VALUE   = 100
 
 #Source reduction, coverage value, time it is on
-INITIAL_SRE_COVERAGE = .00
-INITIAL_SRE_TIME     = 50
+INITIAL_SRE_COVERAGE = 00
+INITIAL_SRE_TIME     = 20
 
 #LArvaciding, coverage value, time it is on
 INITIAL_LAR_COVERAGE = .00
-INITIAL_LAR_TIME     = 2
+INITIAL_LAR_TIME     = 200
 
 #Biological, coverage value, time it is on
 INITIAL_BIO_COVERAGE = .00
-INITIAL_BIO_TIME     = 2
+INITIAL_BIO_TIME     = 200
 
 
 #ATSB, coverage value, time it is on
@@ -62,7 +62,7 @@ INITIAL_ITN_TIME     = 50
 INITIAL_IRS_COVERAGE = 0.50
 INITIAL_IRS_TIME     = 20
 #House modification
-INITIAL_HOU_COVERAGE = 0.0
+INITIAL_HOU_COVERAGE = 0.00
 INITIAL_HOU_TIME     = 60
 #Cattle - Systemic
 INITIAL_ECS_COVERAGE = 0.00
@@ -117,11 +117,15 @@ initState <<- calculateInitialState(theta)
 ## Run the model
 IVM_traj <<- runODE(INITIAL_TIME_VALUE,1,initState,theta,"lsoda")
 
+
+
 ## Generate outputs - using Histograms
 barChartMosquitoDemographics(IVM_traj)
 
 ## Generate output - using gg plots
 plotTrajectory(IVM_traj)
+
+#plotEIR(IVM_traj)
 
 
 

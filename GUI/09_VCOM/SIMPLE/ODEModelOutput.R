@@ -6,44 +6,53 @@
 ########################################################################
 
 ######################################################################################
-produceHumanBitingRate = function(V,H){
-  #. produceHumanBitingRate: Main function that return human biting rate per mosquito in presence of intervetion
-  Mdensity <- V/H
+computeLengthGonotrophicycle = function(deltaCom){
+  #. computeLengthGonotrophicycle: Main function that return the length of gonotrophic cycle in presence of interventions
+  #Length of gonotrophic cycle
+  
+  f_theta <- 1/deltaCom
+  return(f_theta)
+}
+
+computeHumanBitingRate = function(f_theta,HBI_com){
+  #. computeHumanBitingRate: Main function that return human biting rate per mosquito in presence of intervetion
+    
+   a_theta <- HBI_com/f_theta
+  return(a_theta)
+}
+######################################################################################
+computeMosqDensity = function(NV,NH){
+  #. computeMosqDensity: Main function that return mosquito density in presence of intervetion
+  Mdensity <- NV/NH
   return(Mdensity)
 }
 ######################################################################################
-produceMosqDensity = function(V,H){
-  #. produceMosqDensity: Main function that return mosquito density in presence of intervetion
-  Mdensity <- V/H
-  return(Mdensity)
-}
-######################################################################################
-produceHBI = function(wCom_human,wCom){
-  #. produceHBI: Main function that return human blood index
+computeHBI = function(wCom_human,wCom){
+  #. computeceHBI: Main function that return human blood index
   #HBI_com <- (Pfi+pfo)/pf
   HBI_com <- (wCom_human)/wCom
   return(HBI_com)
 }
 
 ######################################################################################
-produceVC = function(a_theta, Mdensity,muVCom,durEV){
-  #. produceVC: Main function that return vectorial capacity
+computeVC = function(a_theta, Mdensity,muVCom,durEV){
+  #. computeVC: Main function that return vectorial capacity
   ## n incubation period
   tilda <- durEV
   VC <- (Mdensity * a_theta^2 *exp(-muVCom*tilda))/muVCom
   return(VC)
 }
 ######################################################################################
-produceEIR = function(a_theta, IV, H){
-  #. produceEIR: Main function that return entomological innoculation rate
+computeEIR = function(a_theta, IV, NH){
+  #. computeEIR: Main function that return entomological innoculation rate
   ## X_theta = iH_eq, bh - add to transmission parameter
-  EIR <- (IV*a_theta)/H
+  EIR <- (IV*a_theta)/NH
   return(EIR)
 }
 
 ######################################################################################
-produceEIR = function(a_theta,muVCom, V,bv,bh,H){
-  #. produceR_0: Main function that return entomological innoculation rate
-  R_o <- (V/H)*a_theta^2*bv*(bh/(muVCom*V))
+computeRO = function(a_theta,muVCom, NV,bv,bh,NH){
+  #. computeRO : Main function that return basic reproduction rate
+  R_o <- (NV/NH)*a_theta^2*bv*(bh/(muVCom))
   return(R_o)
 }

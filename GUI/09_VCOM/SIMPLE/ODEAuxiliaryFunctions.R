@@ -6,9 +6,16 @@
 #=======================================================================
 ########################################################################
 REQUIRED_PARAMETERS_LIST_GLOBAL = c("beta","muEL","muLL","muPL","durEL","durLL","durPL","durEV",
-                                    "gamma","tau1","tau2","muV","Q0","phiB","phiI","rOVI","sOVI","rFOG","sFOG","rLAR","sLAR",
-                                    "rBIO","sBIO","rSRE","sSRE","rIRS","sIRS","rITN","sITN","rECS","rECT","dHOU","dIRS","rHOU","sHOU","rODO",
+                                    "gamma","tau1","tau2","muV","Q0","phiB","phiI","rOVI","sOVI","rFOG","sFOG","rLAR","sLAR",                                     "rBIO","sBIO","rSRE","sSRE","rIRS","sIRS","rITN","sITN","rECS","rECT","dHOU","dIRS","rHOU","sHOU","rODO",
                                     "sODO","rSPA","sSPA")
+
+
+# REQUIRED_PARAMETERS_LIST_GLOBAL = c("time","tau1","tau2","e_ov","time_ATSB_on","ATSBcov","time_SSP_on",
+#                                     "SSPcov","fSSP","fATSB","muV","Q0","aOBT","OBTcov","time_OBT_on","time_ITN_on",
+#                                     "ITNcov","time_IRS_on","IRScov","HOUcov","time_HOU_on","rITN","sITN","rIRS","rHOU",
+#                                     "sIRS","sHOU","phiB", "phiI","dHOU","dIRS","time_SPR_on","SPRcov","time_PPM_on",
+#                                     "PPMcov","rSPR","rPPM","sSPR","sPPM","c0","time_ECS_on","ECScov","time_ECT_on",
+#                                     "ECTcov","rECT","sECS","sECT","time_OVI_on","OVIcov","fOVI")
 
 plotTrajectory = function(IVM_traj){
   #. plotTrajectory: Plots the evolution of the dynamics of the system
@@ -19,6 +26,34 @@ plotTrajectory = function(IVM_traj){
     geom_line(aes(y = EV, col = "EV"), size = 1.2) +
     labs(x = "Time (days)", y = "Number of mosquitoes")
 }
+plotEIR = function(IVM_traj){
+  #. plotEIR: Plots EIR dynamics of the system
+  browser()
+  # feedingCycleImpact= impactFeedingCycleParameters(time,tau1,tau2,e_ov,time_ATSB_on,ATSBcov,time_SSP_on,SSPcov,fSSP,fATSB,muV,
+  #                                                  Q0,aOBT,OBTcov,time_OBT_on,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOUcov,
+  #                                                  time_HOU_on,rITN,sITN,rIRS,rHOU,sIRS,sHOU, phiB, phiI,dHOU,dIRS,
+  #                                                  time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,
+  #                                                  c0,time_ECS_on,ECScov,time_ECT_on,ECTcov,rECT,sECS,sECT,
+  #                                                  time_OVI_on,OVIcov,fOVI)
+  
+  muVCom  = feedingCycleImpact[1]
+  betaCom = feedingCycleImpact[2]
+  # #EIR
+  transmissionValues = getAdditionalTransmissionParameters()
+  bV = transmissionValues[["bV"]]
+  NH = transmissionValues[["NH_eq"]]
+  bh = transmissionValues[["bh"]]
+  IV = IVM_traj["IV"]
+  
+  EIR <-computeEIR(a_theta, IV, NH)
+  ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
+    #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) + 
+    geom_line(aes(y = a_theta, col = "EIR"), size = 1.2) + 
+    labs(x = "Time (days)", y = "biting rate")
+}
+
+
+
 barChartMosquitoDemographics = function(IVM_traj){
   #. barChartMosquitoDemographics: Generates a bar chart with the amount of mosquitos in each life stage
   #NumMosq <- c(sum(IVM_traj[2]),sum(IVM_traj[3]),sum(IVM_traj[4]),sum(IVM_traj[5]),sum(IVM_traj[6]),sum(IVM_traj[7]))

@@ -88,7 +88,8 @@ getTheta = function(
     epsilon0    = additionalTransmissionParameters[["epsilon0"]],
     iH_eq       = additionalTransmissionParameters[["iH_eq"]],
     NH_eq       = additionalTransmissionParameters[["NH_eq"]],
-    bV          = additionalTransmissionParameters[["bV"]]
+    bV          = additionalTransmissionParameters[["bV"]],
+    bh          = additionalTransmissionParameters[["bh"]]
   )
 }
 ######################################################################################
