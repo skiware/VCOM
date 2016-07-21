@@ -12,18 +12,29 @@ rBIO
 sBIO
 rSRE
 sSRE
+rSPR, Probability of mosquito repeating a feeding attempt due to spatial repelent
+sSPR, Probability of mosquito feeding succesfully in presence to spatial repelent
+rPPM, Probability of mosquito repeating a feeding attempt due to personal protection measures
+sPPM, Probability of mosquito feeding succesfully in presence to personal protection measures
 rIRS, Probability of mosquito repeating a feeding attempt due to IRS
 sIRS, Probability of mosquito feeding and surviving in presence of IRS
 rITN, Probability of mosquito repeating a feeding attempt due to IRS
 sITN, Probability of mosquito feeding and surviving in presence of ITN
-rIVM
-sIVM
+rECT, Probability of mosquito repeating a feeding attempt due to instecide (topical) treated cattle
+sECT, Probability of mosquito feeding and surviving in presence of instecide (topical) treated cattle
+rECS, Probability of mosquito repeating a feeding attempt due to instecide (systemic) treated cattle
+sECS, Probability of mosquito feeding and surviving in presence of instecide (systemic) treated cattle
+dHOU, Death due to encountering mosquito proofed housing
+dIRS, Death due to encountering IRS treated house
+aOBT, availability of one odor baited trap in relation to one human
+eSRE, effectiveness of the impact of source reduction in K
+fATSB factor allowing for increased mosquito death due to ATBS
+fLAR factor allowing for increased mosquito death due to larvaciding
+fBIO factor allowing for increased mosquito death due to biological control
+fSSP factor allowing for increased mosquito death due to space spraying
+fOVI factor allowing for increased mosquito death due to space spraying
 rHOU
 sHOU
-rODO
-sODO
-rSPA
-sSPA
 beta, Number of eggs laid per day per female mosquito
 muEL, Early larval instar daily mortality
 muLL, Late larvarl instar daily mortality

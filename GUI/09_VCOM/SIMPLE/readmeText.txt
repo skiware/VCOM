@@ -1,2 +1,1 @@
-Rise and shine Mr. Freeman. Rise and shine...
-Yeh man, rise and shine
+# Vector Control Optimization Model (VCOM) is a platform designed 
