@@ -204,8 +204,7 @@ shinyUI(
               downloadButton("downloadPlotDemographics", 'Download Demographics Plot')
             )
           )
-        )#,
-        #tags$script('$(document).on("keydown", function(e){Shiny.onInputChange("keypressed", e.which);});')
+        )
       )
     )
   )

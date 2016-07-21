@@ -1,7 +1,7 @@
-# VCOM
+# Vector Control Optimization Model [VCOM]
 
 ## Description	
-Vector Control Optimization Model (VCOM) is a platform designed to do cool stuff...
+VCOM is a platform designed to do cool stuff...
 
 ## Citation
 VCOM, Awesome Journal
