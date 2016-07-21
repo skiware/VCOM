@@ -13,14 +13,18 @@
 #======================================================================
 
 
-#impactFeedingCycleParameters = function(muV_1_Com,tau1,zCom,wCom,muV_2_Com,tau2,deltaCom,e_ov){
-impactFeedingCycleParameters = function(time,tau1,tau2,e_ov,time_ATSB_on,ATSBcov,time_SSP_on,SSPcov,fSSP,fATSB,muV,
-                                        Q0,aOBT,OBTcov,time_OBT_on,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOUcov,
-                                        time_HOU_on,rITN,sITN,rIRS,rHOU,sIRS,sHOU, phiB, phiI,dHOU,dIRS,
-                                        time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,
-                                        c0,time_ECS_on,ECScov,time_ECT_on,ECTcov,rECT,sECS,sECT,
-                                        time_OVI_on,OVIcov,fOVI){
-    #. impactFeedingCycleParameters: compute the impact of interventions on feeding cycle parameters
+ #impactFeedingCycleParameters = function(muV_1_Com,tau1,zCom,wCom,muV_2_Com,tau2,deltaCom,e_ov){
+impactFeedingCycleParameters = function(time,beta,tau1,tau2,e_ov,time_ATSB_on,ATSBcov,time_SSP_on,SSPcov,fSSP,fATSB,muV,
+                                         Q0,aOBT,OBTcov,time_OBT_on,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOUcov,
+                                         time_HOU_on,rITN,sITN,rIRS,rHOU,sIRS,sHOU, phiB, phiI,dHOU,dIRS,
+                                         time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,
+                                         c0,time_ECS_on,ECScov,time_ECT_on,ECTcov,rECT,sECS,sECT,
+                                         time_OVI_on,OVIcov,fOVI){
+  
+  delta <- 1/(tau1+tau2) # Inverse of gonotrophic cycle without interventions
+  e_ov <- beta*(exp(muV/delta)-1)/muV # Number of eggs per oviposition per mosquito
+  
+  #. impactFeedingCycleParameters: compute the impact of interventions on feeding cycle parameters
   ##**********Host seeking - ATSB and space spraying ****##############################
   muV_1_Com <<- impactATSBSpaceSpraying(time,time_ATSB_on,ATSBcov,time_SSP_on,SSPcov,fSSP,fATSB,muV)
   
@@ -79,6 +83,9 @@ impactFeedingCycleParameters = function(time,tau1,tau2,e_ov,time_ATSB_on,ATSBcov
   # deltaCom: Inverse of gonotrophic cycle length with ITNs & IRS:
   deltaCom <- 1/(tau1/(1-zCom) + tau2)
   
+  # Probability that a surviving mosquito succeeds in feeding during a single attempt - only on humans
+  wCom_human = wCom_Human_Outdoor + wCom_Human_Indoor
+  
   ### wCom: Probability that a surviving mosquito succeeds in feeding during a single attempt:##
   wCom <- wCom_Cattle + wCom_Human_Outdoor + wCom_Human_Indoor
   #wCom <- wCom_Cattle  + wCom_Human_Indoor
@@ -100,7 +107,16 @@ impactFeedingCycleParameters = function(time,tau1,tau2,e_ov,time_ATSB_on,ATSBcov
     # betaCom: Eggs laid per day by female mosquitoes in presence of ITNs & IRS:
     betaCom <- e_ov*muVCom/(exp(muVCom/deltaCom) - 1)
     
-    impactFeedingCycle <- c(muVCom,betaCom)
+    #Length Gonotrophic cycle
+    f_theta = computeLengthGonotrophicycle(deltaCom)
+    
+    #HBI
+    HBI_com = computeHBI(wCom_human,wCom)
+      
+    #Compute biting rate
+    a_theta =  computeHumanBitingRate(f_theta,HBI_com)
+    
+    impactFeedingCycle <- c(muVCom,betaCom,a_theta)
     
     return(impactFeedingCycle)
 

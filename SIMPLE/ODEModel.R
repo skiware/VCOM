@@ -75,6 +75,7 @@ IVM_ode <- function(time, state, theta){
   tau1 <- theta[["tau1"]] # Time spent foraging for a blood meal (no ITNs) (days)
   tau2 <- theta[["tau1"]] # Time spent resting and ovipositing (days)
   NV_eq <- theta[["NV_eq"]] # Number of female mosquitoes at equilibrium
+  #e_ov  <- theta[["e_ov"]] # # Number of eggs per oviposition per mosquito - SK wanted to add it in theta but recomputed in FC
   lambdaV <- theta[["lambdaV"]] # Force of infection in vectors at equilibrium
   ## Parameters (interventions):
   ITNcov <- theta[["ITNcov"]] # ITN coverage
@@ -190,7 +191,7 @@ IVM_ode <- function(time, state, theta){
   
 
   ##**************Feeding cycle in presence of interventions ****************************
-  feedingCycleImpact= impactFeedingCycleParameters(time,tau1,tau2,e_ov,time_ATSB_on,ATSBcov,time_SSP_on,SSPcov,fSSP,fATSB,muV,
+  feedingCycleImpact= impactFeedingCycleParameters(time,beta,tau1,tau2,e_ov,time_ATSB_on,ATSBcov,time_SSP_on,SSPcov,fSSP,fATSB,muV,
                      Q0,aOBT,OBTcov,time_OBT_on,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOUcov,
                      time_HOU_on,rITN,sITN,rIRS,rHOU,sIRS,sHOU, phiB, phiI,dHOU,dIRS,
                      time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,

@@ -10,12 +10,6 @@ REQUIRED_PARAMETERS_LIST_GLOBAL = c("beta","muEL","muLL","muPL","durEL","durLL",
                                     "sODO","rSPA","sSPA")
 
 
-# REQUIRED_PARAMETERS_LIST_GLOBAL = c("time","tau1","tau2","e_ov","time_ATSB_on","ATSBcov","time_SSP_on",
-#                                     "SSPcov","fSSP","fATSB","muV","Q0","aOBT","OBTcov","time_OBT_on","time_ITN_on",
-#                                     "ITNcov","time_IRS_on","IRScov","HOUcov","time_HOU_on","rITN","sITN","rIRS","rHOU",
-#                                     "sIRS","sHOU","phiB", "phiI","dHOU","dIRS","time_SPR_on","SPRcov","time_PPM_on",
-#                                     "PPMcov","rSPR","rPPM","sSPR","sPPM","c0","time_ECS_on","ECScov","time_ECT_on",
-#                                     "ECTcov","rECT","sECS","sECT","time_OVI_on","OVIcov","fOVI")
 
 plotTrajectory = function(IVM_traj){
   #. plotTrajectory: Plots the evolution of the dynamics of the system
@@ -26,18 +20,19 @@ plotTrajectory = function(IVM_traj){
     geom_line(aes(y = EV, col = "EV"), size = 1.2) +
     labs(x = "Time (days)", y = "Number of mosquitoes")
 }
-plotEIR = function(IVM_traj){
+plotEIR = function(IVM_traj,theta,time){
   #. plotEIR: Plots EIR dynamics of the system
-  browser()
-  # feedingCycleImpact= impactFeedingCycleParameters(time,tau1,tau2,e_ov,time_ATSB_on,ATSBcov,time_SSP_on,SSPcov,fSSP,fATSB,muV,
-  #                                                  Q0,aOBT,OBTcov,time_OBT_on,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOUcov,
-  #                                                  time_HOU_on,rITN,sITN,rIRS,rHOU,sIRS,sHOU, phiB, phiI,dHOU,dIRS,
-  #                                                  time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,
-  #                                                  c0,time_ECS_on,ECScov,time_ECT_on,ECTcov,rECT,sECS,sECT,
-  #                                                  time_OVI_on,OVIcov,fOVI)
+  #browser()
+  impactFeedingCycle = impactFeedingCycleParameters(time, theta[["beta"]], theta[["tau1"]],theta[["tau2"]],theta[["e_ov"]],theta[["time_ATSB_on"]],theta[["ATSBcov"]],theta[["time_SSP_on"]],
+                               theta[["SSPcov"]],theta[["fSSP"]],theta[["fATSB"]],theta[["muV"]],theta[["Q0"]],theta[["aOBT"]],theta[["OBTcov"]],theta[["time_OBT_on"]],theta[["time_ITN_on"]],
+                               theta[["ITNcov"]],theta[["time_IRS_on"]],theta[["IRScov"]],theta[["HOUcov"]],theta[["time_HOU_on"]],theta[["rITN"]],theta[["sITN"]],theta[["rIRS"]],theta[["rHOU"]],
+                               theta[["sIRS"]],  theta[["sHOU"]],theta[["phiB"]], theta[["phiI"]],theta[["dHOU"]],theta[["dIRS"]],theta[["time_SPR_on"]],theta[["SPRcov"]],theta[["time_PPM_on"]],
+                               theta[["PPMcov"]],theta[["rSPR"]],theta[["rPPM"]],theta[["sSPR"]],theta[["sPPM"]],theta[["c0"]],theta[["time_ECS_on"]],theta[["ECScov"]],theta[["time_ECT_on"]],
+                               theta[["ECTcov"]],theta[["rECT"]],theta[["sECS"]],theta[["sECT"]],theta[["time_OVI_on"]],theta[["OVIcov"]],theta[["fOVI"]])
+ 
+  #Biting rate
+  a_theta = impactFeedingCycle[3]
   
-  muVCom  = feedingCycleImpact[1]
-  betaCom = feedingCycleImpact[2]
   # #EIR
   transmissionValues = getAdditionalTransmissionParameters()
   bV = transmissionValues[["bV"]]
@@ -45,11 +40,13 @@ plotEIR = function(IVM_traj){
   bh = transmissionValues[["bh"]]
   IV = IVM_traj["IV"]
   
+  
+  #browser()
   EIR <-computeEIR(a_theta, IV, NH)
   ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
     #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) + 
-    geom_line(aes(y = a_theta, col = "EIR"), size = 1.2) + 
-    labs(x = "Time (days)", y = "biting rate")
+    geom_line(aes(y = EIR, col = "EIR"), size = 1.2) + 
+    labs(x = "Time (days)", y = "EIR")
 }
 
 
