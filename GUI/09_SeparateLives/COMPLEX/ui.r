@@ -53,6 +53,9 @@ TEMPLATE_AN_GAMBIAE<<-importCSVParametersFromDirectory("SetupTemplates/Template_
 shinyUI(
   fluidPage(theme=shinytheme("cosmo"),
     useShinyjs(),
+    tags$script(ENTER_DOWN_RUN),
+    tags$head(tags$style(type="text/css",WORKING_MESSAGE_STYLE)),
+    conditionalPanel(condition="$('html').hasClass('shiny-busy')",tags$div("Working...",id="loadmessage")),
     titlePanel(h1("VCOM: Expert",align="center"),windowTitle="VCOM: Expert"),
     titlePanel(h4("Vector Control Optimization Model",align="center")),
     navbarPage("",id="nav",
@@ -60,9 +63,6 @@ shinyUI(
       tabPanel("Main",
         sidebarLayout(
           sidebarPanel(
-            tags$script(ENTER_DOWN_RUN),
-            tags$head(tags$style(type="text/css",WORKING_MESSAGE_STYLE)),
-            conditionalPanel(condition="$('html').hasClass('shiny-busy')",tags$div("Working...",id="loadmessage")),
             titlePanel(h1("Instructions",align="left")),
             helpText("(1) Select the number of days for the simulation to run."),
             helpText("(2) Load the simulation setup file (CSV or XLS format). In case you currently do not have the template download it from the 'Downloads/'"),

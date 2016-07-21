@@ -59,7 +59,12 @@ shinyUI(
   fluidPage(theme = shinytheme("cerulean"),
     titlePanel(h1("VCOM: Simple",align="center"),windowTitle="VCOM: Simple"),
     titlePanel(h4("Vector Control Optimization Model",align="center")),
+    ###############################################################################
     useShinyjs(),
+    tags$script(ENTER_DOWN_RUN),
+    tags$head(tags$style(type="text/css",WORKING_MESSAGE_STYLE)),
+    conditionalPanel(condition="$('html').hasClass('shiny-busy')",tags$div("Working...",id="loadmessage")),
+    ###############################################################################
     navbarPage("",id="nav",
         #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
         tabPanel("Main",
@@ -98,9 +103,6 @@ shinyUI(
               #####################################################################
               fluidRow(h3("5. Run Model")),
               actionButton("buttonRun","Run",width="100%"),
-              tags$script(ENTER_DOWN_RUN),
-              tags$head(tags$style(type="text/css",WORKING_MESSAGE_STYLE)),
-              conditionalPanel(condition="$('html').hasClass('shiny-busy')",tags$div("Working...",id="loadmessage")),
               #####################################################################
               fluidRow(h3("6. Interventions")),
               fluidRow(
