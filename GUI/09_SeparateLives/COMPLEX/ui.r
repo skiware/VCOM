@@ -25,6 +25,17 @@ DISALLOWED_HEADS<<-c("Life Cycle Parameters","Species-Specific Parameters","Inte
 importedFile=NULL
 BOXES_WIDTH<<-"75px"
 NAS_ALLOWED<<-11
+ENTER_DOWN_RUN <<- '
+  $(document).ready(function(){
+    $("body").keydown(function(e){
+      if(e.which === 13){$("#buttonRun").click();}
+    });
+  });'
+WORKING_MESSAGE_STYLE <<- "#loadmessage {
+    position: fixed;top: 50%;left: 0px;line-height: 80px;height: 100px;
+    width: 100%;padding: 5px 0px 5px 0px;text-align: center;font-weight: bold;
+    font-size: 200%;color: #FFFFFF;background-color: rgba(0, 0, 0, .5);z-index: 105;
+  }"
 # Theta from code----------------------------------
 #initialTheta <<- getTheta()
 # Theta from setup CSV-----------------------------
@@ -49,13 +60,8 @@ shinyUI(
       tabPanel("Main",
         sidebarLayout(
           sidebarPanel(
-            tags$head(tags$style(type="text/css", "
-              #loadmessage {
-                position: fixed;top: 50%;left: 0px;line-height: 80px;height: 100px;
-                width: 100%;padding: 5px 0px 5px 0px;text-align: center;font-weight: bold;
-                font-size: 200%;color: #FFFFFF;background-color: rgba(0, 0, 0, .5);z-index: 105;
-              }
-            ")),
+            tags$script(ENTER_DOWN_RUN),
+            tags$head(tags$style(type="text/css",WORKING_MESSAGE_STYLE)),
             conditionalPanel(condition="$('html').hasClass('shiny-busy')",tags$div("Working...",id="loadmessage")),
             titlePanel(h1("Instructions",align="left")),
             helpText("(1) Select the number of days for the simulation to run."),

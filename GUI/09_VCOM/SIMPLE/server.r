@@ -19,8 +19,6 @@ shinyServer(
     output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
     output$plotDemographics = renderPlot({barChartMosquitoDemographics(IVM_traj)})
-    #onevent("keypress", "13", hide("text"))
-    #onevent("mouseleave", "disappear", show("text"))
     #############################################################################
     # CLICK EVENTS ##############################################################
     observeEvent(input$buttonTest,{cat("Button event!\n")})
