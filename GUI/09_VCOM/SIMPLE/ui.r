@@ -33,7 +33,17 @@ COVERAGE_BAR_SIZE = 5
 COVERAGE_INIT_SIZE = 4
 INITIAL_TIME_VALUE = 80
 INITIAL_ITN_COVERAGE = .5
-INITIAL_ITN_TIME = 50
+ENTER_DOWN_RUN <<- '
+  $(document).ready(function(){
+    $("body").keydown(function(e){
+      if(e.which === 13){$("#buttonRun").click();}
+    });
+  });'
+WORKING_MESSAGE_STYLE <<- "#loadmessage {
+    position: fixed;top: 50%;left: 0px;line-height: 80px;height: 100px;
+    width: 100%;padding: 5px 0px 5px 0px;text-align: center;font-weight: bold;
+    font-size: 200%;color: #FFFFFF;background-color: rgba(100, 200, 255, .75);z-index: 105;
+  }"
 ###################################################################################
 # PRIME SYSTEM  ###################################################################
 MOSQUITO_PARAMETERS = getAnGambiaeParameters()
@@ -61,7 +71,7 @@ shinyUI(
               helpText("(2) Select the EIR interval."),
               helpText("(3) Set the Q0 level."),
               helpText("(4) Select the number of days."),
-              helpText("(5) Run the model!"),
+              helpText("(5) Run the model! (Click the button or press 'Enter')"),
               helpText("(6) Setup the desired interventions and repeat step 3 as required."),
               helpText("(7) Additionally you can download results in the 'Files Output' tab."),
               fluidRow(h3("1. Mosquito Selection")),
@@ -88,17 +98,8 @@ shinyUI(
               #####################################################################
               fluidRow(h3("5. Run Model")),
               actionButton("buttonRun","Run",width="100%"),
-              #fluidRow(
-              #  column(5,helpText("Model Status: ")),
-              #  column(2,helpText(textOutput("modelStatus")))
-              #),
-              tags$head(tags$style(type="text/css", "
-                #loadmessage {
-                  position: fixed;top: 50%;left: 0px;line-height: 80px;height: 100px;
-                  width: 100%;padding: 5px 0px 5px 0px;text-align: center;font-weight: bold;
-                  font-size: 200%;color: #FFFFFF;background-color: rgba(100, 200, 255, .75);z-index: 105;
-                }
-              ")),
+              tags$script(ENTER_DOWN_RUN),
+              tags$head(tags$style(type="text/css",WORKING_MESSAGE_STYLE)),
               conditionalPanel(condition="$('html').hasClass('shiny-busy')",tags$div("Working...",id="loadmessage")),
               #####################################################################
               fluidRow(h3("6. Interventions")),
