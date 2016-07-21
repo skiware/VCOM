@@ -66,7 +66,7 @@ shinyUI(
             titlePanel(h1("Instructions",align="left")),
             helpText("(1) Select the number of days for the simulation to run."),
             helpText("(2) Load the simulation setup file (CSV or XLS format). In case you currently do not have the template download it from the 'Downloads/'"),
-            helpText("(3) Run the model!"),
+            helpText("(3) Run the model! (click the button or hit 'ENTER')"),
             sliderInput("sliderTime","1. Days to Simulate:",min=1,max=365,value=80),
             fileInput('fileImport','2. Import CSV/XLS Parameters File',accept=c(
               'application/vnd.ms-excel',

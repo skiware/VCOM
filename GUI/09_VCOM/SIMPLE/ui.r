@@ -33,6 +33,7 @@ COVERAGE_BAR_SIZE = 5
 COVERAGE_INIT_SIZE = 4
 INITIAL_TIME_VALUE = 80
 INITIAL_ITN_COVERAGE = .5
+INITIAL_ITN_TIME = 50
 ENTER_DOWN_RUN <<- '
   $(document).ready(function(){
     $("body").keydown(function(e){
@@ -47,7 +48,7 @@ WORKING_MESSAGE_STYLE <<- "#loadmessage {
 ###################################################################################
 # PRIME SYSTEM  ###################################################################
 MOSQUITO_PARAMETERS = getAnGambiaeParameters()
-INTERVENTION_PARAMETERS = getInterventionsParameters(ITNcov=INITIAL_ITN_COVERAGE,time_ITN_on=INITIAL_ITN_TIME)
+INTERVENTION_PARAMETERS = getInterventionsParameters(time_ITN_on=INITIAL_ITN_TIME,ITNcov=INITIAL_ITN_COVERAGE)
 theta <<- getTheta(interventionParameters=INTERVENTION_PARAMETERS)
 #initialParametersValues <<- importCSVParametersFromDirectory("SetupTemplates/SETUP_MosquitoLifeCycleParameters.csv")
 #theta <<- parseImportedCSVParameters(initialParametersValues)
@@ -76,7 +77,7 @@ shinyUI(
               helpText("(2) Select the EIR interval."),
               helpText("(3) Set the Q0 level."),
               helpText("(4) Select the number of days."),
-              helpText("(5) Run the model! (Click the button or press 'Enter')"),
+              helpText("(5) Run the model! (click the button or hit 'ENTER')"),
               helpText("(6) Setup the desired interventions and repeat step 3 as required."),
               helpText("(7) Additionally you can download results in the 'Files Output' tab."),
               fluidRow(h3("1. Mosquito Selection")),
