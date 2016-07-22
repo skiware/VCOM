@@ -19,6 +19,7 @@ shinyServer(
     output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
     output$plotDemographics = renderPlot({barChartMosquitoDemographics(IVM_traj)})
+    output$plotEIR = renderPlot({plotEIR(IVM_traj,theta,time)})
     #############################################################################
     # CLICK EVENTS ##############################################################
     observeEvent(input$buttonTest,{cat("Button event!\n")})
@@ -54,9 +55,11 @@ shinyServer(
       )
       #--------------------------------------------------------------------------
       initState=calculateInitialState(theta)
+      time<<-seq(0, INITIAL_TIME_VALUE,by=1)
       IVM_traj<<-runODE(input$sliderTime,1,initState,theta,"lsoda")
       output$plotDemographics=renderPlot({barChartMosquitoDemographics(IVM_traj)})
       output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
+      output$plotEIR = renderPlot({plotEIR(IVM_traj,theta,time)})
       print(INTERVENTION_PARAMETERS)
       #--------------------------------------------------------------------------
       shinyjs::enable("downloadCSVTrace"); shinyjs::enable("downloadPlotTrace")
@@ -88,7 +91,13 @@ shinyServer(
         ggsave(file,plot=plotTrajectory(IVM_traj),device=device)
       }
     )
-    #output$results = renderPrint({if(input$keypressed==13){input$keypressed}})
+    output$downloadPlotEIR <- downloadHandler(
+      filename = function(){paste(input$dataset,'EIRPlot.png',sep='')},
+      content = function(file){
+        device <- function(...,width,height){grDevices::png(...,width=2*width,height=height,res=300,units="in")}
+        ggsave(file,plot=plotEIR(IVM_traj,theta,time),device=device)
+      }
+    )
     #############################################################################
   })
 #---#############################################################################
