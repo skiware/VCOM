@@ -84,6 +84,12 @@ shinyServer(
         write.csv(IVM_traj,file)
       }
     )
+#     output$downloadCSVEIR <- downloadHandler(
+#       filename <- function(){paste("VCOM_EIR","csv",sep=".")},
+#       content <- function(file){
+#         write.csv(IVM_traj,file)
+#       }
+#     )
     output$downloadPlotTrace <- downloadHandler(
       filename = function(){paste(input$dataset,'TrajectoryPlot.png',sep='')},
       content = function(file){
@@ -98,6 +104,13 @@ shinyServer(
         ggsave(file,plot=plotEIR(IVM_traj,theta,time),device=device)
       }
     )
+    output$downloadPlotDemographics <- downloadHandler(
+      filename = 'Demographics.pdf',
+      content = function(file) {
+        pdf(file = file, width=12, height=8)
+        barChartMosquitoDemographics(IVM_traj)
+        dev.off()
+      })
     #############################################################################
   })
 #---#############################################################################

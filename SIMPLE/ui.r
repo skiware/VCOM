@@ -193,9 +193,9 @@ shinyUI(
           fluidRow(
             column(4,align="center",
               titlePanel(h3("Data",align="center")),
-              downloadButton("downloadCSVTrace", 'Download CSV Trace'),
-              downloadButton("downloadCSVEIR", 'Download CSV EIR'),
-              downloadButton("downloadCSVDemographics", 'Download CSV Demographics')
+              downloadButton("downloadCSVTrace", 'Download CSV Trace')
+              #downloadButton("downloadCSVEIR", 'Download CSV EIR'),
+              #downloadButton("downloadCSVDemographics", 'Download CSV Demographics')
             ),
             column(4,""),
             column(4,align="center",
