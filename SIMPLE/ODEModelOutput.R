@@ -35,11 +35,11 @@ computeHBI = function(wCom_human,wCom){
 }
 
 ######################################################################################
-computeVC = function(a_theta, Mdensity,muVCom,durEV){
+computeVC = function(a_theta, NV,NH,muVCom,theta){
   #. computeVC: Main function that return vectorial capacity
   ## n incubation period
-  tilda <- durEV
-  VC <- (Mdensity * a_theta^2 *exp(-muVCom*tilda))/muVCom
+  tilda <- theta["durEV"]
+  VC <- ((NV/NH) * a_theta^2 *exp(-muVCom*tilda))/muVCom
   return(VC)
 }
 ######################################################################################

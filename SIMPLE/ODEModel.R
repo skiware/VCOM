@@ -10,6 +10,7 @@
 runODE = function(tMax, tIncrement, initState, theta, method){
   #. runODE: Main ODE wrapper for simulating the mosquito population
   simPeriod <- tMax # Simulation runs up to 365 days
+  
   times <- seq(0, simPeriod, by = tIncrement)
   IVM_traj <- data.frame(dede(y = initState, times = times, parms = theta, func = IVM_ode, method = "lsoda"))
   #print(IVM_traj)

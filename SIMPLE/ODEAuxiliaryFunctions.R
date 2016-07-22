@@ -20,34 +20,59 @@ plotTrajectory = function(IVM_traj){
     geom_line(aes(y = EV, col = "EV"), size = 1.2) +
     labs(x = "Time (days)", y = "Number of mosquitoes")
 }
-plotEIR = function(IVM_traj,theta,time){
-  #. plotEIR: Plots EIR dynamics of the system
+plotEIR_VC_R0 = function(IVM_traj,theta,timeUsed){
+  #. plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
   #browser()
-  impactFeedingCycle = impactFeedingCycleParameters(time, theta[["beta"]], theta[["tau1"]],theta[["tau2"]],theta[["e_ov"]],theta[["time_ATSB_on"]],theta[["ATSBcov"]],theta[["time_SSP_on"]],
+  impactFeedingCycle = impactFeedingCycleParameters(timeUsed, theta[["beta"]], theta[["tau1"]],theta[["tau2"]],theta[["e_ov"]],theta[["time_ATSB_on"]],theta[["ATSBcov"]],theta[["time_SSP_on"]],
                                theta[["SSPcov"]],theta[["fSSP"]],theta[["fATSB"]],theta[["muV"]],theta[["Q0"]],theta[["aOBT"]],theta[["OBTcov"]],theta[["time_OBT_on"]],theta[["time_ITN_on"]],
                                theta[["ITNcov"]],theta[["time_IRS_on"]],theta[["IRScov"]],theta[["HOUcov"]],theta[["time_HOU_on"]],theta[["rITN"]],theta[["sITN"]],theta[["rIRS"]],theta[["rHOU"]],
                                theta[["sIRS"]],  theta[["sHOU"]],theta[["phiB"]], theta[["phiI"]],theta[["dHOU"]],theta[["dIRS"]],theta[["time_SPR_on"]],theta[["SPRcov"]],theta[["time_PPM_on"]],
                                theta[["PPMcov"]],theta[["rSPR"]],theta[["rPPM"]],theta[["sSPR"]],theta[["sPPM"]],theta[["c0"]],theta[["time_ECS_on"]],theta[["ECScov"]],theta[["time_ECT_on"]],
                                theta[["ECTcov"]],theta[["rECT"]],theta[["sECS"]],theta[["sECT"]],theta[["time_OVI_on"]],theta[["OVIcov"]],theta[["fOVI"]])
  
+  #mosquito mortality
+  muVCom  = impactFeedingCycle[1]
   #Biting rate
   a_theta = impactFeedingCycle[3]
+  
+  
   
   # #EIR
   transmissionValues = getAdditionalTransmissionParameters()
   bV = transmissionValues[["bV"]]
   NH = transmissionValues[["NH_eq"]]
   bh = transmissionValues[["bh"]]
-  IV = IVM_traj["IV"]
+  bv = transmissionValues[["bV"]]
+  IV = IVM_traj[["IV"]]
+  
+  #Mosquito population
+  NV = IVM_traj[["SV"]]+IVM_traj[["EV"]]+IVM_traj[["IV"]]
+  #Mosquito density
+  Mdensity = NV/NH
   
   
   #browser()
+  
   EIR <-computeEIR(a_theta, IV, NH)
-  ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
+  
+  #R0
+  R0 = computeRO(a_theta,muVCom, NV,bv,bh,NH)
+  
+  #VC
+  VC = computeVC(a_theta, NV,NH,muVCom,theta)
+  
+  ggplot(IVM_traj, aes(x = timeUsed, y = EIR, color = State)) +
     #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) + 
     geom_line(aes(y = EIR, col = "EIR"), size = 1.2) + 
+    geom_line(aes(y = VC, col = "VC"), size = 1.2) + 
+    geom_line(aes(y = R0, col = "R0"), size = 1.2) + 
+    #geom_line(aes(y = IVM_traj["EV"], col = "EV"), size = 1.2) +
     labs(x = "Time (days)", y = "EIR")
-}
+  
+ }
+
+
+
 
 
 

@@ -56,10 +56,10 @@ INITIAL_SSP_TIME     = 00
 INITIAL_OBT_COVERAGE = .00
 INITIAL_OBT_TIME     = 20
 #LLINs, coverage value, time it is on
-INITIAL_ITN_COVERAGE = .60
+INITIAL_ITN_COVERAGE = .40
 INITIAL_ITN_TIME     = 50
 #IRS
-INITIAL_IRS_COVERAGE = 0.50
+INITIAL_IRS_COVERAGE = 0.00
 INITIAL_IRS_TIME     = 20
 #House modification
 INITIAL_HOU_COVERAGE = 0.00
@@ -116,8 +116,7 @@ initState <<- calculateInitialState(theta)
 
 ## Run the model
 IVM_traj <<- runODE(INITIAL_TIME_VALUE,1,initState,theta,"lsoda")
-time=seq(0, INITIAL_TIME_VALUE,by=1)
-plotEIR(IVM_traj,theta,time)
+
 
 
 ## Generate outputs - using Histograms
@@ -126,7 +125,10 @@ barChartMosquitoDemographics(IVM_traj)
 ## Generate output - using gg plots
 plotTrajectory(IVM_traj)
 
-plotEIR(IVM_traj)
+#If need be I can seprate the function for the three graphs
+timeUsed=seq(0, INITIAL_TIME_VALUE,by=1)
+plotEIR_VC_R0(IVM_traj,theta,timeUsed)
+
 
 
 
