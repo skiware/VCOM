@@ -19,7 +19,7 @@ shinyServer(
     output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
     output$plotDemographics = renderPlot({barChartMosquitoDemographics(IVM_traj)})
-    output$plotEIR = renderPlot({plotEIR(IVM_traj,theta,time)})
+    output$plotEIR = renderPlot({plotEIR(IVM_traj,theta,timing)})
     #############################################################################
     # CLICK EVENTS ##############################################################
     observeEvent(input$buttonTest,{cat("Button event!\n")})
@@ -55,11 +55,11 @@ shinyServer(
       )
       #--------------------------------------------------------------------------
       initState=calculateInitialState(theta)
-      time<<-seq(0, INITIAL_TIME_VALUE,by=1)
       IVM_traj<<-runODE(input$sliderTime,1,initState,theta,"lsoda")
       output$plotDemographics=renderPlot({barChartMosquitoDemographics(IVM_traj)})
       output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
-      output$plotEIR = renderPlot({plotEIR(IVM_traj,theta,time)})
+      timing<<-seq(0,input$sliderTime,by=1)
+      output$plotEIR = renderPlot({plotEIR(IVM_traj,theta,timing)})
       print(INTERVENTION_PARAMETERS)
       #--------------------------------------------------------------------------
       shinyjs::enable("downloadCSVTrace"); shinyjs::enable("downloadPlotTrace")

@@ -50,10 +50,10 @@ WORKING_MESSAGE_STYLE <<- "#loadmessage {
 MOSQUITO_PARAMETERS = getAnGambiaeParameters()
 INTERVENTION_PARAMETERS = getInterventionsParameters(time_ITN_on=INITIAL_ITN_TIME,ITNcov=INITIAL_ITN_COVERAGE)
 theta <<- getTheta(interventionParameters=INTERVENTION_PARAMETERS)
-time<<-seq(0, INITIAL_TIME_VALUE,by=1)
 #initialParametersValues <<- importCSVParametersFromDirectory("SetupTemplates/SETUP_MosquitoLifeCycleParameters.csv")
 #theta <<- parseImportedCSVParameters(initialParametersValues)
 # MODEL -------------------------------------
+timing <<- seq(0,INITIAL_TIME_VALUE,by=1)
 initState <<- calculateInitialState(theta)
 IVM_traj <<- runODE(INITIAL_TIME_VALUE,1,initState,theta,"lsoda")
 ###################################################################################
