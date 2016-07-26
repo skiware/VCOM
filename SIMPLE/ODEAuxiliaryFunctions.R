@@ -1,8 +1,10 @@
 ########################################################################
 #=======================================================================
 # ODEAuxiliaryFunctions.R
-# Contains the functions that deal with plotting and performing other
-# generic kind of actions
+#    Contains the functions that deal with calling functions to compute model out and plotting different scenarios + performing other actions
+#
+#
+
 #=======================================================================
 ########################################################################
 REQUIRED_PARAMETERS_LIST_GLOBAL = c("beta","muEL","muLL","muPL","durEL","durLL","durPL","durEV",
@@ -15,22 +17,31 @@ plotTrajectory = function(IVM_traj){
   #. plotTrajectory: Plots the evolution of the dynamics of the system
   ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
     #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) + 
-    geom_line(aes(y = SV, col = "SV"), size = 1.2) + 
-    geom_line(aes(y = IV, col = "IV"), size = 1.2) +
+    geom_line(aes(y = IV, col = "IV"), size = 1.2) + 
+    geom_line(aes(y = SV, col = "SV"), size = 1.2) +
     geom_line(aes(y = EV, col = "EV"), size = 1.2) +
     labs(x = "Time (days)", y = "Number of mosquitoes")
 }
-plotEIR_VC_R0 = function(IVM_traj,theta,timeUsed){
+
+
+plotEIR_VC_R0 = function(IVM_traj,theta,INITIAL_MODELRUNTIME_VALUE){
   #. plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
   #browser()
-  impactFeedingCycle = impactFeedingCycleParameters(timeUsed, theta[["beta"]], theta[["tau1"]],theta[["tau2"]],theta[["e_ov"]],theta[["time_ATSB_on"]],theta[["ATSBcov"]],theta[["time_SSP_on"]],
+  #IS IT OK TO RE-COMPUTE THE parameter values required to compute EIR, VC, R0? This time done at after the ODE run
+  # INITIAL_MODELRUNTIME_VALUE - this value will be compared by intervention turn on time (less than INITIAL_MODELRUNTIME_VALUE)
+  # This values are re-computed at equilbrium subjected to turned - on intervention
+  impactFeedingCycle = impactFeedingCycleParameters(INITIAL_MODELRUNTIME_VALUE, theta[["beta"]], theta[["tau1"]],theta[["tau2"]],theta[["e_ov"]],theta[["time_ATSB_on"]],theta[["ATSBcov"]],theta[["time_SSP_on"]],
                                theta[["SSPcov"]],theta[["fSSP"]],theta[["fATSB"]],theta[["muV"]],theta[["Q0"]],theta[["aOBT"]],theta[["OBTcov"]],theta[["time_OBT_on"]],theta[["time_ITN_on"]],
                                theta[["ITNcov"]],theta[["time_IRS_on"]],theta[["IRScov"]],theta[["HOUcov"]],theta[["time_HOU_on"]],theta[["rITN"]],theta[["sITN"]],theta[["rIRS"]],theta[["rHOU"]],
                                theta[["sIRS"]],  theta[["sHOU"]],theta[["phiB"]], theta[["phiI"]],theta[["dHOU"]],theta[["dIRS"]],theta[["time_SPR_on"]],theta[["SPRcov"]],theta[["time_PPM_on"]],
                                theta[["PPMcov"]],theta[["rSPR"]],theta[["rPPM"]],theta[["sSPR"]],theta[["sPPM"]],theta[["c0"]],theta[["time_ECS_on"]],theta[["ECScov"]],theta[["time_ECT_on"]],
                                theta[["ECTcov"]],theta[["rECT"]],theta[["sECS"]],theta[["sECT"]],theta[["time_OVI_on"]],theta[["OVIcov"]],theta[["fOVI"]])
- 
-  #mosquito mortality
+  # I can also just pass theta for this function
+  
+  
+  #browser()
+
+    #mosquito mortality
   muVCom  = impactFeedingCycle[1]
   #Biting rate
   a_theta = impactFeedingCycle[3]
@@ -51,23 +62,47 @@ plotEIR_VC_R0 = function(IVM_traj,theta,timeUsed){
   Mdensity = NV/NH
   
   
-  #browser()
   
+  #EIR
   EIR <-computeEIR(a_theta, IV, NH)
-  
-  #R0
-  R0 = computeRO(a_theta,muVCom, NV,bv,bh,NH)
+  p1 <- ggplot(IVM_traj, aes(x = 1:length(IVM_traj[,1]), y = EIR, color = State)) +
+    geom_line(aes(y = EIR, col = "EIR"), size = 1.2) + 
+    #geom_line(aes(y = IVM_traj["EV"], col = "EV"), size = 1.2) +
+    labs(x = "Time (days)", y = " EIR")
   
   #VC
   VC = computeVC(a_theta, NV,NH,muVCom,theta)
+  p2 <-  ggplot(IVM_traj, aes(x = 1:length(IVM_traj[,1]), y = EIR, color = State)) +
+    geom_line(aes(y = VC, col = "VC"), size = 1.2) + 
+    #geom_line(aes(y = IVM_traj["EV"], col = "EV"), size = 1.2) +
+    labs(x = "Time (days)", y = " VC")
   
-  ggplot(IVM_traj, aes(x = timeUsed, y = EIR, color = State)) +
+  #R0
+  R0 = computeRO(a_theta,muVCom, NV,bv,bh,NH,theta)
+  p3 <- ggplot(IVM_traj, aes(x = 1:length(IVM_traj[,1]), y = EIR, color = State)) +
+    geom_line(aes(y = R0, col = "R0"), size = 1.2) + 
+    #geom_line(aes(y = IVM_traj["EV"], col = "EV"), size = 1.2) +
+    labs(x = "Time (days)", y = " R0")
+  
+  
+ 
+  
+  #All at once
+  
+  #IVM_traj - just space holder
+  # We might need to plot them separately - s
+  p4 <- ggplot(IVM_traj, aes(x = 1:length(IVM_traj[,1]), y = EIR, color = State)) +
     #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) + 
     geom_line(aes(y = EIR, col = "EIR"), size = 1.2) + 
     geom_line(aes(y = VC, col = "VC"), size = 1.2) + 
     geom_line(aes(y = R0, col = "R0"), size = 1.2) + 
     #geom_line(aes(y = IVM_traj["EV"], col = "EV"), size = 1.2) +
-    labs(x = "Time (days)", y = "EIR")
+    labs(x = "Time (days)", y = "values for EIR, VC, or R0")
+  
+  
+  multiplot(p1, p2, p3, p4, cols=2)
+  
+  
   
  }
 
@@ -83,6 +118,7 @@ barChartMosquitoDemographics = function(IVM_traj){
   NumMosq <- c(sum(IVM_traj["EL"]),sum(IVM_traj["LL"]),sum(IVM_traj["PL"]),sum(IVM_traj["SV"]),sum(IVM_traj["EV"]),sum(IVM_traj["IV"]))
   barplot(NumMosq , main='', xlab='Time (days)',ylab='Number of Mosquitoes',names.arg=c('EL','LL','PL','SV','EV','IV'))
 }
+#SK - CHECK WITH HECTOR - Need to rename some of the parameters in the following function
 parseImportedCSVParameters = function(inputDataFrame){
   #. parseImportedCSVParameters: Once a csv file has been imported this function converts the data into a theta object
   c(

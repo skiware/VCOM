@@ -12,6 +12,7 @@
 # 
 #======================================================================
 
+#can just pass theta
 
  #impactFeedingCycleParameters = function(muV_1_Com,tau1,zCom,wCom,muV_2_Com,tau2,deltaCom,e_ov){
 impactFeedingCycleParameters = function(time,beta,tau1,tau2,e_ov,time_ATSB_on,ATSBcov,time_SSP_on,SSPcov,fSSP,fATSB,muV,
