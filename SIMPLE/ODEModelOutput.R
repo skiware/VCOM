@@ -17,7 +17,7 @@ computeLengthGonotrophicycle = function(deltaCom){
 computeHumanBitingRate = function(f_theta,HBI_com){
   #. computeHumanBitingRate: Main function that return human biting rate per mosquito in presence of intervetion
     
-   a_theta <- HBI_com*f_theta
+   a_theta <- HBI_com/f_theta
   return(a_theta)
 }
 ######################################################################################
@@ -55,6 +55,7 @@ computeRO = function(a_theta,muVCom, NV,bv,bh,NH,theta){
   #. computeRO : Main function that return basic reproduction rate
   ## n incubation period
   tilda <- theta[["durEV"]]
-  R_o <- (NV/NH)*a_theta^2*bv*(bh*exp(-muVCom*tilda)/(muVCom))
+  rec = 1/50  #recovery rate of humans
+  R_o <- (NV/NH)*a_theta^2*bv*(bh*exp(-muVCom*tilda)/(rec*muVCom))
   return(R_o)
 }
