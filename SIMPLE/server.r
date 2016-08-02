@@ -44,11 +44,11 @@ shinyServer(
       INTERVENTION_PARAMETERS <<- getInterventionsParameters(
         OVIcov=input$OVIcov,FOGcov=input$FOGcov,LARcov=input$LARcov,BIOcov=input$BIOcov,SREcov=input$SREcov,ITNcov=input$ITNcov,
         IRScov=input$IRScov,ECScov=input$ECScov,ECTcov=input$ECTcov,HOUcov=input$HOUcov,OBTcov=input$OBTcov,SPRcov=input$SPRcov,
-        PPMcov=input$PPMcov,ATSBcov=input$ATSBcov,
+        PPMcov=input$PPMcov,ATSBcov=input$ATSBcov,SSPcov=input$SSPcov,
         time_OVI_on=input$time_OVI_on,time_FOG_on=input$time_FOG_on,time_LAR_on=input$time_LAR_on,time_BIO_on=input$time_BIO_on,
         time_SRE_on=input$time_SRE_on,time_ITN_on=input$time_ITN_on,time_IRS_on=input$time_IRS_on,time_ECS_on=input$time_ECS_on,
         time_ECT_on=input$time_ECT_on,time_HOU_on=input$time_HOU_on,time_OBT_on=input$time_OBT_on,time_SPR_on=input$time_SPR_on,
-        time_PPM_on=input$time_PPM_on,time_ATSB_on=input$time_ATSB_on
+        time_PPM_on=input$time_PPM_on,time_ATSB_on=input$time_ATSB_on,time_SSP_on=input$time_SSP_on
       )
       theta <<- getTheta(
         speciesSpecificParameters=MOSQUITO_PARAMETERS,
@@ -102,7 +102,7 @@ shinyServer(
       filename = function(){paste(input$dataset,'EIRPlot.png',sep='')},
       content = function(file){
         device <- function(...,width,height){grDevices::png(...,width=2*width,height=height,res=300,units="in")}
-        ggsave(file,plot=plotEIR(IVM_traj,theta,time),device=device)
+        ggsave(file,plot=plotEIR_VC_R0(IVM_traj,theta,time),device=device)
       }
     )
     output$downloadPlotDemographics <- downloadHandler(

@@ -18,8 +18,7 @@
 #* bh:        transmission efficiency from an infectious mosquito to an uninfected, susceptible human
 #------------------------------------------------------------------------
 getAdditionalTransmissionParameters = function(
-  #For getting low, medium
-  f0=1/3,epsilon0=100/365,iH_eq=0.35,
+  f0=1/3,epsilon0=10/365,iH_eq=0.35,
   NH_eq=200,bV=0.05,bh=0.5   #bv = originally 0.05
 ){
   #. getAdditionalTransmissionParameters: Returns the transmission parameters
