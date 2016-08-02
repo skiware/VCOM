@@ -30,16 +30,13 @@ source("multiplot.R")
 MOSQUITO_PARAMETERS = getAnGambiaeParameters()
 
 # simulation runs per day - enter the end time
-INITIAL_MODELRUNTIME_VALUE   = 365
+INITIAL_MODELRUNTIME_VALUE   = 100
 
 #Enter the coverage for a specific intervetion
-# To turn it on  - enter the required time which is < the max model run time
-# To turn it off - enter INITIAL_MODELRUNTIME_VALUE + 1
-
-###************************************************************
-
+# To turn it on - enter the required time < the max model run time
+#To turn it off - enter INITIAL_MODELRUNTIME_VALUE + 1
 #Source reduction, coverage value, time it is on
-INITIAL_SRE_COVERAGE = 0.0
+INITIAL_SRE_COVERAGE = 00
 INITIAL_SRE_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 
 #LArvaciding, coverage value, time it is on
@@ -63,13 +60,13 @@ INITIAL_SSP_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 INITIAL_OBT_COVERAGE = .00
 INITIAL_OBT_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 #LLINs, coverage value, time it is on
-INITIAL_ITN_COVERAGE = .00
-INITIAL_ITN_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
+INITIAL_ITN_COVERAGE = .50
+INITIAL_ITN_TIME     = 20
 #IRS
-INITIAL_IRS_COVERAGE = 0.00
-INITIAL_IRS_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
+INITIAL_IRS_COVERAGE = 0.50
+INITIAL_IRS_TIME     = 40
 #House modification
-INITIAL_HOU_COVERAGE = 0.0
+INITIAL_HOU_COVERAGE = 0.00
 INITIAL_HOU_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 #Cattle - Systemic
 INITIAL_ECS_COVERAGE = 0.00
