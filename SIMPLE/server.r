@@ -102,7 +102,7 @@ shinyServer(
       filename = function(){paste(input$dataset,'EIRPlot.png',sep='')},
       content = function(file){
         device <- function(...,width,height){grDevices::png(...,width=2*width,height=height,res=300,units="in")}
-        ggsave(file,plot=plotEIR(IVM_traj,theta,time),device=device)
+        ggsave(file,plot=plotEIR_VC_R0(IVM_traj,theta,time),device=device)
       }
     )
     output$downloadPlotDemographics <- downloadHandler(

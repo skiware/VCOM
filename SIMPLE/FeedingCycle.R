@@ -92,7 +92,7 @@ impactFeedingCycleParameters = function(time,beta,tau1,tau2,e_ov,time_ATSB_on,AT
   #wCom <- wCom_Cattle  + wCom_Human_Indoor
   #******************************************************************************************
 
-    # probability of surviving feeding period in the presence of an intervetion
+    # probability of surviving feeding period in the absence of an intervetion
     p10 <- exp(-muV_1_Com*tau1)
     
     # Probability of surviving the first attempt, second, and so on -eqn 3 (SK)
