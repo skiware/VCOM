@@ -26,7 +26,7 @@ source("FeedingCycle.R")
 source("multiplot.R")
 ## Get parameter for a specific specie ######
 
-# Run first for An. gambiae - 
+# Run first for An. gambiae -
 MOSQUITO_PARAMETERS = getAnGambiaeParameters()
 
 # simulation runs per day - enter the end time
@@ -44,7 +44,7 @@ INITIAL_SRE_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 
 #LArvaciding, coverage value, time it is on
 INITIAL_LAR_COVERAGE = .00
-INITIAL_LAR_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
+INITIAL_LAR_TIME     = 0
 
 #Biological, coverage value, time it is on
 INITIAL_BIO_COVERAGE = .00
@@ -88,12 +88,12 @@ INITIAL_OVI_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 ## Get intervetions parameters
 INTERVENTION_PARAMETERS = getInterventionsParameters(
                                   #Source Reduction
-                          SREcov=INITIAL_SRE_COVERAGE,time_SRE_on=INITIAL_SRE_TIME, 
+                          SREcov=INITIAL_SRE_COVERAGE,time_SRE_on=INITIAL_SRE_TIME,
                                 #Larvaciding
                           LARcov=INITIAL_LAR_COVERAGE,time_LAR_on=INITIAL_LAR_TIME,
                                 #Biological Control
                           BIOcov=INITIAL_BIO_COVERAGE,time_BIO_on=INITIAL_BIO_TIME,
-                          
+
                                   #ATSB
                           ATSBcov=INITIAL_ATSB_COVERAGE,time_ATSB_on=INITIAL_ATSB_TIME,
                                 #Space Spraying

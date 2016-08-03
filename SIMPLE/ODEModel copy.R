@@ -10,7 +10,7 @@
 runODE = function(tMax, tIncrement, initState, theta, method){
   #. runODE: Main ODE wrapper for simulating the mosquito population
   simPeriod <- tMax # Simulation runs up to 365 days
-
+  
   times <- seq(0, simPeriod, by = tIncrement)
   IVM_traj <- data.frame(dede(y = initState, times = times, parms = theta, func = IVM_ode, method = "lsoda"))
   #print(IVM_traj)
@@ -49,11 +49,11 @@ calculateInitialState = function(theta){
 
   #initState <- c(EL = EL_eq,LL = LL_eq,PL = PL_eq,SV = SV_eq,EV = EV_eq,IV = IV_eq)
   # Initiated EL_LAR, etc as EL_eq etc, IS THIS OK? Initialized to 0
-
+  
   #initState <- c(EL = EL_eq,EL_LAR = EL_eq,EL_BIO = EL_eq,EL_LAR_BIO = EL_eq,LL = LL_eq,LL_LAR = LL_eq,LL_BIO = LL_eq,LL_LAR_BIO = LL_eq,PL = PL_eq,SV = SV_eq,EV = EV_eq,IV = IV_eq)
 
   initState <- c(EL = EL_eq,EL_LAR = 0,EL_BIO = 0,EL_LAR_BIO = 0,LL = LL_eq,LL_LAR = 0,LL_BIO = 0,LL_LAR_BIO = 0,PL = PL_eq,SV = SV_eq,EV = EV_eq,IV = IV_eq)
-
+  
   return(initState)
 }
 ######################################################################################
@@ -118,34 +118,34 @@ IVM_ode <- function(time, state, theta){
   rPPM <- theta[["rPPM"]] # Probability of mosquito repeating a feeding attempt due personal protection measures
   sPPM <- theta[["sPPM"]] # Probability of mosquito feeding in presence of PPM
 
-
+  
   ##***********Odor baited traps ********************
   time_OBT_on <- theta[["time_OBT_on"]] # When OBT is on)
   aOBT <- theta[["aOBT"]] # availability of one trap in relation to one human
   OBTcov <- theta[["OBTcov"]] # ratio of traps to human (i.e., coverage)
-
+  
   ##***********Source Reduction ********************
   time_SRE_on <- theta[["time_SRE_on"]] # When source reduction is on)
   eSRE <- theta[["eSRE"]] # effectiveness of source reduction
   SREcov <- theta[["SREcov"]] # prop of aquatic habitats covered by source reduction
-
+  
   ##***********Host Seeking - ATSB and Space spraying ********************
   time_ATSB_on <- theta[["time_ATSB_on"]] # When ATSB is on)
   fATSB <- theta[["fATSB"]] # factor allowing for increased death rate due to ATSB
-  ATSBcov <- theta[["ATSBcov"]] # prop of vegation sprayed with ATSB
-
+  ATSBcov <- theta[["ATSBcov"]] # prop of vegation sprayed with 
+  
   time_SSP_on <- theta[["time_SSP_on"]] # When space spraying is on)
   fSSP <- theta[["fSSP"]] # factor allowing for increased death rate due to space spraying
-  SSPcov <- theta[["SSPcov"]] # prop mosquito habitats in a defined area sprayed with insecticide
-
+  SSPcov <- theta[["SSPcov"]] # prop of a defined area sprayed with insecticide
+  
   ##***********Resting and Ovipositing: ATSB, Space spraying, ovitraps ********************
   time_OVI_on <- theta[["time_OVI_on"]] # When ATSB is on)
   fOVI <- theta[["fOVI"]] # factor allowing for increased death rate due to ATSB
-  OVIcov <- theta[["OVIcov"]] # prop of ovitraps
+  OVIcov <- theta[["OVIcov"]] # prop of ovitraps 
   #ATSB and SSP - already defined - might have two differentiate the two
-
+  
   ##**********************Larviciding and Biologica Control *********************
-
+  
   time_BIO_on <- theta[["time_BIO_on"]] # When biological control is on)
   fBIO <- theta[["fOVI"]] # factor allowing for increased death rate due to biological control
   BIOcov <- theta[["BIOcov"]] # prop of aquatic habitats covered by biological control
@@ -153,7 +153,7 @@ IVM_ode <- function(time, state, theta){
   fLAR <- theta[["fOVI"]] # factor allowing for increased death rate due to larvacide
   LARcov <- theta[["LARcov"]] # prop of aquatic habitats covered by larvicide
 
-
+ 
   ## States:  - Defn added by SK
   EL         <- state[["EL"]]  # Early Instar stage
   EL_LAR     <- state[["EL_LAR"]]  # Early Instar stage in presence of larvaciding
@@ -167,12 +167,12 @@ IVM_ode <- function(time, state, theta){
   SV         <- state[["SV"]]  # Susceptitable Vectors
   EV         <- state[["EV"]]  # Latent period
   IV         <- state[["IV"]]  # Infectious Vectors
-
-
+ 
+   
   ## Derived parameters: (SK - IMPoRANT add to the write up)
   NV <- SV + EV + IV # Total mosquito population size
   #Equation 1
-  delta <- 1/(tau1+tau2) # Inverse of gonotrophic cycle without interventions
+  delta <- 1/(tau1+tau2) # Inverse of gonotrophic cycle without ITNs/IRS (DONE)
   #Equation 3
   e_ov <- beta*(exp(muV/delta)-1)/muV # Number of eggs per oviposition per mosquito (DONE)
   b_omega <- gamma*muLL/muEL - durEL/durLL + (gamma-1)*muLL*durEL
@@ -181,15 +181,15 @@ IVM_ode <- function(time, state, theta){
   ## Derived parameters which depend on intervention status:
 
  #browser()   #break point
-
-
+  
+  
   ##**********Aquatic habitats - impact of source management ****##############################
   K_sr    <<- impactSourceReduction(time,eSRE,SREcov,time_SRE_on,K)
-
-   #Update K
+  
+   #Update K 
   K = K_sr
-
-
+  
+  
 
   ##**************Feeding cycle in presence of interventions ****************************
   feedingCycleImpact= impactFeedingCycleParameters(time,beta,tau1,tau2,e_ov,time_ATSB_on,ATSBcov,time_SSP_on,SSPcov,fSSP,fATSB,muV,
@@ -198,24 +198,24 @@ IVM_ode <- function(time, state, theta){
                      time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,
                      c0,time_ECS_on,ECScov,time_ECT_on,ECTcov,rECT,sECS,sECT,
                      time_OVI_on,OVIcov,fOVI)
-
+  
   muVCom  = feedingCycleImpact[1]
   betaCom = feedingCycleImpact[2]
-
+  
   ##****************Other Outputs####################
-
+  
   #Extract transmission parameter values
   #browser()
   transmissionValues = getAdditionalTransmissionParameters()
   bV = transmissionValues[["bV"]]
   NH = transmissionValues[["NH_eq"]]
   bh = transmissionValues[["bh"]]
-
-
-
+  
+ 
+  
   # #Mosquito density
   # Mdensity = computeMosqDensity(NV,NH)
-  #
+  # 
   # #Length of gonotrophic cycle
   #  f_theta <- computeLengthGonotrophicycle(deltaCom)
   # # #HBI
@@ -230,15 +230,13 @@ IVM_ode <- function(time, state, theta){
   #  EIR <-computeEIR(a_theta, IV, NH)
   # # #RO
   #  R0 <- computeRO(a_theta,muVCom, NV,bV,bh,NH)
-
+  
   ##*********************************************************************
-
+  
   ##******Add Larviciding and biological control -move to a function
-  #I ABSOLUTELLY HATE THIS PATCH BUT IT FIXES THE ERROR ON SETTING COVERAGES TO ZERO!!!! I REALLY HATE IT... A LOT!!!!!! IT MAKES ME CRY!!!!!
-  AD_HOC_HORRIBLE_PATCH = .0000000001
-  if (time > time_LAR_on) { LARcov_t <- LARcov + AD_HOC_HORRIBLE_PATCH } else { LARcov_t <- 0 }
-  if (time > time_BIO_on) { BIOcov_t <- BIOcov + AD_HOC_HORRIBLE_PATCH } else { BIOcov_t <- 0 }
-
+  if (time > time_LAR_on) { LARcov_t <- LARcov } else { LARcov_t <- 0 }
+  if (time > time_BIO_on) { BIOcov_t <- BIOcov } else { BIOcov_t <- 0 }
+  
   #Coverage larvaciding only
   cLAR <- LARcov_t - LARcov_t*BIOcov_t
   # Coverage with biological control  only
@@ -247,70 +245,58 @@ IVM_ode <- function(time, state, theta){
   c_LAR_BIO <-  LARcov_t*BIOcov_t
   # neither applied
   c0_LAR_BIO <- 1 - LARcov_t - BIOcov_t +  LARcov_t*BIOcov_t
-
+  
   f_LAR_BIO =fLAR*fBIO
-
-
-  #browser()
-
+  
+  
+  
+  
   #################**********************************
     ##********************************* ODEs:
   if(time < durEV){
     SVLag <- SV
   }else{
-    #Always make sure the lagstates[10] is SV else change 10 to appropriate number
     lagStates <- lagvalue(time-durEV)
-    SVLag <- lagStates[10]
+    SVLag <- lagStates[4]
   }
-
-
-  if( time > 7){
-   # browser()
-  }
-
+  
+  
+  #if( time > 20){
+  #  browser()
+  #}
+  
     ###
- # browser()
+  
   #dEL   <- betaCom*NV - muEL*(1 + ((EL+LL)/K))*EL - EL/durEL
   #dLL   <-EL/durEL - muLL*(1 + gamma*((EL+LL)/K))*LL - LL/durLL
-
+  
    dEL   <- c0_LAR_BIO*betaCom*NV - muEL*(1 + ((EL+LL)/K*c0_LAR_BIO))*EL - EL/durEL
    dLL     <-c0_LAR_BIO*EL/durEL - muLL*(1 + gamma*((EL+LL)/K*c0_LAR_BIO))*LL - LL/durLL
    dPL <- LL/durLL - muPL*PL - PL/durPL
-
+  
    ###*************Enable Larvaciding and biological control************
-   #with coverage > 0 included
-   # if( (time > time_LAR_on) && (cLAR >0) ){dEL_LAR <- cLAR*betaCom*NV - fLAR*muEL*(1 + ((EL_LAR+LL_LAR)/cLAR*K))*EL_LAR - EL_LAR/durEL}else{dEL_LAR<-0}
-   # if( (time > time_BIO_on) && (cBIO >0) ){dEL_BIO <- cBIO*betaCom*NV - fBIO*muEL*(1 + ((EL_BIO+LL_BIO)/cBIO*K))*EL_BIO - EL_BIO/durEL}else{dEL_BIO <-0}
-   # if( ((time > time_LAR_on) && (cLAR >0)) && ((time > time_BIO_on) && (cBIO >0))){dEL_LAR_BIO <- c_LAR_BIO*betaCom*NV - f_LAR_BIO*muEL*(1 + ((EL_LAR_BIO+LL_LAR_BIO)/c_LAR_BIO*K))*EL_LAR_BIO - EL_LAR_BIO/durEL}else{dEL_LAR_BIO<-0}
+   if( time > time_LAR_on && cLAR >0 ){dEL_LAR <- cLAR*betaCom*NV - fLAR*muEL*(1 + ((EL_LAR+LL_LAR)/cLAR*K))*EL_LAR - EL_LAR/durEL}else{dEL_LAR<-0}
+   if( time > time_BIO_on && cBIO >0){dEL_BIO <- cBIO*betaCom*NV - fBIO*muEL*(1 + ((EL_BIO+LL_BIO)/cBIO*K))*EL_BIO - EL_BIO/durEL}else{dEL_BIO <-0}
+   if( time > time_LAR_on && cLAR >0 && time > time_BIO_on && cBIO >0){dEL_LAR_BIO <- c_LAR_BIO*betaCom*NV - f_LAR_BIO*muEL*(1 + ((EL_LAR_BIO+LL_LAR_BIO)/c_LAR_BIO*K))*EL_LAR_BIO - EL_LAR_BIO/durEL}else{dEL_LAR_BIO<-0}
 
-   if( time > time_LAR_on ){dEL_LAR <- cLAR*betaCom*NV - fLAR*muEL*(1 + ((EL_LAR+LL_LAR)/cLAR*K))*EL_LAR - EL_LAR/durEL}else{dEL_LAR<-0}
-   if( time > time_BIO_on ){dEL_BIO <- cBIO*betaCom*NV - fBIO*muEL*(1 + ((EL_BIO+LL_BIO)/cBIO*K))*EL_BIO - EL_BIO/durEL}else{dEL_BIO <-0}
-   if( (time > time_LAR_on) && (time > time_BIO_on) ){dEL_LAR_BIO <- c_LAR_BIO*betaCom*NV - f_LAR_BIO*muEL*(1 + ((EL_LAR_BIO+LL_LAR_BIO)/c_LAR_BIO*K))*EL_LAR_BIO - EL_LAR_BIO/durEL}else{dEL_LAR_BIO<-0}
-
-
-   if( time > time_LAR_on ){dLL_LAR <-cLAR*EL/durEL - fLAR*muLL*(1 + gamma*((EL_LAR+LL_LAR)/K*cLAR))*LL_LAR - LL_LAR/durLL}else{dLL_LAR<-0}
-   if( time > time_BIO_on ){dLL_BIO <-cBIO*EL/durEL - fBIO*muLL*(1 + gamma*((EL_BIO+LL_BIO)/K*cBIO))*LL_BIO - LL_BIO/durLL}else{dLL_BIO<-0}
-   if( (time > time_LAR_on) && (time > time_BIO_on) ){dLL_LAR_BIO <-c_LAR_BIO*EL/durEL - f_LAR_BIO*muLL*(1 + gamma*((EL_LAR_BIO+LL_LAR_BIO)/K*c_LAR_BIO))*LL_LAR_BIO - LL_LAR_BIO/durLL}else{dLL_LAR_BIO<-0}
-
-   # #with coverage
-   # if( (time > time_LAR_on) && (cLAR >0) ){dLL_LAR <-cLAR*EL/durEL - fLAR*muLL*(1 + gamma*((EL_LAR+LL_LAR)/K*cLAR))*LL_LAR - LL_LAR/durLL}else{dLL_LAR<-0}
-   # if( (time > time_BIO_on) && (cBIO >0) ){dLL_BIO <-cBIO*EL/durEL - fBIO*muLL*(1 + gamma*((EL_BIO+LL_BIO)/K*cBIO))*LL_BIO - LL_BIO/durLL}else{dLL_BIO<-0}
-   # if( ((time > time_LAR_on) && (cLAR >0)) && ((time > time_BIO_on) && (cBIO >0)) ){dLL_LAR_BIO <-c_LAR_BIO*EL/durEL - f_LAR_BIO*muLL*(1 + gamma*((EL_LAR_BIO+LL_LAR_BIO)/K*c_LAR_BIO))*LL_LAR_BIO - LL_LAR_BIO/durLL}else{dLL_LAR_BIO<-0}
-   # #
-
+   
+  
+  if( time > time_LAR_on && cLAR >0 ){dLL_LAR <-cLAR*EL/durEL - fLAR*muLL*(1 + gamma*((EL_LAR+LL_LAR)/K*cLAR))*LL_LAR - LL_LAR/durLL}else{dLL_LAR<-0}
+  if( time > time_BIO_on && cBIO >0 ){dLL_BIO <-cBIO*EL/durEL - fBIO*muLL*(1 + gamma*((EL_BIO+LL_BIO)/K*cBIO))*LL_BIO - LL_BIO/durLL}else{dLL_BIO<-0}
+  if( time > time_LAR_on && cLAR >0 && time > time_BIO_on && cBIO >0 ){dLL_LAR_BIO <-c_LAR_BIO*EL/durEL - f_LAR_BIO*muLL*(1 + gamma*((EL_LAR_BIO+LL_LAR_BIO)/K*c_LAR_BIO))*LL_LAR_BIO - LL_LAR_BIO/durLL}else{dLL_LAR_BIO<-0}
+  # 
   #Do we need to LL = LL+LAR+BIO+LAR_BIO????
-
-
+  
+  
   #0.5 only dealing with female mosquitoes
   dSV <- 0.5*PL/durPL - lambdaV*SV - muVCom*SV
   dEV <- lambdaV*SV - lambdaV*SVLag*exp(-muVCom*durEV) - muVCom*EV
   dIV <- lambdaV*SVLag*exp(-muVCom*durEV) - muVCom*IV
-
+  
   #return(list(c(dEL, dLL, dPL, dSV, dEV, dIV)))
-
-
+  
+  
   #With larvaciding and biological control
-  #if you add more states - make sure the lagstates[10] is still SV -- SK will automate
   return(list(c(dEL,dEL_LAR,dEL_BIO,dEL_LAR_BIO, dLL,dLL_LAR,dLL_BIO,dLL_LAR_BIO, dPL, dSV, dEV, dIV)))
 
   }

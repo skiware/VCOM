@@ -47,80 +47,11 @@ WORKING_MESSAGE_STYLE <<- "#loadmessage {
     width: 100%;padding: 5px 0px 5px 0px;text-align: center;font-weight: bold;
     font-size: 200%;color: #FFFFFF;background-color: rgba(100, 200, 255, .75);z-index: 105;
   }"
-#
-#Source reduction, coverage value, time it is on
-INITIAL_SRE_COVERAGE = 0.0
-INITIAL_SRE_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-#LArvaciding, coverage value, time it is on
-INITIAL_LAR_COVERAGE = .00
-INITIAL_LAR_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-#Biological, coverage value, time it is on
-INITIAL_BIO_COVERAGE = .00
-INITIAL_BIO_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-#ATSB, coverage value, time it is on
-INITIAL_ATSB_COVERAGE = .00
-INITIAL_ATSB_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-#Space Spraying, coverage value, time it is on
-INITIAL_SSP_COVERAGE = .00
-INITIAL_SSP_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-#Odor Traps, coverage value, time it is on
-INITIAL_OBT_COVERAGE = .00
-INITIAL_OBT_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-#LLINs, coverage value, time it is on
-INITIAL_ITN_COVERAGE = .00
-INITIAL_ITN_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-#IRS
-INITIAL_IRS_COVERAGE = 0.00
-INITIAL_IRS_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-#House modification
-INITIAL_HOU_COVERAGE = 0.0
-INITIAL_HOU_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-#Cattle - Systemic
-INITIAL_ECS_COVERAGE = 0.00
-INITIAL_ECS_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-#Cattle - Topical
-INITIAL_ECT_COVERAGE = 0.00
-INITIAL_ECT_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-
-#Resting and Ovipositing - OviTraps -assuming same coverage for ATSB and SSP
-INITIAL_OVI_COVERAGE = 0.00
-INITIAL_OVI_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-
-## Get intervetions parameters - LLINs for testing
-#INTERVENTION_PARAMETERS = getInterventionsParameters(ITNcov=INITIAL_ITN_COVERAGE,time_ITN_on=INITIAL_ITN_TIME)
-
-## Get intervetions parameters
-INTERVENTION_PARAMETERS = getInterventionsParameters(
-                                  #Source Reduction
-                          SREcov=INITIAL_SRE_COVERAGE,time_SRE_on=INITIAL_SRE_TIME,
-                                #Larvaciding
-                          LARcov=INITIAL_LAR_COVERAGE,time_LAR_on=INITIAL_LAR_TIME,
-                                #Biological Control
-                          BIOcov=INITIAL_BIO_COVERAGE,time_BIO_on=INITIAL_BIO_TIME,
-                                  #ATSB
-                          ATSBcov=INITIAL_ATSB_COVERAGE,time_ATSB_on=INITIAL_ATSB_TIME,
-                                #Space Spraying
-                          SSPcov=INITIAL_SSP_COVERAGE,time_SSP_on=INITIAL_SSP_TIME,
-                                  #Odor Traps
-                          OBTcov=INITIAL_OBT_COVERAGE,time_OBT_on=INITIAL_OBT_TIME,
-                                 #LLINs
-                          ITNcov=INITIAL_ITN_COVERAGE,time_ITN_on=INITIAL_ITN_TIME,
-                                  #IRS
-                          IRScov=INITIAL_IRS_COVERAGE,time_IRS_on=INITIAL_IRS_TIME,
-                                   #House Modification
-                          HOUcov=INITIAL_HOU_COVERAGE,time_HOU_on=INITIAL_HOU_TIME,
-                                  #Cattle - Systemic
-                          ECScov=INITIAL_ECS_COVERAGE,time_ECS_on=INITIAL_ECS_TIME,
-                                 #Cattle - topical
-                          ECTcov=INITIAL_ECT_COVERAGE,time_ECT_on=INITIAL_ECT_TIME,
-                                 #Resting & Ovipositing - Ovitraps --same for ATSB, SSP
-                          OVIcov=INITIAL_OVI_COVERAGE,time_OVI_on=INITIAL_OVI_TIME)
-
 ###################################################################################
 # PRIME SYSTEM  ###################################################################
 MOSQUITO_PARAMETERS = getAnGambiaeParameters()
 #INTERVENTION_PARAMETERS = getInterventionsParameters(time_ITN_on=INITIAL_ITN_TIME,ITNcov=INITIAL_ITN_COVERAGE)
-theta <<- getTheta(interventionParameters=INTERVENTION_PARAMETERS)
+theta <<- getTheta()
 #initialParametersValues <<- importCSVParametersFromDirectory("SetupTemplates/SETUP_MosquitoLifeCycleParameters.csv")
 #theta <<- parseImportedCSVParameters(initialParametersValues)
 # MODEL -------------------------------------
@@ -252,6 +183,11 @@ shinyUI(
                 column(COVERAGE_LABELS_SIZE,h5("ATSB",align="left")),
                 column(COVERAGE_BAR_SIZE,sliderInput("ATSBcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
                 column(COVERAGE_INIT_SIZE,numericInput("time_ATSB_on",NULL,value=0,min=0,max=365))
+              ),
+              fluidRow(
+                column(COVERAGE_LABELS_SIZE,h5("SSP",align="left")),
+                column(COVERAGE_BAR_SIZE,sliderInput("SSPcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
+                column(COVERAGE_INIT_SIZE,numericInput("time_SSP_on",NULL,value=0,min=0,max=365))
               )
             ),mainPanel(
               plotOutput("plotTrajectory"),
