@@ -12,7 +12,11 @@
 #------------------------------------------------------------------------
 getTheta = function(
   #. getTheta: Facade function to return theta from selected parameters
-  speciesSpecificParameters=getAnGambiaeParameters(), 
+  
+  # Move this to driver
+  #speciesSpecificParameters=getAnGambiaeParameters(), 
+  #speciesSpecificParameters=getAnArabiensisParameters(), 
+  speciesSpecificParameters=getAnFunestusParameters(),
   interventionParameters=getInterventionsParameters(),
   additionalTransmissionParameters=getAdditionalTransmissionParameters(), 
   mosquitoLifeCycleParameters=getMosquitoLifeCycleParameters()
@@ -155,16 +159,17 @@ getAnArabiensisParameters = function(){
   #. getAnArabiensisParameters: Returns the list of Anopheles Arabiensis specific parameters
   c(
     #Phi = 0.96, phiB = 90 ;;;modified get the actual value
-    muV = 1/7.6, Q0 = 0.71, phiB = 0.50, phiI = 0.50,
+    #muV = 1/7.6, Q0 = 0.71,   phiB = 0.50, phiI = 0.50,
+    muV = 1/7.6, Q0 = 0.71,   phiB = 0.90, phiI = 0.96,
     rOVI = 0.00, sOVI = 0.00, rFOG = 0.00, sFOG = 0.00,
     rLAR = 0.00, sLAR = 0.00, rBIO = 0.00, sBIO = 0.00,
     rSRE = 0.00, sSRE = 0.00, rIRS = 0.60, sIRS = 0.00,
     rITN = 0.56, sITN = 0.03, rECS = 0.50, sECS = 0.50,
-    rHOU = 0.00, sHOU = 0.00, rODO = 0.00, sODO = 0.00,
-    rSPR = 0.00, sSPR = 0.00, rECT = 0.50, sECT = 0.50,
-    rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10,
+    rHOU = 0.80, sHOU = 0.15, rODO = 0.00, sODO = 0.00,
+    rSPR = 0.80, sSPR = 0.15, rECT = 0.50, sECT = 0.50,
+    rPPM = 0.50, sPPM = 0.40, dHOU = 0.10, dIRS = 0.10,
     aOBT = 2.00, eSRE = 0.70, fATSB =1.50, fSSP = 1.50,
-    fOVI = 1.50, fLAR = 55.5, fBIO = 35.5
+    fOVI = 1.50, fLAR = 55.5, fBIO = 15.5
   )
 }
 getAnFunestusParameters = function(){

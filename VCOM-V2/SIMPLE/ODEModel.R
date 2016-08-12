@@ -220,29 +220,10 @@ IVM_ode <- function(time, state, theta){
   NH = transmissionValues[["NH_eq"]]
   bh = transmissionValues[["bh"]]
   
- 
-  
-  # #Mosquito density
-  # Mdensity = computeMosqDensity(NV,NH)
-  # 
-  # #Length of gonotrophic cycle
-  #  f_theta <- computeLengthGonotrophicycle(deltaCom)
-  # # #HBI
-  #  wCom_human = wCom_Human_Indoor + wCom_Human_Outdoor
-  #  HBI_com <- computeHBI(wCom_human,wCom)
-  # # #Human biting rate
-  #  a_theta <- computeHumanBitingRate(f_theta,HBI_com)
-  # # #VC
-  #  VC<- computeVC(a_theta, Mdensity,muVCom,durEV)
-  # # #Sam get transmission parameters and proceed...
-  # # #EIR
-  #  EIR <-computeEIR(a_theta, IV, NH)
-  # # #RO
-  #  R0 <- computeRO(a_theta,muVCom, NV,bV,bh,NH)
-  
-  ##*********************************************************************
-  
+
   ##******Add Larviciding and biological control -move to a function
+  
+ 
   if (time > time_LAR_on) { LARcov_t <- LARcov } else { LARcov_t <- 0 }
   if (time > time_BIO_on) { BIOcov_t <- BIOcov } else { BIOcov_t <- 0 }
   
@@ -254,6 +235,24 @@ IVM_ode <- function(time, state, theta){
   c_LAR_BIO <-  LARcov_t*BIOcov_t
   # neither applied
   c0_LAR_BIO <- 1 - LARcov_t - BIOcov_t +  LARcov_t*BIOcov_t
+  
+  #Avoid c0_LAR_BIO to be 0
+  if (cLAR == 0 ){
+    #browser()
+    cLAR  =2*exp(-16)
+  }
+  if (cBIO == 0 ){
+    #browser()
+    cBIO =2*exp(-16) #2*exp(-16)
+  }
+  if (c_LAR_BIO == 0 ){
+    #browser()
+    c_LAR_BIO=2*exp(-16)
+  }
+  if (c0_LAR_BIO == 0 ){
+    #browser()
+    c0_LAR_BIO =2*exp(-16)
+  }
   
   f_LAR_BIO =fLAR*fBIO
   
@@ -270,12 +269,7 @@ IVM_ode <- function(time, state, theta){
     SVLag <- lagStates[10]
   }
   
-  #browser()
-  
-  if( time > 0){
-    #browser()
-  }
-  
+
 
   
     ###

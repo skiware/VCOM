@@ -30,7 +30,6 @@ source("multiplot.R")
 
 # Run first for An. gambiae - 
 #MOSQUITO_PARAMETERS = getAnGambiaeParameters()
-MOSQUITO_PARAMETERS = getAnArabiensisParameters() 
 
 # simulation runs per day - enter the end time
 INITIAL_MODELRUNTIME_VALUE   = 100
@@ -40,129 +39,55 @@ INITIAL_MODELRUNTIME_VALUE   = 100
 # To turn it off - enter INITIAL_MODELRUNTIME_VALUE + 1
 
 ###************************************************************
-NumTools = 6
-#FIX i
 
-for (i in 1:NumTools){
-  
-  
+#Source reduction, coverage value, time it is on
+INITIAL_SRE_COVERAGE = 0.0
+INITIAL_SRE_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 
+#LArvaciding, coverage value, time it is on
+INITIAL_LAR_COVERAGE = 1
+INITIAL_LAR_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 
-  #Source reduction, coverage value, time it is on
-  INITIAL_SRE_COVERAGE = 0.0
-  INITIAL_SRE_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-  
-  #LArvaciding, coverage value, time it is on
-  INITIAL_LAR_COVERAGE = .00
-  INITIAL_LAR_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-  
-  #Biological, coverage value, time it is on
-  INITIAL_BIO_COVERAGE = .00
-  INITIAL_BIO_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-  
-  #ATSB, coverage value, time it is on
-  INITIAL_ATSB_COVERAGE = .00
-  INITIAL_ATSB_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-  
-  #Space Spraying, coverage value, time it is on
-  INITIAL_SSP_COVERAGE = .00
-  INITIAL_SSP_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-  
-  #Odor Traps, coverage value, time it is on
-  INITIAL_OBT_COVERAGE = .00
-  INITIAL_OBT_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-  #LLINs, coverage value, time it is on
-  if(i==1){
-   INITIAL_ITN_COVERAGE = .00
-    INITIAL_ITN_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-    
-    #Cattle - Topical
-    INITIAL_ECT_COVERAGE = 0.00
-    INITIAL_ECT_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-    
-    INITIAL_HOU_COVERAGE = 0.0
-    INITIAL_HOU_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-    
-    INITIAL_OBT_COVERAGE = .00
-    INITIAL_OBT_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-  }
-  #IRS
-  INITIAL_IRS_COVERAGE = 0.50
-  INITIAL_IRS_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-  #House modification
-  INITIAL_HOU_COVERAGE = 0.0
-  INITIAL_HOU_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-  #Cattle - Systemic
-  INITIAL_ECS_COVERAGE = 0.00
-  INITIAL_ECS_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-  #Cattle - Topical
-  #INITIAL_ECT_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-  
-  #Resting and Ovipositing - OviTraps -assuming same coverage for ATSB and SSP
-  INITIAL_OVI_COVERAGE = 0.00
-  INITIAL_OVI_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-  
-  if(i==2){
-    INITIAL_ITN_COVERAGE = .50
-    INITIAL_ITN_TIME     = 20
-    #Cattle - Topical
-    INITIAL_ECT_COVERAGE = 0.50
-    INITIAL_ECT_TIME     = 40
-    
-    
-  }
-  
-  if(i==3){
-    INITIAL_ITN_COVERAGE = .50
-    INITIAL_ITN_TIME     = 20
-    
-    INITIAL_ECT_COVERAGE = 0.00
-    INITIAL_ECT_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-  }
-  if(i==4){
-    INITIAL_ITN_COVERAGE = .00
-    INITIAL_ITN_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-    
-    INITIAL_ECT_COVERAGE = 0.50
-    INITIAL_ECT_TIME     = 40
-  }
-  if(i==5){
-    INITIAL_ITN_COVERAGE = .50
-    INITIAL_ITN_TIME     = 20
-    
-    INITIAL_ECT_COVERAGE = 0.00
-    INITIAL_ECT_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-    
-    #House modification
-    INITIAL_HOU_COVERAGE = 0.50
-    INITIAL_HOU_TIME     = 20
-  } 
-if(i==6){
-  INITIAL_ITN_COVERAGE = .50
-  INITIAL_ITN_TIME     = 20
-  
-  INITIAL_ECT_COVERAGE = 0.00
-  INITIAL_ECT_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-  
-  #House modification
-  INITIAL_HOU_COVERAGE = 0.00
-  INITIAL_HOU_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-  
-  INITIAL_OBT_COVERAGE = .50
-  INITIAL_OBT_TIME     = 20
-  
-  
-}
-  
-  
+#Biological, coverage value, time it is on
+INITIAL_BIO_COVERAGE = 0
+INITIAL_BIO_TIME     = 20
 
+#ATSB, coverage value, time it is on
+INITIAL_ATSB_COVERAGE = .00
+INITIAL_ATSB_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
+
+#Space Spraying, coverage value, time it is on
+INITIAL_SSP_COVERAGE = .00
+INITIAL_SSP_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
+
+#Odor Traps, coverage value, time it is on
+INITIAL_OBT_COVERAGE = .00
+INITIAL_OBT_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
+#LLINs, coverage value, time it is on
+INITIAL_ITN_COVERAGE = 0
+INITIAL_ITN_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
+#IRS
+INITIAL_IRS_COVERAGE = 0
+INITIAL_IRS_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
+#House modification
+INITIAL_HOU_COVERAGE = 0.0
+INITIAL_HOU_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
+#Cattle - Systemic
+INITIAL_ECS_COVERAGE = 0.00
+INITIAL_ECS_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
+#Cattle - Topical
+INITIAL_ECT_COVERAGE = 0.00
+INITIAL_ECT_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
+
+#Resting and Ovipositing - OviTraps -assuming same coverage for ATSB and SSP
+INITIAL_OVI_COVERAGE = 0.00
+INITIAL_OVI_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 
 ## Get intervetions parameters - LLINs for testing
 #INTERVENTION_PARAMETERS = getInterventionsParameters(ITNcov=INITIAL_ITN_COVERAGE,time_ITN_on=INITIAL_ITN_TIME)
 
 ## Get intervetions parameters
-#INTERVENTION_PARAMETERS = getInterventionsParameters
-  INTERVENTION_PARAMETERS = getInterventionsParameters(
+INTERVENTION_PARAMETERS = getInterventionsParameters(
                                   #Source Reduction
                           SREcov=INITIAL_SRE_COVERAGE,time_SRE_on=INITIAL_SRE_TIME, 
                                 #Larvaciding
@@ -190,108 +115,29 @@ if(i==6){
                           OVIcov=INITIAL_OVI_COVERAGE,time_OVI_on=INITIAL_OVI_TIME)
 
 
-  theta <<- getTheta(interventionParameters=INTERVENTION_PARAMETERS)
+theta <<- getTheta(interventionParameters=INTERVENTION_PARAMETERS)
 
- # browser()
 ## Initialize the model
-  initState <<- calculateInitialState(theta)
- 
-  if (i==1){
+initState <<- calculateInitialState(theta)
+
+
 ## Run the model - eventually produce different IVM_traj for different scenarios, eg., 1 intervention, 2 inter, etc
-  IVM_traj_Control <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
-  }
-  
-  if (i==2){
-    ## Run the model - eventually produce different IVM_traj for different scenarios, eg., 1 intervention, 2 inter, etc
-    IVM_traj_cc <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
-  }
-  
-  if (i==3){
-    ## Run the model - eventually produce different IVM_traj for different scenarios, eg., 1 intervention, 2 inter, etc
-    IVM_traj_LLIN_50 <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
-  }
-  if (i==4){
-    ## Run the model - eventually produce different IVM_traj for different scenarios, eg., 1 intervention, 2 inter, etc
-    IVM_traj_Cattle_50 <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
-  }
-  
-  if (i==5){
-    ## Run the model - eventually produce different IVM_traj for different scenarios, eg., 1 intervention, 2 inter, etc
-    IVM_traj_LLIN_HOUSE_50 <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
-  }
-  
-  if (i==6){
-    ## Run the model - eventually produce different IVM_traj for different scenarios, eg., 1 intervention, 2 inter, etc
-    IVM_traj_LLIN_OBT_50 <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
-  }
-  ## 
+IVM_traj <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
+
 ## Generate outputs - using Histograms
-  #barChartMosquitoDemographics(IVM_traj)
+barChartMosquitoDemographics(IVM_traj)
 
 ## Generate output - using gg plots
-  #plotTrajectory(IVM_traj)
+plotTrajectory(IVM_traj)
 
-
-
-}
-
-## SA Figues
-#plot_SA_Figures(IVM_traj_Control,IVM_traj_LLIN_80,IVM_traj_LLIN_50,theta,INITIAL_MODELRUNTIME_VALUE)
-
-plot_SA_Figures_v2(IVM_traj_Control,IVM_traj_cc,IVM_traj_LLIN_50,IVM_traj_Cattle_50,IVM_traj_LLIN_HOUSE_50,IVM_traj_LLIN_OBT_50,theta,INITIAL_MODELRUNTIME_VALUE)
 #compute and plot EIR, VC, R0
 #If need be I can seprate the function for the three graphs
-#RunTime=seq(0, INITIAL_MODELRUNTIME_VALUE,by=1)
-#plotEIR_VC_R0(IVM_traj,theta,INITIAL_MODELRUNTIME_VALUE)
+RunTime=seq(0, INITIAL_MODELRUNTIME_VALUE,by=1)
+plotEIR_VC_R0(IVM_traj,theta,INITIAL_MODELRUNTIME_VALUE)
 
 
-# Sort out the scale - to go from 0 to max
+
 
 ##Notes for Sam #######
 #
 #browser() IF YOU WANT TO DEBURG
-
-
-#Additional
-#Source reduction, coverage value, time it is on
-# INITIAL_SRE_COVERAGE = 0.0
-# INITIAL_SRE_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-# 
-# #LArvaciding, coverage value, time it is on
-# INITIAL_LAR_COVERAGE = .00
-# INITIAL_LAR_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-# 
-# #Biological, coverage value, time it is on
-# INITIAL_BIO_COVERAGE = .00
-# INITIAL_BIO_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-# 
-# #ATSB, coverage value, time it is on
-# INITIAL_ATSB_COVERAGE = .00
-# INITIAL_ATSB_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-# 
-# #Space Spraying, coverage value, time it is on
-# INITIAL_SSP_COVERAGE = .00
-# INITIAL_SSP_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-# 
-# #Odor Traps, coverage value, time it is on
-# INITIAL_OBT_COVERAGE = .10
-# INITIAL_OBT_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-# #LLINs, coverage value, time it is on
-# INITIAL_ITN_COVERAGE = .60
-# INITIAL_ITN_TIME     =  20
-# #IRS
-# INITIAL_IRS_COVERAGE = 0.50
-# INITIAL_IRS_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-# #House modification
-# INITIAL_HOU_COVERAGE = 0.0
-# INITIAL_HOU_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-# #Cattle - Systemic
-# INITIAL_ECS_COVERAGE = 0.00
-# INITIAL_ECS_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-# #Cattle - Topical
-# INITIAL_ECT_COVERAGE = 0.00
-# INITIAL_ECT_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
-# 
-# #Resting and Ovipositing - OviTraps -assuming same coverage for ATSB and SSP
-# INITIAL_OVI_COVERAGE = 0.00
-# INITIAL_OVI_TIME     = INITIAL_MODELRUNTIME_VALUE + 1

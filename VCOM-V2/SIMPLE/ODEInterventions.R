@@ -242,8 +242,9 @@ impactInsecticideTreatedCattle = function(time,time_ECS_on,ECScov,time_ECT_on,EC
   
   # repeating due to encountering insecticide (topical applied (only)) treated cattle
   #zCom_Cattle <- (1 - Q0)*(cECT*rECT+cCom_Cattle*rECT)
-  zCom_Cattle <- Q0_t_C*(cECT*rECT+cCom_Cattle*rECT)
- 
+  #zCom_Cattle <- Q0_t_C*(cECT*rECT+cCom_Cattle*rECT)
+  #Fix this with JM - need to consider repellency from cattle
+  zCom_Cattle = 0
    #browser()
   #Add cattle treated with endocticide (systemic and/or topical applied)
   wCom_Cattle <- Q0_t_C*(c0_Cattle+cECS*sECS+cECT*sECT+cCom_Cattle*sECS*sECT)

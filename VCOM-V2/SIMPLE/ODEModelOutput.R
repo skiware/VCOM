@@ -47,6 +47,7 @@ computeEIR = function(time_on,a_theta, IV, NH){
   #. computeEIR: Main function that return entomological innoculation rate
   ## X_theta = iH_eq, bh - add to transmission parameter
   
+    #To make sure   
    for (i in 1:length(IV)) {
      if (i < time_on){
        a_theta = theta[["Q0"]] * theta[["f0"]] #human biting rate at equilbrium
