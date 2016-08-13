@@ -118,11 +118,6 @@ shinyUI(
                 column(COVERAGE_INIT_SIZE,numericInput("time_OVI_on",NULL,value=0,min=0,max=365))
               ),
               fluidRow(
-                column(COVERAGE_LABELS_SIZE,h5("FOG",align="left")),
-                column(COVERAGE_BAR_SIZE,sliderInput("FOGcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
-                column(COVERAGE_INIT_SIZE,numericInput("time_FOG_on",NULL,value=0,min=0,max=365))
-              ),
-              fluidRow(
                 column(COVERAGE_LABELS_SIZE,h5("LAR",align="left")),
                 column(COVERAGE_BAR_SIZE,sliderInput("LARcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
                 column(COVERAGE_INIT_SIZE,numericInput("time_LAR_on",NULL,value=0,min=0,max=365))
