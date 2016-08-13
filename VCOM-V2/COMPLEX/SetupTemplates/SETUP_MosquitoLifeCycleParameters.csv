@@ -11,69 +11,78 @@ gamma,13.25,Effect of density-dependence on late instars relative to early insta
 tau1,0.68,Time spent foraginf for a blood meal at 0% ITN coverage
 tau2,2.32,Time spent resting and ovipositing by a mosquito
 Species-Specific Parameters,Value,Description
-muV,0.1123, Adult mosquito daily mortality
+muV,0.112359551, Adult mosquito daily mortality
 Q0,0.94, Human blood index
 phiB,0.9, Proportion of bites on a person while they are in bed
 phiI,0.98, Proportion of bites on a person while they are indoors
-rOVI,0,
-sOVI,0,
-rFOG,0,
-sFOG,0,
-rLAR,0,
-sLAR,0,
-rBIO,0,
-sBIO,0,
-rSRE,0,
-sSRE,0,
-rIRS,0, Probability of mosquito repeating a feeding attempt due to IRS
-sIRS,0, Probability of mosquito feeding and surviving in presence of IRS
-rITN,0, Probability of mosquito repeating a feeding attempt due to IRS
-sITN,0, Probability of mosquito feeding and surviving in presence of ITN
-rIVM,0,
-sIVM,0,
-rHOU,0,
-sHOU,0,
-rODO,0,
-sODO,0,
-rSPA,0,
-sSPA,0,
+rOVI,0,Repellance probability
+sOVI,0,Successful feeding probability
+fOVI,0,Death rate factor of increase
+rFOG,0,Repellance probability
+sFOG,0,Successful feeding probability
+rLAR,0,Repellance probability
+sLAR,0,Successful feeding probability
+fLAR,0,Death rate factor of increase
+rBIO,0,Repellance probability
+sBIO,0,Successful feeding probability
+fBIO,0,Death rate factor of increase
+rSRE,0,Repellance probability
+sSRE,0,Successful feeding probability
+eSRE,0,Death rate factor of increase
+rIRS,0,Repellance probability
+sIRS,0,Successful feeding probability
+dIRS,0,Death probability
+rITN,0,Repellance probability
+sITN,0,Successful feeding probability
+rECS,0,Repellance probability
+sECS,0,Successful feeding probability
+rHOU,0,Repellance probability
+sHOU,0,Successful feeding probability
+dHOU,0,Death probability
+rSPR,0,Repellance probability
+sSPR,0,Successful feeding probability
+rECT,0,Repellance probability
+sECT,0,Successful feeding probability
+rPPM,0,Repellance probability
+sPPM,0,Successful feeding probability
+aOBT,0,Availability of one odor baited trap in relation to one human
+fSSP,0,Death rate factor of increase
+fATSB,0,Death rate factor of increase
 Interventions Parameters,Value,Description
-OVIcov,0, Ovitraps coverage
-time_OVI_on,0, When Ovitraps are applied (days)
-OVIeff,0,TEXT
-FOGcov,0, Fogging coverage
-time_FOG_on,0, When Fogging is applied (days)
-FOGeff,0,TEXT
-LARcov,0, Larvacide coverage
-time_LAR_on,0, When Larvacide is applied (days)
-LAReff,0,TEXT
-BIOcov,0, Biological Control coverage
-time_BIO_on,0, When Biological Control is applied (days)
-BIOeff,0,TEXT
-SREcov,0, Source Reduction coverage
-time_SRE_on,0, When Source Reduction is applied (days)
-SREeff,0,TEXT
-IRScov,.8, IRS coverage
-time_IRS_on,50, When IRSs are applied (days)
-IRSeff,0,TEXT
-ITNcov,0, ITN coverage
-time_ITN_on,0, When ITNs are applied (days)
-ITNeff,0,TEXT
-IVMcov,0, Ivermectin coverage
-time_IVM_on,0, When Ivermectin is applied (days)
-IVMeff,0,TEXT
-HOUcov,0, House Modification coverage
-time_HOU_on,0, When House Modifications are applied (days)
-HOUeff,0,TEXT
-ODOcov,0, Odor Traps coverage
-time_ODO_on,0, When Odor Traps are applied (days)
-ODOeff,0,TEXT
-SPAcov,0, Spatial Repellents coverage
-time_SPA_on,0, When Space Repellents are applied (days)
-SPAeff,0,TEXT
+OVIcov,0,Coverage
+time_OVI_on,0,Time in which the intervention is first applied
+FOGcov,0,Coverage
+time_FOG_on,0,Time in which the intervention is first applied
+LARcov,0,Coverage
+time_LAR_on,0,Time in which the intervention is first applied
+BIOcov,0,Coverage
+time_BIO_on,0,Time in which the intervention is first applied
+IRScov,0,Coverage
+time_IRS_on,0,Time in which the intervention is first applied
+ITNcov,0,Coverage
+time_ITN_on,0,Time in which the intervention is first applied
+ECScov,0,Coverage
+time_ECS_on,0,Time in which the intervention is first applied
+ECTcov,0,Coverage
+time_ECT_on,0,Time in which the intervention is first applied
+HOUcov,0,Coverage
+time_HOU_on,0,Time in which the intervention is first applied
+OBTcov,0,Coverage
+time_OBT_on,0,Time in which the intervention is first applied
+PPMcov,0,Coverage
+time_PPM_on,0,Time in which the intervention is first applied
+ATSBcov,0,Coverage
+time_ATSB_on,0,Time in which the intervention is first applied
+SSPcov,0,Coverage
+time_SSP_on,0,Time in which the intervention is first applied
+SREcov,0,Coverage
+time_SRE_on,0,Time in which the intervention is first applied
+SPRcov,0,Coverage
+time_SPR_on,0,Time in which the intervention is first applied
 Transmission Parameters,Value,Description
 f0,0.33333, Daily biting rate by mosquitoes on animals and humans
 epsilon0,0.02739726, Daily entomological inolculation rate
 iH_eq,0.35, Equilibrium malaria prevalence in humans
 NH_eq,200, Equilibrium human population size
 bV,0.05, Probability of transmission from human to vector per infectious bite
+bh,0.5,Transmission efficiency from an infectious mosquito to an uninfected susceptible human
