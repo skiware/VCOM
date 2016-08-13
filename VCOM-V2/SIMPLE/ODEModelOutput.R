@@ -39,6 +39,7 @@ computeVC = function(a_theta, NV,NH,muVCom,theta){
   #. computeVC: Main function that return vectorial capacity
   ## n incubation period
   tilda <- theta["durEV"]
+  #There is probably a nice way to handle this
   for (i in 1:length(IV)) {
     if (i < time_on){
       a_theta = theta[["Q0"]] * theta[["f0"]] #human biting rate at equilbrium
