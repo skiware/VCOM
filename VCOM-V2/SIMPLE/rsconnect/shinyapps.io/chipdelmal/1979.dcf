@@ -2,8 +2,8 @@ name: 1979
 account: chipdelmal
 server: shinyapps.io
 appId: 120209
-bundleId: 532423
+bundleId: 532426
 url: https://chipdelmal.shinyapps.io/1979/
-when: 1471283703.18679
+when: 1471284220.59117
 asMultiple: FALSE
 asStatic: FALSE
