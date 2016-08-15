@@ -1,0 +1,3 @@
+Movement probabilities of mosquitos in a spatially heterogeneous setting. Circles represent different "types of places" (pink: oviposition spots, cyan: feeding sites (houses), white: mating spots, yellow: sugar sources) and the lines connecting them represent the probability of mosquitos to move from one specific site to another (red means more probability while blue represents less probability). 
+
+In this figure we can see the impact of spatial heterogeneity on the movement of mosquitos as the distribution of the sites can affect the way mosquitos choose their hosts and ultimately the impact of an epidemic process.
