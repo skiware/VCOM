@@ -171,6 +171,10 @@ shinyUI(
                 column(COVERAGE_LABELS_SIZE,h5("PPM",align="left")),
                 column(COVERAGE_BAR_SIZE,sliderInput("PPMcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
                 column(COVERAGE_INIT_SIZE,numericInput("time_PPM_on",NULL,value=0,min=0,max=365))
+              ),
+              helpText("Key: Ovitraps (OVI), Larviciding (LAR), Biological Control (BIO), Source Reduction (SRE)
+                      Insecticide-Treated Nets (ITN), Indoor Residual Spraying (IRS), Endocticide (ECS), Endocticide (ECT), House Modifications (HOU),
+                      Odor-Baited Traps (OBT), Spatial-Spraying (SPR), (PPM)"
               )
             ),mainPanel(
               plotOutput("plotTrajectory"),

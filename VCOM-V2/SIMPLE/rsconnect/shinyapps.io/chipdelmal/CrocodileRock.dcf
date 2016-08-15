@@ -1,5 +1,10 @@
 name: CrocodileRock
 account: chipdelmal
-bundleId: 447230
-url: https://chipdelmal.shinyapps.io/CrocodileRock/
 server: shinyapps.io
+appId: 100401
+bundleId: 532282
+url: https://chipdelmal.shinyapps.io/CrocodileRock/
+when: 1471275042.33737
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: ArabeinsisITN60.pdf
