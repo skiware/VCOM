@@ -33,6 +33,7 @@ COVERAGE_BAR_SIZE = 5
 COVERAGE_INIT_SIZE = 4
 INITIAL_TIME_VALUE = 80
 INITIAL_ITN_COVERAGE = .5
+INITIAL_EIR = 100
 INITIAL_ITN_TIME = 50
 ENTER_DOWN_RUN <<- '
   $(document).ready(function(){
@@ -48,6 +49,7 @@ WORKING_MESSAGE_STYLE <<- "#loadmessage {
 ###################################################################################
 # PRIME SYSTEM  ###################################################################
 MOSQUITO_PARAMETERS = getAnGambiaeParameters()
+TRANSMISSION_PARAMETERS = getAdditionalTransmissionParameters(epsilon0 = INITIAL_EIR/365)
 INTERVENTION_PARAMETERS = getInterventionsParameters(time_ITN_on=INITIAL_ITN_TIME,ITNcov=INITIAL_ITN_COVERAGE)
 theta <<- getTheta(interventionParameters=INTERVENTION_PARAMETERS)
 #initialParametersValues <<- importCSVParametersFromDirectory("SetupTemplates/SETUP_MosquitoLifeCycleParameters.csv")
@@ -90,12 +92,13 @@ shinyUI(
                 ),selected="GAM"),
               #####################################################################
               fluidRow(h3("2. EIR Level Selection")),
-              radioButtons("EIR",label=NULL,
-                choices=list(
-                  "0<=EIR<10"="10",
-                  "10<=EIR<100"="100",
-                  "100<=EIR<1000"="1000"
-                ),selected="100"),
+              sliderInput("radioEIR","EIR:",min=1,max=1000,value=INITIAL_EIR),
+              #radioButtons("radioEIR",label=NULL,
+              #  choices=list(
+              #    "10"=10,
+              #    "100"=100,
+              #    "1000"=1000
+              #  ),selected=100),
               #####################################################################
               fluidRow(h3("3. Q0")),
               sliderInput("Q0",label=NULL,min=0,max=1,value=0,step=.01),

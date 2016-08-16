@@ -41,6 +41,8 @@ shinyServer(
         "ARA"=getAnArabiensisParameters(),
         "FUN"=getAnFunestusParameters()
       )
+      TRANSMISSION_PARAMETERS <<- getAdditionalTransmissionParameters(epsilon0=as.numeric(input$radioEIR)/365)
+      print(TRANSMISSION_PARAMETERS)
       INTERVENTION_PARAMETERS <<- getInterventionsParameters(
         OVIcov=input$OVIcov,FOGcov=input$FOGcov,LARcov=input$LARcov,BIOcov=input$BIOcov,SREcov=input$SREcov,ITNcov=input$ITNcov,
         IRScov=input$IRScov,ECScov=input$ECScov,ECTcov=input$ECTcov,HOUcov=input$HOUcov,OBTcov=input$OBTcov,SPRcov=input$SPRcov,PPMcov=input$PPMcov,
@@ -51,7 +53,8 @@ shinyServer(
       )
       theta <<- getTheta(
         speciesSpecificParameters=MOSQUITO_PARAMETERS,
-        interventionParameters=INTERVENTION_PARAMETERS
+        interventionParameters=INTERVENTION_PARAMETERS,
+        additionalTransmissionParameters=TRANSMISSION_PARAMETERS
       )
       #--------------------------------------------------------------------------
       initState=calculateInitialState(theta)
