@@ -92,6 +92,7 @@ IVM_ode <- function(time, state, theta){
   tau1 <- theta[["tau1"]] # Time spent foraging for a blood meal (no ITNs) (days)
   tau2 <- theta[["tau1"]] # Time spent resting and ovipositing (days)
   NV_eq <- theta[["NV_eq"]] # Number of female mosquitoes at equilibrium
+  recRate <- theta[["recRate"]]
   #e_ov  <- theta[["e_ov"]] # # Number of eggs per oviposition per mosquito - SK wanted to add it in theta but recomputed in FC
   lambdaV <- theta[["lambdaV"]] # Force of infection in vectors at equilibrium
   ## Parameters (interventions):
@@ -353,7 +354,7 @@ IVM_ode <- function(time, state, theta){
   #Check a_theta? updated when intervention is on?
   
   #browser()
-  #Include recRate into transmissionParameter file
+  #Include recRate into transmissionParameter file recRate
  
   dSH <- -(NV/NH)*a_theta*(IV/NV)*bh*SH +  recRate*IH
   dIH <-  (NV/NH)*a_theta*(IV/NV)*bh*SH -  recRate*IH
