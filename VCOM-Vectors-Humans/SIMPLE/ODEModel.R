@@ -33,9 +33,12 @@ calculateInitialState = function(theta){
   a0 <- Q0*f0 # Human biting rate at equilibrium
   
   #Incorporating humans
-  iH_eq <-NH_eq * (epsilon0 *bh)/(recRate+(epsilon0*bh))
+  iH_eq <- (epsilon0 *bh)/(recRate+(epsilon0*bh))
+  IH_eq <- iH_eq*NH_eq 
   
-  SH_eq = NH_eq - iH_eq
+  
+  
+  SH_eq = NH_eq* (1-iH_eq)
   
   lambdaV <- a0*iH_eq*bV # Force of infection in mosquitoes at equilibrium
   theta["lambdaV"] <<- lambdaV # Include vector force of infection in vector of parameters (theta)

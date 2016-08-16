@@ -112,13 +112,13 @@ plotEIR_VC_R0 = function(IVM_traj,theta,INITIAL_MODELRUNTIME_VALUE){
  
   
   #R0
-  R0 = computeRO(a_theta,muVCom, NV,bv,bh,NH,theta)
+  R0 = computeRO(time_on,a_theta,muVCom, NV,bv,bh,NH)
   p5 <- ggplot(IVM_traj, aes(x = 1:length(IVM_traj[,1]), y = EIR, color = State)) +
     geom_line(aes(y = R0, col = "R0"), size = 1.2) + 
     #geom_line(aes(y = IVM_traj["EV"], col = "EV"), size = 1.2) +
     labs(x = "Time (days)", y = " R0")
   
-  VC = computeVC(a_theta, NV,NH,muVCom,theta)
+  VC = computeVC(time_on,a_theta, NV,NH,muVCom)
   p6 <-  ggplot(IVM_traj, aes(x = 1:length(IVM_traj[,1]), y = EIR, color = State)) +
     geom_line(aes(y = VC, col = "VC"), size = 1.2) + 
     #geom_line(aes(y = IVM_traj["EV"], col = "EV"), size = 1.2) +
