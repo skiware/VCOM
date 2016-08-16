@@ -9,11 +9,11 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 url: "" # the base hostname & protocol for your site
 
 # User setting
-owner:
-email:
+owner: UCSF - Malaria Elimination Initiative
+email:  blueYoshi@ucsf.com
 facebook_username:
 twitter_username:
-github_username:
+github_username: chipdelmal
 address:
   - line:
   - line:
