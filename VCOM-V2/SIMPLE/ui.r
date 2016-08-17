@@ -93,7 +93,7 @@ shinyUI(
                 ),selected="GAM"),
               #####################################################################
               fluidRow(h3("2. EIR Level Selection")),
-              sliderInput("radioEIR","EIR:",min=0.1,max=1000,value=100,step=10),
+              sliderInput("radioEIR",label=NULL,min=0.1,max=1000,value=100,step=10),
               #radioButtons("radioEIR",label=NULL,
               #  choices=list(
               #    "10"=10,
