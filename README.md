@@ -1,6 +1,8 @@
 # Vector Control Optimization Model [VCOM]
 
-<img src="./Media/ucsf.png" alt="University of California, San Francisco">
+<img src="./img/ihi.jpg" alt="University of California, San Francisco" height="80px">
+<img src="./img/ucsf.png" alt="University of California, San Francisco" height="80px">
+<img src="./img/itesm.png" alt="University of California, San Francisco" height="80px">
 
 
 ## Description	
