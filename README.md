@@ -1,12 +1,13 @@
 # Vector Control Optimization Model [VCOM]
 
-<img src="./img/ihi.jpg" alt="University of California, San Francisco" height="80px">
+<img src="./img/ihi.jpg" alt="Ifakara Health Institute" height="80px">
 <img src="./img/ucsf.png" alt="University of California, San Francisco" height="80px">
-<img src="./img/itesm.png" alt="University of California, San Francisco" height="80px">
+<img src="./img/berkeley.jpg" alt="University of California, Berkeley" height="80px">
+<img src="./img/itesm.png" alt="Tecnológico de Monterrey" height="80px">
 
 
 ## Description	
-VCOM is a model created as part of the <a href="http://globalhealthsciences.ucsf.edu/global-health-group/malaria-elimination-initiative">Malaria Elimination Initiative</a>to help policy makers make decisions on which mosquito-control interventions should be prioritised in different given scenarios. To this end we have created two graphical user interfaces (GUIs) to make the model accessible to people without programming or modelling backgrounds.
+VCOM is a model created as part of the <a href="http://globalhealthsciences.ucsf.edu/global-health-group/malaria-elimination-initiative">Malaria Elimination Initiative</a> to help policy makers make decisions on which mosquito-control interventions should be prioritised in different given scenarios. To this end we have created two graphical user interfaces (GUIs) to make the model accessible to people without programming or modelling backgrounds.
 
 Check out our <a href="http://chipdelmal.github.io/VCOM/">website</a> for more information and to run our model!
 
