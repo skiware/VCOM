@@ -1,7 +1,7 @@
 # Vector Control Optimization Model [VCOM]
 
 ## Description	
-VCOM is a platform designed to do cool stuff...
+VCOM is a model created as part of the "Malaria Elimination Initiative" to help policy makers make decisions on which mosquito-control interventions should be prioritised in different given scenarios. To this end we have created two graphical user interfaces (GUIs) to make the model accessible to people without programming or modelling backgrounds.
 
 ## Citation
 VCOM, Awesome Journal
@@ -102,7 +102,17 @@ Awesome people
 ## Functions	
 * impactFeedingCycleParameters: compute the impact of interventions on feeding cycle parameters
 * plotTrajectory: Plots the evolution of the dynamics of the system
-* plotEIR: Plots EIR dynamics of the system
+* plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
+* barChartMosquitoDemographics: Generates a bar chart with the amount of mosquitos in each life stage
+* parseImportedCSVParameters: Once a csv file has been imported this function converts the data into a theta object
+* importCSVParametersFromDirectory: Loads the verified parameters of the simulation from a CSV file into the workflow
+* validateCSVParameters: Verifies that the user has imported a valid CSV file with all the parameters defined
+* importXLSParametersFromDirectory: Loads the verified parameters of the simulation from an XLS file into the workflow
+* importCSVXLSParametersFromDirectoryShiny: Wrapper function that works only within shiny to select the proper import function to use on a given file
+* plotTrajectory: Plots the evolution of the dynamics of the system
+* plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
+* plot_SA_Figures - produce some figures for presentations: NA
+* plot_SA_Figures - produce some figures for presentations: NA
 * barChartMosquitoDemographics: Generates a bar chart with the amount of mosquitos in each life stage
 * parseImportedCSVParameters: Once a csv file has been imported this function converts the data into a theta object
 * importCSVParametersFromDirectory: Loads the verified parameters of the simulation from a CSV file into the workflow
