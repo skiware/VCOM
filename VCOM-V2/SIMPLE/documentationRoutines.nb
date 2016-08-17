@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     62597,       1316]
-NotebookOptionsPosition[     60864,       1254]
-NotebookOutlinePosition[     61221,       1270]
-CellTagsIndexPosition[     61178,       1267]
+NotebookDataLength[     68161,       1399]
+NotebookOptionsPosition[     66429,       1337]
+NotebookOutlinePosition[     66782,       1353]
+CellTagsIndexPosition[     66739,       1350]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -127,8 +127,10 @@ Cell[BoxData[{
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"\<\"Driver.R\"\>", ",", "\<\"FeedingCycle.R\"\>", 
+  RowBox[{"\<\"Driver.R\"\>", ",", "\<\"Driver-SimplePlots.R\"\>", 
+   ",", "\<\"FeedingCycle.R\"\>", ",", "\<\"multiplot.R\"\>", 
    ",", "\<\"ODEAuxiliaryFunctions.R\"\>", 
+   ",", "\<\"ODEAuxiliaryFunctions - SimplePlots.R\"\>", 
    ",", "\<\"ODEControlMeasuresParameters.R\"\>", 
    ",", "\<\"ODEInterventions - FirstPass.R\"\>", 
    ",", "\<\"ODEInterventions.R\"\>", ",", "\<\"ODEModelOutput.R\"\>", 
@@ -147,7 +149,7 @@ Cell[BoxData[
    3.675099746559181*^9, 3.678115756294635*^9, {3.678123126734837*^9, 
    3.678123146416396*^9}, 3.678123295005644*^9, 3.678123346224698*^9, {
    3.678124181975445*^9, 3.6781242233331833`*^9}, 3.678126055137306*^9, 
-   3.6781261477904987`*^9}],
+   3.6781261477904987`*^9, 3.680444221603487*^9, 3.680444274252675*^9}],
 
 Cell[BoxData[
  TagBox[GridBox[{
@@ -156,7 +158,27 @@ Cell[BoxData[
 interventions on feeding cycle parameters\"\>"},
     {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
 the system\"\>"},
-    {"\<\"plotEIR\"\>", "\<\" Plots EIR dynamics of the system\"\>"},
+    {"\<\"plotEIR_VC_R0\"\>", "\<\" Plots EIR, VC and R0 dynamics of the \
+system\"\>"},
+    {"\<\"barChartMosquitoDemographics\"\>", "\<\" Generates a bar chart with \
+the amount of mosquitos in each life stage\"\>"},
+    {"\<\"parseImportedCSVParameters\"\>", "\<\" Once a csv file has been \
+imported this function converts the data into a theta object\"\>"},
+    {"\<\"importCSVParametersFromDirectory\"\>", "\<\" Loads the verified \
+parameters of the simulation from a CSV file into the workflow\"\>"},
+    {"\<\"validateCSVParameters\"\>", "\<\" Verifies that the user has \
+imported a valid CSV file with all the parameters defined\"\>"},
+    {"\<\"importXLSParametersFromDirectory\"\>", "\<\" Loads the verified \
+parameters of the simulation from an XLS file into the workflow\"\>"},
+    {"\<\"importCSVXLSParametersFromDirectoryShiny\"\>", "\<\" Wrapper \
+function that works only within shiny to select the proper import function to \
+use on a given file\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotEIR_VC_R0\"\>", "\<\" Plots EIR, VC and R0 dynamics of the \
+system\"\>"},
+    {"\<\"plot_SA_Figures - produce some figures for presentations\"\>", ""},
+    {"\<\"plot_SA_Figures - produce some figures for presentations\"\>", ""},
     {"\<\"barChartMosquitoDemographics\"\>", "\<\" Generates a bar chart with \
 the amount of mosquitos in each life stage\"\>"},
     {"\<\"parseImportedCSVParameters\"\>", "\<\" Once a csv file has been \
@@ -245,7 +267,7 @@ transmission parameters\"\>"}
    3.675099746559181*^9, 3.678115756294635*^9, {3.678123126734837*^9, 
    3.678123146416396*^9}, 3.678123295005644*^9, 3.678123346224698*^9, {
    3.678124181975445*^9, 3.6781242233331833`*^9}, 3.678126055137306*^9, 
-   3.678126147920401*^9}],
+   3.6781261477904987`*^9, 3.680444221603487*^9, 3.680444274425123*^9}],
 
 Cell[BoxData["\<\"Documentation/DOC_functionsDescription.txt\"\>"], "Output",
  CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
@@ -258,7 +280,7 @@ Cell[BoxData["\<\"Documentation/DOC_functionsDescription.txt\"\>"], "Output",
    3.675099746559181*^9, 3.678115756294635*^9, {3.678123126734837*^9, 
    3.678123146416396*^9}, 3.678123295005644*^9, 3.678123346224698*^9, {
    3.678124181975445*^9, 3.6781242233331833`*^9}, 3.678126055137306*^9, 
-   3.678126147932726*^9}],
+   3.6781261477904987`*^9, 3.680444221603487*^9, 3.680444274437632*^9}],
 
 Cell[BoxData["\<\"Documentation/DOC_functionsDescription.csv\"\>"], "Output",
  CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
@@ -271,7 +293,7 @@ Cell[BoxData["\<\"Documentation/DOC_functionsDescription.csv\"\>"], "Output",
    3.675099746559181*^9, 3.678115756294635*^9, {3.678123126734837*^9, 
    3.678123146416396*^9}, 3.678123295005644*^9, 3.678123346224698*^9, {
    3.678124181975445*^9, 3.6781242233331833`*^9}, 3.678126055137306*^9, 
-   3.67812614794462*^9}],
+   3.6781261477904987`*^9, 3.680444221603487*^9, 3.6804442744500504`*^9}],
 
 Cell[BoxData["\<\"Documentation/DOC_functionsDescription.png\"\>"], "Output",
  CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
@@ -284,7 +306,7 @@ Cell[BoxData["\<\"Documentation/DOC_functionsDescription.png\"\>"], "Output",
    3.675099746559181*^9, 3.678115756294635*^9, {3.678123126734837*^9, 
    3.678123146416396*^9}, 3.678123295005644*^9, 3.678123346224698*^9, {
    3.678124181975445*^9, 3.6781242233331833`*^9}, 3.678126055137306*^9, 
-   3.678126149132725*^9}]
+   3.6781261477904987`*^9, 3.680444221603487*^9, 3.6804442765677757`*^9}]
 }, Open  ]]
 }, Closed]],
 
@@ -374,8 +396,10 @@ Cell[BoxData[{
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"\<\"Driver.R\"\>", ",", "\<\"FeedingCycle.R\"\>", 
+  RowBox[{"\<\"Driver.R\"\>", ",", "\<\"Driver-SimplePlots.R\"\>", 
+   ",", "\<\"FeedingCycle.R\"\>", ",", "\<\"multiplot.R\"\>", 
    ",", "\<\"ODEAuxiliaryFunctions.R\"\>", 
+   ",", "\<\"ODEAuxiliaryFunctions - SimplePlots.R\"\>", 
    ",", "\<\"ODEControlMeasuresParameters.R\"\>", 
    ",", "\<\"ODEInterventions - FirstPass.R\"\>", 
    ",", "\<\"ODEInterventions.R\"\>", ",", "\<\"ODEModelOutput.R\"\>", 
@@ -395,7 +419,8 @@ Cell[BoxData[
    3.673019042141333*^9, 3.675099747462699*^9, 3.6781157581944313`*^9, {
    3.678123128218417*^9, 3.6781231478982897`*^9}, 3.678123296468048*^9, 
    3.678123347561016*^9, {3.678124184230997*^9, 3.6781242248784924`*^9}, 
-   3.678126056881381*^9, 3.678126149263406*^9}],
+   3.678126056881381*^9, 3.678126149263406*^9, 3.680444224755965*^9, 
+   3.680444277382745*^9}],
 
 Cell[BoxData[
  TagBox[GridBox[{
@@ -544,7 +569,8 @@ to an uninfected, susceptible human\"\>"}
    3.673019042141333*^9, 3.675099747462699*^9, 3.6781157581944313`*^9, {
    3.678123128218417*^9, 3.6781231478982897`*^9}, 3.678123296468048*^9, 
    3.678123347561016*^9, {3.678124184230997*^9, 3.6781242248784924`*^9}, 
-   3.678126056881381*^9, 3.678126149384845*^9}],
+   3.678126056881381*^9, 3.678126149263406*^9, 3.680444224755965*^9, 
+   3.680444277550365*^9}],
 
 Cell[BoxData["\<\"Documentation/DOC_parametersDescription.txt\"\>"], "Output",
  CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
@@ -558,7 +584,8 @@ Cell[BoxData["\<\"Documentation/DOC_parametersDescription.txt\"\>"], "Output",
    3.673019042141333*^9, 3.675099747462699*^9, 3.6781157581944313`*^9, {
    3.678123128218417*^9, 3.6781231478982897`*^9}, 3.678123296468048*^9, 
    3.678123347561016*^9, {3.678124184230997*^9, 3.6781242248784924`*^9}, 
-   3.678126056881381*^9, 3.678126149396824*^9}],
+   3.678126056881381*^9, 3.678126149263406*^9, 3.680444224755965*^9, 
+   3.680444277562546*^9}],
 
 Cell[BoxData["\<\"Documentation/DOC_parametersDescription.csv\"\>"], "Output",
  CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
@@ -572,7 +599,8 @@ Cell[BoxData["\<\"Documentation/DOC_parametersDescription.csv\"\>"], "Output",
    3.673019042141333*^9, 3.675099747462699*^9, 3.6781157581944313`*^9, {
    3.678123128218417*^9, 3.6781231478982897`*^9}, 3.678123296468048*^9, 
    3.678123347561016*^9, {3.678124184230997*^9, 3.6781242248784924`*^9}, 
-   3.678126056881381*^9, 3.678126149408589*^9}],
+   3.678126056881381*^9, 3.678126149263406*^9, 3.680444224755965*^9, 
+   3.680444277573403*^9}],
 
 Cell[BoxData["\<\"Documentation/DOC_parametersDescription.png\"\>"], "Output",
  CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
@@ -586,7 +614,8 @@ Cell[BoxData["\<\"Documentation/DOC_parametersDescription.png\"\>"], "Output",
    3.673019042141333*^9, 3.675099747462699*^9, 3.6781157581944313`*^9, {
    3.678123128218417*^9, 3.6781231478982897`*^9}, 3.678123296468048*^9, 
    3.678123347561016*^9, {3.678124184230997*^9, 3.6781242248784924`*^9}, 
-   3.678126056881381*^9, 3.6781261514077168`*^9}]
+   3.678126056881381*^9, 3.678126149263406*^9, 3.680444224755965*^9, 
+   3.680444280048855*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -653,8 +682,10 @@ Cell[BoxData[{
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"\<\"Driver.csv\"\>", ",", "\<\"FeedingCycle.csv\"\>", 
+  RowBox[{"\<\"Driver.csv\"\>", ",", "\<\"Driver-SimplePlots.csv\"\>", 
+   ",", "\<\"FeedingCycle.csv\"\>", ",", "\<\"multiplot.csv\"\>", 
    ",", "\<\"ODEAuxiliaryFunctions.csv\"\>", 
+   ",", "\<\"ODEAuxiliaryFunctions - SimplePlots.csv\"\>", 
    ",", "\<\"ODEControlMeasuresParameters.csv\"\>", 
    ",", "\<\"ODEInterventions - FirstPass.csv\"\>", 
    ",", "\<\"ODEInterventions.csv\"\>", ",", "\<\"ODEModelOutput.csv\"\>", 
@@ -672,12 +703,15 @@ Cell[BoxData[
    3.67301904350154*^9, 3.6750997486492853`*^9, 3.678115760443885*^9, {
    3.67812313044244*^9, 3.6781231502691708`*^9}, 3.678123298707863*^9, 
    3.678123349658596*^9, {3.67812418719464*^9, 3.6781242273421717`*^9}, 
-   3.67812605919092*^9, 3.678126151495957*^9}],
+   3.67812605919092*^9, 3.678126151495957*^9, 3.680444227843604*^9, 
+   3.680444280291081*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"\<\"www/Driver.csv\"\>", ",", "\<\"www/FeedingCycle.csv\"\>", 
+  RowBox[{"\<\"www/Driver.csv\"\>", ",", "\<\"www/Driver-SimplePlots.csv\"\>",
+    ",", "\<\"www/FeedingCycle.csv\"\>", ",", "\<\"www/multiplot.csv\"\>", 
    ",", "\<\"www/ODEAuxiliaryFunctions.csv\"\>", 
+   ",", "\<\"www/ODEAuxiliaryFunctions - SimplePlots.csv\"\>", 
    ",", "\<\"www/ODEControlMeasuresParameters.csv\"\>", 
    ",", "\<\"www/ODEInterventions - FirstPass.csv\"\>", 
    ",", "\<\"www/ODEInterventions.csv\"\>", 
@@ -695,7 +729,8 @@ Cell[BoxData[
    3.67301904350154*^9, 3.6750997486492853`*^9, 3.678115760443885*^9, {
    3.67812313044244*^9, 3.6781231502691708`*^9}, 3.678123298707863*^9, 
    3.678123349658596*^9, {3.67812418719464*^9, 3.6781242273421717`*^9}, 
-   3.67812605919092*^9, 3.678126151515048*^9}]
+   3.67812605919092*^9, 3.678126151495957*^9, 3.680444227843604*^9, 
+   3.680444280339347*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -776,8 +811,10 @@ Cell[BoxData[{
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"\<\"Driver.R\"\>", ",", "\<\"FeedingCycle.R\"\>", 
+  RowBox[{"\<\"Driver.R\"\>", ",", "\<\"Driver-SimplePlots.R\"\>", 
+   ",", "\<\"FeedingCycle.R\"\>", ",", "\<\"multiplot.R\"\>", 
    ",", "\<\"ODEAuxiliaryFunctions.R\"\>", 
+   ",", "\<\"ODEAuxiliaryFunctions - SimplePlots.R\"\>", 
    ",", "\<\"ODEControlMeasuresParameters.R\"\>", 
    ",", "\<\"ODEInterventions - FirstPass.R\"\>", 
    ",", "\<\"ODEInterventions.R\"\>", ",", "\<\"ODEModelOutput.R\"\>", 
@@ -791,7 +828,7 @@ Cell[BoxData[
    3.675099748713513*^9, 3.6781157605353193`*^9, {3.678123130496162*^9, 
    3.678123150365699*^9}, 3.678123298901332*^9, 3.678123349752138*^9, {
    3.678124187265553*^9, 3.678124227422703*^9}, 3.678126059271254*^9, 
-   3.678126151574284*^9}],
+   3.678126151574284*^9, 3.680444227962908*^9, 3.6804442804161873`*^9}],
 
 Cell[BoxData[
  TagBox[GridBox[{
@@ -800,7 +837,27 @@ Cell[BoxData[
 interventions on feeding cycle parameters\"\>"},
     {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
 the system\"\>"},
-    {"\<\"plotEIR\"\>", "\<\" Plots EIR dynamics of the system\"\>"},
+    {"\<\"plotEIR_VC_R0\"\>", "\<\" Plots EIR, VC and R0 dynamics of the \
+system\"\>"},
+    {"\<\"barChartMosquitoDemographics\"\>", "\<\" Generates a bar chart with \
+the amount of mosquitos in each life stage\"\>"},
+    {"\<\"parseImportedCSVParameters\"\>", "\<\" Once a csv file has been \
+imported this function converts the data into a theta object\"\>"},
+    {"\<\"importCSVParametersFromDirectory\"\>", "\<\" Loads the verified \
+parameters of the simulation from a CSV file into the workflow\"\>"},
+    {"\<\"validateCSVParameters\"\>", "\<\" Verifies that the user has \
+imported a valid CSV file with all the parameters defined\"\>"},
+    {"\<\"importXLSParametersFromDirectory\"\>", "\<\" Loads the verified \
+parameters of the simulation from an XLS file into the workflow\"\>"},
+    {"\<\"importCSVXLSParametersFromDirectoryShiny\"\>", "\<\" Wrapper \
+function that works only within shiny to select the proper import function to \
+use on a given file\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotEIR_VC_R0\"\>", "\<\" Plots EIR, VC and R0 dynamics of the \
+system\"\>"},
+    {"\<\"plot_SA_Figures - produce some figures for presentations\"\>", ""},
+    {"\<\"plot_SA_Figures - produce some figures for presentations\"\>", ""},
     {"\<\"barChartMosquitoDemographics\"\>", "\<\" Generates a bar chart with \
 the amount of mosquitos in each life stage\"\>"},
     {"\<\"parseImportedCSVParameters\"\>", "\<\" Once a csv file has been \
@@ -884,7 +941,7 @@ transmission parameters\"\>"}
    3.675099748713513*^9, 3.6781157605353193`*^9, {3.678123130496162*^9, 
    3.678123150365699*^9}, 3.678123298901332*^9, 3.678123349752138*^9, {
    3.678124187265553*^9, 3.678124227422703*^9}, 3.678126059271254*^9, 
-   3.678126151726631*^9}],
+   3.678126151574284*^9, 3.680444227962908*^9, 3.680444280576222*^9}],
 
 Cell[BoxData["\<\"Documentation/DOC_functionsDescription.txt\"\>"], "Output",
  CellChangeTimes->{
@@ -892,7 +949,7 @@ Cell[BoxData["\<\"Documentation/DOC_functionsDescription.txt\"\>"], "Output",
    3.675099748713513*^9, 3.6781157605353193`*^9, {3.678123130496162*^9, 
    3.678123150365699*^9}, 3.678123298901332*^9, 3.678123349752138*^9, {
    3.678124187265553*^9, 3.678124227422703*^9}, 3.678126059271254*^9, 
-   3.678126151740152*^9}],
+   3.678126151574284*^9, 3.680444227962908*^9, 3.6804442805860987`*^9}],
 
 Cell[BoxData["\<\"Documentation/DOC_functionsDescription.csv\"\>"], "Output",
  CellChangeTimes->{
@@ -900,7 +957,7 @@ Cell[BoxData["\<\"Documentation/DOC_functionsDescription.csv\"\>"], "Output",
    3.675099748713513*^9, 3.6781157605353193`*^9, {3.678123130496162*^9, 
    3.678123150365699*^9}, 3.678123298901332*^9, 3.678123349752138*^9, {
    3.678124187265553*^9, 3.678124227422703*^9}, 3.678126059271254*^9, 
-   3.678126151752781*^9}],
+   3.678126151574284*^9, 3.680444227962908*^9, 3.680444280599905*^9}],
 
 Cell[BoxData["\<\"Documentation/DOC_functionsDescription.png\"\>"], "Output",
  CellChangeTimes->{
@@ -908,7 +965,7 @@ Cell[BoxData["\<\"Documentation/DOC_functionsDescription.png\"\>"], "Output",
    3.675099748713513*^9, 3.6781157605353193`*^9, {3.678123130496162*^9, 
    3.678123150365699*^9}, 3.678123298901332*^9, 3.678123349752138*^9, {
    3.678124187265553*^9, 3.678124227422703*^9}, 3.678126059271254*^9, 
-   3.678126153766899*^9}]
+   3.678126151574284*^9, 3.680444227962908*^9, 3.680444283770011*^9}]
 }, Open  ]]
 }, Closed]],
 
@@ -1028,7 +1085,12 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"\<\"## Description\"\>", ",", "\<\"\"\>"}], "}"}], ",", 
    RowBox[{
-   "{", "\<\"VCOM is a platform designed to do cool stuff...\"\>", "}"}], ",", 
+   "{", "\<\"VCOM is a model created as part of the \\\"Malaria Elimination \
+Initiative\\\" to help policy makers make decisions on which mosquito-control \
+interventions should be prioritised in different given scenarios. To this end \
+we have created two graphical user interfaces (GUIs) to make the model \
+accessible to people without programming or modelling backgrounds.\"\>", 
+    "}"}], ",", 
    RowBox[{"{", "}"}], ",", 
    RowBox[{"{", "\<\"## Citation\"\>", "}"}], ",", 
    RowBox[{"{", "\<\"VCOM, Awesome Journal\"\>", "}"}], ",", 
@@ -1147,9 +1209,30 @@ uninfected, susceptible human\"\>", ",",
    ",", "\<\"* impactFeedingCycleParameters: compute the impact of \
 interventions on feeding cycle parameters\"\>", 
    ",", "\<\"* plotTrajectory: Plots the evolution of the dynamics of the \
-system\"\>", ",", "\<\"* plotEIR: Plots EIR dynamics of the system\"\>", 
+system\"\>", 
+   ",", "\<\"* plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the \
+system\"\>", 
    ",", "\<\"* barChartMosquitoDemographics: Generates a bar chart with the \
 amount of mosquitos in each life stage\"\>", 
+   ",", "\<\"* parseImportedCSVParameters: Once a csv file has been imported \
+this function converts the data into a theta object\"\>", 
+   ",", "\<\"* importCSVParametersFromDirectory: Loads the verified \
+parameters of the simulation from a CSV file into the workflow\"\>", 
+   ",", "\<\"* validateCSVParameters: Verifies that the user has imported a \
+valid CSV file with all the parameters defined\"\>", 
+   ",", "\<\"* importXLSParametersFromDirectory: Loads the verified \
+parameters of the simulation from an XLS file into the workflow\"\>", 
+   ",", "\<\"* importCSVXLSParametersFromDirectoryShiny: Wrapper function \
+that works only within shiny to select the proper import function to use on a \
+given file\"\>", 
+   ",", "\<\"* plotTrajectory: Plots the evolution of the dynamics of the \
+system\"\>", 
+   ",", "\<\"* plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the \
+system\"\>", 
+   ",", "\<\"* plot_SA_Figures - produce some figures for presentations: NA\"\
+\>", ",", "\<\"* plot_SA_Figures - produce some figures for presentations: NA\
+\"\>", ",", "\<\"* barChartMosquitoDemographics: Generates a bar chart with \
+the amount of mosquitos in each life stage\"\>", 
    ",", "\<\"* parseImportedCSVParameters: Once a csv file has been imported \
 this function converts the data into a theta object\"\>", 
    ",", "\<\"* importCSVParametersFromDirectory: Loads the verified \
@@ -1229,10 +1312,10 @@ parameters\"\>"}], "}"}]], "Output",
    3.678122763457912*^9, {3.678123132804118*^9, 3.67812315275568*^9}, 
    3.6781232229627237`*^9, {3.6781233011349897`*^9, 3.678123351841206*^9}, {
    3.678124190171863*^9, 3.6781242297005997`*^9}, 3.678126061524439*^9, 
-   3.678126153854648*^9}],
+   3.678126153854648*^9, 3.680444231071418*^9, 3.680444283931143*^9}],
 
-Cell[BoxData["\<\"/Users/chipdelmal/Documents/School/Research/VCOM/README.md\"\
-\>"], "Output",
+Cell[BoxData["\<\"/Users/chipdelmal/Documents/School/Research/VCOM/VCOM-V2/\
+README.md\"\>"], "Output",
  CellChangeTimes->{{3.672149082715744*^9, 3.672149109239107*^9}, {
    3.672149170434374*^9, 3.672149223542457*^9}, {3.6721492649826393`*^9, 
    3.672149283739147*^9}, 3.672149322888214*^9, {3.672149382428684*^9, 
@@ -1246,7 +1329,7 @@ Cell[BoxData["\<\"/Users/chipdelmal/Documents/School/Research/VCOM/README.md\"\
    3.678122763457912*^9, {3.678123132804118*^9, 3.67812315275568*^9}, 
    3.6781232229627237`*^9, {3.6781233011349897`*^9, 3.678123351841206*^9}, {
    3.678124190171863*^9, 3.6781242297005997`*^9}, 3.678126061524439*^9, 
-   3.678126153882128*^9}]
+   3.678126153854648*^9, 3.680444231071418*^9, 3.680444283971281*^9}]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
@@ -1254,7 +1337,7 @@ Cell[BoxData["\<\"/Users/chipdelmal/Documents/School/Research/VCOM/README.md\"\
 },
 WindowSize->{1429, 797},
 WindowMargins->{{Automatic, 5}, {Automatic, 2}},
-FrontEndVersion->"10.4 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 25, \
+FrontEndVersion->"11.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 28, \
 2016)",
 StyleDefinitions->"Default.nb"
 ]
@@ -1277,43 +1360,43 @@ Cell[CellGroupData[{
 Cell[856, 32, 93, 1, 64, "Section"],
 Cell[CellGroupData[{
 Cell[974, 37, 3667, 88, 199, "Input"],
-Cell[4644, 127, 1362, 22, 70, "Output"],
-Cell[6009, 151, 5549, 96, 70, "Output"],
-Cell[11561, 249, 822, 11, 70, "Output"],
-Cell[12386, 262, 821, 11, 70, "Output"],
-Cell[13210, 275, 822, 11, 70, "Output"]
+Cell[4644, 127, 1533, 24, 70, "Output"],
+Cell[6180, 153, 6840, 116, 70, "Output"],
+Cell[13023, 271, 868, 11, 70, "Output"],
+Cell[13894, 284, 870, 11, 70, "Output"],
+Cell[14767, 297, 870, 11, 70, "Output"]
 }, Open  ]]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[14081, 292, 97, 1, 50, "Section"],
+Cell[15686, 314, 97, 1, 50, "Section"],
 Cell[CellGroupData[{
-Cell[14203, 297, 2700, 75, 199, "Input"],
-Cell[16906, 374, 1456, 23, 70, "Output"],
-Cell[18365, 399, 7722, 147, 70, "Output"],
-Cell[26090, 548, 919, 12, 70, "Output"],
-Cell[27012, 562, 919, 12, 70, "Output"],
-Cell[27934, 576, 921, 12, 70, "Output"]
+Cell[15808, 319, 2700, 75, 199, "Input"],
+Cell[18511, 396, 1631, 26, 70, "Output"],
+Cell[20145, 424, 7770, 148, 70, "Output"],
+Cell[27918, 574, 967, 13, 70, "Output"],
+Cell[28888, 589, 967, 13, 70, "Output"],
+Cell[29858, 604, 967, 13, 70, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[28892, 593, 2007, 58, 97, "Input"],
-Cell[30902, 653, 1221, 21, 70, "Output"],
-Cell[32126, 676, 1282, 21, 70, "Output"]
+Cell[30862, 622, 2007, 58, 97, "Input"],
+Cell[32872, 682, 1402, 24, 70, "Output"],
+Cell[34277, 708, 1475, 24, 70, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[33445, 702, 2513, 72, 199, "Input"],
-Cell[35961, 776, 948, 17, 70, "Output"],
-Cell[36912, 795, 5137, 91, 70, "Output"],
-Cell[42052, 888, 410, 6, 70, "Output"],
-Cell[42465, 896, 410, 6, 70, "Output"],
-Cell[42878, 904, 410, 6, 70, "Output"]
+Cell[35789, 737, 2513, 72, 199, "Input"],
+Cell[38305, 811, 1121, 19, 70, "Output"],
+Cell[39429, 832, 6426, 111, 70, "Output"],
+Cell[45858, 945, 456, 6, 70, "Output"],
+Cell[46317, 953, 454, 6, 70, "Output"],
+Cell[46774, 961, 454, 6, 70, "Output"]
 }, Open  ]]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[43337, 916, 91, 1, 50, "Section"],
+Cell[47277, 973, 91, 1, 50, "Section"],
 Cell[CellGroupData[{
-Cell[43453, 921, 4135, 98, 216, "Input"],
-Cell[47591, 1021, 12157, 210, 1083, "Output"],
-Cell[59751, 1233, 1061, 15, 28, "Output"]
+Cell[47393, 978, 4135, 98, 264, "Input"],
+Cell[51531, 1078, 13730, 236, 1755, "Output"],
+Cell[65264, 1316, 1113, 15, 32, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]

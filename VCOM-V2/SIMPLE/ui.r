@@ -63,6 +63,7 @@ shinyUI(
   fluidPage(theme = shinytheme("cerulean"),
     titlePanel(h1("VCOM: Simple",align="center"),windowTitle="VCOM: Simple"),
     titlePanel(h4("Vector Control Optimization Model",align="center")),
+    titlePanel(h4(tags$a(class="btn btn-danger", href="http://chipdelmal.github.io/VCOM/", "Home", style="display: block; width: 100%;"),align="center")),
     ###############################################################################
     useShinyjs(),
     tags$script(ENTER_DOWN_RUN),
@@ -92,7 +93,7 @@ shinyUI(
                 ),selected="GAM"),
               #####################################################################
               fluidRow(h3("2. EIR Level Selection")),
-              sliderInput("radioEIR","EIR:",min=1,max=1000,value=INITIAL_EIR),
+              sliderInput("radioEIR","EIR:",min=0.1,max=1000,value=100,step=10),
               #radioButtons("radioEIR",label=NULL,
               #  choices=list(
               #    "10"=10,
