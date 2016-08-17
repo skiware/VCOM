@@ -1,1 +1,3 @@
 VCOM is a model created as part of the "Malaria Elimination Initiative" to help policy makers make decisions on which mosquito-control interventions should be prioritised in different given scenarios. To this end we have created two graphical user interfaces (GUIs) to make the model accessible to people without programming or modelling backgrounds.
+
+Check out our <a href="http://chipdelmal.github.io/VCOM/">website</a> for more information.
