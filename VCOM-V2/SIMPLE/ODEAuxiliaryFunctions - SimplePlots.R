@@ -20,7 +20,8 @@ plotTrajectory = function(IVM_traj){
     geom_line(aes(y = IV, col = "IV"), size = 1.2) + 
     geom_line(aes(y = SV, col = "SV"), size = 1.2) +
     geom_line(aes(y = EV, col = "EV"), size = 1.2) +
-    labs(x = "Time (days)", y = "Number of mosquitoes")
+    labs(x = "Time (days)", y = "Number of mosquitoes") +
+    theme_bw()
 }
 
 
@@ -413,6 +414,23 @@ barChartMosquitoDemographics = function(IVM_traj){
   NumMosq <- c(sum(IVM_traj["EL"]),sum(IVM_traj["LL"]),sum(IVM_traj["PL"]),sum(IVM_traj["SV"]),sum(IVM_traj["EV"]),sum(IVM_traj["IV"]))
   barplot(NumMosq , main='', xlab='Time (days)',ylab='Number of Mosquitoes',names.arg=c('EL','LL','PL','SV','EV','IV'))
 }
+
+#plot the trajectory with ggplot2 
+barChartMosquitoDemographics_slwu <- function(IVM_traj){
+  
+  traj_dat <- data.frame(stage=c("EL","LL","PL","SV","EV","IV"),
+                         sum=c(sum(IVM_traj["EL"]),sum(IVM_traj["LL"]),sum(IVM_traj["PL"]),sum(IVM_traj["SV"]),sum(IVM_traj["EV"]),sum(IVM_traj["IV"])))
+  traj_dat$stage <- factor(traj_dat$stage,levels=traj_dat$stage)
+  
+  ggplot(data=traj_dat,aes(stage,sum,fill=stage)) +
+    geom_bar(stat="identity",colour="black") +
+    scale_y_log10() +
+    theme_bw() +
+    guides(fill=FALSE) +
+    labs(x="Mosquito Stage",y="Number of Mosquitoes")
+    
+}
+
 #SK - CHECK WITH HECTOR - Need to rename some of the parameters in the following function
 parseImportedCSVParameters = function(inputDataFrame){
   #. parseImportedCSVParameters: Once a csv file has been imported this function converts the data into a theta object
