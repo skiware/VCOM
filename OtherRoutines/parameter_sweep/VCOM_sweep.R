@@ -3,6 +3,8 @@
 ######Sean Wu 8/19/2016################################################
 #######################################################################
 
+###load libraries and source files###
+
 #set working directory to source file location
 source("VCOM_initialization.R")
 source("VCOM_output.R")
@@ -12,7 +14,6 @@ library(deSolve)
 library(parallel)
 library(doSNOW)
 library(foreach)
-
 
 
 ###function to create the parameter tuples to run through###
@@ -131,14 +132,26 @@ create_tuples <- function(n,epsilon0,species,time_on,granularity){
 
 
 #run parameter sweep in parallel
-vcom_iterator <- create_tuples(n=2,epsilon0=100,species=1,time_on=50,granularity=2)
+vcom_iterator <- create_tuples(n=2,epsilon0=100,species=1,time_on=20,granularity=5)
 
-cl <- makeCluster(spec=detectCores()-1)
+cl <- makeCluster(spec=detectCores())
 registerDoSNOW(cl)
 
-vcom_parameter_sweep <- foreach(i=vcom_iterator,.packages=c("deSolve"),.combine="list",.verbose=TRUE) %dopar% {
-  runODE(365,1,parameters=as.list(i))
+vcom_parameter_sweep <- foreach(i=vcom_iterator,.packages=c("deSolve"),.verbose=TRUE) %dopar% {
+  run_vcom(parameters=as.list(i),time_end=150)
 }
 
 stopCluster(cl)
 rm(cl)
+
+#export results
+EIR_sweep <- sapply(vcom_parameter_sweep,function(x){
+  x$EIR[length(x$EIR)]
+})
+
+tuple_names <- t(sapply(vcom_iterator,function(x){x}))
+rownames(tuple_names) <- NULL
+
+write(tuple_names,file="tuple_names.txt",sep=",",ncolumns=32)
+write(EIR_sweep,file="EIR_sweep.txt",sep=",")
+
