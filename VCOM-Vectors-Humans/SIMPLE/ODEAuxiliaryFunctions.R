@@ -30,6 +30,42 @@ plotTrajectoryMalesMosq = function(IVM_traj){
     geom_line(aes(y = Mm, col = "Mm"), size = 1.2) + 
     labs(x = "Time (days)", y = "Number of Male Mosquitoes")
 }
+plotTrajectoryALL = function(IVM_traj){
+  #. plotTrajectory: Plots the evolution of the dynamics of the system
+  ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
+    #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) +
+    geom_line(aes(y = EL, col = "EL"), size = 1.2) +
+    geom_line(aes(y = LL, col = "LL"), size = 1.2) +
+    geom_line(aes(y = PL, col = "PL"), size = 1.2) +
+    geom_line(aes(y = IV, col = "IV"), size = 1.2) +
+    geom_line(aes(y = SV, col = "SV"), size = 1.2) +
+    geom_line(aes(y = EV, col = "EV"), size = 1.2) +
+    geom_line(aes(y = EL_LAR, col = "EL_LAR"), size = 1.2) +
+    geom_line(aes(y = EL_BIO, col = "EL_BIO"), size = 1.2) +
+    geom_line(aes(y = EL_LAR_BIO, col = "EL_LAR_BIO"), size = 1.2) +
+    geom_line(aes(y = LL_LAR, col = "LL_LAR"), size = 1.2) +
+    geom_line(aes(y = LL_BIO, col = "LL_BIO"), size = 1.2) +
+    geom_line(aes(y = LL_LAR_BIO, col = "LL_LAR_BIO"), size = 1.2) +
+    labs(x = "Time (days)", y = "Number of mosquitoes") +
+    scale_y_log10() +
+    theme_bw()
+}
+
+plotTrajectoryDEBUG <- function(traj,log=FALSE){
+  #. plotTrajectoryDEBUG: Used only to debug
+  require(reshape2)
+  IVM_melt <- melt(traj,id.vars="time")
+  if(log){
+    ggplot(data=IVM_melt,aes(x=time,y=value,group=variable,colour=variable,linetype=variable)) + 
+      geom_line(size=1.15) + 
+      theme_bw() +
+      scale_y_log10()
+  } else {
+    ggplot(data=IVM_melt,aes(x=time,y=value,group=variable,colour=variable,linetype=variable)) + 
+      geom_line(size=1.15) + 
+      theme_bw()
+  }
+}
 
 plotTrajectoryHumans = function(IVM_traj){
   #. plotTrajectory: Plots the evolution of the dynamics of the system
@@ -39,44 +75,18 @@ plotTrajectoryHumans = function(IVM_traj){
     geom_line(aes(y = SH, col = "SH"), size = 1.2) +
     labs(x = "Time (days)", y = "Number of humans")
 }
-
-
-plotEIR_VC_R0 = function(IVM_traj,theta,INITIAL_MODELRUNTIME_VALUE){
+plotEIR = function(IVM_traj){
   #. plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
-  #browser()
-  #IS IT OK TO RE-COMPUTE THE parameter values required to compute EIR, VC, R0? This time done at after the ODE run
-  # INITIAL_MODELRUNTIME_VALUE - this value will be compared by intervention turn on time (less than INITIAL_MODELRUNTIME_VALUE)
-  # This values are re-computed at equilbrium subjected to turned - on intervention
-  impactFeedingCycle = impactFeedingCycleParameters(INITIAL_MODELRUNTIME_VALUE, theta[["beta"]], theta[["tau1"]],theta[["tau2"]],theta[["e_ov"]],theta[["time_ATSB_on"]],theta[["ATSBcov"]],theta[["time_SSP_on"]],
-                               theta[["SSPcov"]],theta[["fSSP"]],theta[["fATSB"]],theta[["muV"]],theta[["Q0"]],theta[["aOBT"]],theta[["OBTcov"]],theta[["time_OBT_on"]],theta[["time_ITN_on"]],
-                               theta[["ITNcov"]],theta[["time_IRS_on"]],theta[["IRScov"]],theta[["HOUcov"]],theta[["time_HOU_on"]],theta[["rITN"]],theta[["sITN"]],theta[["rIRS"]],theta[["rHOU"]],
-                               theta[["sIRS"]],  theta[["sHOU"]],theta[["phiB"]], theta[["phiI"]],theta[["dHOU"]],theta[["dIRS"]],theta[["time_SPR_on"]],theta[["SPRcov"]],theta[["time_PPM_on"]],
-                               theta[["PPMcov"]],theta[["rSPR"]],theta[["rPPM"]],theta[["sSPR"]],theta[["sPPM"]],theta[["c0"]],theta[["time_ECS_on"]],theta[["ECScov"]],theta[["time_ECT_on"]],
-                               theta[["ECTcov"]],theta[["rECT"]],theta[["sECS"]],theta[["sECT"]],theta[["time_OVI_on"]],theta[["OVIcov"]],theta[["fOVI"]])
-  # I can also just pass theta for this function
+   ggplot(IVM_traj, aes(x = time, y = EIR, color = State)) +
+    geom_line(aes(y = IVM_traj[["EIR"]], col = "EIR"), size = 1.2) +
+    labs(x = "Time (days)", y = " EIR")
   
-  
- 
+}
 
-    #mosquito mortality
-  muVCom  = impactFeedingCycle[1]
-  #Biting rate
-  a_theta = impactFeedingCycle[3]
+
+plotEIR_VC_R0 = function(IVM_traj){
+  #. plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
   
-  
-  
-  # #EIR
-  transmissionValues = getAdditionalTransmissionParameters()
-  bV = transmissionValues[["bV"]]
-  NH = transmissionValues[["NH_eq"]]
-  bh = transmissionValues[["bh"]]
-  bv = transmissionValues[["bV"]]
-  IV = IVM_traj[["IV"]]
-  
-  #Mosquito population
-  NV = IVM_traj[["SV"]]+IVM_traj[["EV"]]+IVM_traj[["IV"]]
-  #Mosquito density
-  Mdensity = NV/NH
   
   
   #Mosquito density
@@ -96,380 +106,24 @@ plotEIR_VC_R0 = function(IVM_traj,theta,INITIAL_MODELRUNTIME_VALUE){
     geom_line(aes(y = IV, col = "IV"), size = 1.2) + 
     labs(x = "Time (days)", y = "Number of infections, mosquitoes")
   
-# browser()
-  
-  #EIR
-  time_on = 20                 #Manually set it to the earliest time an intervention is on - to be automated
-  EIR <-computeEIR(time_on,a_theta, IV, NH)
-  #EIR <-computeEIR(a_theta, IV, NH)
-  
-  p4 <- ggplot(IVM_traj, aes(x = 1:length(IVM_traj[,1]), y = EIR, color = State)) +
-    geom_line(aes(y = EIR, col = "EIR"), size = 1.2) + 
-    #geom_line(aes(y = IVM_traj["EV"], col = "EV"), size = 1.2) +
+ #browser()
+  p4 <- ggplot(IVM_traj, aes(x = time, y = EIR, color = State)) +
+    geom_line(aes(y = IVM_traj[["EIR"]], col = "EIR"), size = 1.2) +
     labs(x = "Time (days)", y = " EIR")
   
-  #VC
- 
   
-  #R0
-  R0 = computeRO(time_on,a_theta,muVCom, NV,bv,bh,NH)
-  p5 <- ggplot(IVM_traj, aes(x = 1:length(IVM_traj[,1]), y = EIR, color = State)) +
-    geom_line(aes(y = R0, col = "R0"), size = 1.2) + 
-    #geom_line(aes(y = IVM_traj["EV"], col = "EV"), size = 1.2) +
+  p5 <- ggplot(IVM_traj, aes(x = time, y = EIR, color = State)) +
+    geom_line(aes(y = IVM_traj[["R0"]], col = "R0"), size = 1.2) +
     labs(x = "Time (days)", y = " R0")
   
-  VC = computeVC(time_on,a_theta, NV,NH,muVCom)
-  p6 <-  ggplot(IVM_traj, aes(x = 1:length(IVM_traj[,1]), y = EIR, color = State)) +
-    geom_line(aes(y = VC, col = "VC"), size = 1.2) + 
-    #geom_line(aes(y = IVM_traj["EV"], col = "EV"), size = 1.2) +
+  
+  p6 <-  ggplot(IVM_traj, aes(x = time, y = EIR, color = State)) +
+    geom_line(aes(y = IVM_traj[["VC"]], col = "VC"), size = 1.2) +
     labs(x = "Time (days)", y = " VC")
   
   
- 
-  
-  #All at once
-  
-  # #IVM_traj - just space holder
-  # # We might need to plot them separately - s
-  # p4 <- ggplot(IVM_traj, aes(x = 1:length(IVM_traj[,1]), y = EIR, color = State)) +
-  #   #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) + 
-  #   geom_line(aes(y = EIR, col = "EIR"), size = 1.2) + 
-  #   geom_line(aes(y = VC, col = "VC"), size = 1.2) + 
-  #   geom_line(aes(y = R0, col = "R0"), size = 1.2) + 
-  #   #geom_line(aes(y = IVM_traj["EV"], col = "EV"), size = 1.2) +
-  #   labs(x = "Time (days)", y = "values for EIR, VC, or R0")
-  # 
-  # 
   multiplot(p1, p2, p3, p4,p5,p6, cols=2)
-  
-  
-  
  }
-
-plot_SA_Figures = function(IVM_traj_Control,IVM_traj_LLIN_60,IVM_traj_LLIN_30,theta,INITIAL_MODELRUNTIME_VALUE){
-  #. plot_SA_Figures - produce some figures for presentations
-  impactFeedingCycle = impactFeedingCycleParameters(INITIAL_MODELRUNTIME_VALUE, theta[["beta"]], theta[["tau1"]],theta[["tau2"]],theta[["e_ov"]],theta[["time_ATSB_on"]],theta[["ATSBcov"]],theta[["time_SSP_on"]],
-                                                    theta[["SSPcov"]],theta[["fSSP"]],theta[["fATSB"]],theta[["muV"]],theta[["Q0"]],theta[["aOBT"]],theta[["OBTcov"]],theta[["time_OBT_on"]],theta[["time_ITN_on"]],
-                                                    theta[["ITNcov"]],theta[["time_IRS_on"]],theta[["IRScov"]],theta[["HOUcov"]],theta[["time_HOU_on"]],theta[["rITN"]],theta[["sITN"]],theta[["rIRS"]],theta[["rHOU"]],
-                                                    theta[["sIRS"]],  theta[["sHOU"]],theta[["phiB"]], theta[["phiI"]],theta[["dHOU"]],theta[["dIRS"]],theta[["time_SPR_on"]],theta[["SPRcov"]],theta[["time_PPM_on"]],
-                                                    theta[["PPMcov"]],theta[["rSPR"]],theta[["rPPM"]],theta[["sSPR"]],theta[["sPPM"]],theta[["c0"]],theta[["time_ECS_on"]],theta[["ECScov"]],theta[["time_ECT_on"]],
-                                                    theta[["ECTcov"]],theta[["rECT"]],theta[["sECS"]],theta[["sECT"]],theta[["time_OVI_on"]],theta[["OVIcov"]],theta[["fOVI"]])
-  # I can also just pass theta for this function
-  
-  
-  #browser()
-  
-  #mosquito mortality
-  muVCom  = impactFeedingCycle[1]
-  #Biting rate
-  a_theta = impactFeedingCycle[3]
-  
-  
-  
-
-  transmissionValues = getAdditionalTransmissionParameters()
-  bV = transmissionValues[["bV"]]
-  NH = transmissionValues[["NH_eq"]]
-  bh = transmissionValues[["bh"]]
-  bv = transmissionValues[["bV"]]
-  #IV = IVM_traj[["IV"]]
-  
-  #Mosquito population
-  NV_Control = IVM_traj_Control[["SV"]]+IVM_traj_Control[["EV"]]+IVM_traj_Control[["IV"]]
-  
-  NV_LLIN_80 = IVM_traj_LLIN_80[["SV"]]+IVM_traj_LLIN_80[["EV"]]+IVM_traj_LLIN_80[["IV"]]
-  
-  NV_LLIN_50 = IVM_traj_LLIN_50[["SV"]]+IVM_traj_LLIN_50[["EV"]]+IVM_traj_LLIN_50[["IV"]]
- 
-  #browser()
-  #Just Mosquito density
-  p <- ggplot(IVM_traj_Control, aes(x = time, y = IVM_traj_Control, color = State)) +
-    geom_line(aes(y = NV_Control, col = "Mosquito-Control"), size = 1.2) + 
-    geom_line(aes(y = NV_LLIN_80, col = "Mosquito-LLIN-80"), size = 1.2) +
-    geom_line(aes(y = NV_LLIN_50, col = "Mosquito-LLIN-50"), size = 1.2) +
-    labs(title = "An. Arabiensis", x = "Time (days)", y = "Number of mosquitoes")
-  p <- p + expand_limits(x = 0, y = 0)
-  multiplot(p, cols=1)
-  
-  #IV
-  IV_Control = IVM_traj_Control[["IV"]]
-  IV_LLIN_80 = IVM_traj_LLIN_80[["IV"]]
-  IV_LLIN_50 = IVM_traj_LLIN_50[["IV"]]
-  
-  
-  
-   #EIR
-   time_on = 20                 #Manually set it to the earliest time an intervention is on - to be automated
-   EIR_control <-computeEIR(time_on,a_theta, IV_Control, NH)
-   EIR_LLIN_80 <-computeEIR(time_on,a_theta, IV_LLIN_80, NH)
-   EIR_LLIN_50 <-computeEIR(time_on,a_theta, IV_LLIN_50, NH)
-   #EIR <-computeEIR(a_theta, IV, NH)
-  # 
-   p2 <- ggplot(IVM_traj_Control, aes(x = 1:length(IVM_traj_Control[,1]), y = EIR, color = key)) +
-     geom_line(aes(y = EIR_control , col = "EIR - Control "), size = 1.2) + 
-     geom_line(aes(y = EIR_LLIN_80, col = "EIR - LLIN - 80 "), size = 1.2) + 
-     geom_line(aes(y = EIR_LLIN_50, col = "EIR - LLIN - 50"), size = 1.2) + 
-     labs(title = "An. Arabiensis", x = "Time (days)", y = "EIR")
-   
-   multiplot(p2, cols=1)
-  
-  #Mosquito density
-  # p1 <- ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
-  #   geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) + 
-  #   #geom_line(aes(y = IV, col = "IV"), size = 1.2) +
-  #   labs(x = "Time (days)", y = "Number of total mosquitoes")
-  # 
-  # #Mosquito density
-  # p2 <- ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
-  #   #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) + 
-  #   geom_line(aes(y = IV, col = "IV"), size = 1.2) +
-  #   labs(x = "Time (days)", y = "Number ofinfectious mosquitoes")
-  # 
-  # #EIR
-  # time_on = 20                 #Manually set it to the earliest time an intervention is on - to be automated
-  # EIR <-computeEIR(time_on,a_theta, IV, NH)
-  # #EIR <-computeEIR(a_theta, IV, NH)
-  # 
-  # p3 <- ggplot(IVM_traj, aes(x = 1:length(IVM_traj[,1]), y = EIR, color = State)) +
-  #   geom_line(aes(y = EIR, col = "EIR"), size = 1.2) + 
-  #   #geom_line(aes(y = IVM_traj["EV"], col = "EV"), size = 1.2) +
-  #   labs(x = "Time (days)", y = " EIR")
-  # 
-  # #VC
-  # 
-  # 
-  # 
-  # 
-  # 
-  # 
-  # #All at once
-  # 
-  # # #IVM_traj - just space holder
-  # # # We might need to plot them separately - s
-  # # p4 <- ggplot(IVM_traj, aes(x = 1:length(IVM_traj[,1]), y = EIR, color = State)) +
-  # #   #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) + 
-  # #   geom_line(aes(y = EIR, col = "EIR"), size = 1.2) + 
-  # #   geom_line(aes(y = VC, col = "VC"), size = 1.2) + 
-  # #   geom_line(aes(y = R0, col = "R0"), size = 1.2) + 
-  # #   #geom_line(aes(y = IVM_traj["EV"], col = "EV"), size = 1.2) +
-  # #   labs(x = "Time (days)", y = "values for EIR, VC, or R0")
-  # # 
-  # # 
-  # multiplot(p1, p2,p3, cols=1)
-  # 
-  
-  
-}
-
-plot_SA_Figures_v2 = function(IVM_traj_Control,IVM_traj_LLIN_80,IVM_traj_LLIN_50_IRS_50,IVM_traj_LLIN_50_LAR_50,IVM_traj_LLIN_50_ECT_50,
-                   IVM_traj_LLIN_50_HOU_50,IVM_traj_LLIN_50_PPM_50,IVM_traj_LLIN_50_ATSB_50,theta,INITIAL_MODELRUNTIME_VALUE){
-
-   #. plot_SA_Figures - produce some figures for presentations
-  impactFeedingCycle = impactFeedingCycleParameters(INITIAL_MODELRUNTIME_VALUE, theta[["beta"]], theta[["tau1"]],theta[["tau2"]],theta[["e_ov"]],theta[["time_ATSB_on"]],theta[["ATSBcov"]],theta[["time_SSP_on"]],
-                                                    theta[["SSPcov"]],theta[["fSSP"]],theta[["fATSB"]],theta[["muV"]],theta[["Q0"]],theta[["aOBT"]],theta[["OBTcov"]],theta[["time_OBT_on"]],theta[["time_ITN_on"]],
-                                                    theta[["ITNcov"]],theta[["time_IRS_on"]],theta[["IRScov"]],theta[["HOUcov"]],theta[["time_HOU_on"]],theta[["rITN"]],theta[["sITN"]],theta[["rIRS"]],theta[["rHOU"]],
-                                                    theta[["sIRS"]],  theta[["sHOU"]],theta[["phiB"]], theta[["phiI"]],theta[["dHOU"]],theta[["dIRS"]],theta[["time_SPR_on"]],theta[["SPRcov"]],theta[["time_PPM_on"]],
-                                                    theta[["PPMcov"]],theta[["rSPR"]],theta[["rPPM"]],theta[["sSPR"]],theta[["sPPM"]],theta[["c0"]],theta[["time_ECS_on"]],theta[["ECScov"]],theta[["time_ECT_on"]],
-                                                    theta[["ECTcov"]],theta[["rECT"]],theta[["sECS"]],theta[["sECT"]],theta[["time_OVI_on"]],theta[["OVIcov"]],theta[["fOVI"]])
-
-  
-
-  #mosquito mortality
-  muVCom  = impactFeedingCycle[1]
-  #Biting rate
-  a_theta = impactFeedingCycle[3]
-  
-  transmissionValues = getAdditionalTransmissionParameters()
-  bV = transmissionValues[["bV"]]
-  NH = transmissionValues[["NH_eq"]]
-  bh = transmissionValues[["bh"]]
-  bv = transmissionValues[["bV"]]
-  
- 
-  #Mosquito population
-  NV_Control        = IVM_traj_Control[["SV"]]+IVM_traj_Control[["EV"]]+IVM_traj_Control[["IV"]]
-  
-  NV_LLIN_80        = IVM_traj_LLIN_80[["SV"]]+IVM_traj_LLIN_80[["EV"]]+IVM_traj_LLIN_80[["IV"]]
-  
-  NV_LLIN_50_IRS_50 = IVM_traj_LLIN_50_IRS_50[["SV"]]+IVM_traj_LLIN_50_IRS_50[["EV"]]+IVM_traj_LLIN_50_IRS_50[["IV"]]
-  
-  NV_LLIN_50_LAR_50 = IVM_traj_LLIN_50_LAR_50[["SV"]]+IVM_traj_LLIN_50_LAR_50[["EV"]]+IVM_traj_LLIN_50_LAR_50[["IV"]]
-  
-  NV_LLIN_50_ECT_50 = IVM_traj_LLIN_50_ECT_50[["SV"]]+IVM_traj_LLIN_50_ECT_50[["EV"]]+IVM_traj_LLIN_50_ECT_50[["IV"]]
-  
-  NV_LLIN_50_HOU_50 = IVM_traj_LLIN_50_HOU_50[["SV"]]+IVM_traj_LLIN_50_HOU_50[["EV"]]+IVM_traj_LLIN_50_HOU_50[["IV"]]
-  
-  NV_LLIN_50_PPM_50 = IVM_traj_LLIN_50_PPM_50[["SV"]]+IVM_traj_LLIN_50_PPM_50[["EV"]]+IVM_traj_LLIN_50_PPM_50[["IV"]]
-  
-  NV_LLIN_50_ATSB_50 = IVM_traj_LLIN_50_ATSB_50[["SV"]]+IVM_traj_LLIN_50_ATSB_50[["EV"]]+IVM_traj_LLIN_50_ATSB_50[["IV"]]
-  
-  
-  #browser()
-  #Just Mosquito density
-  p <- ggplot(IVM_traj_Control, aes(x = time, y = IVM_traj_Control, color = Key)) +
-    geom_line(aes(y = NV_Control,        col = "Control"), size = 1.2) + 
-    geom_line(aes(y = NV_LLIN_80 ,       col = "LLIN=0.80"), size = 1.2) +
-    geom_line(aes(y = NV_LLIN_50_IRS_50, col = "LLIN=0.50 & IRS=0.50"), size = 1.2) +
-    geom_line(aes(y = NV_LLIN_50_LAR_50, col = "LLIN=0.50 & LAR=0.50"), size = 1.2) +
-    geom_line(aes(y = NV_LLIN_50_ECT_50, col = "LLIN=0.50 & ECT=0.50"), size = 1.2) +
-    geom_line(aes(y = NV_LLIN_50_HOU_50, col = "LLIN=0.50 & HOU=0.50"), size = 1.2) +
-    geom_line(aes(y = NV_LLIN_50_PPM_50, col = "LLIN=0.50 & PPM=0.50"), size = 1.2) +
-    geom_line(aes(y = NV_LLIN_50_ATSB_50,col = "LLIN=0.50 & ATSB=0.50"), size = 1.2) +
-    labs(title = "An Funestus", x = "Time (days)", y = "Number of mosquitoes")
-  p <- p + expand_limits(x = 0, y = 0)
-  multiplot(p, cols=1)
-  
-  #Bar plots??
-  #NumMosq <- c(sum(NV_Control),sum(NV_LLIN_80),sum(NV_LLIN_50_IRS_50),sum(NV_LLIN_50_LAR_50),sum(NV_LLIN_50_ECT_50),sum(NV_LLIN_50_HOU_50),sum(NV_LLIN_50_PPM_50),sum(NV_LLIN_50_ATSB_50))
-  
-  NumMosq_eq <- c(tail(NV_Control,1),tail(NV_LLIN_80,1),tail(NV_LLIN_50_IRS_50,1),tail(NV_LLIN_50_LAR_50,1),tail(NV_LLIN_50_ECT_50,1),tail(NV_LLIN_50_HOU_50,1),tail(NV_LLIN_50_PPM_50,1),tail(NV_LLIN_50_ATSB_50,1))
-  
-#  divVal = length(NV_Control)
- # NumMosqAvg <- c(sum(NV_Control)/divVal,sum(NV_LLIN_50)/divVal,sum(NV_cattle_50)/divVal,sum(NV_cc)/divVal,sum(NV_LLIN_HOUSE_50)/divVal,sum(NV_LLIN_OBT_50)/divVal)
-  #barplot(NumMosq , main='An. Arabiensis: Mosquito Density', xlab='Time (days)',ylab='Number of Mosquitoes',names.arg=c('Control','BB','CC','DD','EE','FF'))
-  
-  
-  #IV
-  
-  IV_Control        = IVM_traj_Control[["IV"]]
-  
-  IV_LLIN_80        = IVM_traj_LLIN_80[["IV"]]
-  
-  IV_LLIN_50_IRS_50 = IVM_traj_LLIN_50_IRS_50[["IV"]]
-  
-  IV_LLIN_50_LAR_50 = IVM_traj_LLIN_50_LAR_50[["IV"]]
-  
-  IV_LLIN_50_ECT_50 = IVM_traj_LLIN_50_ECT_50[["IV"]]
-  
-  IV_LLIN_50_HOU_50 = IVM_traj_LLIN_50_HOU_50[["IV"]]
-  
-  IV_LLIN_50_PPM_50 = IVM_traj_LLIN_50_PPM_50[["IV"]]
-  
-  IV_LLIN_50_ATSB_50 =IVM_traj_LLIN_50_ATSB_50[["IV"]]
-  
-  
-   #EIR
-  time_on = 20                 #Manually set it to the earliest time an intervention is on - to be automated
-  EIR_control       <-computeEIR(time_on,a_theta, IV_Control, NH)
-  EIR_LLIN_80            <-computeEIR(time_on,a_theta, IV_LLIN_80, NH)
-  EIR_LLIN_50_IRS_50       <-computeEIR(time_on,a_theta, IV_LLIN_50_IRS_50, NH)
-  EIR_LLIN_50_LAR_50     <-computeEIR(time_on,a_theta, IV_LLIN_50_LAR_50, NH)
-  EIR_LLIN_50_ECT_50 <-computeEIR(time_on,a_theta, IV_LLIN_50_ECT_50, NH)
-  EIR_LLIN_50_HOU_50   <-computeEIR(time_on,a_theta, IV_LLIN_50_HOU_50, NH)
-  EIR_LLIN_50_PPM_50   <-computeEIR(time_on,a_theta, IV_LLIN_50_PPM_50, NH)
-  EIR_LLIN_50_ATSB_50   <-computeEIR(time_on,a_theta, IV_LLIN_50_ATSB_50, NH)
-  
-  
-  #EIR <-computeEIR(a_theta, IV, NH)
-  # 
-  p2 <- ggplot(IVM_traj_Control, aes(x = 1:length(IVM_traj_Control[,1]), y = EIR, color = Key)) +
-    geom_line(aes(y = EIR_control,        col = "Control"), size = 1.2) + 
-    geom_line(aes(y = EIR_LLIN_80 ,       col = "LLIN=0.80"), size = 1.2) +
-    geom_line(aes(y = EIR_LLIN_50_IRS_50, col = "LLIN=0.50 & IRS=0.50"), size = 1.2) +
-    geom_line(aes(y = EIR_LLIN_50_LAR_50, col = "LLIN=0.50 & LAR=0.50"), size = 1.2) +
-    geom_line(aes(y = EIR_LLIN_50_ECT_50, col = "LLIN=0.50 & ECT=0.50"), size = 1.2) +
-    geom_line(aes(y = EIR_LLIN_50_HOU_50, col = "LLIN=0.50 & HOU=0.50"), size = 1.2) +
-    geom_line(aes(y = EIR_LLIN_50_PPM_50, col = "LLIN=0.50 & PPM=0.50"), size = 1.2) +
-    geom_line(aes(y = EIR_LLIN_50_ATSB_50,col = "LLIN=0.50 & ATSB=0.50"), size = 1.2) +
-    labs(title = "An Funestus", x = "Time (days)", y = "EIR")
-  p2 <- p2 + expand_limits(x = 0, y = 0)
-  multiplot(p2, cols=1)
-  
-  EIR_eq <-c(tail(EIR_control,1),tail(EIR_LLIN_80,1),tail(EIR_LLIN_50_IRS_50,1),tail(EIR_LLIN_50_LAR_50,1)
-             ,tail(EIR_LLIN_50_ECT_50,1),tail(EIR_LLIN_50_HOU_50,1),tail(EIR_LLIN_50_PPM_50,1),tail(EIR_LLIN_50_ATSB_50,1))
-  
-  ###Computing R0
-
-  
-  time_on = 20                 #Manually set it to the earliest time an intervention is on - to be automated
-  R0_control       <-computeRO(time_on,a_theta,muVCom, NV_Control,bv,bh,NH)
-  R0_LLIN_80            <-computeRO(time_on,a_theta,muVCom, NV_LLIN_80,bv,bh,NH)
-  R0_LLIN_50_IRS_50       <-computeRO(time_on,a_theta,muVCom, NV_LLIN_50_IRS_50,bv,bh,NH)
-  R0_LLIN_50_LAR_50     <-computeRO(time_on,a_theta,muVCom, NV_LLIN_50_LAR_50,bv,bh,NH)
-  R0_LLIN_50_ECT_50 <-computeRO(time_on,a_theta,muVCom, NV_LLIN_50_ECT_50,bv,bh,NH)
-  R0_LLIN_50_HOU_50   <-computeRO(time_on,a_theta,muVCom, NV_LLIN_50_HOU_50,bv,bh,NH)
-  R0_LLIN_50_PPM_50   <-computeRO(time_on,a_theta,muVCom, NV_LLIN_50_PPM_50,bv,bh,NH)
-  R0_LLIN_50_ATSB_50   <-computeRO(time_on,a_theta,muVCom, NV_LLIN_50_ATSB_50,bv,bh,NH)
-  
-  R0_eq <-c(tail(R0_control,1),tail(R0_LLIN_80,1),tail(R0_LLIN_50_IRS_50,1),tail(R0_LLIN_50_LAR_50,1)
-             ,tail(R0_LLIN_50_ECT_50,1),tail(R0_LLIN_50_HOU_50,1),tail(R0_LLIN_50_PPM_50,1),tail(R0_LLIN_50_ATSB_50,1))
-  browser()
-  
-  p3 <- ggplot(IVM_traj_Control, aes(x = 1:length(IVM_traj_Control[,1]), y = EIR, color = Key)) +
-    geom_line(aes(y = R0_control,        col = "Control"), size = 1.2) + 
-    geom_line(aes(y = R0_LLIN_80 ,       col = "LLIN=0.80"), size = 1.2) +
-    geom_line(aes(y = R0_LLIN_50_IRS_50, col = "LLIN=0.50 & IRS=0.50"), size = 1.2) +
-    geom_line(aes(y = R0_LLIN_50_LAR_50, col = "LLIN=0.50 & LAR=0.50"), size = 1.2) +
-    geom_line(aes(y = R0_LLIN_50_ECT_50, col = "LLIN=0.50 & ECT=0.50"), size = 1.2) +
-    geom_line(aes(y = R0_LLIN_50_HOU_50, col = "LLIN=0.50 & HOU=0.50"), size = 1.2) +
-    geom_line(aes(y = R0_LLIN_50_PPM_50, col = "LLIN=0.50 & PPM=0.50"), size = 1.2) +
-    geom_line(aes(y = R0_LLIN_50_ATSB_50,col = "LLIN=0.50 & ATSB=0.50"), size = 1.2) +
-    labs(title = "An Funestus", x = "Time (days)", y = "R0")
-  
-  multiplot(p3, cols=1)
-  
-  NumMosq_eq
-  EIR_eq
-  R0_eq
-  
-  #Average EIR
-  #divValue = length(EIR_control)
-  #EIR_AVERAGE <- c(sum(EIR_control)/divValue,sum(EIR_LLIN_50)/divValue,sum(EIR_Cattle_50)/divValue,sum(EIR_CC)/divValue,sum(EIR_LLIN_HOUSE_50)/divValue,sum(EIR_LLIN_OBT_50)/divValue)
-  #barplot(EIR_AVERAGE , main='An. Arabiensis EIR = 100', xlab='Tools',ylab='Average EIR',names.arg=c('Baseline','LLIN-50%','ITC - 50%','ITC & LLIN - 50%','LLIN & MPH - 50','LLIN & OBT - 50'))
-  
-#  write.csv(EIR_AVERAGE, file = "foo.csv")
-  
- # myData = list(c('Baseline','ITC & LLIN - 50%','LLIN-50%','ITC - 50%','LLIN & MPH - 50','LLIN & OBT - 50'),EIR_AVERAGE)
-  
-  #browser()
-  breakPoint = 1
-  #Mosquito density
-  # p1 <- ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
-  #   geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) + 
-  #   #geom_line(aes(y = IV, col = "IV"), size = 1.2) +
-  #   labs(x = "Time (days)", y = "Number of total mosquitoes")
-  # 
-  # #Mosquito density
-  # p2 <- ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
-  #   #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) + 
-  #   geom_line(aes(y = IV, col = "IV"), size = 1.2) +
-  #   labs(x = "Time (days)", y = "Number ofinfectious mosquitoes")
-  # 
-  # #EIR
-  # time_on = 20                 #Manually set it to the earliest time an intervention is on - to be automated
-  # EIR <-computeEIR(time_on,a_theta, IV, NH)
-  # #EIR <-computeEIR(a_theta, IV, NH)
-  # 
-  # p3 <- ggplot(IVM_traj, aes(x = 1:length(IVM_traj[,1]), y = EIR, color = State)) +
-  #   geom_line(aes(y = EIR, col = "EIR"), size = 1.2) + 
-  #   #geom_line(aes(y = IVM_traj["EV"], col = "EV"), size = 1.2) +
-  #   labs(x = "Time (days)", y = " EIR")
-  # 
-  # #VC
-  # 
-  # 
-  # 
-  # 
-  # 
-  # 
-  # #All at once
-  # 
-  # # #IVM_traj - just space holder
-  # # # We might need to plot them separately - s
-  # # p4 <- ggplot(IVM_traj, aes(x = 1:length(IVM_traj[,1]), y = EIR, color = State)) +
-  # #   #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) + 
-  # #   geom_line(aes(y = EIR, col = "EIR"), size = 1.2) + 
-  # #   geom_line(aes(y = VC, col = "VC"), size = 1.2) + 
-  # #   geom_line(aes(y = R0, col = "R0"), size = 1.2) + 
-  # #   #geom_line(aes(y = IVM_traj["EV"], col = "EV"), size = 1.2) +
-  # #   labs(x = "Time (days)", y = "values for EIR, VC, or R0")
-  # # 
-  # # 
-  # multiplot(p1, p2,p3, cols=1)
-  # 
-  
-  
-}
 
 
 

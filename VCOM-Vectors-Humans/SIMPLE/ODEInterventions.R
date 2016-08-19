@@ -86,8 +86,8 @@ impactOdorBaitedTraps = function(time,Q0,aOBT,OBTcov,time_OBT_on){
   #OBTcov = coverage same as ratio trap to human
   if (time > time_OBT_on) { OBTcov_t <- OBTcov } else {OBTcov_t <- 0 }
   
-  Q0_t_h = Q0*(1/(1+aOBT*OBTcov))  #Impact on Q0 for humans
-  Q0_t_c = (1-Q0)*(1/(1+aOBT*OBTcov)) #Impact on 1-Q0 prop going to Cattle
+  Q0_t_h = Q0*(1/(1+aOBT*OBTcov_t))  #Impact on Q0 for humans
+  Q0_t_c = (1-Q0)*(1/(1+aOBT*OBTcov_t)) #Impact on 1-Q0 prop going to Cattle
   impactOdor <- c(Q0_t_h,Q0_t_c)
   
   return(impactOdor)
@@ -122,7 +122,7 @@ impactIndoorProtection = function(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOU
   #LLIN and IRS and HOU
   cCom <- ITNcov_t*IRScov_t*HOUcov_t
   #Neither of them
-  c0 <- 1 - ITNcov_t - IRScov_t - HOUcov_t + ITNcov_t*IRScov_t + ITNcov_t*HOUcov_t + IRScov_t*HOUcov_t- 2* ITNcov_t*IRScov_t*HOUcov_t 
+  c0 <- 1 - ITNcov_t - IRScov_t - HOUcov_t + ITNcov_t*IRScov_t + ITNcov_t*HOUcov_t + IRScov_t*HOUcov_t- ITNcov_t*IRScov_t*HOUcov_t 
   
   # repeating due to LLINs and IRS
   r_LLIN_IRS <- rIRS + (1-rIRS)*rITN
@@ -282,7 +282,7 @@ impactRestingOvipositing = function(time,time_OVI_on,OVIcov,time_ATSB_on,ATSBcov
   #OVI and ATSB and OVI
   cCom_RestingOvipositing <- OVIcov_t*ATSBcov_t*SSPcov_t
   #Neither of them
-  c0_RestingOvipositing <- 1 - OVIcov_t - ATSBcov_t - SSPcov_t + OVIcov_t*ATSBcov_t + OVIcov_t*SSPcov_t + ATSBcov_t*OVIcov_t- 2* OVIcov_t*ATSBcov_t*SSPcov_t 
+  c0_RestingOvipositing <- 1 - OVIcov_t - ATSBcov_t - SSPcov_t + OVIcov_t*ATSBcov_t + OVIcov_t*SSPcov_t + ATSBcov_t*OVIcov_t- OVIcov_t*ATSBcov_t*SSPcov_t 
   
   muV_2_Com = muV*(cOVI*fOVI + cATSB*fATSB + cSSP*fSSP + cOVI_ATSB *fOVI*fATSB + cOVI_SSP *fOVI*fSSP + cATSB_SSP*fATSB*fSSP
   + cCom_RestingOvipositing *fOVI*fATSB*fSSP + c0_RestingOvipositing)

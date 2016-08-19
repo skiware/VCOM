@@ -32,7 +32,7 @@ source("multiplot.R")
 #MOSQUITO_PARAMETERS = getAnGambiaeParameters()
 
 # simulation runs per day - enter the end time
-INITIAL_MODELRUNTIME_VALUE   = 100
+INITIAL_MODELRUNTIME_VALUE   = 365
 
 #Enter the coverage for a specific intervetion
 # To turn it on  - enter the required time which is < the max model run time
@@ -64,13 +64,13 @@ INITIAL_SSP_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 INITIAL_OBT_COVERAGE = .00
 INITIAL_OBT_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 #LLINs, coverage value, time it is on
-INITIAL_ITN_COVERAGE = .50
-INITIAL_ITN_TIME     = 30
+INITIAL_ITN_COVERAGE = .8
+INITIAL_ITN_TIME     = 20
 #IRS
-INITIAL_IRS_COVERAGE = 0.50
+INITIAL_IRS_COVERAGE = 0.8
 INITIAL_IRS_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 #House modification
-INITIAL_HOU_COVERAGE = 0.0
+INITIAL_HOU_COVERAGE = 0.8
 INITIAL_HOU_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 #Personal Protection measure
 INITIAL_PPM_COVERAGE = 0.90
@@ -127,7 +127,7 @@ initState <<- calculateInitialState(theta)
 
 
 ## Run the model - eventually produce different IVM_traj for different scenarios, eg., 1 intervention, 2 inter, etc
-IVM_traj <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
+IVM_traj <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"daspk")
 
 ## Generate outputs - using Histograms
 barChartMosquitoDemographics(IVM_traj)
@@ -135,18 +135,23 @@ barChartMosquitoDemographics(IVM_traj)
 ## Generate output - using gg plots - vectors
 plotTrajectory(IVM_traj)
 
+#plotTrajectoryALL(IVM_traj)
+
+
 ## Generate output - using gg plots - male mosquitoes
-plotTrajectoryMalesMosq(IVM_traj)
+#plotTrajectoryMalesMosq(IVM_traj)
 
 ## Generate output - using gg plots - humans
 plotTrajectoryHumans(IVM_traj)
 
+## Plot Just EIR
+plotEIR(IVM_traj)
+
 #compute and plot EIR, VC, R0
-#If need be I can seprate the function for the three graphs
-RunTime=seq(0, INITIAL_MODELRUNTIME_VALUE,by=1)
-plotEIR_VC_R0(IVM_traj,theta,INITIAL_MODELRUNTIME_VALUE)
+plotEIR_VC_R0(IVM_traj)
 
 
+#SAM - check the impact of mosq proofed housing
 
 
 ##Notes for Sam #######

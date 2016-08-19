@@ -93,7 +93,7 @@ IVM_ode <- function(time, state, theta){
   durEV <- theta[["durEV"]] # Duration of latent period in mosquito (days)
   gamma <- theta[["gamma"]] # Effect of density-dependence on late instarts relative to early instars
   tau1 <- theta[["tau1"]] # Time spent foraging for a blood meal (no ITNs) (days)
-  tau2 <- theta[["tau2"]] # Time spent resting and ovipositing (days)
+  tau2 <- theta[["tau1"]] # Time spent resting and ovipositing (days)
   NV_eq <- theta[["NV_eq"]] # Number of female mosquitoes at equilibrium
   recRate <- theta[["recRate"]]
   #e_ov  <- theta[["e_ov"]] # # Number of eggs per oviposition per mosquito - SK wanted to add it in theta but recomputed in FC
@@ -218,7 +218,7 @@ IVM_ode <- function(time, state, theta){
   if( time > 0){
     #browser()
   }
-#browser()
+
   ##**************Feeding cycle in presence of interventions ****************************
   feedingCycleImpact= impactFeedingCycleParameters(time,beta,tau1,tau2,e_ov,time_ATSB_on,ATSBcov,time_SSP_on,SSPcov,fSSP,fATSB,muV,
                      Q0,aOBT,OBTcov,time_OBT_on,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOUcov,
@@ -233,23 +233,15 @@ IVM_ode <- function(time, state, theta){
   
   
   
-  
   ##****************Other Outputs####################
   
   #Extract transmission parameter values
-  
+  #browser()
   transmissionValues = getAdditionalTransmissionParameters()
-  bv = transmissionValues[["bV"]]
+  bV = transmissionValues[["bV"]]
   NH = transmissionValues[["NH_eq"]]
   bh = transmissionValues[["bh"]]
   
-  #Compute EIR
-  EIR <-computeEIR(a_theta, IV, NH)
-  
-  #compute Basic reproductive number
-  R0 <- computeRO(a_theta,muVCom, NV,bv,bh,NH)
-  #Compute Vectoral capacity
-  VC <- computeVC(a_theta, NV,NH,muVCom)
 
   ##******Add Larviciding and biological control -move to a function
   
@@ -299,12 +291,31 @@ IVM_ode <- function(time, state, theta){
     SVLag <- lagStates[10]
   }
   
+
+
+  
+    ###
+ # browser()
+  #dEL   <- betaCom*NV - muEL*(1 + ((EL+LL)/K))*EL - EL/durEL
+  #dLL   <-EL/durEL - muLL*(1 + gamma*((EL+LL)/K))*LL - LL/durLL
+  
    dEL   <- c0_LAR_BIO*betaCom*NV - muEL*(1 + ( (EL+LL)/(K*c0_LAR_BIO) ))*EL - EL/durEL
    dLL     <-c0_LAR_BIO*EL/durEL - muLL*(1 + gamma*((EL+LL)/(K*c0_LAR_BIO)))*LL - LL/durLL
    dPL <- (LL+LL_LAR+LL_BIO+LL_LAR_BIO)/durLL - muPL*PL - PL/durPL
+   # 
+  
+  #Just larvacide
+  # dEL   <- (1-LARcov_t)*betaCom*NV - muEL*(1 + ((EL+LL)/K*(1-LARcov_t)))*EL - EL/durEL
+  # dLL     <-c0_LAR_BIO*EL/durEL - muLL*(1 + gamma*((EL+LL)/K*c0_LAR_BIO))*LL - LL/durLL
+  # dPL <- LL/durLL - muPL*PL - PL/durPL
+  # 
   
    ###*************Enable Larvaciding and biological control************
-   
+   #with coverage > 0 included
+   # if( (time > time_LAR_on) && (cLAR >0) ){dEL_LAR <- cLAR*betaCom*NV - fLAR*muEL*(1 + ((EL_LAR+LL_LAR)/cLAR*K))*EL_LAR - EL_LAR/durEL}else{dEL_LAR<-0}
+   # if( (time > time_BIO_on) && (cBIO >0) ){dEL_BIO <- cBIO*betaCom*NV - fBIO*muEL*(1 + ((EL_BIO+LL_BIO)/cBIO*K))*EL_BIO - EL_BIO/durEL}else{dEL_BIO <-0}
+   # if( ((time > time_LAR_on) && (cLAR >0)) && ((time > time_BIO_on) && (cBIO >0))){dEL_LAR_BIO <- c_LAR_BIO*betaCom*NV - f_LAR_BIO*muEL*(1 + ((EL_LAR_BIO+LL_LAR_BIO)/c_LAR_BIO*K))*EL_LAR_BIO - EL_LAR_BIO/durEL}else{dEL_LAR_BIO<-0}
+
    if( (time > time_LAR_on) && (cLAR >0) ){dEL_LAR <- cLAR*betaCom*NV - fLAR*muEL*(1 + ((EL_LAR+LL_LAR)/(cLAR*K)))*EL_LAR - EL_LAR/durEL}else{dEL_LAR<-0}
    if( (time > time_BIO_on) && (cBIO >0) ){dEL_BIO <- cBIO*betaCom*NV - fBIO*muEL*(1 + ((EL_BIO+LL_BIO)/(cBIO*K)))*EL_BIO - EL_BIO/durEL}else{dEL_BIO <-0}
    if( ((time > time_LAR_on) && (cLAR >0)) && ((time > time_BIO_on) && (cBIO >0))){dEL_LAR_BIO <- c_LAR_BIO*betaCom*NV - f_LAR_BIO*muEL*(1 + ((EL_LAR_BIO+LL_LAR_BIO)/(c_LAR_BIO*K)))*EL_LAR_BIO - EL_LAR_BIO/durEL}else{dEL_LAR_BIO<-0}
@@ -314,7 +325,11 @@ IVM_ode <- function(time, state, theta){
    if( (time > time_BIO_on) && (cBIO >0) ){dLL_BIO <-cBIO*EL/durEL - fBIO*muLL*(1 + gamma*((EL_BIO+LL_BIO)/(K*cBIO)))*LL_BIO - LL_BIO/durLL}else{dLL_BIO<-0}
    if( ((time > time_LAR_on) && (cLAR >0)) && ((time > time_BIO_on) && (cBIO >0))){dLL_LAR_BIO <-c_LAR_BIO*EL/durEL - f_LAR_BIO*muLL*(1 + gamma*((EL_LAR_BIO+LL_LAR_BIO)/(K*c_LAR_BIO)))*LL_LAR_BIO - LL_LAR_BIO/durLL}else{dLL_LAR_BIO<-0}
   
-  
+   # #with coverage
+   # if( (time > time_LAR_on) && (cLAR >0) ){dLL_LAR <-cLAR*EL/durEL - fLAR*muLL*(1 + gamma*((EL_LAR+LL_LAR)/K*cLAR))*LL_LAR - LL_LAR/durLL}else{dLL_LAR<-0}
+   # if( (time > time_BIO_on) && (cBIO >0) ){dLL_BIO <-cBIO*EL/durEL - fBIO*muLL*(1 + gamma*((EL_BIO+LL_BIO)/K*cBIO))*LL_BIO - LL_BIO/durLL}else{dLL_BIO<-0}
+   # if( ((time > time_LAR_on) && (cLAR >0)) && ((time > time_BIO_on) && (cBIO >0)) ){dLL_LAR_BIO <-c_LAR_BIO*EL/durEL - f_LAR_BIO*muLL*(1 + gamma*((EL_LAR_BIO+LL_LAR_BIO)/K*c_LAR_BIO))*LL_LAR_BIO - LL_LAR_BIO/durLL}else{dLL_LAR_BIO<-0}
+   # #
    
   #Do we need to LL = LL+LAR+BIO+LAR_BIO????
   
@@ -336,15 +351,30 @@ IVM_ode <- function(time, state, theta){
   
   
   ##*******************SIR model for humans********************************************
+  #SK - check bh
+  # How do we get NV
+  #Initialize at equilbrium
+  #Check a_theta? updated when intervention is on?
   
+  #browser()
+  #Include recRate into transmissionParameter file recRate
+ 
+  #DOES THIS MATCH JM's MANUSCRIPT??
+  #Fix - a_theta at start time is at baseline -generalize it
+  
+  timeON = 20
+  if (time <= timeON){a_theta = theta[["Q0"]] * theta[["f0"]]}
   dSH <- -(NV/NH)*a_theta*(IV/NV)*bh*SH +  recRate*IH
   dIH <-  (NV/NH)*a_theta*(IV/NV)*bh*SH -  recRate*IH
   
   ##3**********************************************************************
   
- 
+  #return(list(c(dEL, dLL, dPL, dSV, dEV, dIV)))
+  
+  
+  #With larvaciding and biological control
   #if you add more states - make sure the lagstates[10] is still SV -- SK will automate
-  return(list(c(dEL,dEL_LAR,dEL_BIO,dEL_LAR_BIO, dLL,dLL_LAR,dLL_BIO,dLL_LAR_BIO, dPL, dSV, dEV, dIV,dSH,dIH,dMm), EIR=EIR, VC = VC, R0 = R0))
+  return(list(c(dEL,dEL_LAR,dEL_BIO,dEL_LAR_BIO, dLL,dLL_LAR,dLL_BIO,dLL_LAR_BIO, dPL, dSV, dEV, dIV,dSH,dIH,dMm)))
 
   }
 ######################################################################################
