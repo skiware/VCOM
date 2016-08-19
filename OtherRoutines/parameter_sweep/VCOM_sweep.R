@@ -155,3 +155,9 @@ rownames(tuple_names) <- NULL
 write(tuple_names,file="tuple_names.txt",sep=",",ncolumns=32)
 write(EIR_sweep,file="EIR_sweep.txt",sep=",")
 
+con <- file("tuple_names.txt","w+")
+write(x=names(vcom_iterator[[1]]),file=con,ncolumns=32,append=TRUE,sep=",")
+for(i in 1:length(vcom_iterator)){
+  write(x=as.character(unname(vcom_iterator[[i]])),file=con,ncolumns=32,append=TRUE,sep=",")
+}
+close.connection(con,"w+")
