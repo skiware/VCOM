@@ -29,7 +29,7 @@ shinyServer(
     shinyjs::disable("downloadPlotTrace")
     output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
-    output$plotDemographics=renderPlot({barChartMosquitoDemographics(IVM_traj)})
+    output$plotDemographics=renderPlot({barChartMosquitoDemographics_slwu(IVM_traj)})
     output$debugOutput=renderText("Load setup file for the 'Run Model' button to be activated.")
     #############################################################################
     # PARAMETER TABLES ##########################################################
@@ -45,7 +45,7 @@ shinyServer(
       initState = calculateInitialState(theta)
       IVM_traj <<- runODE(input$sliderTime,1,initState,theta,"lsoda")
       output$IVM_Runtime = renderTable(IVM_traj)
-      output$plotDemographics = renderPlot({barChartMosquitoDemographics(IVM_traj)})
+      output$plotDemographics = renderPlot({barChartMosquitoDemographics_slwu(IVM_traj)})
       output$plotTrajectory = renderPlot({plotTrajectory(IVM_traj)})
       shinyjs::enable("downloadCSVTrace")
       shinyjs::enable("downloadPlotTrace")
