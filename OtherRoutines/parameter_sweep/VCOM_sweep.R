@@ -149,11 +149,7 @@ EIR_sweep <- sapply(vcom_parameter_sweep,function(x){
   x$EIR[length(x$EIR)]
 })
 
-tuple_names <- t(sapply(vcom_iterator,function(x){x}))
-rownames(tuple_names) <- NULL
-
-write(tuple_names,file="tuple_names.txt",sep=",",ncolumns=32)
-write(EIR_sweep,file="EIR_sweep.txt",sep=",")
+write(EIR_sweep,ncolumns=1,file="EIR_sweep.txt",sep=",")
 
 con <- file("tuple_names.txt","w+")
 write(x=names(vcom_iterator[[1]]),file=con,ncolumns=32,append=TRUE,sep=",")
