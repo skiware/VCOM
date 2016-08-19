@@ -18,7 +18,7 @@ shinyServer(
     shinyjs::disable("downloadCSVDemographics"); shinyjs::disable("downloadPlotDemographics")
     output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
-    output$plotDemographics = renderPlot({barChartMosquitoDemographics(IVM_traj)})
+    output$plotDemographics = renderPlot({barChartMosquitoDemographics_slwu(IVM_traj)})
     output$plotEIR = renderPlot({plotEIR(IVM_traj,theta,timing)})
     #############################################################################
     # CLICK EVENTS ##############################################################
@@ -59,7 +59,7 @@ shinyServer(
       #--------------------------------------------------------------------------
       initState=calculateInitialState(theta)
       IVM_traj<<-runODE(input$sliderTime,1,initState,theta,"lsoda")
-      output$plotDemographics=renderPlot({barChartMosquitoDemographics(IVM_traj)})
+      output$plotDemographics=renderPlot({barChartMosquitoDemographics_slwu(IVM_traj)})
       output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
       timing<<-seq(0,input$sliderTime,by=1)
       output$plotEIR = renderPlot({plotEIR(IVM_traj,theta,timing)})
@@ -108,12 +108,12 @@ shinyServer(
       }
     )
     output$downloadPlotDemographics <- downloadHandler(
-      filename = 'Demographics.pdf',
-      content = function(file) {
-        pdf(file = file, width=12, height=8)
-        barChartMosquitoDemographics(IVM_traj)
-        dev.off()
-      })
+      filename = function(){paste(input$dataset,'Demographics.png',sep='')},
+      content = function(file){
+        device <- function(...,width,height){grDevices::png(...,width=2*width,height=height,res=300,units="in")}
+        ggsave(file,plot=barChartMosquitoDemographics_slwu(IVM_traj),device=device)
+      }
+    )
     #############################################################################
   })
 #---#############################################################################

@@ -78,12 +78,13 @@ shinyUI(
               #####################################################################
               titlePanel(h1("Instructions",align="left")),
               helpText("(1) Select the mosquito species."),
-              helpText("(2) Select the EIR interval."),
-              helpText("(3) Set the Q0 level."),
-              helpText("(4) Select the number of days."),
+              helpText("(2) Select the EIR (entomological inoculation rate) level."),
+              helpText("(3) Set the Q0 level (proportion of bites taken on humans with respect to cattle)."),
+              helpText("(4) Select the number of days to simulate."),
               helpText("(5) Run the model! (click the button or hit 'ENTER')"),
               helpText("(6) Setup the desired interventions and repeat step 3 as required."),
               helpText("(7) Additionally you can download results in the 'Files Output' tab."),
+              helpText("(8) Eliminate malaria!"),
               fluidRow(h3("1. Mosquito Selection")),
               radioButtons("radioSpecies",label=NULL,
                 choices=list(

@@ -63,6 +63,7 @@ shinyUI(
   fluidPage(theme = shinytheme("cerulean"),
     titlePanel(h1("VCOM: Simple",align="center"),windowTitle="VCOM: Simple"),
     titlePanel(h4("Vector Control Optimization Model",align="center")),
+    titlePanel(h4(tags$a(class="btn btn-danger", href="http://chipdelmal.github.io/VCOM/", "Home", style="display: block; width: 100%;"),align="center")),
     ###############################################################################
     useShinyjs(),
     tags$script(ENTER_DOWN_RUN),
@@ -77,12 +78,13 @@ shinyUI(
               #####################################################################
               titlePanel(h1("Instructions",align="left")),
               helpText("(1) Select the mosquito species."),
-              helpText("(2) Select the EIR interval."),
-              helpText("(3) Set the Q0 level."),
-              helpText("(4) Select the number of days."),
+              helpText("(2) Select the EIR (entomological inoculation rate) level."),
+              helpText("(3) Set the Q0 level (proportion of bites taken on humans with respect to cattle)."),
+              helpText("(4) Select the number of days to simulate."),
               helpText("(5) Run the model! (click the button or hit 'ENTER')"),
               helpText("(6) Setup the desired interventions and repeat step 3 as required."),
               helpText("(7) Additionally you can download results in the 'Files Output' tab."),
+              helpText("(8) Eliminate malaria!"),
               fluidRow(h3("1. Mosquito Selection")),
               radioButtons("radioSpecies",label=NULL,
                 choices=list(
@@ -92,7 +94,7 @@ shinyUI(
                 ),selected="GAM"),
               #####################################################################
               fluidRow(h3("2. EIR Level Selection")),
-              sliderInput("radioEIR","EIR:",min=1,max=1000,value=INITIAL_EIR),
+              sliderInput("radioEIR",label=NULL,min=0.1,max=1000,value=100,step=10),
               #radioButtons("radioEIR",label=NULL,
               #  choices=list(
               #    "10"=10,

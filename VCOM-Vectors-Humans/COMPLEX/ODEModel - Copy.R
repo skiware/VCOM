@@ -12,7 +12,7 @@ runODE = function(tMax, tIncrement, initState, theta, method){
   simPeriod <- tMax # Simulation runs up to 365 days
   
   times <- seq(0, simPeriod, by = tIncrement)
-  IVM_traj <- data.frame(dede(y = initState, times = times, parms = theta, func = IVM_ode, method = method))
+  IVM_traj <- data.frame(dede(y = initState, times = times, parms = theta, func = IVM_ode, method = "lsoda"))
   #browser()
   #EIR <-computeEIR(a_theta, IV, NH)
   #print(IVM_traj)
@@ -25,21 +25,13 @@ calculateInitialState = function(theta){
   muPL <- theta[["muPL"]]; muV <- theta[["muV"]]; durEL <- theta[["durEL"]]
   durLL <- theta[["durLL"]]; durPL <- theta[["durPL"]]; durEV <- theta[["durEV"]]
   gamma <- theta[["gamma"]]; Q0 <- theta[["Q0"]]; f0 <- theta[["f0"]]
-  epsilon0 <- theta[["epsilon0"]]; recRate <- theta[["recRate"]]
+  epsilon0 <- theta[["epsilon0"]]; iH_eq <- theta[["iH_eq"]]
   NH_eq <- theta[["NH_eq"]]; bV <- theta[["bV"]];bh <- theta[["bh"]]
 
   b_omega <- gamma*muLL/muEL - durEL/durLL + (gamma-1)*muLL*durEL
   omega <- -0.5*b_omega + sqrt(0.25*b_omega^2 + gamma*beta*muLL*durEL/(2*muEL*muV*durLL*(1+durPL*muPL)))
   a0 <- Q0*f0 # Human biting rate at equilibrium
-  
-  #Incorporating humans
-  iH_eq <- (epsilon0 *bh)/(recRate+(epsilon0*bh))
-  IH_eq <- iH_eq*NH_eq 
-  
-  
-  
-  SH_eq = NH_eq* (1-iH_eq)
-  
+
   lambdaV <- a0*iH_eq*bV # Force of infection in mosquitoes at equilibrium
   theta["lambdaV"] <<- lambdaV # Include vector force of infection in vector of parameters (theta)
 
@@ -56,18 +48,13 @@ calculateInitialState = function(theta){
   SV_eq <- sV_eq*NV_eq
   EV_eq <- eV_eq*NV_eq
   IV_eq <- iV_eq*NV_eq
-  
-  ##What about humans in equilbrium?/
-  
-  ##Initialize male mosquitoes
-  #Mm = SV_eq ??
 
   #initState <- c(EL = EL_eq,LL = LL_eq,PL = PL_eq,SV = SV_eq,EV = EV_eq,IV = IV_eq)
   # Initiated EL_LAR, etc as EL_eq etc, IS THIS OK? Initialized to 0
   
   #initState <- c(EL = EL_eq,EL_LAR = EL_eq,EL_BIO = EL_eq,EL_LAR_BIO = EL_eq,LL = LL_eq,LL_LAR = LL_eq,LL_BIO = LL_eq,LL_LAR_BIO = LL_eq,PL = PL_eq,SV = SV_eq,EV = EV_eq,IV = IV_eq)
 
-  initState <- c(EL = EL_eq,EL_LAR = 0,EL_BIO = 0,EL_LAR_BIO = 0,LL = LL_eq,LL_LAR = 0,LL_BIO = 0,LL_LAR_BIO = 0,PL = PL_eq,SV = SV_eq,EV = EV_eq,IV = IV_eq, SH = SH_eq, IH = IH_eq, Mm = SV_eq)
+  initState <- c(EL = EL_eq,EL_LAR = 0,EL_BIO = 0,EL_LAR_BIO = 0,LL = LL_eq,LL_LAR = 0,LL_BIO = 0,LL_LAR_BIO = 0,PL = PL_eq,SV = SV_eq,EV = EV_eq,IV = IV_eq)
   
   #Modified to EL_LAR_eq, etc
   #initState <- c(EL = EL_eq,EL_LAR_eq = 0,EL_BIO_eq = 0,EL_LAR_BIO_eq = 0,LL = LL_eq,LL_LAR_eq = 0,LL_BIO_eq = 0,LL_LAR_BIO_eq = 0,PL = PL_eq,SV = SV_eq,EV = EV_eq,IV = IV_eq)
@@ -93,9 +80,8 @@ IVM_ode <- function(time, state, theta){
   durEV <- theta[["durEV"]] # Duration of latent period in mosquito (days)
   gamma <- theta[["gamma"]] # Effect of density-dependence on late instarts relative to early instars
   tau1 <- theta[["tau1"]] # Time spent foraging for a blood meal (no ITNs) (days)
-  tau2 <- theta[["tau2"]] # Time spent resting and ovipositing (days)
+  tau2 <- theta[["tau1"]] # Time spent resting and ovipositing (days)
   NV_eq <- theta[["NV_eq"]] # Number of female mosquitoes at equilibrium
-  recRate <- theta[["recRate"]]
   #e_ov  <- theta[["e_ov"]] # # Number of eggs per oviposition per mosquito - SK wanted to add it in theta but recomputed in FC
   lambdaV <- theta[["lambdaV"]] # Force of infection in vectors at equilibrium
   ## Parameters (interventions):
@@ -187,12 +173,6 @@ IVM_ode <- function(time, state, theta){
   SV         <- state[["SV"]]  # Susceptitable Vectors
   EV         <- state[["EV"]]  # Latent period
   IV         <- state[["IV"]]  # Infectious Vectors
-  #Males
-  Mm         <- state[["Mm"]]  # Number of adult male mosquitoes
-  
-  #For SIR - humans
-  SH         <- state[["SH"]]  # Susceptitable humans
-  IH         <- state[["IH"]]  # Infectious humans
  
    
   ## Derived parameters: (SK - IMPoRANT add to the write up)
@@ -218,7 +198,7 @@ IVM_ode <- function(time, state, theta){
   if( time > 0){
     #browser()
   }
-#browser()
+
   ##**************Feeding cycle in presence of interventions ****************************
   feedingCycleImpact= impactFeedingCycleParameters(time,beta,tau1,tau2,e_ov,time_ATSB_on,ATSBcov,time_SSP_on,SSPcov,fSSP,fATSB,muV,
                      Q0,aOBT,OBTcov,time_OBT_on,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOUcov,
@@ -229,27 +209,17 @@ IVM_ode <- function(time, state, theta){
   
   muVCom  = feedingCycleImpact[1]
   betaCom = feedingCycleImpact[2]
-  a_theta = feedingCycleImpact[3]
-  
-  
   
   
   ##****************Other Outputs####################
   
   #Extract transmission parameter values
-  
+  #browser()
   transmissionValues = getAdditionalTransmissionParameters()
-  bv = transmissionValues[["bV"]]
+  bV = transmissionValues[["bV"]]
   NH = transmissionValues[["NH_eq"]]
   bh = transmissionValues[["bh"]]
   
-  #Compute EIR
-  EIR <-computeEIR(a_theta, IV, NH)
-  
-  #compute Basic reproductive number
-  R0 <- computeRO(a_theta,muVCom, NV,bv,bh,NH)
-  #Compute Vectoral capacity
-  VC <- computeVC(a_theta, NV,NH,muVCom)
 
   ##******Add Larviciding and biological control -move to a function
   
@@ -299,12 +269,31 @@ IVM_ode <- function(time, state, theta){
     SVLag <- lagStates[10]
   }
   
+
+
+  
+    ###
+ # browser()
+  #dEL   <- betaCom*NV - muEL*(1 + ((EL+LL)/K))*EL - EL/durEL
+  #dLL   <-EL/durEL - muLL*(1 + gamma*((EL+LL)/K))*LL - LL/durLL
+  
    dEL   <- c0_LAR_BIO*betaCom*NV - muEL*(1 + ( (EL+LL)/(K*c0_LAR_BIO) ))*EL - EL/durEL
    dLL     <-c0_LAR_BIO*EL/durEL - muLL*(1 + gamma*((EL+LL)/(K*c0_LAR_BIO)))*LL - LL/durLL
-   dPL <- (LL+LL_LAR+LL_BIO+LL_LAR_BIO)/durLL - muPL*PL - PL/durPL
+   dPL <- LL/durLL - muPL*PL - PL/durPL
+   # 
+  
+  #Just larvacide
+  # dEL   <- (1-LARcov_t)*betaCom*NV - muEL*(1 + ((EL+LL)/K*(1-LARcov_t)))*EL - EL/durEL
+  # dLL     <-c0_LAR_BIO*EL/durEL - muLL*(1 + gamma*((EL+LL)/K*c0_LAR_BIO))*LL - LL/durLL
+  # dPL <- LL/durLL - muPL*PL - PL/durPL
+  # 
   
    ###*************Enable Larvaciding and biological control************
-   
+   #with coverage > 0 included
+   # if( (time > time_LAR_on) && (cLAR >0) ){dEL_LAR <- cLAR*betaCom*NV - fLAR*muEL*(1 + ((EL_LAR+LL_LAR)/cLAR*K))*EL_LAR - EL_LAR/durEL}else{dEL_LAR<-0}
+   # if( (time > time_BIO_on) && (cBIO >0) ){dEL_BIO <- cBIO*betaCom*NV - fBIO*muEL*(1 + ((EL_BIO+LL_BIO)/cBIO*K))*EL_BIO - EL_BIO/durEL}else{dEL_BIO <-0}
+   # if( ((time > time_LAR_on) && (cLAR >0)) && ((time > time_BIO_on) && (cBIO >0))){dEL_LAR_BIO <- c_LAR_BIO*betaCom*NV - f_LAR_BIO*muEL*(1 + ((EL_LAR_BIO+LL_LAR_BIO)/c_LAR_BIO*K))*EL_LAR_BIO - EL_LAR_BIO/durEL}else{dEL_LAR_BIO<-0}
+
    if( (time > time_LAR_on) && (cLAR >0) ){dEL_LAR <- cLAR*betaCom*NV - fLAR*muEL*(1 + ((EL_LAR+LL_LAR)/(cLAR*K)))*EL_LAR - EL_LAR/durEL}else{dEL_LAR<-0}
    if( (time > time_BIO_on) && (cBIO >0) ){dEL_BIO <- cBIO*betaCom*NV - fBIO*muEL*(1 + ((EL_BIO+LL_BIO)/(cBIO*K)))*EL_BIO - EL_BIO/durEL}else{dEL_BIO <-0}
    if( ((time > time_LAR_on) && (cLAR >0)) && ((time > time_BIO_on) && (cBIO >0))){dEL_LAR_BIO <- c_LAR_BIO*betaCom*NV - f_LAR_BIO*muEL*(1 + ((EL_LAR_BIO+LL_LAR_BIO)/(c_LAR_BIO*K)))*EL_LAR_BIO - EL_LAR_BIO/durEL}else{dEL_LAR_BIO<-0}
@@ -314,7 +303,11 @@ IVM_ode <- function(time, state, theta){
    if( (time > time_BIO_on) && (cBIO >0) ){dLL_BIO <-cBIO*EL/durEL - fBIO*muLL*(1 + gamma*((EL_BIO+LL_BIO)/(K*cBIO)))*LL_BIO - LL_BIO/durLL}else{dLL_BIO<-0}
    if( ((time > time_LAR_on) && (cLAR >0)) && ((time > time_BIO_on) && (cBIO >0))){dLL_LAR_BIO <-c_LAR_BIO*EL/durEL - f_LAR_BIO*muLL*(1 + gamma*((EL_LAR_BIO+LL_LAR_BIO)/(K*c_LAR_BIO)))*LL_LAR_BIO - LL_LAR_BIO/durLL}else{dLL_LAR_BIO<-0}
   
-  
+   # #with coverage
+   # if( (time > time_LAR_on) && (cLAR >0) ){dLL_LAR <-cLAR*EL/durEL - fLAR*muLL*(1 + gamma*((EL_LAR+LL_LAR)/K*cLAR))*LL_LAR - LL_LAR/durLL}else{dLL_LAR<-0}
+   # if( (time > time_BIO_on) && (cBIO >0) ){dLL_BIO <-cBIO*EL/durEL - fBIO*muLL*(1 + gamma*((EL_BIO+LL_BIO)/K*cBIO))*LL_BIO - LL_BIO/durLL}else{dLL_BIO<-0}
+   # if( ((time > time_LAR_on) && (cLAR >0)) && ((time > time_BIO_on) && (cBIO >0)) ){dLL_LAR_BIO <-c_LAR_BIO*EL/durEL - f_LAR_BIO*muLL*(1 + gamma*((EL_LAR_BIO+LL_LAR_BIO)/K*c_LAR_BIO))*LL_LAR_BIO - LL_LAR_BIO/durLL}else{dLL_LAR_BIO<-0}
+   # #
    
   #Do we need to LL = LL+LAR+BIO+LAR_BIO????
   
@@ -324,27 +317,13 @@ IVM_ode <- function(time, state, theta){
   dEV <- lambdaV*SV - lambdaV*SVLag*exp(-muVCom*durEV) - muVCom*EV
   dIV <- lambdaV*SVLag*exp(-muVCom*durEV) - muVCom*IV
   
- #Introducing males
   
-  # Get the actual variables
-  muMm = muV
-  f_SwS = 11
-  
-  muMmCom = muMm*f_SwS
-    
-  dMm <- 0.5*PL/durPL - muMmCom*Mm
+  #return(list(c(dEL, dLL, dPL, dSV, dEV, dIV)))
   
   
-  ##*******************SIR model for humans********************************************
-  
-  dSH <- -(NV/NH)*a_theta*(IV/NV)*bh*SH +  recRate*IH
-  dIH <-  (NV/NH)*a_theta*(IV/NV)*bh*SH -  recRate*IH
-  
-  ##3**********************************************************************
-  
- 
+  #With larvaciding and biological control
   #if you add more states - make sure the lagstates[10] is still SV -- SK will automate
-  return(list(c(dEL,dEL_LAR,dEL_BIO,dEL_LAR_BIO, dLL,dLL_LAR,dLL_BIO,dLL_LAR_BIO, dPL, dSV, dEV, dIV,dSH,dIH,dMm), EIR=EIR, VC = VC, R0 = R0))
+  return(list(c(dEL,dEL_LAR,dEL_BIO,dEL_LAR_BIO, dLL,dLL_LAR,dLL_BIO,dLL_LAR_BIO, dPL, dSV, dEV, dIV)))
 
   }
 ######################################################################################

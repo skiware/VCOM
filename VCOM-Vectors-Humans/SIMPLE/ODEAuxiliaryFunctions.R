@@ -16,8 +16,8 @@ REQUIRED_PARAMETERS_LIST_GLOBAL = c("beta","muEL","muLL","muPL","durEL","durLL",
 plotTrajectory = function(IVM_traj){
   #. plotTrajectory: Plots the evolution of the dynamics of the system
   ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
-    #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) + 
-    geom_line(aes(y = IV, col = "IV"), size = 1.2) + 
+    #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) +
+    geom_line(aes(y = IV, col = "IV"), size = 1.2) +
     geom_line(aes(y = SV, col = "SV"), size = 1.2) +
     geom_line(aes(y = EV, col = "EV"), size = 1.2) +
     labs(x = "Time (days)", y = "Number of mosquitoes")
@@ -26,8 +26,8 @@ plotTrajectory = function(IVM_traj){
 plotTrajectoryMalesMosq = function(IVM_traj){
   #. plotTrajectory: Plots the evolution of the dynamics of the system
   ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
-    #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) + 
-    geom_line(aes(y = Mm, col = "Mm"), size = 1.2) + 
+    #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) +
+    geom_line(aes(y = Mm, col = "Mm"), size = 1.2) +
     labs(x = "Time (days)", y = "Number of Male Mosquitoes")
 }
 plotTrajectoryALL = function(IVM_traj){
@@ -56,13 +56,13 @@ plotTrajectoryDEBUG <- function(traj,log=FALSE){
   require(reshape2)
   IVM_melt <- melt(traj,id.vars="time")
   if(log){
-    ggplot(data=IVM_melt,aes(x=time,y=value,group=variable,colour=variable,linetype=variable)) + 
-      geom_line(size=1.15) + 
+    ggplot(data=IVM_melt,aes(x=time,y=value,group=variable,colour=variable,linetype=variable)) +
+      geom_line(size=1.15) +
       theme_bw() +
       scale_y_log10()
   } else {
-    ggplot(data=IVM_melt,aes(x=time,y=value,group=variable,colour=variable,linetype=variable)) + 
-      geom_line(size=1.15) + 
+    ggplot(data=IVM_melt,aes(x=time,y=value,group=variable,colour=variable,linetype=variable)) +
+      geom_line(size=1.15) +
       theme_bw()
   }
 }
@@ -70,8 +70,8 @@ plotTrajectoryDEBUG <- function(traj,log=FALSE){
 plotTrajectoryHumans = function(IVM_traj){
   #. plotTrajectory: Plots the evolution of the dynamics of the system
   ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
-    #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) + 
-    geom_line(aes(y = IH, col = "IH"), size = 1.2) + 
+    #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) +
+    geom_line(aes(y = IH, col = "IH"), size = 1.2) +
     geom_line(aes(y = SH, col = "SH"), size = 1.2) +
     labs(x = "Time (days)", y = "Number of humans")
 }
@@ -80,48 +80,48 @@ plotEIR = function(IVM_traj){
    ggplot(IVM_traj, aes(x = time, y = EIR, color = State)) +
     geom_line(aes(y = IVM_traj[["EIR"]], col = "EIR"), size = 1.2) +
     labs(x = "Time (days)", y = " EIR")
-  
+
 }
 
 
 plotEIR_VC_R0 = function(IVM_traj){
   #. plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
-  
-  
-  
+
+
+
   #Mosquito density
   p1 <- ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
-    #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) + 
+    #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) +
     geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) +
     labs(x = "Time (days)", y = "Number of total mosquitoes")
- 
+
    #Latent Vector
   p2 <- ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
-    #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) + 
+    #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) +
     geom_line(aes(y = IV, col = "IV"), size = 1.2) +
     labs(x = "Time (days)", y = "Number of infectious mosquitoes")
   #IV
   p3 <- ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
-    geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) + 
-    geom_line(aes(y = IV, col = "IV"), size = 1.2) + 
+    geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) +
+    geom_line(aes(y = IV, col = "IV"), size = 1.2) +
     labs(x = "Time (days)", y = "Number of infections, mosquitoes")
-  
+
  #browser()
   p4 <- ggplot(IVM_traj, aes(x = time, y = EIR, color = State)) +
     geom_line(aes(y = IVM_traj[["EIR"]], col = "EIR"), size = 1.2) +
     labs(x = "Time (days)", y = " EIR")
-  
-  
+
+
   p5 <- ggplot(IVM_traj, aes(x = time, y = EIR, color = State)) +
     geom_line(aes(y = IVM_traj[["R0"]], col = "R0"), size = 1.2) +
     labs(x = "Time (days)", y = " R0")
-  
-  
+
+
   p6 <-  ggplot(IVM_traj, aes(x = time, y = EIR, color = State)) +
     geom_line(aes(y = IVM_traj[["VC"]], col = "VC"), size = 1.2) +
     labs(x = "Time (days)", y = " VC")
-  
-  
+
+
   multiplot(p1, p2, p3, p4,p5,p6, cols=2)
  }
 
@@ -134,6 +134,20 @@ barChartMosquitoDemographics = function(IVM_traj){
   #Exctract using names
   NumMosq <- c(sum(IVM_traj["EL"]),sum(IVM_traj["LL"]),sum(IVM_traj["PL"]),sum(IVM_traj["SV"]),sum(IVM_traj["EV"]),sum(IVM_traj["IV"]))
   barplot(NumMosq , main='', xlab='Time (days)',ylab='Number of Mosquitoes',names.arg=c('EL','LL','PL','SV','EV','IV'))
+}
+barChartMosquitoDemographics_slwu <- function(IVM_traj){
+
+  traj_dat <- data.frame(stage=c("EL","LL","PL","SV","EV","IV"),
+                         sum=c(sum(IVM_traj["EL"]),sum(IVM_traj["LL"]),sum(IVM_traj["PL"]),sum(IVM_traj["SV"]),sum(IVM_traj["EV"]),sum(IVM_traj["IV"])))
+  traj_dat$stage <- factor(traj_dat$stage,levels=traj_dat$stage)
+
+  ggplot(data=traj_dat,aes(stage,sum,fill=stage)) +
+    geom_bar(stat="identity",colour="black") +
+    scale_y_log10() +
+    theme_bw() +
+    guides(fill=FALSE) +
+    labs(x="Mosquito Stage",y="Number of Mosquitoes")
+
 }
 #SK - CHECK WITH HECTOR - Need to rename some of the parameters in the following function
 parseImportedCSVParameters = function(inputDataFrame){
