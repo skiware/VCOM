@@ -12,7 +12,6 @@
 library(shiny)
 library(deSolve)
 library(ggplot2)
-library(XLConnect)
 library(shinyjs)
 library(shinythemes)
 source("ODEModel.R")
@@ -20,6 +19,10 @@ source("ODEMosquitoParameters.R")
 source("ODEAuxiliaryFunctions.R")
 source("ODEControlMeasuresParameters.R")
 source("ODETransmissionParameters.R")
+source("ODEInterventions.R")
+#source("ODEInterventions - FirstPass.R")
+source("ODEModelOutput.R")
+source("FeedingCycle.R")
 ################################################################################
 DISALLOWED_HEADS<<-c("Life Cycle Parameters","Species-Specific Parameters","Interventions Parameters","Transmission Parameters","NA",paste0(rep("NA.",20),1:20))
 importedFile=NULL
@@ -46,9 +49,9 @@ initState<<-calculateInitialState(theta)
 IVM_traj<<-runODE(80,1,initState,theta,"lsoda")
 #print(theta)
 ################################################################################
-TEMPLATE_AN_ARABIENSIS<<-importCSVParametersFromDirectory("SetupTemplates/Template_AnArabiensis.csv")
-TEMPLATE_AN_FUNESTUS<<-importCSVParametersFromDirectory("SetupTemplates/Template_AnFunestus.csv")
-TEMPLATE_AN_GAMBIAE<<-importCSVParametersFromDirectory("SetupTemplates/Template_AnGambiae.csv")
+#TEMPLATE_AN_ARABIENSIS<<-importCSVParametersFromDirectory("SetupTemplates/Template_AnArabiensis.csv")
+#TEMPLATE_AN_FUNESTUS<<-importCSVParametersFromDirectory("SetupTemplates/Template_AnFunestus.csv")
+#TEMPLATE_AN_GAMBIAE<<-importCSVParametersFromDirectory("SetupTemplates/Template_AnGambiae.csv")
 ################################################################################
 shinyUI(
   fluidPage(theme=shinytheme("cosmo"),

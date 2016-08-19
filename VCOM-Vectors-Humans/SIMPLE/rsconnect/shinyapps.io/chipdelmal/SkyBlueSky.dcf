@@ -2,8 +2,8 @@ name: SkyBlueSky
 account: chipdelmal
 server: shinyapps.io
 appId: 103868
-bundleId: 536242
+bundleId: 536389
 url: https://chipdelmal.shinyapps.io/SkyBlueSky/
-when: 1471627426.25579
+when: 1471636586.35103
 asMultiple: FALSE
 asStatic: FALSE

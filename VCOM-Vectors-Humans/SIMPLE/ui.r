@@ -79,12 +79,12 @@ shinyUI(
               titlePanel(h1("Instructions",align="left")),
               helpText("(1) Select the mosquito species."),
               helpText("(2) Select the EIR (entomological inoculation rate) level."),
-              helpText("(3) Set the Q0 level (proportion of bites taken on humans with respect to cattle)."),
-              helpText("(4) Select the number of days to simulate."),
-              helpText("(5) Run the model! (click the button or hit 'ENTER')"),
-              helpText("(6) Setup the desired interventions and repeat step 3 as required."),
-              helpText("(7) Additionally you can download results in the 'Files Output' tab."),
-              helpText("(8) Eliminate malaria!"),
+              #helpText("(3) Set the Q0 level (proportion of bites taken on humans with respect to cattle)."),
+              helpText("(3) Select the number of days to simulate."),
+              helpText("(4) Run the model! (click the button or hit 'ENTER')"),
+              helpText("(5) Setup the desired interventions and repeat step 3 as required."),
+              helpText("(6) Additionally you can download results in the 'Files Output' tab."),
+              helpText("(7) Eliminate malaria!"),
               fluidRow(h3("1. Mosquito Selection")),
               radioButtons("radioSpecies",label=NULL,
                 choices=list(
@@ -102,16 +102,16 @@ shinyUI(
               #    "1000"=1000
               #  ),selected=100),
               #####################################################################
-              fluidRow(h3("3. Q0")),
-              sliderInput("Q0",label=NULL,min=0,max=1,value=0,step=.01),
+              # fluidRow(h3("3. Q0")),
+              # sliderInput("Q0",label=NULL,min=0,max=1,value=0,step=.01),
               #####################################################################
-              fluidRow(h3("4. Simulation Time")),
+              fluidRow(h3("3. Simulation Time")),
               sliderInput("sliderTime","Days to Simulate:",min=1,max=365,value=80),
               #####################################################################
-              fluidRow(h3("5. Run Model")),
+              fluidRow(h3("4. Run Model")),
               actionButton("buttonRun","Run",width="100%"),
               #####################################################################
-              fluidRow(h3("6. Interventions")),
+              fluidRow(h3("5. Interventions")),
               fluidRow(
                 column(COVERAGE_LABELS_SIZE,h4("",align="center")),
                 column(COVERAGE_BAR_SIZE,h4("Coverage",align="center")),

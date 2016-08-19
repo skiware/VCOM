@@ -81,7 +81,7 @@ shinyServer(
     # DOWNLOADS HANDLERS ########################################################
     output$downloadTemplate <- downloadHandler(
       filename <- function(){paste("VCOM_SimSetupFile","xls",sep=".")},
-      content <- function(file){file.copy("SetupTemplates/SETUP_VCOM.xls",file)}
+      content <- function(file){file.copy("SetupTemplates/SETUP_MosquitoLifeCycleParameters.xls",file)}
     )
     output$downloadCSVTrace <- downloadHandler(
       filename <- function(){paste("VCOM_Trace","csv",sep=".")},
