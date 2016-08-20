@@ -282,7 +282,7 @@ create_tuples_constant <- function(n,epsilon0,constant,constant_cov,species,time
 
 
 ###run parameter sweep in parallel###
-vcom_iterator <- create_tuples(n=2,epsilon0=100,species=1,time_on=20,granularity=5)
+vcom_iterator <- create_tuples(n=1,epsilon0=100,species=3,time_on=20,granularity=5)
 
 cl <- makeCluster(spec=detectCores())
 registerDoSNOW(cl)
@@ -310,7 +310,7 @@ close.connection(con,"w+")
 
 
 ###run parameter sweep in parallel holding ITN constant###
-vcom_iterator_llin <- create_tuples_constant(n=2,epsilon0=50,constant="ITNcov",constant_cov=.5,species=1,time_on=10,granularity=5)
+vcom_iterator_llin <- create_tuples_constant(n=1,epsilon0=50,constant="ITNcov",constant_cov=.5,species=2,time_on=20,granularity=5)
 
 cl <- makeCluster(spec=detectCores())
 registerDoSNOW(cl)
@@ -327,9 +327,9 @@ EIR_sweepLLIN <- sapply(vcom_parameter_sweep_llin,function(x){
   x$EIR[length(x$EIR)]
 })
 
-write(EIR_sweepLLIN,ncolumns=1,file="EIR_sweepLLIN.txt",sep=",")
+write(EIR_sweepLLIN,ncolumns=1,file="EIR_sweepLLIN-2.txt",sep=",")
 
-con <- file("tuple_namesLLIN.txt","w+")
+con <- file("tuple_namesLLIN-2.txt","w+")
 write(x=names(vcom_iterator_llin[[1]]),file=con,ncolumns=32,append=TRUE,sep=",")
 for(i in 1:length(vcom_iterator_llin)){
   write(x=as.character(unname(vcom_iterator_llin[[i]])),file=con,ncolumns=32,append=TRUE,sep=",")
