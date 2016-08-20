@@ -1,0 +1,10 @@
+name: VCOM_example_sweep
+account: slwu89
+server: shinyapps.io
+appId: 121143
+bundleId: 536678
+url: https://slwu89.shinyapps.io/VCOM_example_sweep/
+when: 1471675177.18726
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: EIR_sweep.csv|EIR_sweepLLIN.txt|tuple_names.csv|tuple_namesLLIN.txt|VCOM_initialization.R|VCOM_model.R|VCOM_output.R|VCOM_sweep.R
