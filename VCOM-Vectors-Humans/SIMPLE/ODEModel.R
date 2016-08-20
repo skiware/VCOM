@@ -161,6 +161,7 @@ IVM_ode <- function(time, state, theta){
   ##***********Resting and Ovipositing: ATSB, Space spraying, ovitraps ********************
   time_OVI_on <- theta[["time_OVI_on"]] # When ATSB is on)
   fOVI <- theta[["fOVI"]] # factor allowing for increased death rate due to ATSB
+  eOVI <- theta[["eOVI"]] #effectiveness of the ovitrap
   OVIcov <- theta[["OVIcov"]] # prop of ovitraps 
   #ATSB and SSP - already defined - might have two differentiate the two
   
@@ -225,13 +226,16 @@ IVM_ode <- function(time, state, theta){
                      time_HOU_on,rITN,sITN,rIRS,rHOU,sIRS,sHOU, phiB, phiI,dHOU,dIRS,
                      time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,
                      c0,time_ECS_on,ECScov,time_ECT_on,ECTcov,rECT,sECS,sECT,
-                     time_OVI_on,OVIcov,fOVI)
+                     time_OVI_on,OVIcov,fOVI,eOVI)
   
   muVCom  = feedingCycleImpact[1]
   betaCom = feedingCycleImpact[2]
   a_theta = feedingCycleImpact[3]
   
+  #Introducet the impact of ovitrap on eggs laying
+  if (time > time_OVI_on) { OVIcov_t <- OVIcov } else { OVIcov_t <- 0 }
   
+  betaCom = betaCom *(1-eOVI*OVIcov_t)
   
   
   ##****************Other Outputs####################

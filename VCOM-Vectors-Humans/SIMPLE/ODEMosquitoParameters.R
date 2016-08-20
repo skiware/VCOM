@@ -82,8 +82,9 @@ getTheta = function(
     dIRS        = speciesSpecificParameters[["dIRS"]],
     dHOU        = speciesSpecificParameters[["dHOU"]],
     aOBT        = speciesSpecificParameters[["aOBT"]],
-    eSRE        = speciesSpecificParameters[["eSRE"]],
+    eSRE        = speciesSpecificParameters[["eSRE"]], 
     fBIO        = speciesSpecificParameters[["fBIO"]],
+    eOVI        = speciesSpecificParameters[["eOVI"]],
     fLAR        = speciesSpecificParameters[["fLAR"]],
     fATSB       = speciesSpecificParameters[["fATSB"]],
     fSSP        = speciesSpecificParameters[["fSSP"]],
@@ -130,6 +131,7 @@ getTheta = function(
 #* dIRS:    Death due to encountering IRS treated house
 #* aOBT:    availability of one odor baited trap in relation to one human
 #* eSRE:    effectiveness of the impact of source reduction in K
+#* eOVI:    effectivens of the ovitrap
 #* fATSB    factor allowing for increased mosquito death due to ATBS
 #* fLAR    factor allowing for increased mosquito death due to larvaciding
 #* fBIO    factor allowing for increased mosquito death due to biological control
@@ -151,8 +153,8 @@ getAnGambiaeParameters = function(){
     rHOU = 0.00, sHOU = 0.50, rODO = 0.00, sODO = 0.00,
     rSPR = 0.00, sSPR = 0.00, rECT = 0.30, sECT = 0.40,
     rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10,
-    aOBT = 2.00, eSRE = 0.70, fATSB =1.5, fSSP =  1.50,
-    fOVI = 1.50, fLAR = 55.5, fBIO = 35.5
+    aOBT = 2.00, eSRE = 0.70, fATSB =1.5,  fSSP =  1.50,
+    fOVI = 1.50, fLAR = 55.5, fBIO = 35.5, eOVI = 0.1
   )
 }
 getAnArabiensisParameters = function(){
@@ -169,7 +171,7 @@ getAnArabiensisParameters = function(){
     rSPR = 0.80, sSPR = 0.15, rECT = 0.50, sECT = 0.50,
     rPPM = 0.50, sPPM = 0.40, dHOU = 0.10, dIRS = 0.10,
     aOBT = 2.00, eSRE = 0.70, fATSB =1.50, fSSP = 1.50,
-    fOVI = 1.50, fLAR = 55.5, fBIO = 15.5
+    fOVI = 1.50, fLAR = 55.5, fBIO = 15.5, eOVI = 0.1
   )
 }
 getAnFunestusParameters = function(){
@@ -184,7 +186,7 @@ getAnFunestusParameters = function(){
     rSPR = 0.00, sSPR = 0.00, rECT = 0.60, sECT = 0.60,
     rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10,
     aOBT = 2.00, eSRE = 0.70, fATSB =1.50, fSSP = 1.50,
-    fOVI = 1.50, fLAR = 55.5, fBIO = 35.5
+    fOVI = 1.50, fLAR = 55.5, fBIO = 35.5, eOVI = 0.1
   )
 }
 ######################################################################################

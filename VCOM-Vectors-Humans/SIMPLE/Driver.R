@@ -32,7 +32,7 @@ source("multiplot.R")
 #MOSQUITO_PARAMETERS = getAnGambiaeParameters()
 
 # simulation runs per day - enter the end time
-INITIAL_MODELRUNTIME_VALUE   = 365
+INITIAL_MODELRUNTIME_VALUE   = 50
 
 #Enter the coverage for a specific intervetion
 # To turn it on  - enter the required time which is < the max model run time
@@ -65,7 +65,7 @@ INITIAL_OBT_COVERAGE = .00
 INITIAL_OBT_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 #LLINs, coverage value, time it is on
 INITIAL_ITN_COVERAGE = .8
-INITIAL_ITN_TIME     = 20
+INITIAL_ITN_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 #IRS
 INITIAL_IRS_COVERAGE = 0.8
 INITIAL_IRS_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
@@ -83,8 +83,8 @@ INITIAL_ECT_COVERAGE = 0.00
 INITIAL_ECT_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 
 #Resting and Ovipositing - OviTraps -assuming same coverage for ATSB and SSP
-INITIAL_OVI_COVERAGE = 0.00
-INITIAL_OVI_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
+INITIAL_OVI_COVERAGE = 0.80
+INITIAL_OVI_TIME     = 20
 
 ## Get intervetions parameters - LLINs for testing
 #INTERVENTION_PARAMETERS = getInterventionsParameters(ITNcov=INITIAL_ITN_COVERAGE,time_ITN_on=INITIAL_ITN_TIME)
