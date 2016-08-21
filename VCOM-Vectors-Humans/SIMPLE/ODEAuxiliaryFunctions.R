@@ -83,6 +83,42 @@ plotEIR = function(IVM_traj){
 
 }
 
+plot_MS_Figures = function(IVM_traj_Control,IVM_traj_LLIN_50,IVM_traj_LLIN_80,IVM_traj_LLIN_90,theta,INITIAL_MODELRUNTIME_VALUE){
+  #. plot_MS_Figures - produce some figures for the manuscript
+  
+  
+  #Mosquito population
+  NV_Control = IVM_traj_Control[["SV"]]+IVM_traj_Control[["EV"]]+IVM_traj_Control[["IV"]]
+  
+  NV_LLIN_80 = IVM_traj_LLIN_80[["SV"]]+IVM_traj_LLIN_80[["EV"]]+IVM_traj_LLIN_80[["IV"]]
+  
+  NV_LLIN_50 = IVM_traj_LLIN_50[["SV"]]+IVM_traj_LLIN_50[["EV"]]+IVM_traj_LLIN_50[["IV"]]
+  NV_LLIN_90 = IVM_traj_LLIN_90[["SV"]]+IVM_traj_LLIN_90[["EV"]]+IVM_traj_LLIN_90[["IV"]]
+  
+  #browser()
+  #Just Mosquito density
+  p <- ggplot(IVM_traj_Control, aes(x = time, y = IVM_traj_Control, color = State)) +
+    geom_line(aes(y = NV_Control, col = "Mosquito-Control"), size = 1.2) + 
+    geom_line(aes(y = NV_LLIN_50, col = "Mosquito-LLIN-50"), size = 1.2) +
+    geom_line(aes(y = NV_LLIN_80, col = "Mosquito-LLIN-80"), size = 1.2) +
+    geom_line(aes(y = NV_LLIN_90, col = "Mosquito-LLIN-80"), size = 1.2) +
+    labs(title = "An. Arabiensis", x = "Time (days)", y = "Number of mosquitoes")
+  p <- p + expand_limits(x = 0, y = 0)
+  multiplot(p, cols=1)
+  
+  # 
+  p2 <- ggplot(IVM_traj_Control, aes(x = 1:length(IVM_traj_Control[,1]), y = EIR, color = key)) +
+    geom_line(aes(y = IVM_traj_Control[["EIR"]] , col = "EIR - Control "), size = 1.2) + 
+    geom_line(aes(y = IVM_traj_LLIN_50[["EIR"]], col = "EIR - LLIN - 50 "), size = 1.2) + 
+    geom_line(aes(y = IVM_traj_LLIN_80[["EIR"]], col = "EIR - LLIN - 80"), size = 1.2) + 
+    geom_line(aes(y = IVM_traj_LLIN_90[["EIR"]], col = "EIR - LLIN - 90"), size = 1.2) + 
+    labs(title = "An. Arabiensis", x = "Time (days)", y = "EIR")
+  
+  multiplot(p2, cols=1)
+  
+  
+  
+}
 
 plotEIR_VC_R0 = function(IVM_traj){
   #. plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system

@@ -14,8 +14,9 @@ getTheta = function(
   #. getTheta: Facade function to return theta from selected parameters
   
   # Move this to driver
+  speciesSpecificParameters=getspeciesSpecificParameter(),
   #speciesSpecificParameters=getAnGambiaeParameters(), 
-  speciesSpecificParameters=getAnArabiensisParameters(), 
+  #speciesSpecificParameters=getAnArabiensisParameters(), 
   #speciesSpecificParameters=getAnFunestusParameters(),
   interventionParameters=getInterventionsParameters(),
   additionalTransmissionParameters=getAdditionalTransmissionParameters(), 
