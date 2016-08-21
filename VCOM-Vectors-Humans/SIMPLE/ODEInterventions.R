@@ -263,7 +263,7 @@ impactRestingOvipositing = function(time,time_OVI_on,OVIcov,time_ATSB_on,ATSBcov
   
   
   ##*************************Resting and ovipositing *********************************##
-  if (time > time_OVI_on) { OVIcov_t <- OVIcov } else { OVIcov_t <- 0 }
+  if (time > time_OVI_on) { OVIcov_t <- OVIcov*eOVI } else { OVIcov_t <- 0 }
   if (time > time_ATSB_on) { ATSBcov_t <- ATSBcov } else { ATSBcov_t <- 0 }
   if (time > time_SSP_on) { SSPcov_t <- SSPcov } else { SSPcov_t <- 0 }
   
@@ -283,6 +283,8 @@ impactRestingOvipositing = function(time,time_OVI_on,OVIcov,time_ATSB_on,ATSBcov
   cCom_RestingOvipositing <- OVIcov_t*ATSBcov_t*SSPcov_t
   #Neither of them
   c0_RestingOvipositing <- 1 - OVIcov_t - ATSBcov_t - SSPcov_t + OVIcov_t*ATSBcov_t + OVIcov_t*SSPcov_t + ATSBcov_t*OVIcov_t- OVIcov_t*ATSBcov_t*SSPcov_t 
+  
+  #Update with the efffectivenes of the trap
   
   #browser()
   #Change this to accomodate the effectiveness of the trap??

@@ -14,8 +14,8 @@ getTheta = function(
   #. getTheta: Facade function to return theta from selected parameters
   
   # Move this to driver
-  speciesSpecificParameters=getAnGambiaeParameters(), 
-  #speciesSpecificParameters=getAnArabiensisParameters(), 
+  #speciesSpecificParameters=getAnGambiaeParameters(), 
+  speciesSpecificParameters=getAnArabiensisParameters(), 
   #speciesSpecificParameters=getAnFunestusParameters(),
   interventionParameters=getInterventionsParameters(),
   additionalTransmissionParameters=getAdditionalTransmissionParameters(), 
@@ -153,8 +153,8 @@ getAnGambiaeParameters = function(){
     rHOU = 0.00, sHOU = 0.50, rODO = 0.00, sODO = 0.00,
     rSPR = 0.00, sSPR = 0.00, rECT = 0.30, sECT = 0.40,
     rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10,
-    aOBT = 2.00, eSRE = 0.70, fATSB =1.5,  fSSP =  1.50,
-    fOVI = 1.50, fLAR = 55.5, fBIO = 35.5, eOVI = 0.1
+    aOBT = 2.00, eSRE = 0.70, fATSB =1.5,  fSSP = 1.50,
+    fOVI = 1.50, fLAR = 55.5, fBIO = 35.5, eOVI = 0.7
   )
 }
 getAnArabiensisParameters = function(){
@@ -171,7 +171,7 @@ getAnArabiensisParameters = function(){
     rSPR = 0.80, sSPR = 0.15, rECT = 0.50, sECT = 0.50,
     rPPM = 0.50, sPPM = 0.40, dHOU = 0.10, dIRS = 0.10,
     aOBT = 2.00, eSRE = 0.70, fATSB =1.50, fSSP = 1.50,
-    fOVI = 1.50, fLAR = 55.5, fBIO = 15.5, eOVI = 0.1
+    fOVI = 1.50, fLAR = 55.5, fBIO = 15.5, eOVI = 0.7
   )
 }
 getAnFunestusParameters = function(){
@@ -186,7 +186,7 @@ getAnFunestusParameters = function(){
     rSPR = 0.00, sSPR = 0.00, rECT = 0.60, sECT = 0.60,
     rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10,
     aOBT = 2.00, eSRE = 0.70, fATSB =1.50, fSSP = 1.50,
-    fOVI = 1.50, fLAR = 55.5, fBIO = 35.5, eOVI = 0.1
+    fOVI = 1.50, fLAR = 55.5, fBIO = 35.5, eOVI = 0.7
   )
 }
 ######################################################################################
