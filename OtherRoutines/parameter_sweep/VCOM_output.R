@@ -297,13 +297,48 @@ impactInsecticideTreatedCattle = function(time,time_ECS_on,ECScov,time_ECT_on,EC
 
 
 ##**************************Targeting Resting, ovipositing mosquitoes**********************##
+# impactRestingOvipositing = function(time,time_OVI_on,OVIcov,time_ATSB_on,ATSBcov,SSPcov,time_SSP_on,
+#                                     fOVI,fATSB,fSSP,muV){
+#   #. impactRestingOvipositing: compute the impact of ATSB, Space Spraying, and ovitraps on muV_2
+#   
+#   
+#   ##*************************Human - Indoor protection *********************************##
+#   if (time > time_OVI_on) { OVIcov_t <- OVIcov } else { OVIcov_t <- 0 }
+#   if (time > time_ATSB_on) { ATSBcov_t <- ATSBcov } else { ATSBcov_t <- 0 }
+#   if (time > time_SSP_on) { SSPcov_t <- SSPcov } else { SSPcov_t <- 0 }
+#   
+#   #Coverage with ovitraps only
+#   cOVI <- OVIcov_t - OVIcov_t*ATSBcov_t - OVIcov_t*SSPcov_t + OVIcov_t*ATSBcov_t*SSPcov_t 
+#   # Coverage with ATSB only
+#   cATSB <- ATSBcov_t - ATSBcov_t*OVIcov_t - ATSBcov_t*SSPcov_t + OVIcov_t*ATSBcov_t*SSPcov_t
+#   # Coverage with space Spraying only
+#   cSSP <- SSPcov_t - OVIcov_t*SSPcov_t - ATSBcov_t*SSPcov_t + OVIcov_t*ATSBcov_t*SSPcov_t
+#   #OVI and ATSB
+#   cOVI_ATSB <- OVIcov_t*ATSBcov_t - OVIcov_t*ATSBcov_t*SSPcov_t
+#   #OVI and SSP
+#   cOVI_SSP <- OVIcov_t*SSPcov_t - OVIcov_t*ATSBcov_t*SSPcov_t
+#   #ATSB and SSP
+#   cATSB_SSP <- ATSBcov_t*SSPcov_t - OVIcov_t*ATSBcov_t*SSPcov_t
+#   #OVI and ATSB and OVI
+#   cCom_RestingOvipositing <- OVIcov_t*ATSBcov_t*SSPcov_t
+#   #Neither of them
+#   c0_RestingOvipositing <- 1 - OVIcov_t - ATSBcov_t - SSPcov_t + OVIcov_t*ATSBcov_t + OVIcov_t*SSPcov_t + ATSBcov_t*OVIcov_t- OVIcov_t*ATSBcov_t*SSPcov_t 
+#   
+#   muV_2_Com = muV*(cOVI*fOVI + cATSB*fATSB + cSSP*fSSP + cOVI_ATSB *fOVI*fATSB + cOVI_SSP *fOVI*fSSP + cATSB_SSP*fATSB*fSSP
+#                    + cCom_RestingOvipositing *fOVI*fATSB*fSSP + c0_RestingOvipositing)
+#   
+#   return(muV_2_Com)
+#   
+# }
+
+###8/22/2016 version of impactRestingOvipositing, incorporating SK's modification of eOVI###
 impactRestingOvipositing = function(time,time_OVI_on,OVIcov,time_ATSB_on,ATSBcov,SSPcov,time_SSP_on,
-                                    fOVI,fATSB,fSSP,muV){
+                                    fOVI,fATSB,fSSP,muV,eOVI){
   #. impactRestingOvipositing: compute the impact of ATSB, Space Spraying, and ovitraps on muV_2
   
   
-  ##*************************Human - Indoor protection *********************************##
-  if (time > time_OVI_on) { OVIcov_t <- OVIcov } else { OVIcov_t <- 0 }
+  ##*************************Resting and ovipositing *********************************##
+  if (time > time_OVI_on) { OVIcov_t <- OVIcov*eOVI } else { OVIcov_t <- 0 }
   if (time > time_ATSB_on) { ATSBcov_t <- ATSBcov } else { ATSBcov_t <- 0 }
   if (time > time_SSP_on) { SSPcov_t <- SSPcov } else { SSPcov_t <- 0 }
   
@@ -324,12 +359,17 @@ impactRestingOvipositing = function(time,time_OVI_on,OVIcov,time_ATSB_on,ATSBcov
   #Neither of them
   c0_RestingOvipositing <- 1 - OVIcov_t - ATSBcov_t - SSPcov_t + OVIcov_t*ATSBcov_t + OVIcov_t*SSPcov_t + ATSBcov_t*OVIcov_t- OVIcov_t*ATSBcov_t*SSPcov_t 
   
-  muV_2_Com = muV*(cOVI*fOVI + cATSB*fATSB + cSSP*fSSP + cOVI_ATSB *fOVI*fATSB + cOVI_SSP *fOVI*fSSP + cATSB_SSP*fATSB*fSSP
-                   + cCom_RestingOvipositing *fOVI*fATSB*fSSP + c0_RestingOvipositing)
+  #Update with the efffectivenes of the trap
+  
+  #browser()
+  #Change this to accomodate the effectiveness of the trap??
+  muV_2_Com = muV*((cOVI*fOVI) + cATSB*fATSB + cSSP*fSSP + cOVI_ATSB*fATSB*(cOVI*fOVI) + cOVI_SSP *(cOVI*fOVI)*fSSP + cATSB_SSP*fATSB*fSSP
+                   + cCom_RestingOvipositing *(cOVI*fOVI)*fATSB*fSSP + c0_RestingOvipositing)
   
   return(muV_2_Com)
   
 }
+
 
 #impactFeedingCycleParameters = function(muV_1_Com,tau1,zCom,wCom,muV_2_Com,tau2,deltaCom,e_ov){
 impactFeedingCycleParameters = function(time,beta,tau1,tau2,e_ov,time_ATSB_on,ATSBcov,time_SSP_on,SSPcov,fSSP,fATSB,muV,
