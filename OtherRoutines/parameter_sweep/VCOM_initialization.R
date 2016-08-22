@@ -204,12 +204,12 @@ getAnGambiaeParameters = function(){
     rOVI = 0.00, sOVI = 0.00, rFOG = 0.00, sFOG = 0.00,
     rLAR = 0.00, sLAR = 0.00, rBIO = 0.00, sBIO = 0.00,
     rSRE = 0.00, sSRE = 0.00, rIRS = 0.60, sIRS = 0.00,
-    rITN = 0.56, sITN = 0.03, rECS = 0.00, sECS = 0.40,
-    rHOU = 0.00, sHOU = 0.50, rODO = 0.00, sODO = 0.00,
-    rSPR = 0.00, sSPR = 0.00, rECT = 0.30, sECT = 0.40,
-    rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10,
-    aOBT = 2.00, eSRE = 0.70, fATSB =1.5, fSSP =  1.50,
-    fOVI = 1.50, fLAR = 55.5, fBIO = 35.5
+    rITN = 0.56, sITN = 0.03, rECS = 0.00, sECS = 0.10,
+    rHOU = 0.69, sHOU = 0.31, rODO = 0.00, sODO = 0.00,
+    rSPR = 0.82, sSPR = 0.12, rECT = 0.30, sECT = 0.50,
+    rPPM = 0.69, sPPM = 0.31, dHOU = 0.10, dIRS = 0.40,
+    aOBT = 2.00, eSRE = 0.50, fATSB =17.1,  fSSP = 1.50,
+    fOVI = 1.50, fLAR = 55.5, fBIO = 38.1, eOVI = 0.7
   )
 }
 getAnArabiensisParameters = function(){
@@ -221,12 +221,12 @@ getAnArabiensisParameters = function(){
     rOVI = 0.00, sOVI = 0.00, rFOG = 0.00, sFOG = 0.00,
     rLAR = 0.00, sLAR = 0.00, rBIO = 0.00, sBIO = 0.00,
     rSRE = 0.00, sSRE = 0.00, rIRS = 0.60, sIRS = 0.00,
-    rITN = 0.56, sITN = 0.03, rECS = 0.50, sECS = 0.50,
-    rHOU = 0.80, sHOU = 0.15, rODO = 0.00, sODO = 0.00,
-    rSPR = 0.80, sSPR = 0.15, rECT = 0.50, sECT = 0.50,
-    rPPM = 0.50, sPPM = 0.40, dHOU = 0.10, dIRS = 0.10,
-    aOBT = 2.00, eSRE = 0.70, fATSB =1.50, fSSP = 1.50,
-    fOVI = 1.50, fLAR = 55.5, fBIO = 15.5
+    rITN = 0.48, sITN = 0.39, rECS = 0.90, sECS = 0.0,
+    rHOU = 0.61, sHOU = 0.39, rODO = 0.00, sODO = 0.00,
+    rSPR = 0.02, sSPR = 0.15, rECT = 0.50, sECT = 0.50,
+    rPPM = 0.69, sPPM = 0.31, dHOU = 0.10, dIRS = 0.40,
+    aOBT = 2.00, eSRE = 0.50, fATSB =17.1, fSSP = 1.50,
+    fOVI = 1.50, fLAR = 55.5, fBIO = 38.1, eOVI = 0.7
   )
 }
 getAnFunestusParameters = function(){
@@ -235,13 +235,13 @@ getAnFunestusParameters = function(){
     muV = 1/8.9, Q0 = 0.94, phiB = 0.90, phiI = 0.98,
     rOVI = 0.00, sOVI = 0.00, rFOG = 0.00, sFOG = 0.00,
     rLAR = 0.00, sLAR = 0.00, rBIO = 0.00, sBIO = 0.00,
-    rSRE = 0.00, sSRE = 0.00, rIRS = 0.60, sIRS = 0.00,
-    rITN = 0.56, sITN = 0.03, rECS = 0.60, sECS = 0.60,
-    rHOU = 0.00, sHOU = 0.00, rODO = 0.00, sODO = 0.00,
-    rSPR = 0.00, sSPR = 0.00, rECT = 0.60, sECT = 0.60,
-    rPPM = 0.00, sPPM = 0.00, dHOU = 0.10, dIRS = 0.10,
-    aOBT = 2.00, eSRE = 0.70, fATSB =1.50, fSSP = 1.50,
-    fOVI = 1.50, fLAR = 55.5, fBIO = 35.5
+    rSRE = 0.00, sSRE = 0.00, rIRS = 0.63, sIRS = 0.00,
+    rITN = 0.56, sITN = 0.03, rECS = 0.60, sECS = 0.50,
+    rHOU = 0.61, sHOU = 0.39, rODO = 0.00, sODO = 0.00,
+    rSPR = 0.82, sSPR = 0.12, rECT = 0.60, sECT = 0.50,
+    rPPM = 0.69, sPPM = 0.31, dHOU = 0.10, dIRS = 0.37,
+    aOBT = 2.00, eSRE = 0.5, fATSB =17.1, fSSP = 1.50,
+    fOVI = 1.50, fLAR = 55.5, fBIO = 38.1, eOVI = 0.7
   )
 }
 
@@ -317,8 +317,9 @@ getTheta = function(
     dIRS        = speciesSpecificParameters[["dIRS"]],
     dHOU        = speciesSpecificParameters[["dHOU"]],
     aOBT        = speciesSpecificParameters[["aOBT"]],
-    eSRE        = speciesSpecificParameters[["eSRE"]],
+    eSRE        = speciesSpecificParameters[["eSRE"]], 
     fBIO        = speciesSpecificParameters[["fBIO"]],
+    eOVI        = speciesSpecificParameters[["eOVI"]],
     fLAR        = speciesSpecificParameters[["fLAR"]],
     fATSB       = speciesSpecificParameters[["fATSB"]],
     fSSP        = speciesSpecificParameters[["fSSP"]],

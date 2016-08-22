@@ -377,7 +377,7 @@ impactFeedingCycleParameters = function(time,beta,tau1,tau2,e_ov,time_ATSB_on,AT
                                         time_HOU_on,rITN,sITN,rIRS,rHOU,sIRS,sHOU, phiB, phiI,dHOU,dIRS,
                                         time_SPR_on,SPRcov,time_PPM_on,PPMcov,rSPR,rPPM,sSPR,sPPM,
                                         c0,time_ECS_on,ECScov,time_ECT_on,ECTcov,rECT,sECS,sECT,
-                                        time_OVI_on,OVIcov,fOVI){
+                                        time_OVI_on,OVIcov,fOVI,eOVI){
   
   delta <- 1/(tau1+tau2) # Inverse of gonotrophic cycle without interventions
   e_ov <- beta*(exp(muV/delta)-1)/muV # Number of eggs per oviposition per mosquito
@@ -429,7 +429,7 @@ impactFeedingCycleParameters = function(time,beta,tau1,tau2,e_ov,time_ATSB_on,AT
   ##*************************** Resting & Ovipositing *********************************************##
   
   muV_2_Com = impactRestingOvipositing(time,time_OVI_on,OVIcov,time_ATSB_on,ATSBcov,SSPcov,time_SSP_on,
-                                       fOVI,fATSB,fSSP,muV)
+                                       fOVI,fATSB,fSSP,muV,eOVI)
   
   
   ######**************************Computing overall impact***********************************#####
