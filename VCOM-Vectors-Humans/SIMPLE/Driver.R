@@ -28,8 +28,11 @@ source("multiplot.R")
 
 ##NOTE: Different start time for LAR and BIO will crush at the max time entered - to be fixed
 
-# Run first for An. gambiae -
-#MOSQUITO_PARAMETERS = getAnGambiaeParameters()
+-
+# Turn on required specie
+MOSQUITO_PARAMETERS   = getAnGambiaeParameters()
+MOSQUITO_PARAMETERS_2 = getAnArabiensisParameters()
+MOSQUITO_PARAMETERS_3 = getAnFunestusParameters()
 
 # simulation runs per day - enter the end time
 INITIAL_MODELRUNTIME_VALUE   = 50
@@ -119,8 +122,10 @@ INTERVENTION_PARAMETERS = getInterventionsParameters(
                                  #Resting & Ovipositing - Ovitraps --same for ATSB, SSP
                           OVIcov=INITIAL_OVI_COVERAGE,time_OVI_on=INITIAL_OVI_TIME)
 
+#Pass in interventions parameter with updated coverage and the specie
 
-theta <<- getTheta(interventionParameters=INTERVENTION_PARAMETERS)
+theta <<- getTheta(interventionParameters=INTERVENTION_PARAMETERS, speciesSpecificParameters=MOSQUITO_PARAMETERS)
+
 
 ## Initialize the model
 initState <<- calculateInitialState(theta)
