@@ -188,12 +188,12 @@ shinyUI(
                 column(COVERAGE_INIT_SIZE,numericInput("time_PPM_on",NULL,value=0,min=0,max=365))
               )
             ),mainPanel(
+              plotOutput("plotEIR"),
               plotOutput("plotTrajectory"),
-              plotOutput("plotHuman"),
+              plotOutput("plotDemographics"),
               plotOutput("plotVC"),
               plotOutput("plotR0"),
-              plotOutput("plotEIR"),
-              plotOutput("plotDemographics")
+              plotOutput("plotHuman")
             )
           ),
           helpText("Cite as: "),
@@ -213,12 +213,14 @@ shinyUI(
             column(4,""),
             column(4,align="center",
               titlePanel(h3("Plots",align="center")),
+              fluidRow(
               downloadButton("downloadPlotTrace", 'Download Trajectory Plot'),
               downloadButton("downloadPlotEIR", 'Download EIR Plot'),
               downloadButton("downloadPlotDemographics", 'Download Demographics Plot'),
               downloadButton("downloadPlotVC", 'Download VC Plot'),
               downloadButton("downloadPlotR0", 'Download R0 Plot'),
               downloadButton("downloadPlotHuman", 'Download Human Plot')
+              )
             )
           )
         )

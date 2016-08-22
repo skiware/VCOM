@@ -20,8 +20,8 @@ shinyServer(
     output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
     output$plotDemographics = renderPlot({barChartMosquitoDemographics_slwu(IVM_traj)})
-    output$plotVC = renderPlot({plotTrajectory(IVM_traj)})
-    output$plotR0 = renderPlot({plotTrajectory(IVM_traj)})
+    output$plotVC = renderPlot({plotVC(IVM_traj)})
+    output$plotR0 = renderPlot({plotR0(IVM_traj)})
     output$plotEIR = renderPlot({plotEIR(IVM_traj)})
     output$plotHuman = renderPlot({plotTrajectoryHumans(IVM_traj)})
     #############################################################################
@@ -66,8 +66,8 @@ shinyServer(
       output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
       output$IVM_Runtime=renderTable(IVM_traj)
       output$plotDemographics = renderPlot({barChartMosquitoDemographics_slwu(IVM_traj)})
-      output$plotVC = renderPlot({plotTrajectory(IVM_traj)})
-      output$plotR0 = renderPlot({plotTrajectory(IVM_traj)})
+      output$plotVC = renderPlot({plotVC(IVM_traj)})
+      output$plotR0 = renderPlot({plotR0(IVM_traj)})
       output$plotEIR = renderPlot({plotEIR(IVM_traj)})
       output$plotHuman = renderPlot({plotTrajectoryHumans(IVM_traj)})
       print(INTERVENTION_PARAMETERS)
@@ -95,12 +95,6 @@ shinyServer(
         write.csv(IVM_traj,file)
       }
     )
-#     output$downloadCSVEIR <- downloadHandler(
-#       filename <- function(){paste("VCOM_EIR","csv",sep=".")},
-#       content <- function(file){
-#         write.csv(IVM_traj,file)
-#       }
-#     )
     output$downloadPlotTrace <- downloadHandler(
       filename = function(){paste(input$dataset,'TrajectoryPlot.png',sep='')},
       content = function(file){
@@ -116,17 +110,24 @@ shinyServer(
       }
     )
     output$downloadPlotVC <- downloadHandler(
-      filename = function(){paste(input$dataset,'Demographics.png',sep='')},
+      filename = function(){paste(input$dataset,'VC.png',sep='')},
       content = function(file){
         device <- function(...,width,height){grDevices::png(...,width=2*width,height=height,res=300,units="in")}
-        ggsave(file,plot=barChartMosquitoDemographics_slwu(IVM_traj),device=device)
+        ggsave(file,plot=plotVC(IVM_traj),device=device)
       }
     )
     output$downloadPlotHuman <- downloadHandler(
-      filename = function(){paste(input$dataset,'Demographics.png',sep='')},
+      filename = function(){paste(input$dataset,'Human.png',sep='')},
       content = function(file){
         device <- function(...,width,height){grDevices::png(...,width=2*width,height=height,res=300,units="in")}
         ggsave(file,plot=plotTrajectoryHumans(IVM_traj),device=device)
+      }
+    )
+    output$downloadPlotR0 <- downloadHandler(
+      filename = function(){paste(input$dataset,'R0.png',sep='')},
+      content = function(file){
+        device <- function(...,width,height){grDevices::png(...,width=2*width,height=height,res=300,units="in")}
+        ggsave(file,plot=plotR0(IVM_traj),device=device)
       }
     )
     output$downloadPlotDemographics <- downloadHandler(
