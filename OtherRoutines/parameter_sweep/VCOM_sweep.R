@@ -309,7 +309,11 @@ for(i in 1:length(vcom_iterator)){
 close.connection(con,"w+")
 
 
+##########################################################
 ###run parameter sweep in parallel holding ITN constant###
+##########################################################
+
+#n=2
 vcom_iterator_llin <- create_tuples_constant(n=2,epsilon0=50,constant="ITNcov",constant_cov=.5,species=2,time_on=20,granularity=5)
 
 cl <- makeCluster(spec=detectCores())
@@ -323,6 +327,8 @@ stopCluster(cl)
 rm(cl)
 
 #export results
+saveRDS(object=vcom_parameter_sweep_llin,file="FullTraj_sweepLLIN-2.rds")
+
 EIR_sweepLLIN <- sapply(vcom_parameter_sweep_llin,function(x){
   x$EIR[length(x$EIR)]
 })
@@ -333,5 +339,34 @@ con <- file("tuple_namesLLIN-2.txt","w+")
 write(x=names(vcom_iterator_llin[[1]]),file=con,ncolumns=32,append=TRUE,sep=",")
 for(i in 1:length(vcom_iterator_llin)){
   write(x=as.character(unname(vcom_iterator_llin[[i]])),file=con,ncolumns=32,append=TRUE,sep=",")
+}
+close.connection(con,"w+")
+
+#n=3
+vcom_iterator_llin3 <- create_tuples_constant(n=3,epsilon0=50,constant="ITNcov",constant_cov=.5,species=2,time_on=20,granularity=5)
+
+cl <- makeCluster(spec=detectCores())
+registerDoSNOW(cl)
+
+vcom_parameter_sweep_llin3 <- foreach(i=vcom_iterator_llin3,.packages=c("deSolve"),.verbose=TRUE) %dopar% {
+  run_vcom(parameters=as.list(i),time_end=150)
+}
+
+stopCluster(cl)
+rm(cl)
+
+#export results
+saveRDS(object=vcom_parameter_sweep_llin3,file="FullTraj_sweepLLIN-3.rds")
+
+EIR_sweepLLIN3 <- sapply(vcom_parameter_sweep_llin3,function(x){
+  x$EIR[length(x$EIR)]
+})
+
+write(EIR_sweepLLIN3,ncolumns=1,file="EIR_sweepLLIN-3.txt",sep=",")
+
+con <- file("tuple_namesLLIN-3.txt","w+")
+write(x=names(vcom_iterator_llin3[[1]]),file=con,ncolumns=32,append=TRUE,sep=",")
+for(i in 1:length(vcom_iterator_llin3)){
+  write(x=as.character(unname(vcom_iterator_llin3[[i]])),file=con,ncolumns=32,append=TRUE,sep=",")
 }
 close.connection(con,"w+")
