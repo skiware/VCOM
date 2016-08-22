@@ -20,6 +20,7 @@ library(foreach)
 ###Creating Figure 1###
 #######################
 
+#create the iterator
 parameter_names <- c("epsilon0","species","OVIcov","time_OVI_on","FOGcov","time_FOG_on","LARcov","time_LAR_on",
                      "BIOcov",   "time_BIO_on",
                      "SREcov",   "time_SRE_on",
@@ -45,6 +46,7 @@ for(i in 1:nrow(fig1_iterator)){
   fig1_iterator_list[[i]] <- as.list(fig1_iterator[i,])
 }
 
+#sweep through parameters
 cl <- makeCluster(spec=detectCores())
 registerDoSNOW(cl)
 
