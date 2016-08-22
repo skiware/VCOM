@@ -3,12 +3,22 @@
 ######Sean Wu 8/22/2016###################################
 ##########################################################
 
-###load libraries and source files###
+#
 
+# Clear all stored parameters:
+rm(list=ls())
+###load libraries and source files##
 #source model files
-source("C:/Users/WuS/Dropbox/IVM Team/SeanWu/VCOM/VCOM/OtherRoutines/parameter_sweep/VCOM_initialization.R")
-source("C:/Users/WuS/Dropbox/IVM Team/SeanWu/VCOM/VCOM/OtherRoutines/parameter_sweep/VCOM_output.R")
-source("C:/Users/WuS/Dropbox/IVM Team/SeanWu/VCOM/VCOM/OtherRoutines/parameter_sweep/VCOM_model.R")
+#source("C:/Users/WuS/Dropbox/IVM Team/SeanWu/VCOM/VCOM/OtherRoutines/parameter_sweep/VCOM_initialization.R")
+#source("C:/Users/WuS/Dropbox/IVM Team/SeanWu/VCOM/VCOM/OtherRoutines/parameter_sweep/VCOM_output.R")
+#source("C:/Users/WuS/Dropbox/IVM Team/SeanWu/VCOM/VCOM/OtherRoutines/parameter_sweep/VCOM_model.R")
+
+#Sourcing from SK laptop
+
+source("C:/Users/skiware/Documents/VCOM/VCOM/OtherRoutines/parameter_sweep/VCOM_initialization.R")
+source("C:/Users/skiware/Documents/VCOM/VCOM/OtherRoutines/parameter_sweep/VCOM_output.R")
+source("C:/Users/skiware/Documents/VCOM/VCOM/OtherRoutines/parameter_sweep/VCOM_model.R")
+
 
 library(deSolve)
 library(ggplot2)
@@ -64,13 +74,13 @@ fig1_df <- cbind(expand.grid(epsilon0=c(10,50,100),species=c("An. Gambiae","An. 
 ggplot(data=fig1_df) +
   geom_raster(aes(x=ITNcov,y=epsilon0,fill=EIR)) +
   # scale_fill_gradientn(colours = heat.colors(10)) +
-  geom_text(aes(x=ITNcov,y=epsilon0,label=round(EIR,digits=3)),color="white",size=4.5) +
+  geom_text(aes(x=ITNcov,y=epsilon0,label=round(EIR,digits=2)),color="white",size=4.5) +
   facet_grid(~species) +
   scale_y_continuous(breaks=c(10,50,100)) +
   scale_x_continuous(breaks=c(0,0.50,0.80),labels=scales::percent) +
   guides(fill=FALSE) +
   labs(x="ITN Coverage",y="Baseline EIR") +
-  theme_bw() +
+  theme_bw(base_size = 18) +
   theme(panel.grid.minor=element_blank(),
         panel.grid.major=element_blank(),
         strip.text.x=element_text(size=12,face="bold.italic"))
@@ -83,13 +93,13 @@ fig1_line_df$ITNcov <- rep(expand.grid(epsilon0=c("Baseline EIR: 10","Baseline E
 fig1_line_df$time <- rep(1:366,27)
 
 ggplot(data=fig1_line_df) +
-  geom_line(aes(x=time,y=EIR,color=as.factor(ITNcov),group=ITNcov),size=2,alpha=0.75) +
-  scale_color_discrete(name="ITN\nCoverage",labels=c("0% ITN","50% ITN","100% ITN")) +
-  # facet_grid(epsilon0 ~ species,scales="free_y") +
-  facet_grid(epsilon0 ~ species) +
+  geom_line(aes(x=time,y=EIR,color=as.factor(ITNcov),group=ITNcov),size=1.75,alpha=0.75) +
+  scale_color_discrete(name="ITN\nCoverage",labels=c("0% ITN","50% ITN","80% ITN")) +
+  facet_grid(epsilon0 ~ species,scales="free_y") +
+  #facet_grid(epsilon0 ~ species) +
   labs(x="Time (Days)") +
   guides(colour=guide_legend(override.aes=list(alpha=1))) +
-  theme_bw() +
+  theme_bw(base_size = 18) +
   theme(axis.title.y=element_blank(),
         strip.text.x=element_text(size=12,face="bold.italic"),
         strip.text.y=element_text(size=10,face="bold"))
