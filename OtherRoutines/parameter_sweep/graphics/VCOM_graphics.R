@@ -60,7 +60,7 @@ rm(cl)
 fig1_df <- cbind(expand.grid(epsilon0=c(10,50,100),species=c("An. Gambiae","An. Arabiensis","An. Funestus"),ITNcov=c(0,0.5,0.8)),
                  EIR=sapply(fig1_output,function(x){x$EIR[366]}))
 
-#plot the data
+#plot the data as heatmap
 ggplot(data=fig1_df) +
   geom_raster(aes(x=ITNcov,y=epsilon0,fill=EIR)) +
   # scale_fill_gradientn(colours = heat.colors(10)) +
@@ -75,5 +75,23 @@ ggplot(data=fig1_df) +
         panel.grid.major=element_blank(),
         strip.text.x=element_text(size=12,face="bold.italic"))
   
+#plot the data as lines
+fig1_line_df <- data.frame(EIR=unlist(lapply(fig1_output,function(x){x$EIR})))
+fig1_line_df$epsilon0 <- rep(expand.grid(epsilon0=c("Baseline EIR: 10","Baseline EIR: 50","Baseline EIR: 100"),species=c("An. Gambiae","An. Arabiensis","An. Funestus"),ITNcov=c(0,0.5,0.8))$epsilon0,each=366)
+fig1_line_df$species <- rep(expand.grid(epsilon0=c("Baseline EIR: 10","Baseline EIR: 50","Baseline EIR: 100"),species=c("An. Gambiae","An. Arabiensis","An. Funestus"),ITNcov=c(0,0.5,0.8))$species,each=366)
+fig1_line_df$ITNcov <- rep(expand.grid(epsilon0=c("Baseline EIR: 10","Baseline EIR: 50","Baseline EIR: 100"),species=c("An. Gambiae","An. Arabiensis","An. Funestus"),ITNcov=c(0,0.5,0.8))$ITNcov,each=366)
+fig1_line_df$time <- rep(1:366,27)
+
+ggplot(data=fig1_line_df) +
+  geom_line(aes(x=time,y=EIR,color=as.factor(ITNcov),group=ITNcov),size=2,alpha=0.75) +
+  scale_color_discrete(name="ITN\nCoverage",labels=c("0% ITN","50% ITN","100% ITN")) +
+  # facet_grid(epsilon0 ~ species,scales="free_y") +
+  facet_grid(epsilon0 ~ species) +
+  labs(x="Time (Days)") +
+  guides(colour=guide_legend(override.aes=list(alpha=1))) +
+  theme_bw() +
+  theme(axis.title.y=element_blank(),
+        strip.text.x=element_text(size=12,face="bold.italic"),
+        strip.text.y=element_text(size=10,face="bold"))
 
 
