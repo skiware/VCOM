@@ -19,7 +19,10 @@ shinyServer(
     output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
     output$plotDemographics = renderPlot({barChartMosquitoDemographics_slwu(IVM_traj)})
-    output$plotEIR = renderPlot({plotEIR(IVM_traj,theta,timing)})
+    output$plotVC = renderPlot({plotTrajectory(IVM_traj)})
+    output$plotR0 = renderPlot({plotTrajectory(IVM_traj)})
+    output$plotEIR = renderPlot({plotEIR(IVM_traj)})
+    output$plotHuman = renderPlot({plotTrajectoryHumans(IVM_traj)})
     #############################################################################
     # CLICK EVENTS ##############################################################
     observeEvent(input$buttonTest,{cat("Button event!\n")})
@@ -59,10 +62,13 @@ shinyServer(
       #--------------------------------------------------------------------------
       initState=calculateInitialState(theta)
       IVM_traj<<-runODE(input$sliderTime,1,initState,theta,"lsoda")
-      output$plotDemographics=renderPlot({barChartMosquitoDemographics_slwu(IVM_traj)})
       output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
-      timing<<-seq(0,input$sliderTime,by=1)
-      output$plotEIR = renderPlot({plotEIR(IVM_traj,theta,timing)})
+      output$IVM_Runtime=renderTable(IVM_traj)
+      output$plotDemographics = renderPlot({barChartMosquitoDemographics_slwu(IVM_traj)})
+      output$plotVC = renderPlot({plotTrajectory(IVM_traj)})
+      output$plotR0 = renderPlot({plotTrajectory(IVM_traj)})
+      output$plotEIR = renderPlot({plotEIR(IVM_traj)})
+      output$plotHuman = renderPlot({plotTrajectoryHumans(IVM_traj)})
       print(INTERVENTION_PARAMETERS)
       #--------------------------------------------------------------------------
       shinyjs::enable("downloadCSVTrace"); shinyjs::enable("downloadPlotTrace")
@@ -104,7 +110,7 @@ shinyServer(
       filename = function(){paste(input$dataset,'EIRPlot.png',sep='')},
       content = function(file){
         device <- function(...,width,height){grDevices::png(...,width=2*width,height=height,res=300,units="in")}
-        ggsave(file,plot=plotEIR(IVM_traj,theta,time),device=device)
+        ggsave(file,plot=plotEIR(IVM_traj),device=device)
       }
     )
     output$downloadPlotDemographics <- downloadHandler(

@@ -60,7 +60,7 @@ shinyUI(
     tags$script(ENTER_DOWN_RUN),
     tags$head(tags$style(type="text/css",WORKING_MESSAGE_STYLE)),
     conditionalPanel(condition="$('html').hasClass('shiny-busy')",tags$div("Working...",id="loadmessage")),
-    titlePanel(h1("VCOM: Expert",align="center"),windowTitle="VCOM: Expert"),
+    titlePanel(h1("VCOM: Expert (beta)",align="center"),windowTitle="VCOM: Expert"),
     titlePanel(h4("Vector Control Optimization Model",align="center")),
     titlePanel(h4(tags$a(class="btn btn-danger", href="http://chipdelmal.github.io/VCOM/", "Home", style="display: block; width: 100%;"),align="center")),
     navbarPage("",id="nav",

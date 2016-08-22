@@ -31,7 +31,7 @@ COVERAGE_STEP_SIZE = .025
 COVERAGE_LABELS_SIZE = 3
 COVERAGE_BAR_SIZE = 5
 COVERAGE_INIT_SIZE = 4
-INITIAL_TIME_VALUE = 80
+INITIAL_TIME_VALUE = 365
 INITIAL_ITN_COVERAGE = .5
 INITIAL_EIR = 100
 INITIAL_ITN_TIME = 50
@@ -106,12 +106,17 @@ shinyUI(
               # sliderInput("Q0",label=NULL,min=0,max=1,value=0,step=.01),
               #####################################################################
               fluidRow(h3("3. Simulation Time")),
-              sliderInput("sliderTime","Days to Simulate:",min=1,max=365,value=80),
+              sliderInput("sliderTime","Days to Simulate:",min=1,max=365,value=INITIAL_TIME_VALUE),
               #####################################################################
               fluidRow(h3("4. Run Model")),
               actionButton("buttonRun","Run",width="100%"),
               #####################################################################
               fluidRow(h3("5. Interventions")),
+              fluidRow(
+                "Key: Ovitraps (OVI), Larviciding (LAR), Biological Control (BIO), Source Reduction (SRE)
+                Insecticide-Treated Nets (ITN), Indoor Residual Spraying (IRS), Endocticide (ECS), Endocticide (ECT), House Modifications (HOU),
+                Odor-Baited Traps (OBT), Spatial-Spraying (SPR), (PPM)"
+              ),
               fluidRow(
                 column(COVERAGE_LABELS_SIZE,h4("",align="center")),
                 column(COVERAGE_BAR_SIZE,h4("Coverage",align="center")),
@@ -181,15 +186,14 @@ shinyUI(
                 column(COVERAGE_LABELS_SIZE,h5("PPM",align="left")),
                 column(COVERAGE_BAR_SIZE,sliderInput("PPMcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
                 column(COVERAGE_INIT_SIZE,numericInput("time_PPM_on",NULL,value=0,min=0,max=365))
-              ),
-              helpText("Key: Ovitraps (OVI), Larviciding (LAR), Biological Control (BIO), Source Reduction (SRE)
-                      Insecticide-Treated Nets (ITN), Indoor Residual Spraying (IRS), Endocticide (ECS), Endocticide (ECT), House Modifications (HOU),
-                      Odor-Baited Traps (OBT), Spatial-Spraying (SPR), (PPM)"
               )
             ),mainPanel(
               plotOutput("plotTrajectory"),
-              plotOutput("plotDemographics"),
-              plotOutput("plot_SA_Figures_v2")
+              plotOutput("plotHuman"),
+              plotOutput("plotVC"),
+              plotOutput("plotR0"),
+              plotOutput("plotEIR"),
+              plotOutput("plotDemographics")
             )
           ),
           helpText("Cite as: "),
