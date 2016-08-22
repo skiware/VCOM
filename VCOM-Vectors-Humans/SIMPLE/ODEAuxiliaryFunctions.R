@@ -82,6 +82,13 @@ plotEIR = function(IVM_traj){
     labs(x = "Time (days)", y = " EIR")
 
 }
+plotEIR_1 = function(IVM_traj,EIR_1){
+  #. plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
+  ggplot(IVM_traj, aes(x = time, y = EIR, color = State)) +
+    geom_line(aes(y = EIR_1, col = "EIR"), size = 1.2) +
+    labs(x = "Time (days)", y = " EIR")
+  
+}
 
 plot_MS_Figures = function(IVM_traj_Control,IVM_traj_LLIN_50,IVM_traj_LLIN_80,IVM_traj_LLIN_90,theta,INITIAL_MODELRUNTIME_VALUE){
   #. plot_MS_Figures - produce some figures for the manuscript
