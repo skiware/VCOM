@@ -15,7 +15,8 @@ shinyServer(
     output$modelStatus <- renderText({"Waiting"})
     shinyjs::disable("downloadCSVTrace"); shinyjs::disable("downloadPlotTrace")
     shinyjs::disable("downloadCSVEIR"); shinyjs::disable("downloadPlotEIR")
-    shinyjs::disable("downloadCSVDemographics"); shinyjs::disable("downloadPlotDemographics")
+    shinyjs::disable("downloadPlotDemographics"); shinyjs::disable("downloadPlotVC")
+    shinyjs::disable("downloadPlotHuman"); shinyjs::disable("downloadPlotR0")
     output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
     output$plotDemographics = renderPlot({barChartMosquitoDemographics_slwu(IVM_traj)})
@@ -73,7 +74,8 @@ shinyServer(
       #--------------------------------------------------------------------------
       shinyjs::enable("downloadCSVTrace"); shinyjs::enable("downloadPlotTrace")
       shinyjs::enable("downloadCSVEIR"); shinyjs::enable("downloadPlotEIR")
-      shinyjs::enable("downloadCSVDemographics"); shinyjs::enable("downloadPlotDemographics")
+      shinyjs::enable("downloadPlotDemographics"); shinyjs::enable("downloadPlotVC")
+      shinyjs::enable("downloadPlotHuman"); shinyjs::enable("downloadPlotR0")
       output$modelStatus <- renderText({"Done!"})
     })
     #############################################################################
@@ -111,6 +113,20 @@ shinyServer(
       content = function(file){
         device <- function(...,width,height){grDevices::png(...,width=2*width,height=height,res=300,units="in")}
         ggsave(file,plot=plotEIR(IVM_traj),device=device)
+      }
+    )
+    output$downloadPlotVC <- downloadHandler(
+      filename = function(){paste(input$dataset,'Demographics.png',sep='')},
+      content = function(file){
+        device <- function(...,width,height){grDevices::png(...,width=2*width,height=height,res=300,units="in")}
+        ggsave(file,plot=barChartMosquitoDemographics_slwu(IVM_traj),device=device)
+      }
+    )
+    output$downloadPlotHuman <- downloadHandler(
+      filename = function(){paste(input$dataset,'Demographics.png',sep='')},
+      content = function(file){
+        device <- function(...,width,height){grDevices::png(...,width=2*width,height=height,res=300,units="in")}
+        ggsave(file,plot=plotTrajectoryHumans(IVM_traj),device=device)
       }
     )
     output$downloadPlotDemographics <- downloadHandler(

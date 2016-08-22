@@ -112,11 +112,11 @@ shinyUI(
               actionButton("buttonRun","Run",width="100%"),
               #####################################################################
               fluidRow(h3("5. Interventions")),
-              fluidRow(
+              fluidRow(helpText(
                 "Key: Ovitraps (OVI), Larviciding (LAR), Biological Control (BIO), Source Reduction (SRE)
                 Insecticide-Treated Nets (ITN), Indoor Residual Spraying (IRS), Endocticide (ECS), Endocticide (ECT), House Modifications (HOU),
-                Odor-Baited Traps (OBT), Spatial-Spraying (SPR), (PPM)"
-              ),
+                Odor-Baited Traps (OBT), Spatial-Spraying (SPR), Personal Protection Measure (PPM)"
+              )),
               fluidRow(
                 column(COVERAGE_LABELS_SIZE,h4("",align="center")),
                 column(COVERAGE_BAR_SIZE,h4("Coverage",align="center")),
@@ -215,7 +215,10 @@ shinyUI(
               titlePanel(h3("Plots",align="center")),
               downloadButton("downloadPlotTrace", 'Download Trajectory Plot'),
               downloadButton("downloadPlotEIR", 'Download EIR Plot'),
-              downloadButton("downloadPlotDemographics", 'Download Demographics Plot')
+              downloadButton("downloadPlotDemographics", 'Download Demographics Plot'),
+              downloadButton("downloadPlotVC", 'Download VC Plot'),
+              downloadButton("downloadPlotR0", 'Download R0 Plot'),
+              downloadButton("downloadPlotHuman", 'Download Human Plot')
             )
           )
         )
