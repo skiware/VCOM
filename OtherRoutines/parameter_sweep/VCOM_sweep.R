@@ -310,7 +310,7 @@ close.connection(con,"w+")
 
 
 ###run parameter sweep in parallel holding ITN constant###
-vcom_iterator_llin <- create_tuples_constant(n=1,epsilon0=50,constant="ITNcov",constant_cov=.5,species=2,time_on=20,granularity=5)
+vcom_iterator_llin <- create_tuples_constant(n=2,epsilon0=50,constant="ITNcov",constant_cov=.5,species=2,time_on=20,granularity=5)
 
 cl <- makeCluster(spec=detectCores())
 registerDoSNOW(cl)
