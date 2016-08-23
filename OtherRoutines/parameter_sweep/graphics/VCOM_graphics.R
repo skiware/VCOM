@@ -26,6 +26,7 @@ library(parallel)
 library(doSNOW)
 library(foreach)
 
+
 #######################
 ###Creating Figure 1###
 #######################
@@ -113,9 +114,16 @@ itn_n2_dat <- readRDS("C:/Users/WuS/Dropbox/IVM Team/SeanWu/VCOM/VCOM/OtherRouti
 itn_n2_tuples <- read.csv("C:/Users/WuS/Dropbox/IVM Team/SeanWu/VCOM/VCOM/OtherRoutines/parameter_sweep/tuple_namesLLIN-2.txt")
 
 #filter data to not include interventions at 100% (negative index, ie; what NOT to include)
+
+null_int <- c("SSP","IRS","BIO","SRE","ECS","OBT")
+null_int_cols <- unname(unlist(sapply(null_int,function(x){
+  grep(x,colnames(itn_n2_tuples))
+},simplify=FALSE)))
+
 filter_index <- NULL
 for(i in 1:nrow(itn_n2_tuples)){
-  if(any(itn_n2_tuples[i,grep("cov",colnames(itn_n2_tuples))] == 1)){
+  if(any(itn_n2_tuples[i,grep("cov",colnames(itn_n2_tuples))] == 1) | 
+     any(unlist(itn_n2_tuples[i,null_int_cols][,grep("cov",colnames(itn_n2_tuples[,null_int_cols]))]) != 0)){
     filter_index <- c(filter_index,i)
   } else {
     next()
@@ -129,6 +137,35 @@ itn_n2_tuples <- itn_n2_tuples[-filter_index,]
 eir_sort <- order(sapply(itn_n2_dat,function(x){
   min(x$EIR)
 }))
+
+itn_n2_dat <- itn_n2_dat[eir_sort]
+itn_n2_tuples <- itn_n2_tuples[eir_sort,]
+
+itn_n2_tuples <- itn_n2_tuples[,-grep("time",colnames(itn_n2_tuples))]
+itn_n2_tuples <- itn_n2_tuples[,-which(sapply(itn_n2_tuples,function(x){all(x==0)}))]
+
+itn_n2_dat <- data.frame(itn_n2_tuples,"EIR"=sapply(itn_n2_dat,function(x){min(x$EIR)}))
+
+#plot the 8 best combinations
+itn_n2_plot_dat <- data.frame(EIR=itn_n2_dat[2:9,"EIR"])
+itn_n2_plot_dat$combination <- LETTERS[1:8]
+
+ggplot(data=itn_n2_plot_dat) +
+  geom_bar(aes(x=combination,y=EIR,fill=combination),stat="identity",colour="black") +
+  scale_y_continuous(labels=scales::scientific) +
+  scale_x_discrete(labels=c("ITN 50%\nLarvacide 80%\nATSB 80%",
+                            "ITN 50%\nLarvacide 60%\nATSB 80%",
+                            "ITN 50%\nSpace Spray 80%\nATSB 80%",
+                            "ITN 50%\nSpace Spray 60%\nATSB 80%",
+                            "ITN 50%\nLarvacide 40%\nATSB 80%",
+                            "ITN 50%\nSpace Spray 40%\nATSB 80%",
+                            "ITN 50%\nTopical Endectocide 80%\nATSB 80%",
+                            "ITN 50%\nLarvacide 20%\nATSB 80%")) +
+  guides(fill=FALSE) +
+  theme_bw() +
+  theme(axis.title.x=element_blank(),
+        axis.title.y=element_text(size=16,face="bold"),
+        axis.text.x=element_text(size=12))
 
 
 #################################################
@@ -182,6 +219,10 @@ for(i in 1:length(comb_iterator_list)){
 }
 close.connection(con,"w+")
 
+#load output
+# comb_output <- readRDS(file="itn_irs_comb.rds")
+# itn_irs_tuples <- read.csv("C:/Users/WuS/Dropbox/IVM Team/SeanWu/VCOM/VCOM/OtherRoutines/parameter_sweep/graphics/itn_irs_tuples.txt")
+
 #plot grid heatmap
 comb_df <- cbind(expand.grid(epsilon0=c("Baseline EIR: 10","Baseline EIR: 50","Baseline EIR: 100"),species=c("An. Gambiae","An. Arabiensis","An. Funestus"),ITNcov=seq(0,1,by=0.05),IRScov=seq(0,1,by=0.05)),
                  EIR=sapply(comb_output,function(x){x$EIR[366]}))
@@ -212,8 +253,10 @@ comb_v1 <- ggplot(data=comb_df) +
   guides(fill=FALSE) +
   theme(panel.grid.minor=element_blank(),
         panel.grid.major=element_blank(),
-        strip.text.x=element_text(size=12,face="bold.italic"),
-        strip.text.y=element_text(size=11,face="bold"))
+        strip.text.x=element_text(size=12.5,face="bold.italic"),
+        strip.text.y=element_text(size=11,face="bold"),
+        axis.title.x=element_text(size=12.5,face="bold"),
+        axis.title.y=element_text(size=12.5,face="bold"))
 
 comb_v2 <- comb_v1 + 
   stat_contour(aes(x=ITNcov,y=IRScov,z=EIR,colour=..level..)) + 
