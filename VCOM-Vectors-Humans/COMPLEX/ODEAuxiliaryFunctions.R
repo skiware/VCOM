@@ -21,9 +21,11 @@ plotTrajectory = function(IVM_traj){
   #. plotTrajectory: Plots the evolution of the dynamics of the system
   ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
     #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) +
-    geom_line(aes(y = IV, col = "IV"), size = 1.2) +
-    geom_line(aes(y = SV, col = "SV"), size = 1.2) +
-    geom_line(aes(y = EV, col = "EV"), size = 1.2) +
+    theme_grey(base_size = 18, base_family = "") +
+    geom_line(aes(y = IV, col = "Infected"), size = 1.75) +
+    geom_line(aes(y = SV, col = "Suceptible"), size = 1.75) +
+    geom_line(aes(y = EV, col = "Exposed"), size = 1.75) +
+    ylim(0, NA) +
     labs(x = "Time (days)", y = "Number of mosquitoes")
 }
 
@@ -74,9 +76,11 @@ plotTrajectoryDEBUG <- function(traj,log=FALSE){
 plotTrajectoryHumans = function(IVM_traj){
   #. plotTrajectory: Plots the evolution of the dynamics of the system
   ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
+    theme_grey(base_size = 18, base_family = "") +
     #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) +
-    geom_line(aes(y = IH, col = "IH"), size = 1.2) +
-    geom_line(aes(y = SH, col = "SH"), size = 1.2) +
+    geom_line(aes(y = IH, col = "Infected"), size = 1.75) +
+    geom_line(aes(y = SH, col = "Suceptible"), size = 1.75) +
+    ylim(0, NA) +
     labs(x = "Time (days)", y = "Number of humans")
 }
 plotEIR = function(IVM_traj){
@@ -87,6 +91,32 @@ plotEIR = function(IVM_traj){
 
 }
 
+plotEIR = function(IVM_traj){
+  #. plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
+   ggplot(IVM_traj, aes(x = time, y = EIR, color = State)) +
+    theme_grey(base_size = 18, base_family = "") +
+    geom_line(aes(y = IVM_traj[["EIR"]], col = "EIR"), size = 1.75, colour = 'magenta') +
+    ylim(0, NA) +
+    labs(x = "Time (days)", y = "Entomological Inoculation Rate (EIR)")
+}
+
+plotVC = function(IVM_traj){
+  #. plotVC
+  ggplot(IVM_traj, aes(x = time, y = VC, color = State)) +
+    theme_grey(base_size = 18, base_family = "") +
+    geom_line(aes(y = IVM_traj[["VC"]], col = "VC"), size = 1.75, colour = 'purple') +
+    ylim(0, NA) +
+    labs(x = "Time (days)", y = "Vectorial Capacity (VC)")
+}
+
+plotR0 = function(IVM_traj){
+  #. plotR0: Plots EIR, VC and R0 dynamics of the system
+  ggplot(IVM_traj, aes(x = time, y = EIR, color = State)) +
+    theme_grey(base_size = 18, base_family = "") +
+    geom_line(aes(y = IVM_traj[["R0"]], col = "R0"), size = 1.75, colour = "blue") +
+    ylim(0, NA) +
+    labs(x = "Time (days)", y = "Basic Reproduction Rate (R0)")
+ }
 
 plotEIR_VC_R0 = function(IVM_traj){
   #. plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system

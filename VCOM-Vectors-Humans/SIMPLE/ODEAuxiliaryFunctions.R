@@ -17,9 +17,11 @@ plotTrajectory = function(IVM_traj){
   #. plotTrajectory: Plots the evolution of the dynamics of the system
   ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
     #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) +
-    geom_line(aes(y = IV, col = "IV"), size = 1.2) +
-    geom_line(aes(y = SV, col = "SV"), size = 1.2) +
-    geom_line(aes(y = EV, col = "EV"), size = 1.2) +
+    theme_grey(base_size = 18, base_family = "") +
+    geom_line(aes(y = IV, col = "Infected"), size = 1.75) +
+    geom_line(aes(y = SV, col = "Suceptible"), size = 1.75) +
+    geom_line(aes(y = EV, col = "Exposed"), size = 1.75) +
+    ylim(0, NA) +
     labs(x = "Time (days)", y = "Number of mosquitoes")
 }
 
@@ -34,12 +36,12 @@ plotTrajectoryALL = function(IVM_traj){
   #. plotTrajectory: Plots the evolution of the dynamics of the system
   ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
     #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) +
-    geom_line(aes(y = EL, col = "EL"), size = 1.2) +
-    geom_line(aes(y = LL, col = "LL"), size = 1.2) +
-    geom_line(aes(y = PL, col = "PL"), size = 1.2) +
-    geom_line(aes(y = IV, col = "IV"), size = 1.2) +
-    geom_line(aes(y = SV, col = "SV"), size = 1.2) +
-    geom_line(aes(y = EV, col = "EV"), size = 1.2) +
+    geom_line(aes(y = EL, col = "Early Instar"), size = 1.2) +
+    geom_line(aes(y = LL, col = "Late Instar"), size = 1.2) +
+    geom_line(aes(y = PL, col = "Pupae"), size = 1.2) +
+    geom_line(aes(y = IV, col = "Infected"), size = 1.2) +
+    geom_line(aes(y = SV, col = "Suceptible"), size = 1.2) +
+    geom_line(aes(y = EV, col = "Eexposed"), size = 1.2) +
     geom_line(aes(y = EL_LAR, col = "EL_LAR"), size = 1.2) +
     geom_line(aes(y = EL_BIO, col = "EL_BIO"), size = 1.2) +
     geom_line(aes(y = EL_LAR_BIO, col = "EL_LAR_BIO"), size = 1.2) +
@@ -70,67 +72,88 @@ plotTrajectoryDEBUG <- function(traj,log=FALSE){
 plotTrajectoryHumans = function(IVM_traj){
   #. plotTrajectory: Plots the evolution of the dynamics of the system
   ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
+    theme_grey(base_size = 18, base_family = "") +
     #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) +
-    geom_line(aes(y = IH, col = "IH"), size = 1.2) +
-    geom_line(aes(y = SH, col = "SH"), size = 1.2) +
+    geom_line(aes(y = IH, col = "Infected"), size = 1.75) +
+    geom_line(aes(y = SH, col = "Suceptible"), size = 1.75) +
+    ylim(0, NA) +
     labs(x = "Time (days)", y = "Number of humans")
 }
-plotEIR = function(IVM_traj){
-  #. plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
-   ggplot(IVM_traj, aes(x = time, y = EIR, color = State)) +
-    geom_line(aes(y = IVM_traj[["EIR"]], col = "EIR"), size = 1.2) +
-    labs(x = "Time (days)", y = " EIR")
 
-}
 plotEIR_1 = function(IVM_traj,EIR_1){
   #. plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
   ggplot(IVM_traj, aes(x = time, y = EIR, color = State)) +
-    geom_line(aes(y = EIR_1, col = "EIR"), size = 1.2) +
+    geom_line(aes(y = EIR_1, col = "EIR"), size = 1.75) +
     labs(x = "Time (days)", y = " EIR")
-  
+
 }
 
 plot_MS_Figures = function(IVM_traj_Control,IVM_traj_LLIN_50,IVM_traj_LLIN_80,IVM_traj_LLIN_90,theta,INITIAL_MODELRUNTIME_VALUE){
   #. plot_MS_Figures - produce some figures for the manuscript
-  
-  
+
+
   #Mosquito population
   NV_Control = IVM_traj_Control[["SV"]]+IVM_traj_Control[["EV"]]+IVM_traj_Control[["IV"]]
-  
+
   NV_LLIN_80 = IVM_traj_LLIN_80[["SV"]]+IVM_traj_LLIN_80[["EV"]]+IVM_traj_LLIN_80[["IV"]]
-  
+
   NV_LLIN_50 = IVM_traj_LLIN_50[["SV"]]+IVM_traj_LLIN_50[["EV"]]+IVM_traj_LLIN_50[["IV"]]
   NV_LLIN_90 = IVM_traj_LLIN_90[["SV"]]+IVM_traj_LLIN_90[["EV"]]+IVM_traj_LLIN_90[["IV"]]
-  
+
   #browser()
   #Just Mosquito density
   p <- ggplot(IVM_traj_Control, aes(x = time, y = IVM_traj_Control, color = State)) +
-    geom_line(aes(y = NV_Control, col = "Mosquito-Control"), size = 1.2) + 
+    geom_line(aes(y = NV_Control, col = "Mosquito-Control"), size = 1.2) +
     geom_line(aes(y = NV_LLIN_50, col = "Mosquito-LLIN-50"), size = 1.2) +
     geom_line(aes(y = NV_LLIN_80, col = "Mosquito-LLIN-80"), size = 1.2) +
     geom_line(aes(y = NV_LLIN_90, col = "Mosquito-LLIN-80"), size = 1.2) +
     labs(title = "An. Arabiensis", x = "Time (days)", y = "Number of mosquitoes")
   p <- p + expand_limits(x = 0, y = 0)
   multiplot(p, cols=1)
-  
-  # 
+
+  #
   p2 <- ggplot(IVM_traj_Control, aes(x = 1:length(IVM_traj_Control[,1]), y = EIR, color = key)) +
-    geom_line(aes(y = IVM_traj_Control[["EIR"]] , col = "EIR - Control "), size = 1.2) + 
-    geom_line(aes(y = IVM_traj_LLIN_50[["EIR"]], col = "EIR - LLIN - 50 "), size = 1.2) + 
-    geom_line(aes(y = IVM_traj_LLIN_80[["EIR"]], col = "EIR - LLIN - 80"), size = 1.2) + 
-    geom_line(aes(y = IVM_traj_LLIN_90[["EIR"]], col = "EIR - LLIN - 90"), size = 1.2) + 
+    geom_line(aes(y = IVM_traj_Control[["EIR"]] , col = "EIR - Control "), size = 1.2) +
+    geom_line(aes(y = IVM_traj_LLIN_50[["EIR"]], col = "EIR - LLIN - 50 "), size = 1.2) +
+    geom_line(aes(y = IVM_traj_LLIN_80[["EIR"]], col = "EIR - LLIN - 80"), size = 1.2) +
+    geom_line(aes(y = IVM_traj_LLIN_90[["EIR"]], col = "EIR - LLIN - 90"), size = 1.2) +
     labs(title = "An. Arabiensis", x = "Time (days)", y = "EIR")
-  
+
   multiplot(p2, cols=1)
-  
-  
-  
+
+
+
 }
+
+plotEIR = function(IVM_traj){
+  #. plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
+   ggplot(IVM_traj, aes(x = time, y = EIR, color = State)) +
+    theme_grey(base_size = 18, base_family = "") +
+    geom_line(aes(y = IVM_traj[["EIR"]], col = "EIR"), size = 1.75, colour = 'magenta') +
+    ylim(0, NA) +
+    labs(x = "Time (days)", y = "Entomological Inoculation Rate (EIR)")
+}
+
+plotVC = function(IVM_traj){
+  #. plotVC
+  ggplot(IVM_traj, aes(x = time, y = VC, color = State)) +
+    theme_grey(base_size = 18, base_family = "") +
+    geom_line(aes(y = IVM_traj[["VC"]], col = "VC"), size = 1.75, colour = 'purple') +
+    ylim(0, NA) +
+    labs(x = "Time (days)", y = "Vectorial Capacity (VC)")
+}
+
+plotR0 = function(IVM_traj){
+  #. plotR0: Plots EIR, VC and R0 dynamics of the system
+  ggplot(IVM_traj, aes(x = time, y = EIR, color = State)) +
+    theme_grey(base_size = 18, base_family = "") +
+    geom_line(aes(y = IVM_traj[["R0"]], col = "R0"), size = 1.75, colour = "blue") +
+    ylim(0, NA) +
+    labs(x = "Time (days)", y = "Basic Reproduction Rate (R0)")
+ }
 
 plotEIR_VC_R0 = function(IVM_traj){
   #. plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
-
-
 
   #Mosquito density
   p1 <- ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
@@ -180,14 +203,14 @@ barChartMosquitoDemographics = function(IVM_traj){
 }
 barChartMosquitoDemographics_slwu <- function(IVM_traj){
 
-  traj_dat <- data.frame(stage=c("EL","LL","PL","SV","EV","IV"),
+  traj_dat <- data.frame(stage=c("Early Instar","Late Instar","Pupae","Suceptible","Exposed","Infected"),
                          sum=c(sum(IVM_traj["EL"]),sum(IVM_traj["LL"]),sum(IVM_traj["PL"]),sum(IVM_traj["SV"]),sum(IVM_traj["EV"]),sum(IVM_traj["IV"])))
   traj_dat$stage <- factor(traj_dat$stage,levels=traj_dat$stage)
 
   ggplot(data=traj_dat,aes(stage,sum,fill=stage)) +
     geom_bar(stat="identity",colour="black") +
     scale_y_log10() +
-    theme_bw() +
+    theme_grey(base_size = 18, base_family = "") +
     guides(fill=FALSE) +
     labs(x="Mosquito Stage",y="Number of Mosquitoes")
 
