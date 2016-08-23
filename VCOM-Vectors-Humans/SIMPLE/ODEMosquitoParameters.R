@@ -150,10 +150,10 @@ getAnGambiaeParameters = function(){
     rLAR = 0.00, sLAR = 0.00, rBIO = 0.00, sBIO = 0.00,
     rSRE = 0.00, sSRE = 0.00, rIRS = 0.60, sIRS = 0.00,
     rITN = 0.56, sITN = 0.03, rECS = 0.00, sECS = 0.10,
-    rHOU = 0.69, sHOU = 0.31, rODO = 0.00, sODO = 0.00,
+    rHOU = 0.69, sHOU = 0.21, rODO = 0.00, sODO = 0.00,
     rSPR = 0.82, sSPR = 0.12, rECT = 0.30, sECT = 0.50,
     rPPM = 0.69, sPPM = 0.31, dHOU = 0.10, dIRS = 0.40,
-    aOBT = 2.00, eSRE = 0.50, fATSB =17.1,  fSSP = 1.50,
+    aOBT = 2.00, eSRE = 0.50, fATSB =17.1, fSSP = 1.50,
     fOVI = 1.50, fLAR = 55.5, fBIO = 38.1, eOVI = 0.7
   )
 }

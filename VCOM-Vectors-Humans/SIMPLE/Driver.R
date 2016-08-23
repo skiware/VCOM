@@ -28,9 +28,9 @@ source("multiplot.R")
 
 ##NOTE: Different start time for LAR and BIO will crush at the max time entered - to be fixed
 
--
 # Turn on required specie
-MOSQUITO_PARAMETERS   = getAnGambiaeParameters()
+ 
+MOSQUITO_PARAMETERS = getAnGambiaeParameters()
 MOSQUITO_PARAMETERS_2 = getAnArabiensisParameters()
 MOSQUITO_PARAMETERS_3 = getAnFunestusParameters()
 

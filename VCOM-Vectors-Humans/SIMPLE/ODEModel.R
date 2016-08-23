@@ -216,7 +216,7 @@ IVM_ode <- function(time, state, theta){
    #Update K 
   K = K_sr
   
-  if( time > 0){
+  if( time > 20){
     #browser()
   }
 #browser()
