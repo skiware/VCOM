@@ -142,7 +142,9 @@ barChart_MS <- function(IVM_traj_Control,IVM_traj_ITN_80,IVM_traj_IRS_80,IVM_tra
     theme_grey(base_size = 18, base_family = "") +
     #theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5))+
     guides(fill=FALSE) +
-    labs(x="Tools",y="EIR")
+    labs(title = "An. Arabiensis : Baseline EIR = 100", x="Tools",y="EIR")
+  
+  
   #scale_x_discrete(labels = function(x) str_wrap(x, width = 10))
 
   #theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5))
