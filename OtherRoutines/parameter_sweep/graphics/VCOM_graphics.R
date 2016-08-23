@@ -182,6 +182,41 @@ for(i in 1:length(comb_iterator_list)){
 }
 close.connection(con,"w+")
 
-fig1_df <- cbind(expand.grid(epsilon0=c(10,50,100),species=c("An. Gambiae","An. Arabiensis","An. Funestus"),ITNcov=c(0,0.5,0.8)),
-                 EIR=sapply(fig1_output,function(x){x$EIR[366]}))
+#plot grid heatmap
+comb_df <- cbind(expand.grid(epsilon0=c("Baseline EIR: 10","Baseline EIR: 50","Baseline EIR: 100"),species=c("An. Gambiae","An. Arabiensis","An. Funestus"),ITNcov=seq(0,1,by=0.05),IRScov=seq(0,1,by=0.05)),
+                 EIR=sapply(comb_output,function(x){x$EIR[366]}))
 
+ggplot(data=comb_df) +
+  geom_raster(aes(x=ITNcov,y=IRScov,fill=EIR),interpolate = TRUE) +
+  geom_contour(aes(x=ITNcov,y=IRScov,z=EIR)) +
+  facet_grid(epsilon0 ~ species) +
+  scale_fill_continuous(low="darkblue",high="red") +
+  scale_y_continuous(breaks=c(0,.25,.5,.75,1),labels=scales::percent) +
+  scale_x_continuous(breaks=c(0,.25,.5,.75,1),labels=scales::percent) +
+  labs(x="ITN Coverage",y="IRS Coverage") +
+  theme_bw() +
+  theme(panel.grid.minor=element_blank(),
+        panel.grid.major=element_blank(),
+        strip.text.x=element_text(size=12,face="bold.italic"),
+        strip.text.y=element_text(size=10,face="bold"))
+
+#plot grid heatmap with labeled contours
+comb_v1 <- ggplot(data=comb_df) +
+  geom_raster(aes(x=ITNcov,y=IRScov,fill=EIR),interpolate = TRUE) +
+  facet_grid(epsilon0 ~ species) +
+  scale_fill_continuous(low="darkblue",high="red") +
+  scale_y_continuous(breaks=c(0,.25,.5,.75,1),labels=scales::percent) +
+  scale_x_continuous(breaks=c(0,.25,.5,.75,1),labels=scales::percent) +
+  labs(x="ITN Coverage",y="IRS Coverage") +
+  theme_bw() +
+  guides(fill=FALSE) +
+  theme(panel.grid.minor=element_blank(),
+        panel.grid.major=element_blank(),
+        strip.text.x=element_text(size=12,face="bold.italic"),
+        strip.text.y=element_text(size=11,face="bold"))
+
+comb_v2 <- comb_v1 + 
+  stat_contour(aes(x=ITNcov,y=IRScov,z=EIR,colour=..level..)) + 
+  scale_colour_gradient(limits=c(1e3,2e3),na.value="#85c7f9")
+
+direct.label(comb_v2,method="top.pieces")
