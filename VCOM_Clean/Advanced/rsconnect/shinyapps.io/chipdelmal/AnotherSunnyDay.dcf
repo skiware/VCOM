@@ -2,8 +2,8 @@ name: AnotherSunnyDay
 account: chipdelmal
 server: shinyapps.io
 appId: 108984
-bundleId: 539106
+bundleId: 539180
 url: https://chipdelmal.shinyapps.io/AnotherSunnyDay/
-when: 1471985735.46192
+when: 1471989326.06236
 asMultiple: FALSE
 asStatic: FALSE

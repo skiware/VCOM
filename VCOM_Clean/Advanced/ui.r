@@ -85,8 +85,8 @@ shinyUI(
             titlePanel(h1("")),
             textOutput("debugOutput"),
             helpText("NOTE: For some reason shiny does not include a function to reset the upload file routine and does not upload a different version of
-              the file if it is called the same way as the one that was uploaded previously. We are currently working on a workaround but for now the solution
-              is to refresh the page. In other words... sorry about the mess.
+              the file if it is called the same way as the one that was uploaded previously. Currently working on a workaround but for now the solution
+              is to refresh the page... it's driving me insane...
             ")
           ),
           mainPanel(
