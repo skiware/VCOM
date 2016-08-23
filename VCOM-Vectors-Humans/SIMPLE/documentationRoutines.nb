@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     62597,       1316]
-NotebookOptionsPosition[     60864,       1254]
-NotebookOutlinePosition[     61221,       1270]
-CellTagsIndexPosition[     61178,       1267]
+NotebookDataLength[     85391,       1685]
+NotebookOptionsPosition[     83652,       1623]
+NotebookOutlinePosition[     84005,       1639]
+CellTagsIndexPosition[     83962,       1636]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -127,12 +127,18 @@ Cell[BoxData[{
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"\<\"Driver.R\"\>", ",", "\<\"FeedingCycle.R\"\>", 
+  RowBox[{"\<\"Driver-MS.R\"\>", ",", "\<\"Driver-PolicyBrief.R\"\>", 
+   ",", "\<\"Driver-PolicyBrief-v2.R\"\>", ",", "\<\"Driver.R\"\>", 
+   ",", "\<\"Driver-SimplePlots.R\"\>", ",", "\<\"FeedingCycle.R\"\>", 
+   ",", "\<\"multiplot.R\"\>", ",", "\<\"ODEAuxiliaryFunctions - Copy.R\"\>", 
+   ",", "\<\"ODEAuxiliaryFunctions - MS.R\"\>", 
+   ",", "\<\"ODEAuxiliaryFunctions-noGraphs.R\"\>", 
    ",", "\<\"ODEAuxiliaryFunctions.R\"\>", 
    ",", "\<\"ODEControlMeasuresParameters.R\"\>", 
    ",", "\<\"ODEInterventions - FirstPass.R\"\>", 
-   ",", "\<\"ODEInterventions.R\"\>", ",", "\<\"ODEModelOutput.R\"\>", 
-   ",", "\<\"ODEModel.R\"\>", 
+   ",", "\<\"ODEInterventions.R\"\>", ",", "\<\"ODEModel - Copy.R\"\>", 
+   ",", "\<\"ODEModelOutput - Copy.R\"\>", ",", "\<\"ODEModelOutput.R\"\>", 
+   ",", "\<\"ODEModel.R\"\>", ",", "\<\"ODEModel - returnONLYd.R\"\>", 
    ",", "\<\"ODEModel - withInterventionsIncluded.R\"\>", 
    ",", "\<\"ODEMosquitoParameters.R\"\>", ",", "\<\"ODE.R\"\>", 
    ",", "\<\"ODETransmissionParameters.R\"\>", ",", "\<\"server.r\"\>", 
@@ -147,7 +153,7 @@ Cell[BoxData[
    3.675099746559181*^9, 3.678115756294635*^9, {3.678123126734837*^9, 
    3.678123146416396*^9}, 3.678123295005644*^9, 3.678123346224698*^9, {
    3.678124181975445*^9, 3.6781242233331833`*^9}, 3.678126055137306*^9, 
-   3.6781261477904987`*^9}],
+   3.6781261477904987`*^9, 3.680958179868681*^9, 3.680958458615034*^9}],
 
 Cell[BoxData[
  TagBox[GridBox[{
@@ -156,7 +162,92 @@ Cell[BoxData[
 interventions on feeding cycle parameters\"\>"},
     {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
 the system\"\>"},
-    {"\<\"plotEIR\"\>", "\<\" Plots EIR dynamics of the system\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotTrajectoryDEBUG\"\>", "\<\" Used only to debug\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotEIR_VC_R0\"\>", "\<\" Plots EIR, VC and R0 dynamics of the \
+system\"\>"},
+    {"\<\"plot_SA_Figures - produce some figures for presentations\"\>", ""},
+    {"\<\"plot_SA_Figures - produce some figures for presentations\"\>", ""},
+    {"\<\"barChartMosquitoDemographics\"\>", "\<\" Generates a bar chart with \
+the amount of mosquitos in each life stage\"\>"},
+    {"\<\"parseImportedCSVParameters\"\>", "\<\" Once a csv file has been \
+imported this function converts the data into a theta object\"\>"},
+    {"\<\"importCSVParametersFromDirectory\"\>", "\<\" Loads the verified \
+parameters of the simulation from a CSV file into the workflow\"\>"},
+    {"\<\"validateCSVParameters\"\>", "\<\" Verifies that the user has \
+imported a valid CSV file with all the parameters defined\"\>"},
+    {"\<\"importXLSParametersFromDirectory\"\>", "\<\" Loads the verified \
+parameters of the simulation from an XLS file into the workflow\"\>"},
+    {"\<\"importCSVXLSParametersFromDirectoryShiny\"\>", "\<\" Wrapper \
+function that works only within shiny to select the proper import function to \
+use on a given file\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotTrajectoryDEBUG\"\>", "\<\" Used only to debug\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotEIR_VC_R0\"\>", "\<\" Plots EIR, VC and R0 dynamics of the \
+system\"\>"},
+    {"\<\"plot_SA_Figures - produce some figures for presentations\"\>", ""},
+    {"\<\"plot_SA_Figures - produce some figures for presentations\"\>", ""},
+    {"\<\"barChartMosquitoDemographics\"\>", "\<\" Generates a bar chart with \
+the amount of mosquitos in each life stage\"\>"},
+    {"\<\"parseImportedCSVParameters\"\>", "\<\" Once a csv file has been \
+imported this function converts the data into a theta object\"\>"},
+    {"\<\"importCSVParametersFromDirectory\"\>", "\<\" Loads the verified \
+parameters of the simulation from a CSV file into the workflow\"\>"},
+    {"\<\"validateCSVParameters\"\>", "\<\" Verifies that the user has \
+imported a valid CSV file with all the parameters defined\"\>"},
+    {"\<\"importXLSParametersFromDirectory\"\>", "\<\" Loads the verified \
+parameters of the simulation from an XLS file into the workflow\"\>"},
+    {"\<\"importCSVXLSParametersFromDirectoryShiny\"\>", "\<\" Wrapper \
+function that works only within shiny to select the proper import function to \
+use on a given file\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotEIR_VC_R0\"\>", "\<\" Plots EIR, VC and R0 dynamics of the \
+system\"\>"},
+    {"\<\"barChartMosquitoDemographics\"\>", "\<\" Generates a bar chart with \
+the amount of mosquitos in each life stage\"\>"},
+    {"\<\"parseImportedCSVParameters\"\>", "\<\" Once a csv file has been \
+imported this function converts the data into a theta object\"\>"},
+    {"\<\"importCSVParametersFromDirectory\"\>", "\<\" Loads the verified \
+parameters of the simulation from a CSV file into the workflow\"\>"},
+    {"\<\"validateCSVParameters\"\>", "\<\" Verifies that the user has \
+imported a valid CSV file with all the parameters defined\"\>"},
+    {"\<\"importXLSParametersFromDirectory\"\>", "\<\" Loads the verified \
+parameters of the simulation from an XLS file into the workflow\"\>"},
+    {"\<\"importCSVXLSParametersFromDirectoryShiny\"\>", "\<\" Wrapper \
+function that works only within shiny to select the proper import function to \
+use on a given file\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotTrajectoryDEBUG\"\>", "\<\" Used only to debug\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotEIR_VC_R0\"\>", "\<\" Plots EIR, VC and R0 dynamics of the \
+system\"\>"},
+    {"\<\"plot_MS_Figures - produce some figures for the manuscript\"\>", 
+     ""},
+    {"\<\"plotEIR_VC_R0\"\>", "\<\" Plots EIR, VC and R0 dynamics of the \
+system\"\>"},
+    {"\<\"plotVC\"\>", ""},
+    {"\<\"plotR0\"\>", "\<\" Plots EIR, VC and R0 dynamics of the system\"\>"},
+    {"\<\"plotEIR_VC_R0\"\>", "\<\" Plots EIR, VC and R0 dynamics of the \
+system\"\>"},
     {"\<\"barChartMosquitoDemographics\"\>", "\<\" Generates a bar chart with \
 the amount of mosquitos in each life stage\"\>"},
     {"\<\"parseImportedCSVParameters\"\>", "\<\" Once a csv file has been \
@@ -192,6 +283,11 @@ wcom for insecticide treated cattle (systemic and topical)\"\>"},
 wcom for insecticide treated cattle (systemic and topical)\"\>"},
     {"\<\"impactRestingOvipositing\"\>", "\<\" compute the impact of ATSB, \
 Space Spraying, and ovitraps on muV_2\"\>"},
+    {"\<\"runODE\"\>", "\<\" Main ODE wrapper for simulating the mosquito \
+population\"\>"},
+    {"\<\"calculateInitialState\"\>", "\<\" Calculates the initial conditions \
+of a system given the theta parameters\"\>"},
+    {"\<\"IVM_ode\"\>", "\<\" ODE Model definition\"\>"},
     {"\<\"computeLengthGonotrophicycle\"\>", "\<\" Main function that return \
 the length of gonotrophic cycle in presence of interventions\"\>"},
     {"\<\"computeHumanBitingRate\"\>", "\<\" Main function that return human \
@@ -206,6 +302,25 @@ capacity\"\>"},
 innoculation rate\"\>"},
     {"\<\"computeRO \"\>", "\<\" Main function that return basic reproduction \
 rate\"\>"},
+    {"\<\"computeLengthGonotrophicycle\"\>", "\<\" Main function that return \
+the length of gonotrophic cycle in presence of interventions\"\>"},
+    {"\<\"computeHumanBitingRate\"\>", "\<\" Main function that return human \
+biting rate per mosquito in presence of intervetion\"\>"},
+    {"\<\"computeMosqDensity\"\>", "\<\" Main function that return mosquito \
+density in presence of intervetion\"\>"},
+    {"\<\"computeceHBI\"\>", "\<\" Main function that return human blood \
+index\"\>"},
+    {"\<\"computeVC\"\>", "\<\" Main function that return vectorial \
+capacity\"\>"},
+    {"\<\"computeEIR\"\>", "\<\" Main function that return entomological \
+innoculation rate\"\>"},
+    {"\<\"computeRO \"\>", "\<\" Main function that return basic reproduction \
+rate\"\>"},
+    {"\<\"runODE\"\>", "\<\" Main ODE wrapper for simulating the mosquito \
+population\"\>"},
+    {"\<\"calculateInitialState\"\>", "\<\" Calculates the initial conditions \
+of a system given the theta parameters\"\>"},
+    {"\<\"IVM_ode\"\>", "\<\" ODE Model definition\"\>"},
     {"\<\"runODE\"\>", "\<\" Main ODE wrapper for simulating the mosquito \
 population\"\>"},
     {"\<\"calculateInitialState\"\>", "\<\" Calculates the initial conditions \
@@ -245,7 +360,7 @@ transmission parameters\"\>"}
    3.675099746559181*^9, 3.678115756294635*^9, {3.678123126734837*^9, 
    3.678123146416396*^9}, 3.678123295005644*^9, 3.678123346224698*^9, {
    3.678124181975445*^9, 3.6781242233331833`*^9}, 3.678126055137306*^9, 
-   3.678126147920401*^9}],
+   3.6781261477904987`*^9, 3.680958179868681*^9, 3.680958458884623*^9}],
 
 Cell[BoxData["\<\"Documentation/DOC_functionsDescription.txt\"\>"], "Output",
  CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
@@ -258,7 +373,7 @@ Cell[BoxData["\<\"Documentation/DOC_functionsDescription.txt\"\>"], "Output",
    3.675099746559181*^9, 3.678115756294635*^9, {3.678123126734837*^9, 
    3.678123146416396*^9}, 3.678123295005644*^9, 3.678123346224698*^9, {
    3.678124181975445*^9, 3.6781242233331833`*^9}, 3.678126055137306*^9, 
-   3.678126147932726*^9}],
+   3.6781261477904987`*^9, 3.680958179868681*^9, 3.680958458897684*^9}],
 
 Cell[BoxData["\<\"Documentation/DOC_functionsDescription.csv\"\>"], "Output",
  CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
@@ -271,7 +386,7 @@ Cell[BoxData["\<\"Documentation/DOC_functionsDescription.csv\"\>"], "Output",
    3.675099746559181*^9, 3.678115756294635*^9, {3.678123126734837*^9, 
    3.678123146416396*^9}, 3.678123295005644*^9, 3.678123346224698*^9, {
    3.678124181975445*^9, 3.6781242233331833`*^9}, 3.678126055137306*^9, 
-   3.67812614794462*^9}],
+   3.6781261477904987`*^9, 3.680958179868681*^9, 3.6809584589107637`*^9}],
 
 Cell[BoxData["\<\"Documentation/DOC_functionsDescription.png\"\>"], "Output",
  CellChangeTimes->{{3.671388514747158*^9, 3.671388553504758*^9}, {
@@ -284,7 +399,7 @@ Cell[BoxData["\<\"Documentation/DOC_functionsDescription.png\"\>"], "Output",
    3.675099746559181*^9, 3.678115756294635*^9, {3.678123126734837*^9, 
    3.678123146416396*^9}, 3.678123295005644*^9, 3.678123346224698*^9, {
    3.678124181975445*^9, 3.6781242233331833`*^9}, 3.678126055137306*^9, 
-   3.678126149132725*^9}]
+   3.6781261477904987`*^9, 3.680958179868681*^9, 3.6809584627943983`*^9}]
 }, Open  ]]
 }, Closed]],
 
@@ -374,12 +489,18 @@ Cell[BoxData[{
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"\<\"Driver.R\"\>", ",", "\<\"FeedingCycle.R\"\>", 
+  RowBox[{"\<\"Driver-MS.R\"\>", ",", "\<\"Driver-PolicyBrief.R\"\>", 
+   ",", "\<\"Driver-PolicyBrief-v2.R\"\>", ",", "\<\"Driver.R\"\>", 
+   ",", "\<\"Driver-SimplePlots.R\"\>", ",", "\<\"FeedingCycle.R\"\>", 
+   ",", "\<\"multiplot.R\"\>", ",", "\<\"ODEAuxiliaryFunctions - Copy.R\"\>", 
+   ",", "\<\"ODEAuxiliaryFunctions - MS.R\"\>", 
+   ",", "\<\"ODEAuxiliaryFunctions-noGraphs.R\"\>", 
    ",", "\<\"ODEAuxiliaryFunctions.R\"\>", 
    ",", "\<\"ODEControlMeasuresParameters.R\"\>", 
    ",", "\<\"ODEInterventions - FirstPass.R\"\>", 
-   ",", "\<\"ODEInterventions.R\"\>", ",", "\<\"ODEModelOutput.R\"\>", 
-   ",", "\<\"ODEModel.R\"\>", 
+   ",", "\<\"ODEInterventions.R\"\>", ",", "\<\"ODEModel - Copy.R\"\>", 
+   ",", "\<\"ODEModelOutput - Copy.R\"\>", ",", "\<\"ODEModelOutput.R\"\>", 
+   ",", "\<\"ODEModel.R\"\>", ",", "\<\"ODEModel - returnONLYd.R\"\>", 
    ",", "\<\"ODEModel - withInterventionsIncluded.R\"\>", 
    ",", "\<\"ODEMosquitoParameters.R\"\>", ",", "\<\"ODE.R\"\>", 
    ",", "\<\"ODETransmissionParameters.R\"\>", ",", "\<\"server.r\"\>", 
@@ -395,7 +516,8 @@ Cell[BoxData[
    3.673019042141333*^9, 3.675099747462699*^9, 3.6781157581944313`*^9, {
    3.678123128218417*^9, 3.6781231478982897`*^9}, 3.678123296468048*^9, 
    3.678123347561016*^9, {3.678124184230997*^9, 3.6781242248784924`*^9}, 
-   3.678126056881381*^9, 3.678126149263406*^9}],
+   3.678126056881381*^9, 3.678126149263406*^9, 3.680958184238866*^9, 
+   3.680958462867594*^9}],
 
 Cell[BoxData[
  TagBox[GridBox[{
@@ -440,24 +562,15 @@ to one human\"\>"},
     {"\<\"SPRcov\"\>", "\<\" Spatial Repellents coverage\"\>"},
     {"\<\"time_SPR_on\"\>", "\<\" When Space Repellents are applied \
 (days)\"\>"},
-    {"\<\"PPMcov\"\>", ""},
-    {"\<\"time_PPM_on\"\>", ""},
+    {"\<\"PPMcov\"\>", "\<\" Personal Protection Measures coverage\"\>"},
+    {"\<\"time_PPM_on\"\>", "\<\" When the personal protection measures are \
+used by people\"\>"},
     {"\<\"muV\"\>", "\<\" Adult mosquito daily mortality\"\>"},
     {"\<\"Q0\"\>", "\<\" Human blood index\"\>"},
     {"\<\"phiB\"\>", "\<\" Proportion of bites on a person while they are in \
 bed\"\>"},
     {"\<\"phiI\"\>", "\<\" Proportion of bites on a person while they are \
 indoors\"\>"},
-    {"\<\"rOVI\"\>", ""},
-    {"\<\"sOVI\"\>", ""},
-    {"\<\"rFOG\"\>", ""},
-    {"\<\"sFOG\"\>", ""},
-    {"\<\"rLAR\"\>", ""},
-    {"\<\"sLAR\"\>", ""},
-    {"\<\"rBIO\"\>", ""},
-    {"\<\"sBIO\"\>", ""},
-    {"\<\"rSRE\"\>", ""},
-    {"\<\"sSRE\"\>", ""},
     {"\<\"rSPR\"\>", "\<\" Probability of mosquito repeating a feeding \
 attempt due to spatial repelent\"\>"},
     {"\<\"sSPR\"\>", "\<\" Probability of mosquito feeding succesfully in \
@@ -489,6 +602,7 @@ presence of instecide (systemic) treated cattle\"\>"},
 to one human\"\>"},
     {"\<\"eSRE\"\>", "\<\" effectiveness of the impact of source reduction in \
 K\"\>"},
+    {"\<\"eOVI\"\>", "\<\" effectivens of the ovitrap\"\>"},
     {"\<\"fATSB factor allowing for increased mosquito death due to ATBS\"\>",
       ""},
     {"\<\"fLAR factor allowing for increased mosquito death due to \
@@ -499,8 +613,6 @@ control\"\>", ""},
 spraying\"\>", ""},
     {"\<\"fOVI factor allowing for increased mosquito death due to space \
 spraying\"\>", ""},
-    {"\<\"rHOU\"\>", ""},
-    {"\<\"sHOU\"\>", ""},
     {"\<\"beta\"\>", "\<\" Number of eggs laid per day per female \
 mosquito\"\>"},
     {"\<\"muEL\"\>", "\<\" Early larval instar daily mortality\"\>"},
@@ -520,7 +632,7 @@ coverage\"\>"},
     {"\<\"f0\"\>", "\<\" Daily biting rate by mosquitoes on animals and \
 humans\"\>"},
     {"\<\"epsilon0\"\>", "\<\" Daily entomological inolculation rate\"\>"},
-    {"\<\"iH_eq\"\>", "\<\" Equilibrium malaria prevalence in humans\"\>"},
+    {"\<\"recRate\"\>", "\<\" human recovery rate\"\>"},
     {"\<\"NH_eq\"\>", "\<\" Equilibrium human population size\"\>"},
     {"\<\"bV\"\>", "\<\" Probability of transmission from human to vector per \
 infectious bite\"\>"},
@@ -544,7 +656,8 @@ to an uninfected, susceptible human\"\>"}
    3.673019042141333*^9, 3.675099747462699*^9, 3.6781157581944313`*^9, {
    3.678123128218417*^9, 3.6781231478982897`*^9}, 3.678123296468048*^9, 
    3.678123347561016*^9, {3.678124184230997*^9, 3.6781242248784924`*^9}, 
-   3.678126056881381*^9, 3.678126149384845*^9}],
+   3.678126056881381*^9, 3.678126149263406*^9, 3.680958184238866*^9, 
+   3.680958463157228*^9}],
 
 Cell[BoxData["\<\"Documentation/DOC_parametersDescription.txt\"\>"], "Output",
  CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
@@ -558,7 +671,8 @@ Cell[BoxData["\<\"Documentation/DOC_parametersDescription.txt\"\>"], "Output",
    3.673019042141333*^9, 3.675099747462699*^9, 3.6781157581944313`*^9, {
    3.678123128218417*^9, 3.6781231478982897`*^9}, 3.678123296468048*^9, 
    3.678123347561016*^9, {3.678124184230997*^9, 3.6781242248784924`*^9}, 
-   3.678126056881381*^9, 3.678126149396824*^9}],
+   3.678126056881381*^9, 3.678126149263406*^9, 3.680958184238866*^9, 
+   3.6809584631701593`*^9}],
 
 Cell[BoxData["\<\"Documentation/DOC_parametersDescription.csv\"\>"], "Output",
  CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
@@ -572,7 +686,8 @@ Cell[BoxData["\<\"Documentation/DOC_parametersDescription.csv\"\>"], "Output",
    3.673019042141333*^9, 3.675099747462699*^9, 3.6781157581944313`*^9, {
    3.678123128218417*^9, 3.6781231478982897`*^9}, 3.678123296468048*^9, 
    3.678123347561016*^9, {3.678124184230997*^9, 3.6781242248784924`*^9}, 
-   3.678126056881381*^9, 3.678126149408589*^9}],
+   3.678126056881381*^9, 3.678126149263406*^9, 3.680958184238866*^9, 
+   3.680958463182184*^9}],
 
 Cell[BoxData["\<\"Documentation/DOC_parametersDescription.png\"\>"], "Output",
  CellChangeTimes->{{3.671388735942916*^9, 3.671388765685646*^9}, {
@@ -586,7 +701,8 @@ Cell[BoxData["\<\"Documentation/DOC_parametersDescription.png\"\>"], "Output",
    3.673019042141333*^9, 3.675099747462699*^9, 3.6781157581944313`*^9, {
    3.678123128218417*^9, 3.6781231478982897`*^9}, 3.678123296468048*^9, 
    3.678123347561016*^9, {3.678124184230997*^9, 3.6781242248784924`*^9}, 
-   3.678126056881381*^9, 3.6781261514077168`*^9}]
+   3.678126056881381*^9, 3.678126149263406*^9, 3.680958184238866*^9, 
+   3.680958465369645*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -653,12 +769,20 @@ Cell[BoxData[{
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"\<\"Driver.csv\"\>", ",", "\<\"FeedingCycle.csv\"\>", 
+  RowBox[{"\<\"Driver-MS.csv\"\>", ",", "\<\"Driver-PolicyBrief.csv\"\>", 
+   ",", "\<\"Driver-PolicyBrief-v2.csv\"\>", ",", "\<\"Driver.csv\"\>", 
+   ",", "\<\"Driver-SimplePlots.csv\"\>", ",", "\<\"FeedingCycle.csv\"\>", 
+   ",", "\<\"multiplot.csv\"\>", 
+   ",", "\<\"ODEAuxiliaryFunctions - Copy.csv\"\>", 
+   ",", "\<\"ODEAuxiliaryFunctions - MS.csv\"\>", 
+   ",", "\<\"ODEAuxiliaryFunctions-noGraphs.csv\"\>", 
    ",", "\<\"ODEAuxiliaryFunctions.csv\"\>", 
    ",", "\<\"ODEControlMeasuresParameters.csv\"\>", 
    ",", "\<\"ODEInterventions - FirstPass.csv\"\>", 
-   ",", "\<\"ODEInterventions.csv\"\>", ",", "\<\"ODEModelOutput.csv\"\>", 
-   ",", "\<\"ODEModel.csv\"\>", 
+   ",", "\<\"ODEInterventions.csv\"\>", ",", "\<\"ODEModel - Copy.csv\"\>", 
+   ",", "\<\"ODEModelOutput - Copy.csv\"\>", 
+   ",", "\<\"ODEModelOutput.csv\"\>", ",", "\<\"ODEModel.csv\"\>", 
+   ",", "\<\"ODEModel - returnONLYd.csv\"\>", 
    ",", "\<\"ODEModel - withInterventionsIncluded.csv\"\>", 
    ",", "\<\"ODEMosquitoParameters.csv\"\>", ",", "\<\"ODE.csv\"\>", 
    ",", "\<\"ODETransmissionParameters.csv\"\>", ",", "\<\"server.csv\"\>", 
@@ -672,16 +796,27 @@ Cell[BoxData[
    3.67301904350154*^9, 3.6750997486492853`*^9, 3.678115760443885*^9, {
    3.67812313044244*^9, 3.6781231502691708`*^9}, 3.678123298707863*^9, 
    3.678123349658596*^9, {3.67812418719464*^9, 3.6781242273421717`*^9}, 
-   3.67812605919092*^9, 3.678126151495957*^9}],
+   3.67812605919092*^9, 3.678126151495957*^9, 3.6809581868572817`*^9, 
+   3.680958465499827*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"\<\"www/Driver.csv\"\>", ",", "\<\"www/FeedingCycle.csv\"\>", 
+  RowBox[{"\<\"www/Driver-MS.csv\"\>", 
+   ",", "\<\"www/Driver-PolicyBrief.csv\"\>", 
+   ",", "\<\"www/Driver-PolicyBrief-v2.csv\"\>", 
+   ",", "\<\"www/Driver.csv\"\>", ",", "\<\"www/Driver-SimplePlots.csv\"\>", 
+   ",", "\<\"www/FeedingCycle.csv\"\>", ",", "\<\"www/multiplot.csv\"\>", 
+   ",", "\<\"www/ODEAuxiliaryFunctions - Copy.csv\"\>", 
+   ",", "\<\"www/ODEAuxiliaryFunctions - MS.csv\"\>", 
+   ",", "\<\"www/ODEAuxiliaryFunctions-noGraphs.csv\"\>", 
    ",", "\<\"www/ODEAuxiliaryFunctions.csv\"\>", 
    ",", "\<\"www/ODEControlMeasuresParameters.csv\"\>", 
    ",", "\<\"www/ODEInterventions - FirstPass.csv\"\>", 
    ",", "\<\"www/ODEInterventions.csv\"\>", 
+   ",", "\<\"www/ODEModel - Copy.csv\"\>", 
+   ",", "\<\"www/ODEModelOutput - Copy.csv\"\>", 
    ",", "\<\"www/ODEModelOutput.csv\"\>", ",", "\<\"www/ODEModel.csv\"\>", 
+   ",", "\<\"www/ODEModel - returnONLYd.csv\"\>", 
    ",", "\<\"www/ODEModel - withInterventionsIncluded.csv\"\>", 
    ",", "\<\"www/ODEMosquitoParameters.csv\"\>", ",", "\<\"www/ODE.csv\"\>", 
    ",", "\<\"www/ODETransmissionParameters.csv\"\>", 
@@ -695,7 +830,8 @@ Cell[BoxData[
    3.67301904350154*^9, 3.6750997486492853`*^9, 3.678115760443885*^9, {
    3.67812313044244*^9, 3.6781231502691708`*^9}, 3.678123298707863*^9, 
    3.678123349658596*^9, {3.67812418719464*^9, 3.6781242273421717`*^9}, 
-   3.67812605919092*^9, 3.678126151515048*^9}]
+   3.67812605919092*^9, 3.678126151495957*^9, 3.6809581868572817`*^9, 
+   3.6809584655727453`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -776,12 +912,18 @@ Cell[BoxData[{
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"\<\"Driver.R\"\>", ",", "\<\"FeedingCycle.R\"\>", 
+  RowBox[{"\<\"Driver-MS.R\"\>", ",", "\<\"Driver-PolicyBrief.R\"\>", 
+   ",", "\<\"Driver-PolicyBrief-v2.R\"\>", ",", "\<\"Driver.R\"\>", 
+   ",", "\<\"Driver-SimplePlots.R\"\>", ",", "\<\"FeedingCycle.R\"\>", 
+   ",", "\<\"multiplot.R\"\>", ",", "\<\"ODEAuxiliaryFunctions - Copy.R\"\>", 
+   ",", "\<\"ODEAuxiliaryFunctions - MS.R\"\>", 
+   ",", "\<\"ODEAuxiliaryFunctions-noGraphs.R\"\>", 
    ",", "\<\"ODEAuxiliaryFunctions.R\"\>", 
    ",", "\<\"ODEControlMeasuresParameters.R\"\>", 
    ",", "\<\"ODEInterventions - FirstPass.R\"\>", 
-   ",", "\<\"ODEInterventions.R\"\>", ",", "\<\"ODEModelOutput.R\"\>", 
-   ",", "\<\"ODEModel.R\"\>", 
+   ",", "\<\"ODEInterventions.R\"\>", ",", "\<\"ODEModel - Copy.R\"\>", 
+   ",", "\<\"ODEModelOutput - Copy.R\"\>", ",", "\<\"ODEModelOutput.R\"\>", 
+   ",", "\<\"ODEModel.R\"\>", ",", "\<\"ODEModel - returnONLYd.R\"\>", 
    ",", "\<\"ODEModel - withInterventionsIncluded.R\"\>", 
    ",", "\<\"ODEMosquitoParameters.R\"\>", ",", "\<\"ODE.R\"\>", 
    ",", "\<\"ODETransmissionParameters.R\"\>", ",", "\<\"server.r\"\>", 
@@ -791,7 +933,7 @@ Cell[BoxData[
    3.675099748713513*^9, 3.6781157605353193`*^9, {3.678123130496162*^9, 
    3.678123150365699*^9}, 3.678123298901332*^9, 3.678123349752138*^9, {
    3.678124187265553*^9, 3.678124227422703*^9}, 3.678126059271254*^9, 
-   3.678126151574284*^9}],
+   3.678126151574284*^9, 3.680958187034605*^9, 3.680958465660392*^9}],
 
 Cell[BoxData[
  TagBox[GridBox[{
@@ -800,7 +942,92 @@ Cell[BoxData[
 interventions on feeding cycle parameters\"\>"},
     {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
 the system\"\>"},
-    {"\<\"plotEIR\"\>", "\<\" Plots EIR dynamics of the system\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotTrajectoryDEBUG\"\>", "\<\" Used only to debug\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotEIR_VC_R0\"\>", "\<\" Plots EIR, VC and R0 dynamics of the \
+system\"\>"},
+    {"\<\"plot_SA_Figures - produce some figures for presentations\"\>", ""},
+    {"\<\"plot_SA_Figures - produce some figures for presentations\"\>", ""},
+    {"\<\"barChartMosquitoDemographics\"\>", "\<\" Generates a bar chart with \
+the amount of mosquitos in each life stage\"\>"},
+    {"\<\"parseImportedCSVParameters\"\>", "\<\" Once a csv file has been \
+imported this function converts the data into a theta object\"\>"},
+    {"\<\"importCSVParametersFromDirectory\"\>", "\<\" Loads the verified \
+parameters of the simulation from a CSV file into the workflow\"\>"},
+    {"\<\"validateCSVParameters\"\>", "\<\" Verifies that the user has \
+imported a valid CSV file with all the parameters defined\"\>"},
+    {"\<\"importXLSParametersFromDirectory\"\>", "\<\" Loads the verified \
+parameters of the simulation from an XLS file into the workflow\"\>"},
+    {"\<\"importCSVXLSParametersFromDirectoryShiny\"\>", "\<\" Wrapper \
+function that works only within shiny to select the proper import function to \
+use on a given file\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotTrajectoryDEBUG\"\>", "\<\" Used only to debug\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotEIR_VC_R0\"\>", "\<\" Plots EIR, VC and R0 dynamics of the \
+system\"\>"},
+    {"\<\"plot_SA_Figures - produce some figures for presentations\"\>", ""},
+    {"\<\"plot_SA_Figures - produce some figures for presentations\"\>", ""},
+    {"\<\"barChartMosquitoDemographics\"\>", "\<\" Generates a bar chart with \
+the amount of mosquitos in each life stage\"\>"},
+    {"\<\"parseImportedCSVParameters\"\>", "\<\" Once a csv file has been \
+imported this function converts the data into a theta object\"\>"},
+    {"\<\"importCSVParametersFromDirectory\"\>", "\<\" Loads the verified \
+parameters of the simulation from a CSV file into the workflow\"\>"},
+    {"\<\"validateCSVParameters\"\>", "\<\" Verifies that the user has \
+imported a valid CSV file with all the parameters defined\"\>"},
+    {"\<\"importXLSParametersFromDirectory\"\>", "\<\" Loads the verified \
+parameters of the simulation from an XLS file into the workflow\"\>"},
+    {"\<\"importCSVXLSParametersFromDirectoryShiny\"\>", "\<\" Wrapper \
+function that works only within shiny to select the proper import function to \
+use on a given file\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotEIR_VC_R0\"\>", "\<\" Plots EIR, VC and R0 dynamics of the \
+system\"\>"},
+    {"\<\"barChartMosquitoDemographics\"\>", "\<\" Generates a bar chart with \
+the amount of mosquitos in each life stage\"\>"},
+    {"\<\"parseImportedCSVParameters\"\>", "\<\" Once a csv file has been \
+imported this function converts the data into a theta object\"\>"},
+    {"\<\"importCSVParametersFromDirectory\"\>", "\<\" Loads the verified \
+parameters of the simulation from a CSV file into the workflow\"\>"},
+    {"\<\"validateCSVParameters\"\>", "\<\" Verifies that the user has \
+imported a valid CSV file with all the parameters defined\"\>"},
+    {"\<\"importXLSParametersFromDirectory\"\>", "\<\" Loads the verified \
+parameters of the simulation from an XLS file into the workflow\"\>"},
+    {"\<\"importCSVXLSParametersFromDirectoryShiny\"\>", "\<\" Wrapper \
+function that works only within shiny to select the proper import function to \
+use on a given file\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotTrajectoryDEBUG\"\>", "\<\" Used only to debug\"\>"},
+    {"\<\"plotTrajectory\"\>", "\<\" Plots the evolution of the dynamics of \
+the system\"\>"},
+    {"\<\"plotEIR_VC_R0\"\>", "\<\" Plots EIR, VC and R0 dynamics of the \
+system\"\>"},
+    {"\<\"plot_MS_Figures - produce some figures for the manuscript\"\>", 
+     ""},
+    {"\<\"plotEIR_VC_R0\"\>", "\<\" Plots EIR, VC and R0 dynamics of the \
+system\"\>"},
+    {"\<\"plotVC\"\>", ""},
+    {"\<\"plotR0\"\>", "\<\" Plots EIR, VC and R0 dynamics of the system\"\>"},
+    {"\<\"plotEIR_VC_R0\"\>", "\<\" Plots EIR, VC and R0 dynamics of the \
+system\"\>"},
     {"\<\"barChartMosquitoDemographics\"\>", "\<\" Generates a bar chart with \
 the amount of mosquitos in each life stage\"\>"},
     {"\<\"parseImportedCSVParameters\"\>", "\<\" Once a csv file has been \
@@ -836,6 +1063,11 @@ wcom for insecticide treated cattle (systemic and topical)\"\>"},
 wcom for insecticide treated cattle (systemic and topical)\"\>"},
     {"\<\"impactRestingOvipositing\"\>", "\<\" compute the impact of ATSB, \
 Space Spraying, and ovitraps on muV_2\"\>"},
+    {"\<\"runODE\"\>", "\<\" Main ODE wrapper for simulating the mosquito \
+population\"\>"},
+    {"\<\"calculateInitialState\"\>", "\<\" Calculates the initial conditions \
+of a system given the theta parameters\"\>"},
+    {"\<\"IVM_ode\"\>", "\<\" ODE Model definition\"\>"},
     {"\<\"computeLengthGonotrophicycle\"\>", "\<\" Main function that return \
 the length of gonotrophic cycle in presence of interventions\"\>"},
     {"\<\"computeHumanBitingRate\"\>", "\<\" Main function that return human \
@@ -850,6 +1082,25 @@ capacity\"\>"},
 innoculation rate\"\>"},
     {"\<\"computeRO \"\>", "\<\" Main function that return basic reproduction \
 rate\"\>"},
+    {"\<\"computeLengthGonotrophicycle\"\>", "\<\" Main function that return \
+the length of gonotrophic cycle in presence of interventions\"\>"},
+    {"\<\"computeHumanBitingRate\"\>", "\<\" Main function that return human \
+biting rate per mosquito in presence of intervetion\"\>"},
+    {"\<\"computeMosqDensity\"\>", "\<\" Main function that return mosquito \
+density in presence of intervetion\"\>"},
+    {"\<\"computeceHBI\"\>", "\<\" Main function that return human blood \
+index\"\>"},
+    {"\<\"computeVC\"\>", "\<\" Main function that return vectorial \
+capacity\"\>"},
+    {"\<\"computeEIR\"\>", "\<\" Main function that return entomological \
+innoculation rate\"\>"},
+    {"\<\"computeRO \"\>", "\<\" Main function that return basic reproduction \
+rate\"\>"},
+    {"\<\"runODE\"\>", "\<\" Main ODE wrapper for simulating the mosquito \
+population\"\>"},
+    {"\<\"calculateInitialState\"\>", "\<\" Calculates the initial conditions \
+of a system given the theta parameters\"\>"},
+    {"\<\"IVM_ode\"\>", "\<\" ODE Model definition\"\>"},
     {"\<\"runODE\"\>", "\<\" Main ODE wrapper for simulating the mosquito \
 population\"\>"},
     {"\<\"calculateInitialState\"\>", "\<\" Calculates the initial conditions \
@@ -884,7 +1135,7 @@ transmission parameters\"\>"}
    3.675099748713513*^9, 3.6781157605353193`*^9, {3.678123130496162*^9, 
    3.678123150365699*^9}, 3.678123298901332*^9, 3.678123349752138*^9, {
    3.678124187265553*^9, 3.678124227422703*^9}, 3.678126059271254*^9, 
-   3.678126151726631*^9}],
+   3.678126151574284*^9, 3.680958187034605*^9, 3.680958465933374*^9}],
 
 Cell[BoxData["\<\"Documentation/DOC_functionsDescription.txt\"\>"], "Output",
  CellChangeTimes->{
@@ -892,7 +1143,7 @@ Cell[BoxData["\<\"Documentation/DOC_functionsDescription.txt\"\>"], "Output",
    3.675099748713513*^9, 3.6781157605353193`*^9, {3.678123130496162*^9, 
    3.678123150365699*^9}, 3.678123298901332*^9, 3.678123349752138*^9, {
    3.678124187265553*^9, 3.678124227422703*^9}, 3.678126059271254*^9, 
-   3.678126151740152*^9}],
+   3.678126151574284*^9, 3.680958187034605*^9, 3.6809584659472713`*^9}],
 
 Cell[BoxData["\<\"Documentation/DOC_functionsDescription.csv\"\>"], "Output",
  CellChangeTimes->{
@@ -900,7 +1151,7 @@ Cell[BoxData["\<\"Documentation/DOC_functionsDescription.csv\"\>"], "Output",
    3.675099748713513*^9, 3.6781157605353193`*^9, {3.678123130496162*^9, 
    3.678123150365699*^9}, 3.678123298901332*^9, 3.678123349752138*^9, {
    3.678124187265553*^9, 3.678124227422703*^9}, 3.678126059271254*^9, 
-   3.678126151752781*^9}],
+   3.678126151574284*^9, 3.680958187034605*^9, 3.6809584659609528`*^9}],
 
 Cell[BoxData["\<\"Documentation/DOC_functionsDescription.png\"\>"], "Output",
  CellChangeTimes->{
@@ -908,7 +1159,7 @@ Cell[BoxData["\<\"Documentation/DOC_functionsDescription.png\"\>"], "Output",
    3.675099748713513*^9, 3.6781157605353193`*^9, {3.678123130496162*^9, 
    3.678123150365699*^9}, 3.678123298901332*^9, 3.678123349752138*^9, {
    3.678124187265553*^9, 3.678124227422703*^9}, 3.678126059271254*^9, 
-   3.678126153766899*^9}]
+   3.678126151574284*^9, 3.680958187034605*^9, 3.680958468081201*^9}]
 }, Open  ]]
 }, Closed]],
 
@@ -1017,7 +1268,7 @@ Cell[BoxData[{
    3.678123180772192*^9, 3.6781232401348877`*^9}, {3.678123285346126*^9, 
    3.678123293627242*^9}, {3.6781233258946953`*^9, 3.6781233423449717`*^9}, {
    3.678123502056391*^9, 3.6781235031217823`*^9}, 3.6781242211136007`*^9, {
-   3.6781260506876163`*^9, 3.678126054035535*^9}}],
+   3.6781260506876163`*^9, 3.678126054035535*^9}, 3.680958176863702*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -1028,13 +1279,31 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"\<\"## Description\"\>", ",", "\<\"\"\>"}], "}"}], ",", 
    RowBox[{
-   "{", "\<\"VCOM is a platform designed to do cool stuff...\"\>", "}"}], ",", 
+   "{", "\<\"VCOM is a model created as part of the Malaria Elimination \
+Initiative to help policy makers make decisions on which mosquito-control \
+interventions should be prioritised in different given scenarios. To this end \
+we have created two graphical user interfaces (GUIs) to make the model \
+accessible to people without programming or modelling backgrounds.\\n\\nThere \
+are to versions of our GUIs. The first one (named \\\"Simple\\\") is oriented \
+towards people who want a quick comparison between interventions. It is \
+controlled with sliders and buttons and contains a baseline parametrisation \
+of how interventions work and of mosquitos biological parameters. The \
+\\\"Advanced\\\" one is designed to be used by people with a more profound \
+entomological/epidemiological background. This one is controlled with an XLS \
+file and allows the modification of most of the model's parameters even \
+without needing programming skills. The third and final option is to download \
+the code from our github repository and code away any modifications needed \
+(only for the bravest).\"\>", "}"}], ",", 
    RowBox[{"{", "}"}], ",", 
    RowBox[{"{", "\<\"## Citation\"\>", "}"}], ",", 
-   RowBox[{"{", "\<\"VCOM, Awesome Journal\"\>", "}"}], ",", 
+   RowBox[{"{", "\<\"VCOM @ \"\>", "}"}], ",", 
    RowBox[{"{", "}"}], ",", 
    RowBox[{"{", "\<\"## Contact\"\>", "}"}], ",", 
-   RowBox[{"{", "\<\"Awesome people\"\>", "}"}], ",", 
+   RowBox[{
+   "{", "\<\"Samson Kiware (skiware@ihi.or.tz)\\nAllison Tatarsky \
+(allison.Tatarsky@ucsf.edu)\\nSean Wu (slwu89@berkeley.edu)\\nH\[EAcute]ctor \
+M. S\[AAcute]nchez C. (sanchez.hmsc@itesm.mx)\\nNakul Chitnis\\nJohn M. \
+Marshall (john.marshall@berkeley.edu)\"\>", "}"}], ",", 
    RowBox[{"{", "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"\<\"## Parameters\"\>", ",", "\<\"\"\>"}], "}"}], 
@@ -1069,19 +1338,15 @@ Cell[BoxData[
    ",", "\<\"* aOBT: availability of one odor baited trap in relation to one \
 human\"\>", ",", "\<\"* SPRcov: Spatial Repellents coverage\"\>", 
    ",", "\<\"* time_SPR_on: When Space Repellents are applied (days)\"\>", 
-   ",", "\<\"* PPMcov: NA\"\>", ",", "\<\"* time_PPM_on: NA\"\>", 
-   ",", "\<\"* muV: Adult mosquito daily mortality\"\>", 
+   ",", "\<\"* PPMcov: Personal Protection Measures coverage\"\>", 
+   ",", "\<\"* time_PPM_on: When the personal protection measures are used by \
+people\"\>", ",", "\<\"* muV: Adult mosquito daily mortality\"\>", 
    ",", "\<\"* Q0: Human blood index\"\>", 
    ",", "\<\"* phiB: Proportion of bites on a person while they are in \
 bed\"\>", 
    ",", "\<\"* phiI: Proportion of bites on a person while they are indoors\"\
-\>", ",", "\<\"* rOVI: NA\"\>", ",", "\<\"* sOVI: NA\"\>", 
-   ",", "\<\"* rFOG: NA\"\>", ",", "\<\"* sFOG: NA\"\>", 
-   ",", "\<\"* rLAR: NA\"\>", ",", "\<\"* sLAR: NA\"\>", 
-   ",", "\<\"* rBIO: NA\"\>", ",", "\<\"* sBIO: NA\"\>", 
-   ",", "\<\"* rSRE: NA\"\>", ",", "\<\"* sSRE: NA\"\>", 
-   ",", "\<\"* rSPR: Probability of mosquito repeating a feeding attempt due \
-to spatial repelent\"\>", 
+\>", ",", "\<\"* rSPR: Probability of mosquito repeating a feeding attempt \
+due to spatial repelent\"\>", 
    ",", "\<\"* sSPR: Probability of mosquito feeding succesfully in presence \
 to spatial repelent\"\>", 
    ",", "\<\"* rPPM: Probability of mosquito repeating a feeding attempt due \
@@ -1109,7 +1374,8 @@ presence of instecide (systemic) treated cattle\"\>",
    ",", "\<\"* aOBT: availability of one odor baited trap in relation to one \
 human\"\>", 
    ",", "\<\"* eSRE: effectiveness of the impact of source reduction in \
-K\"\>", ",", "\<\"* fATSB factor allowing for increased mosquito death due to \
+K\"\>", ",", "\<\"* eOVI: effectivens of the ovitrap\"\>", 
+   ",", "\<\"* fATSB factor allowing for increased mosquito death due to \
 ATBS: NA\"\>", 
    ",", "\<\"* fLAR factor allowing for increased mosquito death due to \
 larvaciding: NA\"\>", 
@@ -1118,7 +1384,7 @@ biological control: NA\"\>",
    ",", "\<\"* fSSP factor allowing for increased mosquito death due to space \
 spraying: NA\"\>", 
    ",", "\<\"* fOVI factor allowing for increased mosquito death due to space \
-spraying: NA\"\>", ",", "\<\"* rHOU: NA\"\>", ",", "\<\"* sHOU: NA\"\>", 
+spraying: NA\"\>", 
    ",", "\<\"* beta: Number of eggs laid per day per female mosquito\"\>", 
    ",", "\<\"* muEL: Early larval instar daily mortality\"\>", 
    ",", "\<\"* muLL: Late larvarl instar daily mortality\"\>", 
@@ -1135,7 +1401,7 @@ coverage\"\>",
    ",", "\<\"* tau2: Time spent resting and ovipositing by a mosquito\"\>", 
    ",", "\<\"* f0: Daily biting rate by mosquitoes on animals and humans\"\>",
     ",", "\<\"* epsilon0: Daily entomological inolculation rate\"\>", 
-   ",", "\<\"* iH_eq: Equilibrium malaria prevalence in humans\"\>", 
+   ",", "\<\"* recRate: human recovery rate\"\>", 
    ",", "\<\"* NH_eq: Equilibrium human population size\"\>", 
    ",", "\<\"* bV: Probability of transmission from human to vector per \
 infectious bite\"\>", 
@@ -1147,7 +1413,88 @@ uninfected, susceptible human\"\>", ",",
    ",", "\<\"* impactFeedingCycleParameters: compute the impact of \
 interventions on feeding cycle parameters\"\>", 
    ",", "\<\"* plotTrajectory: Plots the evolution of the dynamics of the \
-system\"\>", ",", "\<\"* plotEIR: Plots EIR dynamics of the system\"\>", 
+system\"\>", 
+   ",", "\<\"* plotTrajectory: Plots the evolution of the dynamics of the \
+system\"\>", 
+   ",", "\<\"* plotTrajectory: Plots the evolution of the dynamics of the \
+system\"\>", ",", "\<\"* plotTrajectoryDEBUG: Used only to debug\"\>", 
+   ",", "\<\"* plotTrajectory: Plots the evolution of the dynamics of the \
+system\"\>", 
+   ",", "\<\"* plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the \
+system\"\>", 
+   ",", "\<\"* plot_SA_Figures - produce some figures for presentations: NA\"\
+\>", ",", "\<\"* plot_SA_Figures - produce some figures for presentations: NA\
+\"\>", ",", "\<\"* barChartMosquitoDemographics: Generates a bar chart with \
+the amount of mosquitos in each life stage\"\>", 
+   ",", "\<\"* parseImportedCSVParameters: Once a csv file has been imported \
+this function converts the data into a theta object\"\>", 
+   ",", "\<\"* importCSVParametersFromDirectory: Loads the verified \
+parameters of the simulation from a CSV file into the workflow\"\>", 
+   ",", "\<\"* validateCSVParameters: Verifies that the user has imported a \
+valid CSV file with all the parameters defined\"\>", 
+   ",", "\<\"* importXLSParametersFromDirectory: Loads the verified \
+parameters of the simulation from an XLS file into the workflow\"\>", 
+   ",", "\<\"* importCSVXLSParametersFromDirectoryShiny: Wrapper function \
+that works only within shiny to select the proper import function to use on a \
+given file\"\>", 
+   ",", "\<\"* plotTrajectory: Plots the evolution of the dynamics of the \
+system\"\>", 
+   ",", "\<\"* plotTrajectory: Plots the evolution of the dynamics of the \
+system\"\>", 
+   ",", "\<\"* plotTrajectory: Plots the evolution of the dynamics of the \
+system\"\>", ",", "\<\"* plotTrajectoryDEBUG: Used only to debug\"\>", 
+   ",", "\<\"* plotTrajectory: Plots the evolution of the dynamics of the \
+system\"\>", 
+   ",", "\<\"* plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the \
+system\"\>", 
+   ",", "\<\"* plot_SA_Figures - produce some figures for presentations: NA\"\
+\>", ",", "\<\"* plot_SA_Figures - produce some figures for presentations: NA\
+\"\>", ",", "\<\"* barChartMosquitoDemographics: Generates a bar chart with \
+the amount of mosquitos in each life stage\"\>", 
+   ",", "\<\"* parseImportedCSVParameters: Once a csv file has been imported \
+this function converts the data into a theta object\"\>", 
+   ",", "\<\"* importCSVParametersFromDirectory: Loads the verified \
+parameters of the simulation from a CSV file into the workflow\"\>", 
+   ",", "\<\"* validateCSVParameters: Verifies that the user has imported a \
+valid CSV file with all the parameters defined\"\>", 
+   ",", "\<\"* importXLSParametersFromDirectory: Loads the verified \
+parameters of the simulation from an XLS file into the workflow\"\>", 
+   ",", "\<\"* importCSVXLSParametersFromDirectoryShiny: Wrapper function \
+that works only within shiny to select the proper import function to use on a \
+given file\"\>", 
+   ",", "\<\"* plotTrajectory: Plots the evolution of the dynamics of the \
+system\"\>", 
+   ",", "\<\"* plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the \
+system\"\>", 
+   ",", "\<\"* barChartMosquitoDemographics: Generates a bar chart with the \
+amount of mosquitos in each life stage\"\>", 
+   ",", "\<\"* parseImportedCSVParameters: Once a csv file has been imported \
+this function converts the data into a theta object\"\>", 
+   ",", "\<\"* importCSVParametersFromDirectory: Loads the verified \
+parameters of the simulation from a CSV file into the workflow\"\>", 
+   ",", "\<\"* validateCSVParameters: Verifies that the user has imported a \
+valid CSV file with all the parameters defined\"\>", 
+   ",", "\<\"* importXLSParametersFromDirectory: Loads the verified \
+parameters of the simulation from an XLS file into the workflow\"\>", 
+   ",", "\<\"* importCSVXLSParametersFromDirectoryShiny: Wrapper function \
+that works only within shiny to select the proper import function to use on a \
+given file\"\>", 
+   ",", "\<\"* plotTrajectory: Plots the evolution of the dynamics of the \
+system\"\>", 
+   ",", "\<\"* plotTrajectory: Plots the evolution of the dynamics of the \
+system\"\>", 
+   ",", "\<\"* plotTrajectory: Plots the evolution of the dynamics of the \
+system\"\>", ",", "\<\"* plotTrajectoryDEBUG: Used only to debug\"\>", 
+   ",", "\<\"* plotTrajectory: Plots the evolution of the dynamics of the \
+system\"\>", 
+   ",", "\<\"* plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the \
+system\"\>", 
+   ",", "\<\"* plot_MS_Figures - produce some figures for the manuscript: \
+NA\"\>", ",", "\<\"* plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the \
+system\"\>", ",", "\<\"* plotVC: NA\"\>", 
+   ",", "\<\"* plotR0: Plots EIR, VC and R0 dynamics of the system\"\>", 
+   ",", "\<\"* plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the \
+system\"\>", 
    ",", "\<\"* barChartMosquitoDemographics: Generates a bar chart with the \
 amount of mosquitos in each life stage\"\>", 
    ",", "\<\"* parseImportedCSVParameters: Once a csv file has been imported \
@@ -1182,6 +1529,11 @@ insecticide treated cattle (systemic and topical)\"\>",
 insecticide treated cattle (systemic and topical)\"\>", 
    ",", "\<\"* impactRestingOvipositing: compute the impact of ATSB, Space \
 Spraying, and ovitraps on muV_2\"\>", 
+   ",", "\<\"* runODE: Main ODE wrapper for simulating the mosquito \
+population\"\>", 
+   ",", "\<\"* calculateInitialState: Calculates the initial conditions of a \
+system given the theta parameters\"\>", 
+   ",", "\<\"* IVM_ode: ODE Model definition\"\>", 
    ",", "\<\"* computeLengthGonotrophicycle: Main function that return the \
 length of gonotrophic cycle in presence of interventions\"\>", 
    ",", "\<\"* computeHumanBitingRate: Main function that return human biting \
@@ -1194,6 +1546,23 @@ in presence of intervetion\"\>",
 innoculation rate\"\>", 
    ",", "\<\"* computeRO : Main function that return basic reproduction \
 rate\"\>", 
+   ",", "\<\"* computeLengthGonotrophicycle: Main function that return the \
+length of gonotrophic cycle in presence of interventions\"\>", 
+   ",", "\<\"* computeHumanBitingRate: Main function that return human biting \
+rate per mosquito in presence of intervetion\"\>", 
+   ",", "\<\"* computeMosqDensity: Main function that return mosquito density \
+in presence of intervetion\"\>", 
+   ",", "\<\"* computeceHBI: Main function that return human blood index\"\>",
+    ",", "\<\"* computeVC: Main function that return vectorial capacity\"\>", 
+   ",", "\<\"* computeEIR: Main function that return entomological \
+innoculation rate\"\>", 
+   ",", "\<\"* computeRO : Main function that return basic reproduction \
+rate\"\>", 
+   ",", "\<\"* runODE: Main ODE wrapper for simulating the mosquito \
+population\"\>", 
+   ",", "\<\"* calculateInitialState: Calculates the initial conditions of a \
+system given the theta parameters\"\>", 
+   ",", "\<\"* IVM_ode: ODE Model definition\"\>", 
    ",", "\<\"* runODE: Main ODE wrapper for simulating the mosquito \
 population\"\>", 
    ",", "\<\"* calculateInitialState: Calculates the initial conditions of a \
@@ -1229,10 +1598,10 @@ parameters\"\>"}], "}"}]], "Output",
    3.678122763457912*^9, {3.678123132804118*^9, 3.67812315275568*^9}, 
    3.6781232229627237`*^9, {3.6781233011349897`*^9, 3.678123351841206*^9}, {
    3.678124190171863*^9, 3.6781242297005997`*^9}, 3.678126061524439*^9, 
-   3.678126153854648*^9}],
+   3.678126153854648*^9, 3.6809581895820627`*^9, 3.680958468218073*^9}],
 
-Cell[BoxData["\<\"/Users/chipdelmal/Documents/School/Research/VCOM/README.md\"\
-\>"], "Output",
+Cell[BoxData["\<\"/Users/chipdelmal/Documents/School/Research/VCOM/VCOM-\
+Vectors-Humans/README.md\"\>"], "Output",
  CellChangeTimes->{{3.672149082715744*^9, 3.672149109239107*^9}, {
    3.672149170434374*^9, 3.672149223542457*^9}, {3.6721492649826393`*^9, 
    3.672149283739147*^9}, 3.672149322888214*^9, {3.672149382428684*^9, 
@@ -1246,7 +1615,7 @@ Cell[BoxData["\<\"/Users/chipdelmal/Documents/School/Research/VCOM/README.md\"\
    3.678122763457912*^9, {3.678123132804118*^9, 3.67812315275568*^9}, 
    3.6781232229627237`*^9, {3.6781233011349897`*^9, 3.678123351841206*^9}, {
    3.678124190171863*^9, 3.6781242297005997`*^9}, 3.678126061524439*^9, 
-   3.678126153882128*^9}]
+   3.678126153854648*^9, 3.6809581895820627`*^9, 3.6809584682494802`*^9}]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
@@ -1254,7 +1623,7 @@ Cell[BoxData["\<\"/Users/chipdelmal/Documents/School/Research/VCOM/README.md\"\
 },
 WindowSize->{1429, 797},
 WindowMargins->{{Automatic, 5}, {Automatic, 2}},
-FrontEndVersion->"10.4 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 25, \
+FrontEndVersion->"11.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 28, \
 2016)",
 StyleDefinitions->"Default.nb"
 ]
@@ -1277,43 +1646,43 @@ Cell[CellGroupData[{
 Cell[856, 32, 93, 1, 64, "Section"],
 Cell[CellGroupData[{
 Cell[974, 37, 3667, 88, 199, "Input"],
-Cell[4644, 127, 1362, 22, 70, "Output"],
-Cell[6009, 151, 5549, 96, 70, "Output"],
-Cell[11561, 249, 822, 11, 70, "Output"],
-Cell[12386, 262, 821, 11, 70, "Output"],
-Cell[13210, 275, 822, 11, 70, "Output"]
+Cell[4644, 127, 1856, 28, 70, "Output"],
+Cell[6503, 157, 11902, 205, 70, "Output"],
+Cell[18408, 364, 868, 11, 70, "Output"],
+Cell[19279, 377, 870, 11, 70, "Output"],
+Cell[20152, 390, 870, 11, 70, "Output"]
 }, Open  ]]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[14081, 292, 97, 1, 50, "Section"],
+Cell[21071, 407, 97, 1, 50, "Section"],
 Cell[CellGroupData[{
-Cell[14203, 297, 2700, 75, 199, "Input"],
-Cell[16906, 374, 1456, 23, 70, "Output"],
-Cell[18365, 399, 7722, 147, 70, "Output"],
-Cell[26090, 548, 919, 12, 70, "Output"],
-Cell[27012, 562, 919, 12, 70, "Output"],
-Cell[27934, 576, 921, 12, 70, "Output"]
+Cell[21193, 412, 2700, 75, 199, "Input"],
+Cell[23896, 489, 1954, 30, 70, "Output"],
+Cell[25853, 521, 7613, 138, 70, "Output"],
+Cell[33469, 661, 969, 13, 70, "Output"],
+Cell[34441, 676, 967, 13, 70, "Output"],
+Cell[35411, 691, 967, 13, 70, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[28892, 593, 2007, 58, 97, "Input"],
-Cell[30902, 653, 1221, 21, 70, "Output"],
-Cell[32126, 676, 1282, 21, 70, "Output"]
+Cell[36415, 709, 2007, 58, 97, "Input"],
+Cell[38425, 769, 1751, 30, 70, "Output"],
+Cell[40179, 801, 1866, 32, 70, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[33445, 702, 2513, 72, 199, "Input"],
-Cell[35961, 776, 948, 17, 70, "Output"],
-Cell[36912, 795, 5137, 91, 70, "Output"],
-Cell[42052, 888, 410, 6, 70, "Output"],
-Cell[42465, 896, 410, 6, 70, "Output"],
-Cell[42878, 904, 410, 6, 70, "Output"]
+Cell[42082, 838, 2513, 72, 199, "Input"],
+Cell[44598, 912, 1442, 23, 70, "Output"],
+Cell[46043, 937, 11488, 200, 70, "Output"],
+Cell[57534, 1139, 456, 6, 70, "Output"],
+Cell[57993, 1147, 456, 6, 70, "Output"],
+Cell[58452, 1155, 454, 6, 70, "Output"]
 }, Open  ]]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[43337, 916, 91, 1, 50, "Section"],
+Cell[58955, 1167, 91, 1, 50, "Section"],
 Cell[CellGroupData[{
-Cell[43453, 921, 4135, 98, 216, "Input"],
-Cell[47591, 1021, 12157, 210, 1083, "Output"],
-Cell[59751, 1233, 1061, 15, 28, "Output"]
+Cell[59071, 1172, 4157, 98, 264, "Input"],
+Cell[63231, 1272, 19237, 328, 2490, "Output"],
+Cell[82471, 1602, 1129, 15, 32, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
