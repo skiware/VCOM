@@ -25,8 +25,10 @@ shinyServer(
     #############################################################################
     # PRIMING GUI ###############################################################
     shinyjs::disable("buttonRun")
-    shinyjs::disable("downloadCSVTrace")
-    shinyjs::disable("downloadPlotTrace")
+    shinyjs::disable("downloadCSVTrace"); shinyjs::disable("downloadPlotTrace")
+    shinyjs::disable("downloadCSVEIR"); shinyjs::disable("downloadPlotEIR")
+    shinyjs::disable("downloadPlotDemographics"); shinyjs::disable("downloadPlotVC")
+    shinyjs::disable("downloadPlotHuman"); shinyjs::disable("downloadPlotR0")
     output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
     output$plotDemographics = renderPlot({barChartMosquitoDemographics_slwu(IVM_traj)})
@@ -72,11 +74,16 @@ shinyServer(
       nasNumber=sum(is.na(theta))
       #print(nasNumber)
       debugLoadText="SETUP FILE LOADED CORRECTLY!"
-      shinyjs::enable("buttonRun")
+      shinyjs::enable("downloadCSVTrace"); shinyjs::enable("downloadPlotTrace")
+      shinyjs::enable("downloadCSVEIR"); shinyjs::enable("downloadPlotEIR")
+      shinyjs::enable("downloadPlotDemographics"); shinyjs::enable("downloadPlotVC")
+      shinyjs::enable("downloadPlotHuman"); shinyjs::enable("downloadPlotR0")
       if(nasNumber > NAS_ALLOWED){
         shinyjs::disable("buttonRun")
-        shinyjs::disable("downloadTrace")
-        shinyjs::disable("downloadPlot")
+        shinyjs::disable("downloadCSVTrace"); shinyjs::disable("downloadPlotTrace")
+        shinyjs::disable("downloadCSVEIR"); shinyjs::disable("downloadPlotEIR")
+        shinyjs::disable("downloadPlotDemographics"); shinyjs::disable("downloadPlotVC")
+        shinyjs::disable("downloadPlotHuman"); shinyjs::disable("downloadPlotR0")
         debugLoadText="ERROR IN SETUP FILE. Please see 'Loaded Parameters' tab for a list of the parameters with error."
       }
       output$debugOutput=renderText(debugLoadText)

@@ -2,16 +2,6 @@ muV, Adult mosquito daily mortality
 Q0, Human blood index
 phiB, Proportion of bites on a person while they are in bed
 phiI, Proportion of bites on a person while they are indoors
-rOVI
-sOVI
-rFOG
-sFOG
-rLAR
-sLAR
-rBIO
-sBIO
-rSRE
-sSRE
 rSPR, Probability of mosquito repeating a feeding attempt due to spatial repelent
 sSPR, Probability of mosquito feeding succesfully in presence to spatial repelent
 rPPM, Probability of mosquito repeating a feeding attempt due to personal protection measures
@@ -28,13 +18,12 @@ dHOU, Death due to encountering mosquito proofed housing
 dIRS, Death due to encountering IRS treated house
 aOBT, availability of one odor baited trap in relation to one human
 eSRE, effectiveness of the impact of source reduction in K
+eOVI, effectivens of the ovitrap
 fATSB factor allowing for increased mosquito death due to ATBS
 fLAR factor allowing for increased mosquito death due to larvaciding
 fBIO factor allowing for increased mosquito death due to biological control
 fSSP factor allowing for increased mosquito death due to space spraying
 fOVI factor allowing for increased mosquito death due to space spraying
-rHOU
-sHOU
 beta, Number of eggs laid per day per female mosquito
 muEL, Early larval instar daily mortality
 muLL, Late larvarl instar daily mortality

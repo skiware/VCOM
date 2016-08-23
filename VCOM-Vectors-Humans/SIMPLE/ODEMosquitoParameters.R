@@ -2,7 +2,7 @@
 #=======================================================================
 # ODEMosquitoParameters.R
 # Contains the accessors and setters for mosquitos and control measures
-# 
+#
 #=======================================================================
 ########################################################################
 
@@ -12,13 +12,13 @@
 #------------------------------------------------------------------------
 getTheta = function(
   #. getTheta: Facade function to return theta from selected parameters
-  
+
   # Move this to driver
-  speciesSpecificParameters=getAnGambiaeParameters(), 
-  #speciesSpecificParameters=getAnArabiensisParameters(), 
+  speciesSpecificParameters=getAnGambiaeParameters(),
+  #speciesSpecificParameters=getAnArabiensisParameters(),
   #speciesSpecificParameters=getAnFunestusParameters(),
   interventionParameters=getInterventionsParameters(),
-  additionalTransmissionParameters=getAdditionalTransmissionParameters(), 
+  additionalTransmissionParameters=getAdditionalTransmissionParameters(),
   mosquitoLifeCycleParameters=getMosquitoLifeCycleParameters()
 ){
   c(
@@ -82,7 +82,7 @@ getTheta = function(
     dIRS        = speciesSpecificParameters[["dIRS"]],
     dHOU        = speciesSpecificParameters[["dHOU"]],
     aOBT        = speciesSpecificParameters[["aOBT"]],
-    eSRE        = speciesSpecificParameters[["eSRE"]], 
+    eSRE        = speciesSpecificParameters[["eSRE"]],
     fBIO        = speciesSpecificParameters[["fBIO"]],
     eOVI        = speciesSpecificParameters[["eOVI"]],
     fLAR        = speciesSpecificParameters[["fLAR"]],
@@ -105,16 +105,6 @@ getTheta = function(
 #* Q0:      Human blood index
 #* phiB:    Proportion of bites on a person while they are in bed
 #* phiI:    Proportion of bites on a person while they are indoors
-#* rOVI:    
-#* sOVI:
-#* rFOG:
-#* sFOG:
-#* rLAR:
-#* sLAR:
-#* rBIO:
-#* sBIO:
-#* rSRE:
-#* sSRE:
 #* rSPR:    Probability of mosquito repeating a feeding attempt due to spatial repelent
 #* sSPR:    Probability of mosquito feeding succesfully in presence to spatial repelent
 #* rPPM:    Probability of mosquito repeating a feeding attempt due to personal protection measures
@@ -137,8 +127,6 @@ getTheta = function(
 #* fBIO    factor allowing for increased mosquito death due to biological control
 #* fSSP     factor allowing for increased mosquito death due to space spraying
 #* fOVI     factor allowing for increased mosquito death due to space spraying
-#* rHOU:
-#* sHOU:
 
 
 #------------------------------------------------------------------------

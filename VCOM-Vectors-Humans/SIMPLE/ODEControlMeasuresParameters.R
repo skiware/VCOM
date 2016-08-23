@@ -16,7 +16,7 @@
 #* time_FOG_on:   When Fogging is applied (days)
 #* LARcov:        Larvacide coverage
 #* time_LAR_on:   When Larvacide is applied (days)
-#* BIOcov:        Biological Control coverage 
+#* BIOcov:        Biological Control coverage
 #* time_BIO_on:   When Biological Control is applied (days)
 #* SREcov:        Source Reduction coverage
 #* time_SRE_on:   When Source Reduction is applied (days)
@@ -41,8 +41,8 @@
 #* aOBT:          availability of one odor baited trap in relation to one human
 #* SPRcov:        Spatial Repellents coverage
 #* time_SPR_on:   When Space Repellents are applied (days)
-#* PPMcov:
-#* time_PPM_on:   
+#* PPMcov:        Personal Protection Measures coverage
+#* time_PPM_on:   When the personal protection measures are used by people
 
 #------------------------------------------------------------------------
 getInterventionsParameters = function(
@@ -61,7 +61,7 @@ getInterventionsParameters = function(
   PPMcov=0,   time_PPM_on=0,
   ATSBcov=0,  time_ATSB_on=0,
   SSPcov=0,   time_SSP_on=0
-  
+
 ){
   #. getInterventionsParameters: Returns the list of intervention parameters
   # (SK) and the time that a particular intervention is on
