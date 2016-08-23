@@ -104,4 +104,5 @@ ggplot(data=fig1_line_df) +
         strip.text.x=element_text(size=12,face="bold.italic"),
         strip.text.y=element_text(size=10,face="bold"))
 
+## plot histogram
 
