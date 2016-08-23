@@ -177,11 +177,11 @@ impactIndoorProtection = function(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOU
   rCom <- rHOU + (1-rHOU)*rIRS + (1-rHOU)*(1-rIRS)*rITN
   
   #Human - new search probability after a mosq is repelled (SK) by indoor interventions
-  zCom_Human <- Q0*cITN*phiB*rITN + Q0*cIRS*phiI*rIRS + Q0*cCom*(phiI-phiB)*rIRS + Q0*cCom*phiB*rCom
-  # zCom_Human <- Q0*(cHOU*phiI*rHOU + cITN*phiB*rITN + cIRS*phiI*rIRS + cITN_HOU*((phiI-phiB)*rHOU+phiB*r_LLIN_HOU) 
-  #                   + cIRS_HOU*phiI*r_IRS_HOU + cITN_IRS*((phiI-phiB)*rIRS+phiB*r_LLIN_IRS) 
-  #                   + cCom*((phiI-phiB)*rIRS + phiB*rCom))
-  # 
+  #zCom_Human <- Q0*cITN*phiB*rITN + Q0*cIRS*phiI*rIRS + Q0*cCom*(phiI-phiB)*rIRS + Q0*cCom*phiB*rCom
+  #SK - fixed this - it was commented out
+  zCom_Human <- Q0*(cHOU*phiI*rHOU + cITN*phiB*rITN + cIRS*phiI*rIRS + cITN_HOU*((phiI-phiB)*rHOU+phiB*r_LLIN_HOU) 
+                    + cIRS_HOU*phiI*r_IRS_HOU + cITN_IRS*((phiI-phiB)*rIRS+phiB*r_LLIN_IRS) 
+                    + cCom*((phiI-phiB)*r_IRS_HOU + phiB*rCom))
   #ENDELEA HAPA
   # Human - Probability that a surviving mosquito succeeds in feeding during a single attempt:##
   
@@ -198,13 +198,15 @@ impactIndoorProtection = function(time,time_ITN_on,ITNcov,time_IRS_on,IRScov,HOU
   sCom  <- (1-rHOU)*(1-rIRS)*sITN*(sIRS/(sIRS+dIRS))*(sHOU/(sHOU+dHOU))
   
   #Prob succesfully feeding in presence of one or all of these interventions
-  # wCom_Human <- Q0*(cHOU*((1-phiI)+phiI*sHOU)+cITN*((1-phiB)+phiB*sITN)+cIRS*((1-phiI)+phiI*sIRS) 
-  #                   + cITN_HOU*((1-phiI)+(phiI-phiB)*sHOU+phiB*s_ITN_HOU)
-  #                   + cITN_IRS*((1-phiI)+(phiI-phiB)*sIRS+phiB*s_ITN_IRS)   
-  #                   + cIRS_HOU*((1-phiI)+(phiI )*s_IRS_HOU               ) 
-  #                   + cCom*((1-phiI)+(phiI-phiB)*s_IRS_HOU+sCom)         )
-  # 
-  wCom_Human <- Q0*cITN*(1-phiB+phiB*sITN) + Q0*cIRS*(1-phiI+phiI*sIRS) + Q0*cCom*((phiI-phiB)*sIRS + 1-phiI + phiB*sCom)
+  #SK - fixed this - it was commented out
+  wCom_Human <- Q0*(cHOU*((1-phiI)+phiI*sHOU)+cITN*((1-phiB)+phiB*sITN)+cIRS*((1-phiI)+phiI*sIRS) 
+                    + cITN_HOU*((1-phiI)+(phiI-phiB)*sHOU+phiB*s_ITN_HOU)
+                    + cITN_IRS*((1-phiI)+(phiI-phiB)*sIRS+phiB*s_ITN_IRS)   
+                    + cIRS_HOU*((1-phiI)+(phiI )*s_IRS_HOU) 
+                    + cCom*((1-phiI)+(phiI-phiB)*s_IRS_HOU+phiB*sCom)   )
+  
+  #SK - this only works for ITNs and IRS
+  #wCom_Human <- Q0*cITN*(1-phiB+phiB*sITN) + Q0*cIRS*(1-phiI+phiI*sIRS) + Q0*cCom*((phiI-phiB)*sIRS + 1-phiI + phiB*sCom)
   
   #browser()
   #Extracting zcom and wcom
