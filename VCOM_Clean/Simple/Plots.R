@@ -30,13 +30,6 @@ plotTrajectoryHumans = function(IVM_traj){
 }
 plotEIR = function(IVM_traj){
   #. plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
-  ggplot(IVM_traj, aes(x = time, y = EIR, color = State)) +
-    geom_line(aes(y = IVM_traj[["EIR"]], col = "EIR"), size = 1.2) +
-    labs(x = "Time (days)", y = " EIR")
-}
-
-plotEIR = function(IVM_traj){
-  #. plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
    ggplot(IVM_traj, aes(x = time, y = EIR, color = State)) +
     theme_grey(base_size = 18, base_family = "") +
     geom_line(aes(y = IVM_traj[["EIR"]], col = "EIR"), size = 1.75, colour = 'magenta') +
@@ -64,8 +57,8 @@ barChartMosquitoDemographics <- function(IVM_traj){
   traj_dat$stage <- factor(traj_dat$stage,levels=traj_dat$stage)
   ggplot(data=traj_dat,aes(stage,sum,fill=stage)) +
     geom_bar(stat="identity",colour="black") +
+    theme_grey(base_size = 18, base_family = "") +
     scale_y_log10() +
-    theme_bw() +
     guides(fill=FALSE) +
     labs(x="Mosquito Stage",y="Number of Mosquitoes")
 }

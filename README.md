@@ -98,63 +98,8 @@ John M. Marshall (john.marshall@berkeley.edu)
 * bh: transmission efficiency from an infectious mosquito to an uninfected, susceptible human
 
 ## Functions	
+* getInterventionsParameters: Returns the list of intervention parameters and the time that a particular intervention is on
 * impactFeedingCycleParameters: compute the impact of interventions on feeding cycle parameters
-* plotTrajectory: Plots the evolution of the dynamics of the system
-* plotTrajectory: Plots the evolution of the dynamics of the system
-* plotTrajectory: Plots the evolution of the dynamics of the system
-* plotTrajectoryDEBUG: Used only to debug
-* plotTrajectory: Plots the evolution of the dynamics of the system
-* plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
-* plot_SA_Figures - produce some figures for presentations: NA
-* plot_SA_Figures - produce some figures for presentations: NA
-* barChartMosquitoDemographics: Generates a bar chart with the amount of mosquitos in each life stage
-* parseImportedCSVParameters: Once a csv file has been imported this function converts the data into a theta object
-* importCSVParametersFromDirectory: Loads the verified parameters of the simulation from a CSV file into the workflow
-* validateCSVParameters: Verifies that the user has imported a valid CSV file with all the parameters defined
-* importXLSParametersFromDirectory: Loads the verified parameters of the simulation from an XLS file into the workflow
-* importCSVXLSParametersFromDirectoryShiny: Wrapper function that works only within shiny to select the proper import function to use on a given file
-* plotTrajectory: Plots the evolution of the dynamics of the system
-* plotTrajectory: Plots the evolution of the dynamics of the system
-* plotTrajectory: Plots the evolution of the dynamics of the system
-* plotTrajectoryDEBUG: Used only to debug
-* plotTrajectory: Plots the evolution of the dynamics of the system
-* plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
-* plot_SA_Figures - produce some figures for presentations: NA
-* plot_SA_Figures - produce some figures for presentations: NA
-* barChartMosquitoDemographics: Generates a bar chart with the amount of mosquitos in each life stage
-* parseImportedCSVParameters: Once a csv file has been imported this function converts the data into a theta object
-* importCSVParametersFromDirectory: Loads the verified parameters of the simulation from a CSV file into the workflow
-* validateCSVParameters: Verifies that the user has imported a valid CSV file with all the parameters defined
-* importXLSParametersFromDirectory: Loads the verified parameters of the simulation from an XLS file into the workflow
-* importCSVXLSParametersFromDirectoryShiny: Wrapper function that works only within shiny to select the proper import function to use on a given file
-* plotTrajectory: Plots the evolution of the dynamics of the system
-* plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
-* barChartMosquitoDemographics: Generates a bar chart with the amount of mosquitos in each life stage
-* parseImportedCSVParameters: Once a csv file has been imported this function converts the data into a theta object
-* importCSVParametersFromDirectory: Loads the verified parameters of the simulation from a CSV file into the workflow
-* validateCSVParameters: Verifies that the user has imported a valid CSV file with all the parameters defined
-* importXLSParametersFromDirectory: Loads the verified parameters of the simulation from an XLS file into the workflow
-* importCSVXLSParametersFromDirectoryShiny: Wrapper function that works only within shiny to select the proper import function to use on a given file
-* plotTrajectory: Plots the evolution of the dynamics of the system
-* plotTrajectory: Plots the evolution of the dynamics of the system
-* plotTrajectory: Plots the evolution of the dynamics of the system
-* plotTrajectoryDEBUG: Used only to debug
-* plotTrajectory: Plots the evolution of the dynamics of the system
-* plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
-* plot_MS_Figures - produce some figures for the manuscript: NA
-* plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
-* plotVC: NA
-* plotR0: Plots EIR, VC and R0 dynamics of the system
-* plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
-* barChartMosquitoDemographics: Generates a bar chart with the amount of mosquitos in each life stage
-* parseImportedCSVParameters: Once a csv file has been imported this function converts the data into a theta object
-* importCSVParametersFromDirectory: Loads the verified parameters of the simulation from a CSV file into the workflow
-* validateCSVParameters: Verifies that the user has imported a valid CSV file with all the parameters defined
-* importXLSParametersFromDirectory: Loads the verified parameters of the simulation from an XLS file into the workflow
-* importCSVXLSParametersFromDirectoryShiny: Wrapper function that works only within shiny to select the proper import function to use on a given file
-* getInterventionsParameters: Returns the list of intervention parameters
-* impactIndoorInterventions: compute both zcom and wcom for indoor interventions
-* impactInsecticideTreatedCattle: compute both zcom and wcom for insecticide treated cattle (systemic and topical)
 * impactSourceReduction: compute updated K due to source management
 * impactLarvacidingBiologicalControl: compute the impact of larvaciding and biological control
 * impactATSBSpaceSpraying: compute the impact of ATSB and SS on P1
@@ -163,9 +108,6 @@ John M. Marshall (john.marshall@berkeley.edu)
 * impactInsecticideTreatedCattle: compute both zcom and wcom for insecticide treated cattle (systemic and topical)
 * impactInsecticideTreatedCattle: compute both zcom and wcom for insecticide treated cattle (systemic and topical)
 * impactRestingOvipositing: compute the impact of ATSB, Space Spraying, and ovitraps on muV_2
-* runODE: Main ODE wrapper for simulating the mosquito population
-* calculateInitialState: Calculates the initial conditions of a system given the theta parameters
-* IVM_ode: ODE Model definition
 * computeLengthGonotrophicycle: Main function that return the length of gonotrophic cycle in presence of interventions
 * computeHumanBitingRate: Main function that return human biting rate per mosquito in presence of intervetion
 * computeMosqDensity: Main function that return mosquito density in presence of intervetion
@@ -173,19 +115,6 @@ John M. Marshall (john.marshall@berkeley.edu)
 * computeVC: Main function that return vectorial capacity
 * computeEIR: Main function that return entomological innoculation rate
 * computeRO : Main function that return basic reproduction rate
-* computeLengthGonotrophicycle: Main function that return the length of gonotrophic cycle in presence of interventions
-* computeHumanBitingRate: Main function that return human biting rate per mosquito in presence of intervetion
-* computeMosqDensity: Main function that return mosquito density in presence of intervetion
-* computeceHBI: Main function that return human blood index
-* computeVC: Main function that return vectorial capacity
-* computeEIR: Main function that return entomological innoculation rate
-* computeRO : Main function that return basic reproduction rate
-* runODE: Main ODE wrapper for simulating the mosquito population
-* calculateInitialState: Calculates the initial conditions of a system given the theta parameters
-* IVM_ode: ODE Model definition
-* runODE: Main ODE wrapper for simulating the mosquito population
-* calculateInitialState: Calculates the initial conditions of a system given the theta parameters
-* IVM_ode: ODE Model definition
 * runODE: Main ODE wrapper for simulating the mosquito population
 * calculateInitialState: Calculates the initial conditions of a system given the theta parameters
 * IVM_ode: ODE Model definition
@@ -195,3 +124,14 @@ John M. Marshall (john.marshall@berkeley.edu)
 * getAnFunestusParameters: Returns the list of Anopheles Funestus specific parameters
 * getMosquitoLifeCycleParameters: Returns the list of mosquito life cycle parameters
 * getAdditionalTransmissionParameters: Returns the transmission parameters
+* parseImportedCSVParameters: Once a csv file has been imported this function converts the data into a theta object
+* importCSVParametersFromDirectory: Loads the verified parameters of the simulation from a CSV file into the workflow
+* validateCSVParameters: Verifies that the user has imported a valid CSV file with all the parameters defined
+* importXLSParametersFromDirectory: Loads the verified parameters of the simulation from an XLS file into the workflow
+* importCSVXLSParametersFromDirectoryShiny: Wrapper function that works only within shiny to select the proper import function to use on a given file
+* plotTrajectory: Plots the evolution of the dynamics of the system
+* plotTrajectory: Plots the evolution of the dynamics of the system
+* plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
+* plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
+* plotVC: NA
+* plotR0: Plots EIR, VC and R0 dynamics of the system

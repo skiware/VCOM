@@ -29,6 +29,7 @@ shinyServer(
     shinyjs::disable("downloadCSVEIR"); shinyjs::disable("downloadPlotEIR")
     shinyjs::disable("downloadPlotDemographics"); shinyjs::disable("downloadPlotVC")
     shinyjs::disable("downloadPlotHuman"); shinyjs::disable("downloadPlotR0")
+    output$debugOutput=renderText("Load a Setup File!")
     output$plotTrajectory=renderPlot({plotTrajectory(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
     output$plotDemographics = renderPlot({barChartMosquitoDemographics(IVM_traj)})
@@ -58,6 +59,10 @@ shinyServer(
       output$plotHuman = renderPlot({plotTrajectoryHumans(IVM_traj)})
       shinyjs::enable("downloadCSVTrace")
       shinyjs::enable("downloadPlotTrace")
+      shinyjs::enable("downloadCSVTrace"); shinyjs::enable("downloadPlotTrace")
+      shinyjs::enable("downloadCSVEIR"); shinyjs::enable("downloadPlotEIR")
+      shinyjs::enable("downloadPlotDemographics"); shinyjs::enable("downloadPlotVC")
+      shinyjs::enable("downloadPlotHuman"); shinyjs::enable("downloadPlotR0")
       #print(IVM_traj)
     })
     #############################################################################
@@ -76,10 +81,6 @@ shinyServer(
       #print(nasNumber)
       debugLoadText="SETUP FILE LOADED CORRECTLY!"
       shinyjs::enable("buttonRun")
-      shinyjs::enable("downloadCSVTrace"); shinyjs::enable("downloadPlotTrace")
-      shinyjs::enable("downloadCSVEIR"); shinyjs::enable("downloadPlotEIR")
-      shinyjs::enable("downloadPlotDemographics"); shinyjs::enable("downloadPlotVC")
-      shinyjs::enable("downloadPlotHuman"); shinyjs::enable("downloadPlotR0")
       if(nasNumber > NAS_ALLOWED){
         shinyjs::disable("buttonRun")
         shinyjs::disable("downloadCSVTrace"); shinyjs::disable("downloadPlotTrace")

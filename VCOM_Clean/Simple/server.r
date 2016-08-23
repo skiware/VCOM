@@ -48,9 +48,9 @@ shinyServer(
       TRANSMISSION_PARAMETERS <<- getAdditionalTransmissionParameters(epsilon0=as.numeric(input$radioEIR)/365)
       print(TRANSMISSION_PARAMETERS)
       INTERVENTION_PARAMETERS <<- getInterventionsParameters(
-        OVIcov=input$OVIcov,FOGcov=input$FOGcov,LARcov=input$LARcov,BIOcov=input$BIOcov,SREcov=input$SREcov,ITNcov=input$ITNcov,
+        OVIcov=input$OVIcov,FOGcov=0,LARcov=input$LARcov,BIOcov=input$BIOcov,SREcov=input$SREcov,ITNcov=input$ITNcov,
         IRScov=input$IRScov,ECScov=input$ECScov,ECTcov=input$ECTcov,HOUcov=input$HOUcov,OBTcov=input$OBTcov,SPRcov=input$SPRcov,PPMcov=input$PPMcov,
-        time_OVI_on=input$time_OVI_on,time_FOG_on=input$time_FOG_on,time_LAR_on=input$time_LAR_on,time_BIO_on=input$time_BIO_on,
+        time_OVI_on=input$time_OVI_on,time_FOG_on=0,time_LAR_on=input$time_LAR_on,time_BIO_on=input$time_BIO_on,
         time_SRE_on=input$time_SRE_on,time_ITN_on=input$time_ITN_on,time_IRS_on=input$time_IRS_on,time_ECS_on=input$time_ECS_on,
         time_ECT_on=input$time_ECT_on,time_HOU_on=input$time_HOU_on,time_OBT_on=input$time_OBT_on,time_SPR_on=input$time_SPR_on,
         time_PPM_on=input$time_PPM_on
