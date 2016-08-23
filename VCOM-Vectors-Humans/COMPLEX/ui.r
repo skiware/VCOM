@@ -86,8 +86,12 @@ shinyUI(
             textOutput("debugOutput")
           ),
           mainPanel(
-            plotOutput("plotTrajectory")
-            #plotOutput("plotDemographics")
+            plotOutput("plotEIR"),
+            plotOutput("plotTrajectory"),
+            plotOutput("plotDemographics"),
+            plotOutput("plotVC"),
+            plotOutput("plotR0"),
+            plotOutput("plotHuman")
           )
         ),
         helpText("Contacts: <Model: Samson.Kiware@ucsf.edu> <GUI: sanchez.hmsc@itesm.mx>"),
@@ -95,11 +99,11 @@ shinyUI(
         helpText("CSS theme downloaded from: http://bootswatch.com (MIT licence)")
       ),
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
-      tabPanel("Additional Output",
-        mainPanel(
-          plotOutput("plotDemographics")
-        )
-      ),
+      # tabPanel("Additional Output",
+      #   mainPanel(
+      #     #plotOutput("plotDemographics")
+      #   )
+      # ),
       tabPanel("Loaded Parameters",
         sidebarLayout(
           sidebarPanel(
@@ -132,11 +136,17 @@ shinyUI(
               ),
               column(5,""),
               column(5,align="center",
+              fluidRow(
                 titlePanel(h3("Plots",align="center")),
                 titlePanel(h6("")),
                 #radioButtons("radioFormat",label=h4("Plot Format"),choices=list("JPG"=".jpg","PNG"=".png"),selected="PNG"),
-                downloadButton("downloadPlotTrace", 'Download Trajectory Plot')
-              )
+                downloadButton("downloadPlotTrace", 'Download Trajectory Plot'),
+                downloadButton("downloadPlotEIR", 'Download EIR Plot'),
+                downloadButton("downloadPlotDemographics", 'Download Demographics Plot'),
+                downloadButton("downloadPlotVC", 'Download VC Plot'),
+                downloadButton("downloadPlotR0", 'Download R0 Plot'),
+                downloadButton("downloadPlotHuman", 'Download Human Plot')
+              ))
             )
           )
         )
