@@ -124,6 +124,31 @@ plot_MS_Figures = function(IVM_traj_Control,IVM_traj_LLIN_50,IVM_traj_LLIN_80,IV
 
 
 }
+barChart_MS <- function(IVM_traj_Control,IVM_traj_ITN_80,IVM_traj_IRS_80,IVM_traj_ITN_ECS_5080,
+                        IVM_traj_ITN_ATSB_5080,IVM_traj_ITN_LAR_5080,IVM_traj_ITN_PPM_LAR_505050
+                        ,IVM_traj_LLIN_ECT_PPM_ATSB_50505050){
+  
+  traj_dat <- data.frame(stage=c("ITN 80%","IRS 80%","ITN 50%, ECT 80%", "ITN 50%, ATSB 80%","ITN 50%, LAR 80%",
+                                 "ITN 50%, PPM 50% LAR 50%","ITN 50%, ECT 50%, PPM 50%, ATSB 50%"),
+                         value=c(tail(IVM_traj_ITN_80[["EIR"]],1),tail(IVM_traj_IRS_80[["EIR"]],1),tail(IVM_traj_ITN_ECS_5080[["EIR"]],1),
+                                 tail(IVM_traj_ITN_ATSB_5080[["EIR"]],1),tail(IVM_traj_ITN_LAR_5080[["EIR"]],1),
+                                 tail(IVM_traj_ITN_PPM_LAR_505050[["EIR"]],1), tail(IVM_traj_LLIN_ECT_PPM_ATSB_50505050[["EIR"]],1)))
+  traj_dat$stage <- factor(traj_dat$stage,levels=traj_dat$stage)
+  
+  traj_dat$newx = str_wrap(traj_dat$stage, width = 10)
+  
+  ggplot(data=traj_dat,aes(newx,value,fill=stage)) +
+    geom_bar(stat="identity",colour="black") +
+    #scale_y_log10() +
+    theme_grey(base_size = 18, base_family = "") +
+    #theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5))+
+    guides(fill=FALSE) +
+    labs(x="Tools",y="EIR")
+  #scale_x_discrete(labels = function(x) str_wrap(x, width = 10))
+  
+  #theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5))
+  
+}
 
 plotEIR = function(IVM_traj){
   #. plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system

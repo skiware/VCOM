@@ -11,6 +11,7 @@ rm(list=ls())
 library(shiny)
 library(deSolve)
 library(ggplot2)
+library(stringr)
 #library(gridGraphics)
 #library(shinyjs)
 #library(shinythemes)
@@ -43,7 +44,7 @@ INITIAL_MODELRUNTIME_VALUE   = 365
 
 ###************************************************************
 #Running selection mannually for desired tool
-NumTools = 4
+NumTools = 8
 #FIX i
 
 for (i in 1:NumTools){
@@ -113,34 +114,37 @@ for (i in 1:NumTools){
 
   if(i==2){
     #INITIAL_MODELRUNTIME_VALUE   = 80
-    INITIAL_ITN_COVERAGE = .50
+    INITIAL_ITN_COVERAGE = .80
     INITIAL_ITN_TIME     = 20
+    
   }
 
   if(i==3){
-    INITIAL_ITN_COVERAGE = .80
-    INITIAL_ITN_TIME     = 40
-    #INITIAL_MODELRUNTIME_VALUE   = 365
+    INITIAL_IRS_COVERAGE = .80
+    INITIAL_IRS_TIME     = 20
 
   }
   if(i==4){
-    INITIAL_ITN_COVERAGE = .90
+    INITIAL_ITN_COVERAGE = .50
     INITIAL_ITN_TIME     = 60
+    
+    INITIAL_ECS_COVERAGE = 0.80
+    INITIAL_ECS_TIME     = 20
 
   }
   if(i==5){
     INITIAL_ITN_COVERAGE = .50
     INITIAL_ITN_TIME     = 20
 
-    INITIAL_ECT_COVERAGE = 0.50
-    INITIAL_ECT_TIME     = 20
+    INITIAL_ATSB_COVERAGE = .80
+    INITIAL_ATSB_TIME     =  20
   }
   if(i==6){
     INITIAL_ITN_COVERAGE = .50
     INITIAL_ITN_TIME     = 20
     #House modification
-    INITIAL_HOU_COVERAGE = 0.50
-    INITIAL_HOU_TIME     = 20
+    INITIAL_LAR_COVERAGE = 0.80
+    INITIAL_LAR_TIME     = 20
   }
   if(i==7){
     INITIAL_ITN_COVERAGE = .50
@@ -148,6 +152,9 @@ for (i in 1:NumTools){
 
     INITIAL_PPM_COVERAGE = 0.50
     INITIAL_PPM_TIME     = 20
+    
+    INITIAL_LAR_COVERAGE = 0.50
+    INITIAL_LAR_TIME     = 20
 
   }
   if(i==8){
@@ -210,51 +217,55 @@ for (i in 1:NumTools){
 
   if (i==2){
     
-    IVM_traj_LLIN_50 <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
+    IVM_traj_ITN_80 <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
   }
 
   if (i==3){
     
-    IVM_traj_LLIN_80 <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
+    IVM_traj_IRS_80 <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
   }
   if (i==4){
 
     
-    IVM_traj_LLIN_90 <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
+    IVM_traj_ITN_ECS_5080 <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
   }
 
   if (i==5){
     
-    IVM_traj_LLIN_50_ECT_50 <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
+    IVM_traj_ITN_ATSB_5080 <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
   }
 
   if (i==6){
     
-    IVM_traj_LLIN_50_HOU_50 <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
+    IVM_traj_ITN_LAR_5080 <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
   }
   if (i==7){
     
-    IVM_traj_LLIN_50_PPM_50 <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
+    IVM_traj_ITN_PPM_LAR_505050 <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
   }
   if (i==8){
     
-    IVM_traj_LLIN_50_ATSB_50 <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
+    IVM_traj_LLIN_ECT_PPM_ATSB_50505050 <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"lsoda")
   }
 
 }
 
 
-plot_MS_Figures(IVM_traj_Control,IVM_traj_LLIN_50,IVM_traj_LLIN_80,IVM_traj_LLIN_90)
+#plot_MS_Figures(IVM_traj_Control,IVM_traj_80,IVM_traj_LLIN_50,IVM_traj_LLIN_80,IVM_traj_LLIN_90)
+
+
+barChart_MS    (IVM_traj_Control,IVM_traj_ITN_80,IVM_traj_IRS_80,IVM_traj_ITN_ECS_5080,
+                IVM_traj_ITN_ATSB_5080,IVM_traj_ITN_LAR_5080,IVM_traj_ITN_PPM_LAR_505050,IVM_traj_LLIN_ECT_PPM_ATSB_50505050)
 
 #Can be ignored - for a plotting a single lile
-EIR_Control = IVM_traj_Control[["EIR"]]
-EIR_traj_LLIN_50 = IVM_traj_LLIN_50[["EIR"]]
-EIR_traj_LLIN_80 = IVM_traj_LLIN_80[["EIR"]]
+#EIR_Control = IVM_traj_Control[["EIR"]]
+#EIR_traj_LLIN_50 = IVM_traj_LLIN_50[["EIR"]]
+#EIR_traj_LLIN_80 = IVM_traj_LLIN_80[["EIR"]]
 
-IVM_One_Line = c(EIR_Control[1:21],EIR_traj_LLIN_50[22:40], EIR_traj_LLIN_80[40:INITIAL_MODELRUNTIME_VALUE] )
+#IVM_One_Line = c(EIR_Control[1:21],EIR_traj_LLIN_50[22:40], EIR_traj_LLIN_80[40:INITIAL_MODELRUNTIME_VALUE] )
 
 
-plotEIR_1(IVM_traj_Control,IVM_One_Line)
+#plotEIR_1(IVM_traj_Control,IVM_One_Line)
 
 
 
