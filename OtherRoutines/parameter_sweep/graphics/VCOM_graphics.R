@@ -162,10 +162,14 @@ ggplot(data=itn_n2_plot_dat) +
                             "ITN 50%\nTopical Endectocide 80%\nATSB 80%",
                             "ITN 50%\nLarvacide 20%\nATSB 80%")) +
   guides(fill=FALSE) +
+  labs(title="An. Arabiensis\n
+       Baseline EIR: 50") +
   theme_bw() +
   theme(axis.title.x=element_blank(),
         axis.title.y=element_text(size=16,face="bold"),
-        axis.text.x=element_text(size=12))
+        axis.text.x=element_text(size=12),
+        axis.text.y=element_text(size=12),
+        title=element_text(face="bold"))
 
 
 #################################################
