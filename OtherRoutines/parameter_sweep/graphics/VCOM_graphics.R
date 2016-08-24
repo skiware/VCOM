@@ -110,8 +110,15 @@ ggplot(data=fig1_line_df) +
 ###Creating Figure for ITN + combinations to reduce EIR###
 ##########################################################
 
-itn_n2_dat <- readRDS("C:/Users/WuS/Dropbox/IVM Team/SeanWu/VCOM/VCOM/OtherRoutines/parameter_sweep/FullTraj_sweepLLIN-2.rds")
-itn_n2_tuples <- read.csv("C:/Users/WuS/Dropbox/IVM Team/SeanWu/VCOM/VCOM/OtherRoutines/parameter_sweep/tuple_namesLLIN-2.txt")
+#itn_n2_dat <- readRDS("C:/Users/WuS/Dropbox/IVM Team/SeanWu/VCOM/VCOM/OtherRoutines/parameter_sweep/FullTraj_sweepLLIN-2.rds")
+#itn_n2_tuples <- read.csv("C:/Users/WuS/Dropbox/IVM Team/SeanWu/VCOM/VCOM/OtherRoutines/parameter_sweep/tuple_namesLLIN-2.txt")
+
+#From SK's laptop
+
+
+itn_n2_dat <- readRDS("C:/Users/skiware/Documents/VCOM/VCOM/OtherRoutines/parameter_sweep/FullTraj_sweepLLIN-2.rds")
+itn_n2_tuples <- read.csv("C:/Users/skiware/Documents/VCOM/VCOM/OtherRoutines/parameter_sweep/tuple_namesLLIN-2.txt")
+
 
 #filter data to not include interventions at 100% (negative index, ie; what NOT to include)
 

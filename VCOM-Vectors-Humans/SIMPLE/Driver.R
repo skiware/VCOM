@@ -30,12 +30,12 @@ source("multiplot.R")
 
 # Turn on required specie
  
-MOSQUITO_PARAMETERS = getAnGambiaeParameters()
+MOSQUITO_PARAMETERS_1 = getAnGambiaeParameters()
 MOSQUITO_PARAMETERS_2 = getAnArabiensisParameters()
 MOSQUITO_PARAMETERS_3 = getAnFunestusParameters()
 
 # simulation runs per day - enter the end time
-INITIAL_MODELRUNTIME_VALUE   = 50
+INITIAL_MODELRUNTIME_VALUE   = 365
 
 #Enter the coverage for a specific intervetion
 # To turn it on  - enter the required time which is < the max model run time
@@ -48,16 +48,16 @@ INITIAL_SRE_COVERAGE = 0.0
 INITIAL_SRE_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 
 #LArvaciding, coverage value, time it is on
-INITIAL_LAR_COVERAGE = 1
-INITIAL_LAR_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
+INITIAL_LAR_COVERAGE = 0.7
+INITIAL_LAR_TIME     = 20
 
 #Biological, coverage value, time it is on
 INITIAL_BIO_COVERAGE = 1
 INITIAL_BIO_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 
 #ATSB, coverage value, time it is on
-INITIAL_ATSB_COVERAGE = .00
-INITIAL_ATSB_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
+INITIAL_ATSB_COVERAGE = .50
+INITIAL_ATSB_TIME     = 20
 
 #Space Spraying, coverage value, time it is on
 INITIAL_SSP_COVERAGE = .00
@@ -67,22 +67,22 @@ INITIAL_SSP_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 INITIAL_OBT_COVERAGE = .00
 INITIAL_OBT_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 #LLINs, coverage value, time it is on
-INITIAL_ITN_COVERAGE = .8
-INITIAL_ITN_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
+INITIAL_ITN_COVERAGE = .50
+INITIAL_ITN_TIME     = 20
 #IRS
 INITIAL_IRS_COVERAGE = 0.8
 INITIAL_IRS_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 #House modification
-INITIAL_HOU_COVERAGE = 0.8
+INITIAL_HOU_COVERAGE = 0.0
 INITIAL_HOU_TIME     = 20
 #Personal Protection measure
 INITIAL_PPM_COVERAGE = 0.90
 INITIAL_PPM_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 #Cattle - Systemic
-INITIAL_ECS_COVERAGE = 0.00
-INITIAL_ECS_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
+INITIAL_ECS_COVERAGE = 0.50
+INITIAL_ECS_TIME     = 20
 #Cattle - Topical
-INITIAL_ECT_COVERAGE = 0.00
+INITIAL_ECT_COVERAGE = 0.50
 INITIAL_ECT_TIME     = INITIAL_MODELRUNTIME_VALUE + 1
 
 #Resting and Ovipositing - OviTraps -assuming same coverage for ATSB and SSP
@@ -124,7 +124,7 @@ INTERVENTION_PARAMETERS = getInterventionsParameters(
 
 #Pass in interventions parameter with updated coverage and the specie
 
-theta <<- getTheta(interventionParameters=INTERVENTION_PARAMETERS, speciesSpecificParameters=MOSQUITO_PARAMETERS)
+theta <<- getTheta(interventionParameters=INTERVENTION_PARAMETERS, speciesSpecificParameters=MOSQUITO_PARAMETERS_3)
 
 
 ## Initialize the model
@@ -133,6 +133,10 @@ initState <<- calculateInitialState(theta)
 
 ## Run the model - eventually produce different IVM_traj for different scenarios, eg., 1 intervention, 2 inter, etc
 IVM_traj <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"daspk")
+
+IVM_traj_2 <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"daspk")
+
+IVM_traj_3 <<- runODE(INITIAL_MODELRUNTIME_VALUE,1,initState,theta,"daspk")
 
 ## Generate outputs - using Histograms
 barChartMosquitoDemographics(IVM_traj)
@@ -150,10 +154,10 @@ plotTrajectory(IVM_traj)
 plotTrajectoryHumans(IVM_traj)
 
 ## Plot Just EIR
-plotEIR(IVM_traj)
+plotEIR(IVM_traj)  #,IVM_traj_2,IVM_traj_3)
 
 #compute and plot EIR, VC, R0
-plotEIR_VC_R0(IVM_traj)
+#plotEIR_VC_R0(IVM_traj)
 
 
 #SAM - check the impact of mosq proofed housing

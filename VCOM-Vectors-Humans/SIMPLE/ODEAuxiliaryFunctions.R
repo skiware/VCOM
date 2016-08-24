@@ -120,18 +120,43 @@ plot_MS_Figures = function(IVM_traj_Control,IVM_traj_LLIN_50,IVM_traj_LLIN_80,IV
 
   multiplot(p2, cols=1)
 
-
+ 
 
 }
-barChart_MS <- function(IVM_traj_Control,IVM_traj_ITN_80,IVM_traj_IRS_80,IVM_traj_ITN_ECS_5080,
-                        IVM_traj_ITN_ATSB_5080,IVM_traj_ITN_LAR_5080,IVM_traj_ITN_PPM_LAR_505050
-                        ,IVM_traj_LLIN_ECT_PPM_ATSB_50505050){
 
-  traj_dat <- data.frame(stage=c("ITN 80%","IRS 80%","ITN 50%, ECT 80%", "ITN 50%, ATSB 80%","ITN 50%, LAR 80%",
-                                 "ITN 50%, PPM 50% LAR 50%","ITN 50%, ECT 50%, PPM 50%, ATSB 50%"),
-                         value=c(tail(IVM_traj_ITN_80[["EIR"]],1),tail(IVM_traj_IRS_80[["EIR"]],1),tail(IVM_traj_ITN_ECS_5080[["EIR"]],1),
-                                 tail(IVM_traj_ITN_ATSB_5080[["EIR"]],1),tail(IVM_traj_ITN_LAR_5080[["EIR"]],1),
-                                 tail(IVM_traj_ITN_PPM_LAR_505050[["EIR"]],1), tail(IVM_traj_LLIN_ECT_PPM_ATSB_50505050[["EIR"]],1)))
+barChart_MS_Other <- function (IVM_traj_Control,IVM_traj_ITN_LAR_5070,IVM_traj_ITN_LAR_ATSB_508050,IVM_traj_ITN_LAR_ATSB_ECS_50805050 )
+{
+  
+  traj_dat <- data.frame(stage=c("ITN 50%, LAR 80%","ITN 50%, LAR 80%, ATSB 50%","ITN 50%, LAR 80, ATSB 50%, ECT 50%"))
+                         value=c(tail(IVM_traj_ITN_LAR_5070[["EIR"]],1),tail(IVM_traj_ITN_LAR_ATSB_508050[["EIR"]],1),tail(IVM_traj_ITN_LAR_ATSB_ECS_50805050[["EIR"]],1))
+  traj_dat$stage <- factor(traj_dat$stage,levels=traj_dat$stage)
+  
+  traj_dat$newx = str_wrap(traj_dat$stage, width = 10)
+  
+  ggplot(data=traj_dat,aes(newx,value,fill=stage)) +
+    geom_bar(stat="identity",colour="black") +
+    #scale_y_log10() +
+    theme_grey(base_size = 18, base_family = "") +
+    #theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5))+
+    guides(fill=FALSE) +
+    labs(title = "An. Funestus  : Baseline EIR = 100", x="Tools",y="EIR") #Arabiensis
+  
+  
+  #scale_x_discrete(labels = function(x) str_wrap(x, width = 10))
+  
+  #theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5))
+  
+}
+barChart_MS <- function(IVM_traj_Control,IVM_traj_ITN_HOU_5050,IVM_traj_ITN_PPM_5050,IVM_traj_ITN_ECS_5050,
+                        IVM_traj_ITN_LAR_ECS_505050,IVM_traj_ITN_LAR_5050,IVM_traj_ITN_PPM_LAR_505050
+                        ,IVM_traj_LLIN_ECT_PPM_505050,IVM_traj_ITN_ATSB_5050,IVM_traj_ITN_ATSB_LAR_505050 ){
+
+  traj_dat <- data.frame(stage=c("ITN 80%, HOU 80%","ITN 80%, PPM 80%","ITN 80%, ECT 80%", "ITN 80%, LAR 80%, ECS 50%","ITN 80%, LAR 80%",
+                                 "ITN 80%, PPM 80% LAR 80%","ITN 80%, ECT 80%, PPM 80%","ITN 80%, ATSB 80%","ITN 80%, ATSB 80%, LAR 80%"),
+                         value=c(tail(IVM_traj_ITN_HOU_5050[["EIR"]],1),tail(IVM_traj_ITN_PPM_5050[["EIR"]],1),tail(IVM_traj_ITN_ECS_5050[["EIR"]],1),
+                                 tail(IVM_traj_ITN_LAR_ECS_505050[["EIR"]],1),tail(IVM_traj_ITN_LAR_5050[["EIR"]],1),
+                                 tail(IVM_traj_ITN_PPM_LAR_505050[["EIR"]],1), tail(IVM_traj_LLIN_ECT_PPM_505050[["EIR"]],1),
+                                 tail(IVM_traj_ITN_ATSB_5050[["EIR"]],1),tail(IVM_traj_ITN_ATSB_LAR_505050[["EIR"]],1)))
   traj_dat$stage <- factor(traj_dat$stage,levels=traj_dat$stage)
 
   traj_dat$newx = str_wrap(traj_dat$stage, width = 10)
@@ -142,7 +167,7 @@ barChart_MS <- function(IVM_traj_Control,IVM_traj_ITN_80,IVM_traj_IRS_80,IVM_tra
     theme_grey(base_size = 18, base_family = "") +
     #theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5))+
     guides(fill=FALSE) +
-    labs(title = "An. Arabiensis : Baseline EIR = 100", x="Tools",y="EIR")
+    labs(title = "An.Arabiensis  : Baseline EIR = 10", x="Tools",y="EIR") #Arabiensis
   
   
   #scale_x_discrete(labels = function(x) str_wrap(x, width = 10))
@@ -155,9 +180,11 @@ plotEIR = function(IVM_traj){
   #. plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
    ggplot(IVM_traj, aes(x = time, y = EIR, color = State)) +
     theme_grey(base_size = 18, base_family = "") +
-    geom_line(aes(y = IVM_traj[["EIR"]], col = "EIR"), size = 1.75, colour = 'magenta') +
+    geom_line(aes(y = IVM_traj[["EIR"]], col = "EIR"), size = 1.75, colour = 'blue') +
+    #geom_line(aes(y = IVM_traj_2[["EIR"]], col = "EIR"), size = 1.75, colour = 'black') +
+    #geom_line(aes(y = IVM_traj_3[["EIR"]], col = "EIR"), size = 1.75, colour = 'blue') +
     ylim(0, NA) +
-    labs(x = "Time (days)", y = "Entomological Inoculation Rate (EIR)")
+    labs(title ="An. Gambiae Baseline EIR = 100" , x = "Time (days)", y = "EIR")
 }
 
 plotVC = function(IVM_traj){

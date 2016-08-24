@@ -57,7 +57,7 @@ impactATSBSpaceSpraying = function(time,time_ATSB_on,ATSBcov,time_SSP_on,SSPcov,
 
 
 
-  if (time > time_ATSB_on) { ATSBcov_t <- ATSBcov } else { ATSBcov_t <- 0 }
+  if (time > time_ATSB_on) { ATSBcov_t <- 0 } else { ATSBcov_t <- 0 }
   if (time > time_SSP_on) { SSPcov_t <- SSPcov } else { SSPcov_t <- 0 }
 
   #Coverage ATSB only
