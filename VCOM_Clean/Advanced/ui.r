@@ -15,6 +15,8 @@ library(ggplot2)
 library(shinyjs)
 library(shinythemes)
 library(XLConnect)
+library(plotly)
+library(BH)
 source("ODEModel.R")
 source("ODEMosquitoParameters.R")
 source("Parsers.R")
@@ -90,12 +92,12 @@ shinyUI(
             ")
           ),
           mainPanel(
-            plotOutput("plotEIR"),
-            plotOutput("plotTrajectory"),
-            plotOutput("plotDemographics"),
-            plotOutput("plotVC"),
-            plotOutput("plotR0"),
-            plotOutput("plotHuman")
+            plotlyOutput("plotEIR"),
+            plotlyOutput("plotTrajectory"),
+            plotlyOutput("plotDemographics"),
+            plotlyOutput("plotVC"),
+            plotlyOutput("plotR0"),
+            plotlyOutput("plotHuman")
           )
         ),
         helpText("Contacts: <Model: Samson.Kiware@ucsf.edu> <GUI: sanchez.hmsc@itesm.mx>"),
