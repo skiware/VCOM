@@ -2,8 +2,8 @@ name: ToniteTonite
 account: chipdelmal
 server: shinyapps.io
 appId: 120612
-bundleId: 540918
+bundleId: 541117
 url: https://chipdelmal.shinyapps.io/ToniteTonite/
-when: 1472142590.27328
+when: 1472156559.56079
 asMultiple: FALSE
 asStatic: FALSE

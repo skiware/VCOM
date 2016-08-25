@@ -20,9 +20,9 @@ shinyServer(
     output$plotTrajectory=renderPlotly({plotTrajectoryPlotLy(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
     output$plotDemographics = renderPlotly({barChartMosquitoDemographicsPlotLy(IVM_traj)})
-    output$plotVC = renderPlotly({plotVCPlotLy(IVM_traj)})
-    output$plotR0 = renderPlotly({plotR0PlotLy(IVM_traj)})
-    output$plotEIR = renderPlotly({plotEIRPlotLy(IVM_traj)})
+    #output$plotVC = renderPlotly({plotVCPlotLy(IVM_traj)})
+    #output$plotR0 = renderPlotly({plotR0PlotLy(IVM_traj)})
+    output$plotEIR = renderPlotly({plotEIRVCR0PlotLy(IVM_traj)})
     output$plotHuman = renderPlotly({plotTrajectoryHumansPlotLy(IVM_traj)})
     #############################################################################
     # CLICK EVENTS ##############################################################
@@ -62,13 +62,13 @@ shinyServer(
       )
       #--------------------------------------------------------------------------
       initState=calculateInitialState(theta)
-      IVM_traj<<-runODE(input$sliderTime,1,initState,theta,"lsoda")
+      IVM_traj<<-runODE(input$sliderTime,1,initState,theta, "daspk")
       output$plotTrajectory=renderPlotly({plotTrajectoryPlotLy(IVM_traj)})
       output$IVM_Runtime=renderTable(IVM_traj)
       output$plotDemographics = renderPlotly({barChartMosquitoDemographicsPlotLy(IVM_traj)})
-      output$plotVC = renderPlotly({plotVCPlotLy(IVM_traj)})
-      output$plotR0 = renderPlotly({plotR0PlotLy(IVM_traj)})
-      output$plotEIR = renderPlotly({plotEIRPlotLy(IVM_traj)})
+      #output$plotVC = renderPlotly({plotVCPlotLy(IVM_traj)})
+      #output$plotR0 = renderPlotly({plotR0PlotLy(IVM_traj)})
+      output$plotEIR = renderPlotly({plotEIRVCR0PlotLy(IVM_traj)})
       output$plotHuman = renderPlotly({plotTrajectoryHumansPlotLy(IVM_traj)})
       print(INTERVENTION_PARAMETERS)
       #--------------------------------------------------------------------------

@@ -2,8 +2,8 @@ name: TheBluesAreStillBlue
 account: chipdelmal
 server: shinyapps.io
 appId: 107536
-bundleId: 540935
+bundleId: 541256
 url: https://chipdelmal.shinyapps.io/TheBluesAreStillBlue/
-when: 1472143887.46162
+when: 1472169018.06743
 asMultiple: FALSE
 asStatic: FALSE

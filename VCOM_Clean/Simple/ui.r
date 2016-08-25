@@ -58,7 +58,7 @@ theta <<- getTheta(interventionParameters=INTERVENTION_PARAMETERS)
 # MODEL -------------------------------------
 timing <<- seq(0,INITIAL_TIME_VALUE,by=1)
 initState <<- calculateInitialState(theta)
-IVM_traj <<- runODE(INITIAL_TIME_VALUE,1,initState,theta,"lsoda")
+IVM_traj <<- runODE(INITIAL_TIME_VALUE,1,initState,theta,"daspk")
 ###################################################################################
 shinyUI(
   fluidPage(theme = shinytheme("cerulean"),
@@ -190,10 +190,16 @@ shinyUI(
               )
             ),mainPanel(
               plotlyOutput("plotEIR"),
+              fluidRow(h1("")),
+              fluidRow(h1("")),
               plotlyOutput("plotTrajectory"),
+              fluidRow(h1("")),
+              fluidRow(h1("")),
               plotlyOutput("plotDemographics"),
-              plotlyOutput("plotVC"),
-              plotlyOutput("plotR0"),
+              fluidRow(h1("")),
+              fluidRow(h1("")),
+              #plotlyOutput("plotVC"),
+              #plotlyOutput("plotR0"),
               plotlyOutput("plotHuman")
             )
           ),

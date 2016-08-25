@@ -92,12 +92,18 @@ shinyUI(
             ")
           ),
           mainPanel(
-            plotlyOutput("plotEIR"),
-            plotlyOutput("plotTrajectory"),
-            plotlyOutput("plotDemographics"),
-            plotlyOutput("plotVC"),
-            plotlyOutput("plotR0"),
-            plotlyOutput("plotHuman")
+              plotlyOutput("plotEIR"),
+              fluidRow(h1("")),
+              fluidRow(h1("")),
+              plotlyOutput("plotTrajectory"),
+              fluidRow(h1("")),
+              fluidRow(h1("")),
+              plotlyOutput("plotDemographics"),
+              fluidRow(h1("")),
+              fluidRow(h1("")),
+              #plotlyOutput("plotVC"),
+              #plotlyOutput("plotR0"),
+              plotlyOutput("plotHuman")
           )
         ),
         helpText("Contacts: <Model: Samson.Kiware@ucsf.edu> <GUI: sanchez.hmsc@itesm.mx>"),
