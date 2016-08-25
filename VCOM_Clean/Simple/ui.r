@@ -14,6 +14,8 @@ library(deSolve)
 library(ggplot2)
 library(shinyjs)
 library(shinythemes)
+library(plotly)
+library(BH)
 source("ODEModel.R")
 source("ODEMosquitoParameters.R")
 source("Plots.R")
@@ -187,12 +189,12 @@ shinyUI(
                 column(COVERAGE_INIT_SIZE,numericInput("time_PPM_on",NULL,value=0,min=0,max=365))
               )
             ),mainPanel(
-              plotOutput("plotEIR"),
-              plotOutput("plotTrajectory"),
-              plotOutput("plotDemographics"),
-              plotOutput("plotVC"),
-              plotOutput("plotR0"),
-              plotOutput("plotHuman")
+              plotlyOutput("plotEIR"),
+              plotlyOutput("plotTrajectory"),
+              plotlyOutput("plotDemographics"),
+              plotlyOutput("plotVC"),
+              plotlyOutput("plotR0"),
+              plotlyOutput("plotHuman")
             )
           ),
           helpText("Cite as: "),
