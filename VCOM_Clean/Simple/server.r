@@ -13,10 +13,10 @@ shinyServer(
     #############################################################################
     # PRIMING GUI ###############################################################
     output$modelStatus <- renderText({"Waiting"})
-    shinyjs::disable("downloadCSVTrace"); shinyjs::disable("downloadPlotTrace")
-    shinyjs::disable("downloadCSVEIR"); shinyjs::disable("downloadPlotEIR")
-    shinyjs::disable("downloadPlotDemographics"); shinyjs::disable("downloadPlotVC")
-    shinyjs::disable("downloadPlotHuman"); shinyjs::disable("downloadPlotR0")
+    #shinyjs::disable("downloadCSVTrace"); shinyjs::disable("downloadPlotTrace")
+    #shinyjs::disable("downloadCSVEIR"); shinyjs::disable("downloadPlotEIR")
+    #shinyjs::disable("downloadPlotDemographics"); shinyjs::disable("downloadPlotVC")
+    #shinyjs::disable("downloadPlotHuman"); shinyjs::disable("downloadPlotR0")
     output$plotTrajectory=renderPlotly({plotTrajectoryPlotLy(IVM_traj)})
     output$IVM_Runtime=renderTable(IVM_traj)
     output$plotDemographics = renderPlotly({barChartMosquitoDemographicsPlotLy(IVM_traj)})
@@ -135,6 +135,19 @@ shinyServer(
       content = function(file){
         device <- function(...,width,height){grDevices::png(...,width=2*width,height=height,res=300,units="in")}
         ggsave(file,plot=barChartMosquitoDemographics(IVM_traj),device=device)
+      }
+    )
+    output$downloadPlots <- downloadHandler(
+      filename = function(){"VCOMReport.pdf"},
+      content = function(file) {
+        pdf(file, width=12, height=7)
+        print(barChartMosquitoDemographics(IVM_traj))
+        print(plotR0(IVM_traj))
+        print(plotTrajectoryHumans(IVM_traj))
+        print(plotVC(IVM_traj))
+        print(plotEIR(IVM_traj))
+        print(plotTrajectory(IVM_traj))
+        dev.off()
       }
     )
     #############################################################################

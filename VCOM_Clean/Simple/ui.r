@@ -83,8 +83,8 @@ shinyUI(
               #helpText("(3) Set the Q0 level (proportion of bites taken on humans with respect to cattle)."),
               helpText("(3) Select the number of days to simulate."),
               helpText("(4) Run the model! (click the button or hit 'ENTER')"),
-              helpText("(5) Setup the desired interventions and repeat step 3 as required."),
-              helpText("(6) Additionally you can download results in the 'Files Output' tab."),
+              helpText("(5 optional) Download a PDF report of the plots or download results individually in the 'Files Output' tab."),
+              helpText("(6) Setup the desired interventions and repeat step 4 as required."),
               helpText("(7) Eliminate malaria!"),
               fluidRow(h3("1. Mosquito Selection")),
               radioButtons("radioSpecies",label=NULL,
@@ -112,7 +112,10 @@ shinyUI(
               fluidRow(h3("4. Run Model")),
               actionButton("buttonRun","Run",width="100%"),
               #####################################################################
-              fluidRow(h3("5. Interventions")),
+              fluidRow(h3("5. Download PDF")),
+              downloadButton("downloadPlots", 'Download PDF Plots Report'),
+              #####################################################################
+              fluidRow(h3("6. Interventions")),
               fluidRow(helpText(
                 "Key: Ovitraps (OVI), Larviciding (LAR), Biological Control (BIO), Source Reduction (SRE)
                 Insecticide-Treated Nets (ITN), Indoor Residual Spraying (IRS), Endocticide (ECS), Endocticide (ECT), House Modifications (HOU),
@@ -188,7 +191,8 @@ shinyUI(
                 column(COVERAGE_BAR_SIZE,sliderInput("PPMcov",NULL,min=0,max=1,value=0,step=COVERAGE_STEP_SIZE)),
                 column(COVERAGE_INIT_SIZE,numericInput("time_PPM_on",NULL,value=0,min=0,max=365))
               )
-            ),mainPanel(
+            ),
+            mainPanel(
               plotlyOutput("plotEIR"),
               fluidRow(h1("")),
               fluidRow(h1("")),
@@ -209,7 +213,7 @@ shinyUI(
         ),
         tabPanel("Files Output",
           titlePanel(h1("Export and Download",align="left")),
-          helpText("Run the model at least once for the buttons to activate."),
+          #helpText("Run the model at least once for the buttons to activate."),
           fluidRow(
             column(4,align="center",
               titlePanel(h3("Data",align="center")),
@@ -220,13 +224,19 @@ shinyUI(
             column(4,""),
             column(4,align="center",
               titlePanel(h3("Plots",align="center")),
-              fluidRow(
-              downloadButton("downloadPlotTrace", 'Download Trajectory Plot'),
-              downloadButton("downloadPlotEIR", 'Download EIR Plot'),
-              downloadButton("downloadPlotDemographics", 'Download Demographics Plot'),
-              downloadButton("downloadPlotVC", 'Download VC Plot'),
-              downloadButton("downloadPlotR0", 'Download R0 Plot'),
-              downloadButton("downloadPlotHuman", 'Download Human Plot')
+                fluidRow(
+                downloadButton("downloadPlotTrace", 'Download Trajectory Plot'),
+                h1(""),
+                downloadButton("downloadPlotEIR", 'Download EIR Plot'),
+                h1(""),
+                downloadButton("downloadPlotDemographics", 'Download Demographics Plot'),
+                h1(""),
+                downloadButton("downloadPlotVC", 'Download VC Plot'),
+                h1(""),
+                downloadButton("downloadPlotR0", 'Download R0 Plot'),
+                h1(""),
+                downloadButton("downloadPlotHuman", 'Download Human Plot'),
+                h1("")
               )
             )
           )
