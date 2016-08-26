@@ -80,16 +80,17 @@ shinyUI(
               'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
               '.xls')
             ),
+            tags$script('$("#fileImport").on("click",function(){this.value=null;});'),
             #fileInput('file1', 'Choose CSV/TXT File',accept=c('text/csv', 'text/comma-separated-values,text/plain')),
             #textOutput("importedMessage"),
             actionButton("buttonRun","3. Run Model",width="100%"),
             #titlePanel(h1("Messages",align="left")),
             titlePanel(h1("")),
-            textOutput("debugOutput"),
-            helpText("NOTE: For some reason shiny does not include a function to reset the upload file routine and does not upload a different version of
-              the file if it is called the same way as the one that was uploaded previously. Currently working on a workaround but for now the solution
-              is to refresh the page... it's driving me insane...
-            ")
+            textOutput("debugOutput")
+            #helpText("NOTE: For some reason shiny does not include a function to reset the upload file routine and does not upload a different version of
+            #  the file if it is called the same way as the one that was uploaded previously. Currently working on a workaround but for now the solution
+            #  is to refresh the page... it's driving me insane...
+            #")
           ),
           mainPanel(
               plotlyOutput("plotEIR"),
