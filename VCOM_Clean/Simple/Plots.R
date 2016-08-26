@@ -9,13 +9,15 @@
 ########################################################################
 plotTrajectory = function(IVM_traj){
   #. plotTrajectory: Plots the evolution of the dynamics of the system
+  print("LOAD")
   ggplot(IVM_traj, aes(x = time, y = IVM_traj, color = State)) +
     #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) +
     theme_grey(base_size = 18, base_family = "") +
     geom_line(aes(y = IV, col = "Infected"), size = 1.75) +
     geom_line(aes(y = SV, col = "Suceptible"), size = 1.75) +
     geom_line(aes(y = EV, col = "Exposed"), size = 1.75) +
-    ylim(0, NA) +
+    scale_y_log10() +
+    #ylim(0, NA) +
     labs(x = "Time (days)", y = "Number of mosquitoes")
 }
 plotTrajectoryHumans = function(IVM_traj){
@@ -25,7 +27,8 @@ plotTrajectoryHumans = function(IVM_traj){
     #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) +
     geom_line(aes(y = IH, col = "Infected"), size = 1.75) +
     geom_line(aes(y = SH, col = "Suceptible"), size = 1.75) +
-    ylim(0, NA) +
+    scale_y_log10() +
+    #ylim(0, NA) +
     labs(x = "Time (days)", y = "Number of humans")
 }
 plotEIR = function(IVM_traj){
