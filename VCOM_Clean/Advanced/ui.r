@@ -59,7 +59,7 @@ IVM_traj<<-runODE(365,1,initState,theta,"lsoda")
 shinyUI(
   fluidPage(theme=shinytheme("cosmo"),
     useShinyjs(),
-    tags$script(ENTER_DOWN_RUN),
+    #tags$script(ENTER_DOWN_RUN),
     tags$head(tags$style(type="text/css",WORKING_MESSAGE_STYLE)),
     conditionalPanel(condition="$('html').hasClass('shiny-busy')",tags$div("Working...",id="loadmessage")),
     titlePanel(h1("VCOM: Expert (beta)",align="center"),windowTitle="VCOM: Expert"),
@@ -73,7 +73,7 @@ shinyUI(
             titlePanel(h1("Instructions",align="left")),
             helpText("(1) Select the number of days for the simulation to run."),
             helpText("(2) Load the simulation setup file (CSV or XLS format). In case you currently do not have the template download it from the 'Downloads/'"),
-            helpText("(3) Run the model! (click the button or hit 'ENTER')"),
+            helpText("If the file was loaded correctly the model should have run automatically!"),
             sliderInput("sliderTime","1. Days to Simulate:",min=1,max=365,value=365),
             fileInput('fileImport','2. Import CSV/XLS Parameters File',accept=c(
               'application/vnd.ms-excel',
@@ -83,7 +83,7 @@ shinyUI(
             tags$script('$("#fileImport").on("click",function(){this.value=null;});'),
             #fileInput('file1', 'Choose CSV/TXT File',accept=c('text/csv', 'text/comma-separated-values,text/plain')),
             #textOutput("importedMessage"),
-            actionButton("buttonRun","3. Run Model",width="100%"),
+            #actionButton("buttonRun","3. Run Model",width="100%"),
             #titlePanel(h1("Messages",align="left")),
             titlePanel(h1("")),
             textOutput("debugOutput")
