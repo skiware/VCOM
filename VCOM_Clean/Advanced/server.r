@@ -44,7 +44,24 @@ shinyServer(
     output$transmissionParametersTable=renderDataTable(transmissionParametersTable,options=list(searching=FALSE,paging = FALSE))
     #############################################################################
     # CLICK EVENTS ##############################################################
-    observeEvent(input$sliderTime,{cat("Slider event!\n")})
+    observeEvent(input$sliderTime,{
+      cat("Slider event!\n")
+      initState = calculateInitialState(theta)
+      IVM_traj <<- runODE(input$sliderTime,1,initState,theta,"daspk")
+      output$plotTrajectory=renderPlotly({plotTrajectoryPlotLy(IVM_traj)})
+      output$IVM_Runtime=renderTable(IVM_traj)
+      output$plotDemographics = renderPlotly({barChartMosquitoDemographicsPlotLy(IVM_traj)})
+      #output$plotVC = renderPlotly({plotVCPlotLy(IVM_traj)})
+      #output$plotR0 = renderPlotly({plotR0PlotLy(IVM_traj)})
+      output$plotEIR = renderPlotly({plotEIRVCR0PlotLy(IVM_traj)})
+      output$plotHuman = renderPlotly({plotTrajectoryHumansPlotLy(IVM_traj)})
+      shinyjs::enable("downloadCSVTrace")
+      shinyjs::enable("downloadPlotTrace")
+      shinyjs::enable("downloadCSVTrace"); shinyjs::enable("downloadPlotTrace")
+      shinyjs::enable("downloadCSVEIR"); shinyjs::enable("downloadPlotEIR")
+      shinyjs::enable("downloadPlotDemographics"); shinyjs::enable("downloadPlotVC")
+      shinyjs::enable("downloadPlotHuman"); shinyjs::enable("downloadPlotR0")
+    })
     # observeEvent(input$buttonRun,{
     #   cat("Button event!\n")
     #   print(theta)
