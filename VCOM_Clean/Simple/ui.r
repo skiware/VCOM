@@ -64,7 +64,7 @@ shinyUI(
   fluidPage(theme = shinytheme("cerulean"),
     titlePanel(h1("VCOM: Simple",align="center"),windowTitle="VCOM: Simple"),
     titlePanel(h4("Vector Control Optimization Model",align="center")),
-    titlePanel(h4(tags$a(class="btn btn-danger", href="http://chipdelmal.github.io/VCOM/", "Home", style="display: block; width: 100%;"),align="center")),
+    titlePanel(h4(tags$a(class="btn btn-default", href="http://chipdelmal.github.io/VCOM/", "Home", style="display: block; width: 100%;"),align="center")),
     ###############################################################################
     useShinyjs(),
     tags$script(ENTER_DOWN_RUN),
