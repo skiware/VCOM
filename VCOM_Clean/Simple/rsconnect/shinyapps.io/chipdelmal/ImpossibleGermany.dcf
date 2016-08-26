@@ -2,8 +2,8 @@ name: ImpossibleGermany
 account: chipdelmal
 server: shinyapps.io
 appId: 122157
-bundleId: 542114
+bundleId: 542119
 url: https://chipdelmal.shinyapps.io/ImpossibleGermany/
-when: 1472249567.66993
+when: 1472249892.77532
 asMultiple: FALSE
 asStatic: FALSE
