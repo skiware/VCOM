@@ -14,7 +14,7 @@ plotTrajectory = function(IVM_traj){
     #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) +
     theme_grey(base_size = 18, base_family = "") +
     geom_line(aes(y = IV, col = "Infected"), size = 1.75) +
-    geom_line(aes(y = SV, col = "Suceptible"), size = 1.75) +
+    geom_line(aes(y = SV, col = "Susceptible"), size = 1.75) +
     geom_line(aes(y = EV, col = "Exposed"), size = 1.75) +
     scale_y_log10() +
     #ylim(0, NA) +
@@ -26,7 +26,7 @@ plotTrajectoryHumans = function(IVM_traj){
     theme_grey(base_size = 18, base_family = "") +
     #geom_line(aes(y = SV+EV+IV, col = "NV"), size = 1.2) +
     geom_line(aes(y = IH, col = "Infected"), size = 1.75) +
-    geom_line(aes(y = SH, col = "Suceptible"), size = 1.75) +
+    geom_line(aes(y = SH, col = "Susceptible"), size = 1.75) +
     ylim(0, NA) +
     labs(x = "Time (days)", y = "Number of humans")
 }
@@ -129,14 +129,14 @@ AxisStyleLogBar = function(label){
 }
 plotTrajectoryPlotLy = function(IVM_traj){
   #. plotTrajectory: Plots the evolution of the dynamics of the system
-  plot_ly(x = IVM_traj$time, y = IVM_traj$SV, line = LINE_STYLE, name = "Suceptible") %>%
+  plot_ly(x = IVM_traj$time, y = IVM_traj$SV, line = LINE_STYLE, name = "Susceptible") %>%
     add_trace(y = IVM_traj$IV, line = LINE_STYLE, name = "Infected") %>%
     add_trace(y = IVM_traj$EV, line = LINE_STYLE, name = "Exposed") %>%
-    layout(xaxis = AxisStyle("Time"), yaxis = AxisStyleLog("Number of Mosquitos"))
+    layout(xaxis = AxisStyle("Time"), yaxis = AxisStyleLog("Number of Mosquitoes"))
 }
 plotTrajectoryHumansPlotLy = function(IVM_traj){
   #. plotTrajectory: Plots the evolution of the dynamics of the system
-  plot_ly(x = IVM_traj$time, y = IVM_traj$SH, line = LINE_STYLE, name = "Suceptible") %>%
+  plot_ly(x = IVM_traj$time, y = IVM_traj$SH, line = LINE_STYLE, name = "Susceptible") %>%
     add_trace(y = IVM_traj$IH, line = LINE_STYLE, name = "Infected") %>%
     layout(xaxis = AxisStyle("Time"), yaxis = AxisStyle("Number of Humans"))
 }
@@ -159,7 +159,7 @@ barChartMosquitoDemographicsPlotLy = function(IVM_traj){
   traj_dat <- data.frame(stage=c("Early Instar","Late Instar","Pupae","Susceptible Adult","Exposed Adult","Infected Adult"),sum=c(sum(IVM_traj["EL"]),sum(IVM_traj["LL"]),sum(IVM_traj["PL"]),sum(IVM_traj["SV"]),sum(IVM_traj["EV"]),sum(IVM_traj["IV"])))
   traj_dat$stage <- factor(traj_dat$stage,levels=traj_dat$stage)
   plot_ly(x = c("Early Instar","Late Instar","Pupae","Susceptible Adult","Exposed Adult","Infected Adult"), y = traj_dat$sum,type = "bar", name = list("EL","LL","PL","SV","EV","IV"), color = list("EL","LL","PL","SV","EV","IV")) %>%
-    layout(xaxis = AxisStyleBar(""), yaxis = AxisStyleLogBar("Number of Mosquitos"), showlegend = FALSE)
+    layout(xaxis = AxisStyleBar(""), yaxis = AxisStyleLogBar("Number of Mosquitoes"), showlegend = FALSE)
 }
 plotEIRVCR0PlotLy = function(IVM_traj){
   #. plotEIR_VC_R0: Plots EIR, VC and R0 dynamics of the system
