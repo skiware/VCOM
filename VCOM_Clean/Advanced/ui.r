@@ -88,7 +88,7 @@ shinyUI(
             #titlePanel(h1("Messages",align="left")),
             titlePanel(h1("")),
             textOutput("debugOutput"),
-            fluidRow(h3("3. Download PDF")),
+            fluidRow(h3("Download PDF")),
             downloadButton("downloadPlots", 'Download PDF Plots Report')
             #helpText("NOTE: For some reason shiny does not include a function to reset the upload file routine and does not upload a different version of
             #  the file if it is called the same way as the one that was uploaded previously. Currently working on a workaround but for now the solution
