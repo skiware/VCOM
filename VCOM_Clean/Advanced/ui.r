@@ -88,8 +88,12 @@ shinyUI(
             #titlePanel(h1("Messages",align="left")),
             titlePanel(h1("")),
             textOutput("debugOutput"),
-            fluidRow(h3("Download PDF")),
-            downloadButton("downloadPlots", 'Download PDF Plots Report')
+            fluidRow(h3("Download Report and Trace")),
+            downloadButton("downloadPlots", 'Download PDF Plots Report'),
+            downloadButton("downloadCSVTrace", 'Download CSV Trace'),
+            fluidRow(h3("Download Parameters Template")),
+            downloadButton("downloadTemplate", 'Download XLS Parameters Template')
+
             #helpText("NOTE: For some reason shiny does not include a function to reset the upload file routine and does not upload a different version of
             #  the file if it is called the same way as the one that was uploaded previously. Currently working on a workaround but for now the solution
             #  is to refresh the page... it's driving me insane...
@@ -110,7 +114,7 @@ shinyUI(
               plotlyOutput("plotHuman")
           )
         ),
-        helpText("Contacts: <Model: Samson.Kiware@ucsf.edu> <GUI: sanchez.hmsc@itesm.mx>"),
+        helpText("Contacts: <Model: Samson.Kiware@ucsf.edu, John.Marshall@berkeley.edu> <GUI: sanchez.hmsc@itesm.mx, tarrasch@berkeley.edu>"),
         helpText("Cite as: "),
         helpText("CSS theme downloaded from: http://bootswatch.com (MIT licence)")
       ),
@@ -132,47 +136,47 @@ shinyUI(
             tableOutput("fileContents")
           )
         )
-      ),
-      #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
-      tabPanel("Downloads",
-        sidebarLayout(
-          sidebarPanel(
-            helpText("You can download PNG files for the plots describing the behaviour of the simulated scenario.")#Please note that some of the buttons will only activate after the model has been run at least once and will be disabled if a file with an error was uploaded.")
-          ),
-          mainPanel(
-            #titlePanel(h1("Templates",align="left")),
-            fluidRow(
-              column(5,align="center",
-                titlePanel(h3("CSV/XLS Downloads",align="center")),
-                titlePanel(h6("")),
-                downloadButton("downloadTemplate", 'Download XLS Parameters Template'),
-                #downloadButton("downloadParameters", 'Download Current CSV Parameters'),
-                titlePanel(h6("")),
-                downloadButton("downloadCSVTrace", 'Download CSV Trace')
-              ),
-              column(5,""),
-              column(5,align="center",
-                fluidRow(
-                  titlePanel(h3("Plots",align="center")),
-                  titlePanel(h6("")),
-                  #radioButtons("radioFormat",label=h4("Plot Format"),choices=list("JPG"=".jpg","PNG"=".png"),selected="PNG"),
-                  downloadButton("downloadPlotTrace", 'Download Trajectory Plot'),
-                  h1(""),
-                  downloadButton("downloadPlotEIR", 'Download EIR Plot'),
-                  h1(""),
-                  downloadButton("downloadPlotDemographics", 'Download Demographics Plot'),
-                  h1(""),
-                  downloadButton("downloadPlotVC", 'Download VC Plot'),
-                  h1(""),
-                  downloadButton("downloadPlotR0", 'Download R0 Plot'),
-                  h1(""),
-                  downloadButton("downloadPlotHuman", 'Download Human Plot'),
-                  h1("")
-                )
-              )
-            )
-          )
-        )
+#       ),
+#       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+#       tabPanel("Downloads",
+#         sidebarLayout(
+#           sidebarPanel(
+#             helpText("You can download PNG files for the plots describing the behaviour of the simulated scenario.")#Please note that some of the buttons will only activate after the model has been run at least once and will be disabled if a file with an error was uploaded.")
+#           ),
+#           mainPanel(
+#             #titlePanel(h1("Templates",align="left")),
+#             fluidRow(
+#               column(5,align="center",
+#                 titlePanel(h3("CSV/XLS Downloads",align="center")),
+#                 titlePanel(h6("")),
+#                 downloadButton("downloadTemplate", 'Download XLS Parameters Template'),
+#                 #downloadButton("downloadParameters", 'Download Current CSV Parameters'),
+#                 titlePanel(h6("")),
+#                 downloadButton("downloadCSVTrace", 'Download CSV Trace')
+#               ),
+#               column(5,""),
+#               column(5,align="center",
+#                 fluidRow(
+#                   titlePanel(h3("Plots",align="center")),
+#                   titlePanel(h6("")),
+#                   #radioButtons("radioFormat",label=h4("Plot Format"),choices=list("JPG"=".jpg","PNG"=".png"),selected="PNG"),
+#                   downloadButton("downloadPlotTrace", 'Download Trajectory Plot'),
+#                   h1(""),
+#                   downloadButton("downloadPlotEIR", 'Download EIR Plot'),
+#                   h1(""),
+#                   downloadButton("downloadPlotDemographics", 'Download Demographics Plot'),
+#                   h1(""),
+#                   downloadButton("downloadPlotVC", 'Download VC Plot'),
+#                   h1(""),
+#                   downloadButton("downloadPlotR0", 'Download R0 Plot'),
+#                   h1(""),
+#                   downloadButton("downloadPlotHuman", 'Download Human Plot'),
+#                   h1("")
+#                 )
+#               )
+#             )
+#           )
+#         )
       )#,
       #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
 #       tabPanel("Runtime Data",

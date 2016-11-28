@@ -71,9 +71,9 @@ shinyUI(
     tags$head(tags$style(type="text/css",WORKING_MESSAGE_STYLE)),
     conditionalPanel(condition="$('html').hasClass('shiny-busy')",tags$div("Working...",id="loadmessage")),
     ###############################################################################
-#     navbarPage("----",id="nav",
+    navbarPage("",id="nav",
         #-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
-#         tabPanel("----",
+        tabPanel("Main",
           sidebarLayout(
             sidebarPanel(
               #####################################################################
@@ -83,7 +83,7 @@ shinyUI(
               #helpText("(3) Set the Q0 level (proportion of bites taken on humans with respect to cattle)."),
               helpText("(3) Select the number of days to simulate."),
               helpText("(4) Run the model! (click the button or hit 'ENTER')"),
-              helpText("(5 optional) Download a PDF report of the plots."),
+              helpText("(5 optional) Download a PDF report of the plots or download results individually in the 'Files Output' tab."),
               helpText("(6) Setup the desired interventions and repeat step 4 as required."),
               helpText("(7) Eliminate malaria!"),
               fluidRow(h3("1. Mosquito Selection")),
@@ -112,10 +112,8 @@ shinyUI(
               fluidRow(h3("4. Run Model")),
               actionButton("buttonRun","Run",width="100%"),
               #####################################################################
-              fluidRow(h3("5. Download PDF and CSV Trace")),
+              fluidRow(h3("5. Download PDF")),
               downloadButton("downloadPlots", 'Download PDF Plots Report'),
-              downloadButton("downloadCSVTrace", 'Download CSV Trace'),
-            
               #####################################################################
               fluidRow(h3("6. Interventions")),
               fluidRow(helpText(
@@ -210,39 +208,39 @@ shinyUI(
             )
           ),
           helpText("Cite as: "),
-          helpText("Contacts: <Model: Samson.Kiware@ucsf.edu> <GUI: sanchez.hmsc@itesm.mx>"),
+          helpText("Contacts: <Model: Samson.Kiware@ucsf.edu, John.Marshall@berkeley.edu>  <GUI: sanchez.hmsc@itesm.mx>"),
           helpText("CSS theme downloaded from: http://bootswatch.com (MIT licence)")
-#         )
-#         tabPanel("Files Output",
-#           titlePanel(h1("Export and Download",align="left")),
-#           #helpText("Run the model at least once for the buttons to activate."),
-#           fluidRow(
-#             column(4,align="center",
-#               titlePanel(h3("Data",align="center")),
-#               downloadButton("downloadCSVTrace", 'Download CSV Trace')
-#               #downloadButton("downloadCSVEIR", 'Download CSV EIR'),
-#               #downloadButton("downloadCSVDemographics", 'Download CSV Demographics')
-#             ),
-#             column(4,""),
-#             column(4,align="center",
-#               titlePanel(h3("Plots",align="center")),
-#                 fluidRow(
-#                 downloadButton("downloadPlotTrace", 'Download Trajectory Plot'),
-#                 h1(""),
-#                 downloadButton("downloadPlotEIR", 'Download EIR Plot'),
-#                 h1(""),
-#                 downloadButton("downloadPlotDemographics", 'Download Demographics Plot'),
-#                 h1(""),
-#                 downloadButton("downloadPlotVC", 'Download VC Plot'),
-#                 h1(""),
-#                 downloadButton("downloadPlotR0", 'Download R0 Plot'),
-#                 h1(""),
-#                 downloadButton("downloadPlotHuman", 'Download Human Plot'),
-#                 h1("")
-#               )
-#             )
-#           )
-#         )
-#       )
+        ),
+        tabPanel("Files Output",
+          titlePanel(h1("Export and Download",align="left")),
+          #helpText("Run the model at least once for the buttons to activate."),
+          fluidRow(
+            column(4,align="center",
+              titlePanel(h3("Data",align="center")),
+              downloadButton("downloadCSVTrace", 'Download CSV Trace')
+              #downloadButton("downloadCSVEIR", 'Download CSV EIR'),
+              #downloadButton("downloadCSVDemographics", 'Download CSV Demographics')
+            ),
+            column(4,""),
+            column(4,align="center",
+              titlePanel(h3("Plots",align="center")),
+                fluidRow(
+                downloadButton("downloadPlotTrace", 'Download Trajectory Plot'),
+                h1(""),
+                downloadButton("downloadPlotEIR", 'Download EIR Plot'),
+                h1(""),
+                downloadButton("downloadPlotDemographics", 'Download Demographics Plot'),
+                h1(""),
+                downloadButton("downloadPlotVC", 'Download VC Plot'),
+                h1(""),
+                downloadButton("downloadPlotR0", 'Download R0 Plot'),
+                h1(""),
+                downloadButton("downloadPlotHuman", 'Download Human Plot'),
+                h1("")
+              )
+            )
+          )
+        )
+      )
     )
   )
