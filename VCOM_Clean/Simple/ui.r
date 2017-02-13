@@ -13,7 +13,7 @@ library(shiny)
 library(deSolve)
 library(ggplot2)
 library(shinyjs)
-library(shinythemes)
+#library(shinythemes)
 library(plotly)
 library(BH)
 source("ODEModel.R")
@@ -61,7 +61,7 @@ initState <<- calculateInitialState(theta)
 IVM_traj <<- runODE(INITIAL_TIME_VALUE,1,initState,theta,"daspk")
 ###################################################################################
 shinyUI(
-  fluidPage(theme = shinytheme("cerulean"),
+  fluidPage(theme = "cerulean.css",
     titlePanel(h1("VCOM: Simple",align="center"),windowTitle="VCOM: Simple"),
     titlePanel(h4("Vector Control Optimization Model",align="center")),
     titlePanel(h4(tags$a(class="btn btn-default", href="http://chipdelmal.github.io/VCOM/", "Home", style="display: block; width: 100%;"),align="center")),
@@ -209,40 +209,21 @@ shinyUI(
               plotlyOutput("plotHuman")
             )
           ),
-          helpText("Cite as: "),
-          helpText("Contacts: <Model: Samson.Kiware@ucsf.edu, John.Marshall@berkeley.edu> <GUI: sanchez.hmsc@itesm.mx, tarrasch@berkeley.edu>"),
-          helpText("CSS theme downloaded from: http://bootswatch.com (MIT licence)")
-#         )
-#         tabPanel("Files Output",
-#           titlePanel(h1("Export and Download",align="left")),
-#           #helpText("Run the model at least once for the buttons to activate."),
-#           fluidRow(
-#             column(4,align="center",
-#               titlePanel(h3("Data",align="center")),
-#               downloadButton("downloadCSVTrace", 'Download CSV Trace')
-#               #downloadButton("downloadCSVEIR", 'Download CSV EIR'),
-#               #downloadButton("downloadCSVDemographics", 'Download CSV Demographics')
-#             ),
-#             column(4,""),
-#             column(4,align="center",
-#               titlePanel(h3("Plots",align="center")),
-#                 fluidRow(
-#                 downloadButton("downloadPlotTrace", 'Download Trajectory Plot'),
-#                 h1(""),
-#                 downloadButton("downloadPlotEIR", 'Download EIR Plot'),
-#                 h1(""),
-#                 downloadButton("downloadPlotDemographics", 'Download Demographics Plot'),
-#                 h1(""),
-#                 downloadButton("downloadPlotVC", 'Download VC Plot'),
-#                 h1(""),
-#                 downloadButton("downloadPlotR0", 'Download R0 Plot'),
-#                 h1(""),
-#                 downloadButton("downloadPlotHuman", 'Download Human Plot'),
-#                 h1("")
-#               )
-#             )
-#           )
-#         )
-#       )
+          tags$div(
+            HTML('
+              <br>
+              <div>
+                <center>
+                  <img src="berkeley.jpeg" style=height:75px;">
+                  <img src="ihi.jpeg" style=height:75px;">
+                  <img src="ucsf.png" style=height:75px;">
+                  <img src="itesm.png" style=height:75px;">
+                </center>
+              </div><br><br>
+            '),
+            helpText("Cite as: Cool paper here"),
+            helpText("Contacts: <Model: Samson.Kiware@ucsf.edu, John.Marshall@berkeley.edu> <GUI: sanchez.hmsc@itesm.mx, tarrasch@berkeley.edu>"),
+            helpText("CSS theme downloaded from: http://bootswatch.com (MIT licence)")
+          )
     )
   )
