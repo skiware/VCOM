@@ -61,8 +61,10 @@ getInterventionsParameters = function(
   PPMcov=0,   time_PPM_on=0,
   ATSBcov=0,  time_ATSB_on=0,
   SSPcov=0,   time_SSP_on=0
+
 ){
-  #. getInterventionsParameters: Returns the list of intervention parameters and the time that a particular intervention is on
+  #. getInterventionsParameters: Returns the list of intervention parameters
+  # (SK) and the time that a particular intervention is on
   c(
     OVIcov=OVIcov,time_OVI_on=time_OVI_on,
     FOGcov=FOGcov,time_FOG_on=time_FOG_on,

@@ -19,7 +19,8 @@
 #------------------------------------------------------------------------
 getAdditionalTransmissionParameters = function(
   #For getting low, medium, high transmission
-  f0=1/3,epsilon0=100/365,recRate=1/50,
+  # Dickson change here epsilon0=100/365
+  f0=1/3,epsilon0=50/365,recRate=1/50,
   NH_eq=2000,bV=0.05,bh=0.5   #bv = originally 0.05
 ){
   #. getAdditionalTransmissionParameters: Returns the transmission parameters

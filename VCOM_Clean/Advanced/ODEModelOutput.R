@@ -9,12 +9,15 @@
 computeLengthGonotrophicycle = function(deltaCom){
   #. computeLengthGonotrophicycle: Main function that return the length of gonotrophic cycle in presence of interventions
   #Length of gonotrophic cycle
+  
   f_theta <- 1/deltaCom
   return(f_theta)
 }
+
 computeHumanBitingRate = function(f_theta,HBI_com){
   #. computeHumanBitingRate: Main function that return human biting rate per mosquito in presence of intervetion
-  a_theta <- HBI_com/f_theta
+    
+   a_theta <- HBI_com/f_theta
   return(a_theta)
 }
 ######################################################################################
@@ -30,25 +33,30 @@ computeHBI = function(wCom_human,wCom){
   HBI_com <- (wCom_human)/wCom
   return(HBI_com)
 }
+
 ######################################################################################
 computeVC = function(a_theta, NV,NH,muVCom){
   #. computeVC: Main function that return vectorial capacity
   ## n incubation period
   tilda <- theta[["durEV"]]
+ 
   VC <- ((NV/NH) * a_theta^2 *exp(-muVCom*tilda))/muVCom
   return(VC)
 }
 ######################################################################################
 computeEIR = function(a_theta, IV, NH){
   #. computeEIR: Main function that return entomological innoculation rate
+ 
   EIR <- 365*(IV*a_theta)/NH    #365 per year
   return(EIR)
 }
+
 ######################################################################################
 computeRO = function(a_theta,muVCom, NV,bv,bh,NH){
   #. computeRO : Main function that return basic reproduction rate
   ## n incubation period
   tilda <- theta[["durEV"]]
-  R_o <- (NV/NH)*a_theta^2*bv*(bh*exp(-muVCom*tilda)/(theta[["recRate"]]*muVCom))
+  
+   R_o <- (NV/NH)*a_theta^2*bv*(bh*exp(-muVCom*tilda)/(theta[["recRate"]]*muVCom))
   return(R_o)
 }
