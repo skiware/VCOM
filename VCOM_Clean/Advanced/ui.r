@@ -114,6 +114,22 @@ shinyUI(
               plotlyOutput("plotHuman")
           )
         ),
+          tags$div(
+            HTML('
+              <br>
+              <div>
+                <center>
+                  <img src="berkeley.jpeg" style=height:75px;">
+                  <img src="ihi.jpeg" style=height:75px;">
+                  <img src="ucsf.png" style=height:75px;">
+                  <img src="itesm.png" style=height:75px;">
+                </center>
+              </div><br><br>
+            '),
+            helpText("Cite as: Cool paper here"),
+            helpText("Contacts: <Model: Samson.Kiware@ucsf.edu, John.Marshall@berkeley.edu> <GUI: sanchez.hmsc@itesm.mx, tarrasch@berkeley.edu>"),
+            helpText("CSS theme downloaded from: http://bootswatch.com (MIT licence)")
+          ),
         helpText("Contacts: <Model: Samson.Kiware@ucsf.edu, John.Marshall@berkeley.edu> <GUI: sanchez.hmsc@itesm.mx, tarrasch@berkeley.edu>"),
         helpText("Cite as: "),
         helpText("CSS theme downloaded from: http://bootswatch.com (MIT licence)")

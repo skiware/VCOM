@@ -11,7 +11,7 @@ gamma,13.25,Effect of density-dependence on late instars relative to early insta
 tau1,0.68,Time spent foraging for a blood meal
 tau2,2.32,Time spent resting and ovipositing by a mosquito
 ITNcov,0.5,Coverage level
-IRScov,0,Coverage level
+IRScov,0.5,Coverage level
 ECScov,0,Coverage level
 ECTcov,0,Coverage level
 HOUcov,0,Coverage level
