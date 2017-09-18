@@ -1,0 +1,74 @@
+Parameter Name,Value,Description
+beta,21.19,Number of eggs laid per day per female mosquito
+muEL,0.034,Early larval instar daily mortality
+muLL,0.035,Late larvarl instar daily mortality
+muPL,0.25,Pupal daily mortality
+durEL,6.64,Duration of early instar stage
+durLL,6.64,Duration of late instar stage
+durPL,0.64,Duration of pupal stage
+durEV,10,Duration of latent period in mosquito (days)
+gamma,13.25,Effect of density-dependence on late instars relative to early instars
+tau1,0.68,Time spent foraging for a blood meal
+tau2,2.32,Time spent resting and ovipositing by a mosquito
+ITNcov,0,Coverage level
+IRScov,0,Coverage level
+ECScov,0,Coverage level
+ECTcov,0,Coverage level
+HOUcov,0,Coverage level
+SPRcov,0,Coverage level
+PPMcov,0,Coverage level
+OBTcov,0,Coverage level
+SREcov,0,Coverage level
+BIOcov,0,Coverage level
+LARcov,0,Coverage level
+ATSBcov,0,Coverage level
+SSPcov,0,Coverage level
+OVIcov,0,Coverage level
+time_ITN_on,25,Initial time of application
+time_IRS_on,0,Initial time of application
+time_HOU_on,0,Initial time of application
+time_ECS_on,0,Initial time of application
+time_ECT_on,0,Initial time of application
+time_SPR_on,0,Initial time of application
+time_PPM_on,0,Initial time of application
+time_OBT_on,0,Initial time of application
+time_BIO_on,0,Initial time of application
+time_SRE_on,0,Initial time of application
+time_LAR_on,0,Initial time of application
+time_OVI_on,0,Initial time of application
+time_ATSB_on,0,Initial time of application
+time_SSP_on,0,Initial time of application
+muV,0.131578947,Adult mosquito daily mortality
+Q0,0.92,Human blood index
+phiB,0.89,Proportion of bites on a person while they are in bed
+phiI,0.97,Proportion of bites on a person while they are indoors
+rITN,0.56,Probability of mosquito repeating a feeding attempt due to IRS
+sITN,0.03,Probability of mosquito feeding and surviving in presence of ITNs
+rIRS,0.6,Probability of mosquito repeating a feeding attempt due to IRS
+sIRS,0,Probability of mosquito feeding and surviving in presence of IRS
+rHOU,0,Probability of mosquito repeating a feeding attempt due to a mosquito proofed housing
+sHOU,0.5,Probability of mosquito feeding and surviving in presence of mosquito proofed housing
+rSPR,0,Probability of mosquito repeating a feeding attempt due personal protection measure (PPM)
+sSPR,0,Probability of mosquito feeding in presence of PPM
+rPPM,0,Probability of mosquito repeating a feeding attempt due personal protection measures
+sPPM,0,Probability of mosquito feeding in presence of PPM
+rECS,0,Probability of mosquito repeating a feeding attempt due to topical-treated cattle
+sECS,0.4,Probability of mosquito feeding and surviving in presence of systemic-treated cattle
+rECT,0.3,Probability of mosquito repeating a feeding attempt due to topical-treated cattle
+sECT,0.4,Probability of mosquito feeding and surviving in presence of systemic-treated cattle
+dIRS,0.1,Death rate after encountering IRS
+dHOU,0.1,Death rate after encountering mosquito proofed housing
+aOBT,2,Availability of one trap in relation to one human
+eSRE,0.7,Effectiveness of source reduction
+fBIO,35.5,Factor allowing for increased death rate due to biological control
+fLAR,55.5,Factor allowing for increased death rate due to larvacide
+fATSB,1.5,Factor allowing for increased death rate due to ATSB
+fSSP,1.5,Factor allowing for increased death rate due to space spraying
+fOVI,1.5,Factor allowing for increased death rate due to OVI
+eOVI,0.7,
+f0,0.333333333,Daily biting rate by mosquitoes on animals and humans
+epsilon0,0.273972603,Daily entomological inolculation rate
+recRate,0.02,Human recovery rate
+NH_eq,2000,Equilibrium human population size
+bV,0.05,Probability of transmission from human to vector per infectious bite
+bh,0.5,"Transmission efficiency from an infectious mosquito to an uninfected, susceptible human"

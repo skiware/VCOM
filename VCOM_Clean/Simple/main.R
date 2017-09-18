@@ -32,4 +32,5 @@ IVM_traj = runODE(360,1,initState,theta,"lsoda")
 ########### PLOT RESULTS ################################################
 barChartMosquitoDemographics(IVM_traj)
 plotTrajectory(IVM_traj)
+plotEIR(IVM_traj)
 #------------------------------------------------------------------------
