@@ -1,6 +1,8 @@
-Samson Kiware (skiware@ihi.or.tz)
+﻿Samson Kiware (skiware@ihi.or.tz)
+Nakul Chitnis (Nakul.Chitnis@unibas.ch)
 Allison Tatarsky (allison.Tatarsky@ucsf.edu)
 Sean Wu (slwu89@berkeley.edu)
 Héctor M. Sánchez C. (sanchez.hmsc@itesm.mx)
-Nakul Chitnis
+David Smith(smitdave@gmail.com)
+Roly Gosling (Roly.Gosling@ucsf.edu)
 John M. Marshall (john.marshall@berkeley.edu)
