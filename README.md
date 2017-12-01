@@ -5,7 +5,7 @@ VCOM is on-going model framework development to help NMCPs, researchers, and oth
 
 There are to versions of our GUIs. The first one (named "Simple") is oriented towards people who want a quick comparison between interventions. It is controlled with sliders and buttons and contains a baseline parametrisation of how interventions work and of mosquitos biological parameters. The "Advanced" one is designed to be used by people with a more profound entomological/epidemiological background. This one is controlled with an XLS file and allows the modification of most of the model's parameters even without needing programming skills. The third and final option is to download the code from our github repository and code away any modifications needed (only for the bravest).
 
-For more information visit our <a href="http://chipdelmal.github.io/VCOM/">website</a>.
+For more information visit our <a href="https://github.com/skiware/VCOM/">website</a>.
 
 ## Citation
 VCOM @ 
