@@ -11,7 +11,7 @@ For more information visit our <a href="https://github.com/skiware/VCOM/">websit
 VCOM @ 
 
 ## Contact
-Samson Kiware (skiware@ihi.or.tz)
+Samson S Kiware (skiware@ihi.or.tz)
 Allison Tatarsky (allison.Tatarsky@ucsf.edu)
 Sean Wu (slwu89@berkeley.edu)
 Héctor M. Sánchez C. (sanchez.hmsc@itesm.mx)
